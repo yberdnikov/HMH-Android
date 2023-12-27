@@ -15,5 +15,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "HMH-Android"
 include(":app")
-include(":build-logic")
-include(":build-logic:convention")

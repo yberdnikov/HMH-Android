@@ -1,6 +1,9 @@
+import java.util.Properties
+
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    hmh("application")
+    hmh("compose")
+    hmh("test")
 }
 
 android {
@@ -54,6 +57,7 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle)
     implementation(libs.activity.compose)
+    implementation(libs.retrofit)
     implementation(platform(libs.compose.bom))
 
     //appcompat implementation

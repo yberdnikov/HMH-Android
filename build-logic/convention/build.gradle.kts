@@ -1,0 +1,54 @@
+plugins {
+    `kotlin-dsl`
+}
+
+group = "com.hmh.hamyeonham.buildlogic"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+
+dependencies {
+    compileOnly(libs.agp)
+    compileOnly(libs.kotlin.gradleplugin)
+}
+
+gradlePlugin {
+    plugins {
+        create("android-application") {
+            id = "com.hmh.hamyeonham.application"
+            implementationClass = "com.hmh.hamyeonham.plugin.AndroidApplicationPlugin"
+        }
+        create("android-feature") {
+            id = "com.hmh.hamyeonham.feature"
+            implementationClass = "com.hmh.hamyeonham.plugin.AndroidFeaturePlugin"
+        }
+        create("android-kotlin") {
+            id = "com.hmh.hamyeonham.kotlin"
+            implementationClass = "com.hmh.hamyeonham.plugin.AndroidKotlinPlugin"
+        }
+        create("android-hilt") {
+            id = "com.hmh.hamyeonham.hilt"
+            implementationClass = "com.hmh.hamyeonham.plugin.AndroidHiltPlugin"
+        }
+        create("kotlin-serialization") {
+            id = "com.hmh.hamyeonham.serialization"
+            implementationClass = "com.hmh.hamyeonham.plugin.KotlinSerializationPlugin"
+        }
+        create("junit5") {
+            id = "com.hmh.hamyeonham.junit5"
+            implementationClass = "com.hmh.hamyeonham.plugin.JUnit5Plugin"
+        }
+        create("android-test") {
+            id = "com.hmh.hamyeonham.test"
+            implementationClass = "com.hmh.hamyeonham.plugin.AndroidTestPlugin"
+        }
+        create("compose") {
+            id = "com.hmh.hamyeonham.compose"
+            implementationClass = "com.hmh.hamyeonham.plugin.ComposePlugin"
+        }
+    }
+}
+

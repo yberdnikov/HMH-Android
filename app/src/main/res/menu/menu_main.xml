@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/page_1"
+        android:id="@+id/usagestatisticsFragment"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="page1"/>
+        android:title="usagestatistics"/>
     <item
-        android:id="@+id/page_2"
+        android:id="@+id/mypageFragment"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="page2"/>
+        android:title="mypage"/>
     <item
-        android:id="@+id/page_3"
+        android:id="@+id/achievmentFragment"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="page3"/>
+        android:title="achievment"/>
 </menu>

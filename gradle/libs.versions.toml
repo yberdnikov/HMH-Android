@@ -80,7 +80,7 @@ dot-indicator = "5.0"
 kakao = "2.17.0"
 splash-screen = "1.0.1"
 javax-inject = "1"
-
+google-material = "1.11.0"
 
 [libraries]
 # kotlin
@@ -195,6 +195,7 @@ sentry = { module = "io.sentry:sentry", version.ref = "sentry-android" }
 
 zxing-core = { module = "com.google.zxing:core", version = "zxing-core" }
 zxing-android-embedded = { module = "com.journeyapps:zxing-android-embedded", version.ref = "zxing-android-embedded" }
+google-material = { group = "com.google.android.material", name = "material", version.ref = "google-material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

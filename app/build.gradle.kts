@@ -36,4 +36,7 @@ dependencies {
     // Splash
     implementation(libs.splash.screen)
 
+    // aac navigation
+    implementation(libs.navigation.ui)
+    implementation(libs.navigation.fragment)
 }

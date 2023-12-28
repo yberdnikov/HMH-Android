@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/usagestatistics"
+        android:name="com.hmh.hamyeonham.presentation.usagestatistics.usagestatisticsFragment"
+        android:labelgi="fragment_usagestatistics"
+        tools:layout="@layout/fragment_usagestatistics" >
+        <action
+            android:id="@+id/action_usagestatistics_to_mypageFragment"
+            app:destination="@id/mypageFragment" />
+        <action
+            android:id="@+id/action_usagestatistics_to_achievmentFragment"
+            app:destination="@id/achievmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mypageFragment"
+        android:name="com.hmh.hamyeonham.presentation.mypage.MypageFragment"
+        android:label="fragment_mypage"
+        tools:layout="@layout/fragment_mypage" >
+        <action
+            android:id="@+id/action_mypageFragment_to_usagestatistics"
+            app:destination="@id/usagestatistics" />
+        <action
+            android:id="@+id/action_mypageFragment_to_achievmentFragment"
+            app:destination="@id/achievmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/achievmentFragment"
+        android:name="com.hmh.hamyeonham.AchievmentFragment"
+        android:label="fragment_achievment"
+        tools:layout="@layout/fragment_achievment" >
+        <action
+            android:id="@+id/action_achievmentFragment_to_mypageFragment"
+            app:destination="@id/mypageFragment" />
+        <action
+            android:id="@+id/action_achievmentFragment_to_usagestatistics"
+            app:destination="@id/usagestatistics" />
+    </fragment>
+</navigation>

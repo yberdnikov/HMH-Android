@@ -72,16 +72,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    // Kotlin
-    implementation("androidx.navigation:navigation-fragment-ktx:$(libs.navigation)")
-    implementation("androidx.navigation:navigation-ui-ktx:$(libs.navigation)")
-
-    // Feature module Support
-    implementation("androidx.navigation:navigation-dynamic-features-fragment:$(libs.navigation)")
-
-    // Testing Navigation
-    androidTestImplementation("androidx.navigation:navigation-testing:$(libs.navigation)")
-
-    // Jetpack Compose Integration
-    implementation("androidx.navigation:navigation-compose:$(libs.navigation)")
+    // aac navigation
+    implementation(libs.navigation.ui)
+    implementation(libs.navigation.fragment)
 }

@@ -109,6 +109,7 @@ navigation_fragment = { module = "androidx.navigation:navigation-fragment-ktx", 
 navigation_ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
 exifInterface = { module = "androidx.exifinterface:exifinterface", version.ref = "exifInterface" }
 
+
 # compose
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
 ui = { group = "androidx.compose.ui", name = "ui" }

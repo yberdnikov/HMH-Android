@@ -12,5 +12,4 @@
         android:id="@+id/mypageFragment"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="my page" />
-
 </menu>

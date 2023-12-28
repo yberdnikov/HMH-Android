@@ -2,7 +2,7 @@ name: HMH Android PR Builder
 
 on:
   pull_request:
-    branches: [ develop, master ]
+    branches: [ develop, main ]
 
 defaults:
   run:

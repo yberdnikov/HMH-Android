@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HMH-Android</string>
+    <string name="main_appbartitle">app bar title</string>
 </resources>

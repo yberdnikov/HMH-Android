@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/navigation/nav_graph.xml -->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/usagestatFragment">
+    <fragment
+        android:id="@+id/achievFragment"
+        android:name="com.hmh.hamyeonham.presentation.main.AchievFragment"
+        android:label="Achiev Fragment" />
+
+    <fragment
+        android:id="@+id/usagestatFragment"
+        android:name="com.hmh.hamyeonham.presentation.main.UsagestatFragment"
+        android:label="Usagestat Fragment" />
+
+    <fragment
+        android:id="@+id/mypageFragment"
+        android:name="com.hmh.hamyeonham.presentation.main.MypageFragment"
+        android:label="Mypage Fragment" />
+
+</navigation>

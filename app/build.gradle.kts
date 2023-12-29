@@ -4,6 +4,9 @@ plugins {
     hmh("application")
     hmh("compose")
     hmh("test")
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.app.distribution)
+    alias(libs.plugins.crashlytics)
 }
 
 android {
@@ -53,6 +56,8 @@ android {
 }
 
 dependencies {
-
+    // Firebase
+    implementation(platform(libs.firebase))
+    implementation(libs.bundles.firebase)
 
 }

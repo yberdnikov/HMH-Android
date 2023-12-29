@@ -49,7 +49,7 @@
             app:layout_constraintStart_toStartOf="parent"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:progress="30"
-            android:progressDrawable="@drawable/usagestat_progressbarthumb_small"/>
+            android:progressDrawable="@drawable/usagestat_progressbar"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

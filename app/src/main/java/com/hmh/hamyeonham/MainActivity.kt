@@ -20,7 +20,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
     @Inject
     lateinit var usageStatsDataSource: UsageStatsDataSource
 
@@ -30,7 +29,18 @@ class MainActivity : AppCompatActivity() {
         val splashScreen = installSplashScreen()
         initSplashAnimation(splashScreen)
         setContentView(R.layout.activity_main)
+        // todo - 리사이클러뷰 구현
+//        initAdapter()
+        initUsageStat()
+    }
 
+//    private fun initAdapter() {
+//        val usagestatAdapter = UsagestatAdapter(viewModel.mockAppUsageList)
+//        binding.rvUsagestat.adapter = usagestatAdapter
+//        binding.rvUsagestat.addItemDecoration(CustomItemDecoration())
+//    }
+
+    private fun initUsageStat() {
         val currentDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
         val startDate =
             LocalDate(currentDateTime.year, currentDateTime.monthNumber, currentDateTime.dayOfMonth)
@@ -42,13 +52,12 @@ class MainActivity : AppCompatActivity() {
         val startTime = startOfDay.toInstant(TimeZone.currentSystemDefault()).toEpochMilliseconds()
         val endTime = endOfDay.toInstant(TimeZone.currentSystemDefault()).toEpochMilliseconds()
 
-
         val list = usageStatsDataSource.getUsageStats(startTime, endTime)
         list.filter { it.totalTimeInForeground > 0 }.sortedByDescending { it.totalTimeInForeground }
             .forEach {
                 Log.d(
                     "usageStatsDataSource",
-                    "onCreate: ${getAppNameFromPackageName(it.packageName)} ${it.totalTimeInForeground}"
+                    "onCreate: ${getAppNameFromPackageName(it.packageName)} ${it.totalTimeInForeground}",
                 )
             }
     }
@@ -58,14 +67,17 @@ class MainActivity : AppCompatActivity() {
             val splashScreenView = splashScreenViewProvider.view
             val fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out)
 
-            fadeOut.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationStart(animation: Animation) {}
-                override fun onAnimationEnd(animation: Animation) {
-                    splashScreenViewProvider.remove()
-                }
+            fadeOut.setAnimationListener(
+                object : Animation.AnimationListener {
+                    override fun onAnimationStart(animation: Animation) {}
 
-                override fun onAnimationRepeat(animation: Animation) {}
-            })
+                    override fun onAnimationEnd(animation: Animation) {
+                        splashScreenViewProvider.remove()
+                    }
+
+                    override fun onAnimationRepeat(animation: Animation) {}
+                },
+            )
             splashScreenView.startAnimation(fadeOut)
         }
     }
@@ -74,8 +86,8 @@ class MainActivity : AppCompatActivity() {
         return packageManager.getApplicationLabel(
             packageManager.getApplicationInfo(
                 packageName,
-                PackageManager.GET_META_DATA
-            )
+                PackageManager.GET_META_DATA,
+            ),
         ).toString()
     }
 }

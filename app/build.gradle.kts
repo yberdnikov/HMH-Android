@@ -16,6 +16,15 @@ android {
         versionName = libs.versions.appVersion.get()
     }
 
+    signingConfigs {
+        getByName("debug") {
+            keyAlias = "android_debug_key"
+            keyPassword = "android"
+            storeFile = File("${project.rootDir.absolutePath}/keystore/debug.keystore")
+            storePassword = "android"
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false

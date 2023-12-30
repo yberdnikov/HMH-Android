@@ -36,4 +36,5 @@ dependencies {
     // Splash
     implementation(libs.splash.screen)
 
+    implementation(projects.feature.)
 }

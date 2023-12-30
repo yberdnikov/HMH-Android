@@ -45,4 +45,9 @@ dependencies {
     // Splash
     implementation(libs.splash.screen)
 
+    implementation(projects.feature.login)
+
+    // kakao
+    implementation(libs.kakao.login)
+
 }

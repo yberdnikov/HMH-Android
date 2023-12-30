@@ -30,20 +30,6 @@ fun Fragment.colorOf(@ColorRes resId: Int) = ContextCompat.getColor(requireConte
 fun Fragment.drawableOf(@DrawableRes resId: Int) =
     ContextCompat.getDrawable(requireContext(), resId)
 
-fun Fragment.showLoading() {
-    childFragmentManager.commit(allowStateLoss = true) {
-        add(LoadingProgressIndicator.newInstance(), LoadingProgressIndicator.TAG)
-    }
-}
-
-fun Fragment.hideLoading() {
-    childFragmentManager.findFragmentByTag(LoadingProgressIndicator.TAG)?.let { fragment ->
-        childFragmentManager.commit(allowStateLoss = true) {
-            remove(fragment)
-        }
-    }
-}
-
 val Fragment.viewLifeCycle
     get() = viewLifecycleOwner.lifecycle
 

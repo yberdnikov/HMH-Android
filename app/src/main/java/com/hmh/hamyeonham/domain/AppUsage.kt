@@ -1,6 +1,5 @@
 package com.hmh.hamyeonham.domain
 
-import android.health.connect.datatypes.units.Percentage
 import androidx.annotation.DrawableRes
 
 data class AppUsage(
@@ -9,5 +8,5 @@ data class AppUsage(
     val packageName: String,
     val appName: String,
     val timeLeft: Int,
-    val usedPercentage: Percentage,
+    val usedPercentage: Int,
 )

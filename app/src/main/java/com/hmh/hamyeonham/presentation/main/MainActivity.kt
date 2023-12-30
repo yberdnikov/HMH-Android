@@ -5,8 +5,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.hmh.hamyeonham.R
 import com.hmh.hamyeonham.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -22,10 +20,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initNavigation() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment = binding.navHostFragment.getFragment<NavHostFragment>()
         val navController = navHostFragment.navController
-        val bottomNavView = findViewById<BottomNavigationView>(R.id.btn_main)
+        val bottomNavView = binding.btnMain
         bottomNavView.setupWithNavController(navController)
     }
 }

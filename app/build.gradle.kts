@@ -1,4 +1,3 @@
-
 plugins {
     hmh("application")
     hmh("compose")
@@ -29,8 +28,12 @@ android {
 }
 
 dependencies {
+
     // Firebase
     implementation(platform(libs.firebase))
     implementation(libs.bundles.firebase)
+
+    // Splash
+    implementation(libs.splash.screen)
 
 }

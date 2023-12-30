@@ -1,19 +1,20 @@
 package com.hmh.hamyeonham
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
-class MainActivity : Activity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         val splashScreen = installSplashScreen()
         initSplashAnimation(splashScreen)
+
+        setContentView(R.layout.activity_main)
     }
 
     private fun initSplashAnimation(splashScreen: SplashScreen) {

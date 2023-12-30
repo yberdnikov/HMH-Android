@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.presentation.main
+package com.hmh.hamyeonham.presentation.usagestat
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -22,7 +22,5 @@ class UsagestatAdapter(private val appUsageList: List<AppUsage>) : Adapter<Usage
         holder.onBind(appUsageList[position])
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount(): Int = appUsageList.size
 }

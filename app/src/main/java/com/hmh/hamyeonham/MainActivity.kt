@@ -24,10 +24,6 @@ class MainActivity : AppCompatActivity() {
         val splashScreen = installSplashScreen()
         initSplashAnimation(splashScreen)
         setContentView(R.layout.activity_main)
-        // todo - 리사이클러뷰 구현
-//        initAdapter()
-        initUsageStat()
-    }
 
         lifecycleScope.launch {
             viewModel.usageStatsList.collect {

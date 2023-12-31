@@ -16,10 +16,10 @@ class OnBoardingActivity : AppCompatActivity() {
 
     private fun numberPickerTest() {
         binding.run {
-            numberPicker.npCustomHours.minValue = 1
-            numberPicker.npCustomHours.maxValue = 6
-            numberPicker.npCustomMinutes.minValue = 1
-            numberPicker.npCustomMinutes.maxValue = 59
+//            numberPicker.npCustomHours.minValue = 1
+//            numberPicker.npCustomHours.maxValue = 6
+//            numberPicker.npCustomMinutes.minValue = 1
+//            numberPicker.npCustomMinutes.maxValue = 59
         }
     }
 }

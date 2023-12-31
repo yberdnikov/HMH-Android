@@ -1,11 +1,13 @@
 package com.hmh.hamyeonham
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.hmh.hamyeonham.feature.onboarding.OnBoardingActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         initSplashAnimation(splashScreen)
 
         setContentView(R.layout.activity_main)
+        Intent(this, OnBoardingActivity::class.java).let(::startActivity)
     }
 
     private fun initSplashAnimation(splashScreen: SplashScreen) {

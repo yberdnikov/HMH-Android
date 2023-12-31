@@ -29,6 +29,9 @@ android {
 
 dependencies {
 
+    // Feature
+    implementation(projects.feature.statistics)
+
     // Domain
     implementation(projects.domain.usagestats)
 

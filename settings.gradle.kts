@@ -19,7 +19,6 @@ dependencyResolutionManagement {
 rootProject.name = "HMH-Android"
 include(":app")
 include(":core:common")
-include(":data")
 include(":data:usagestats")
-include(":domain")
 include(":domain:usagestats")
+include(":feature:statistics")

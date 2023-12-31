@@ -1,5 +1,6 @@
 package com.hmh.hamyeonham
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.animation.Animation
@@ -10,6 +11,7 @@ import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
+import com.hmh.hamyeonham.statistics.StaticsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -24,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         val splashScreen = installSplashScreen()
         initSplashAnimation(splashScreen)
         setContentView(R.layout.activity_main)
+        val intent = Intent(this, StaticsActivity::class.java)
+        startActivity(intent)
 
         lifecycleScope.launch {
             viewModel.usageStatsList.collect {

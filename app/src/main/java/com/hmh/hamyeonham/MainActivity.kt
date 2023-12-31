@@ -1,27 +1,22 @@
 package com.hmh.hamyeonham
 
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.hmh.hamyeonham.usagestats.datasource.UsageStatsDataSource
+import androidx.lifecycle.lifecycleScope
+import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.datetime.Clock
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toInstant
-import kotlinx.datetime.toLocalDateTime
-import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    @Inject
-    lateinit var usageStatsDataSource: UsageStatsDataSource
+
+    private val viewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,32 +29,17 @@ class MainActivity : AppCompatActivity() {
         initUsageStat()
     }
 
-//    private fun initAdapter() {
-//        val usagestatAdapter = UsagestatAdapter(viewModel.mockAppUsageList)
-//        binding.rvUsagestat.adapter = usagestatAdapter
-//        binding.rvUsagestat.addItemDecoration(CustomItemDecoration())
-//    }
-
-    private fun initUsageStat() {
-        val currentDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
-        val startDate =
-            LocalDate(currentDateTime.year, currentDateTime.monthNumber, currentDateTime.dayOfMonth)
-        val startOfDay =
-            LocalDateTime(startDate.year, startDate.monthNumber, startDate.dayOfMonth, 0, 0)
-        val endOfDay =
-            LocalDateTime(startDate.year, startDate.monthNumber, startDate.dayOfMonth, 23, 59, 59)
-
-        val startTime = startOfDay.toInstant(TimeZone.currentSystemDefault()).toEpochMilliseconds()
-        val endTime = endOfDay.toInstant(TimeZone.currentSystemDefault()).toEpochMilliseconds()
-
-        val list = usageStatsDataSource.getUsageStats(startTime, endTime)
-        list.filter { it.totalTimeInForeground > 0 }.sortedByDescending { it.totalTimeInForeground }
-            .forEach {
-                Log.d(
-                    "usageStatsDataSource",
-                    "onCreate: ${getAppNameFromPackageName(it.packageName)} ${it.totalTimeInForeground}",
-                )
+        lifecycleScope.launch {
+            viewModel.usageStatsList.collect {
+                it.forEach {
+                    Log.d(
+                        "MainActivity",
+                        "packageName: ${getAppNameFromPackageName(it.packageName)}"
+                    )
+                    Log.d("MainActivity", "totalTimeInForeground: ${it.totalTimeInForeground}")
+                }
             }
+        }
     }
 
     private fun initSplashAnimation(splashScreen: SplashScreen) {
@@ -80,14 +60,5 @@ class MainActivity : AppCompatActivity() {
             )
             splashScreenView.startAnimation(fadeOut)
         }
-    }
-
-    fun getAppNameFromPackageName(packageName: String): String {
-        return packageManager.getApplicationLabel(
-            packageManager.getApplicationInfo(
-                packageName,
-                PackageManager.GET_META_DATA,
-            ),
-        ).toString()
     }
 }

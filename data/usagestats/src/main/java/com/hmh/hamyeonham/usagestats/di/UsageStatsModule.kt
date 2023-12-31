@@ -18,8 +18,9 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object UsageStatsModule {
-    @Singleton
+
     @Provides
+    @Singleton
     fun provideUsageStatusManager(@ApplicationContext context: Context): UsageStatsManager? {
         return context.getSystemService(Context.USAGE_STATS_SERVICE) as? UsageStatsManager
     }

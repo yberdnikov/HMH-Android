@@ -2,6 +2,7 @@ package com.hmh.hamyeonham.common.context
 
 import android.app.Dialog
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Point
 import android.os.Build
 import android.view.View
@@ -66,3 +67,13 @@ fun Context.getDeviceSize(): IntArray {
         return intArrayOf(size.x, size.y)
     }
 }
+
+
+fun Context.getAppNameFromPackageName(packageName: String): String =
+    try {
+        val appInfo = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA)
+        packageManager.getApplicationLabel(appInfo).toString()
+    } catch (e: PackageManager.NameNotFoundException) {
+        "Unknown"
+    }
+

@@ -1,6 +1,5 @@
 package com.hmh.hamyeonham.usagestats.datasource
 
-import com.hmh.hamyeonham.usagestats.model.UsageStat
 import com.hmh.hamyeonham.usagestats.model.UsageStatModel
 
 interface UsageStatsDataSource {

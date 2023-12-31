@@ -29,12 +29,19 @@ android {
 
 dependencies {
 
+    // Domain
+    implementation(projects.domain.usagestats)
+
+    // Data
+    implementation(projects.data.usagestats)
+
+    // Core
+    implementation(projects.core.common)
+
     // Firebase
     implementation(platform(libs.firebase))
     implementation(libs.bundles.firebase)
 
     // Splash
     implementation(libs.splash.screen)
-
-    implementation(projects.data.usagestats)
 }

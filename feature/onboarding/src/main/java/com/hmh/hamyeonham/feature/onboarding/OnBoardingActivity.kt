@@ -46,14 +46,15 @@ class OnBoardingActivity : AppCompatActivity() {
 
     private fun requestUsageAccessPermission() {
         if (!hasUsageStatsPermission()) {
-            val intent = try {
+            try {
                 val packageUri = Uri.parse("package:$packageName")
-                Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS, packageUri)
+                val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS, packageUri)
+                startActivity(intent)
 
             } catch (e: Exception) {
-                Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+                val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+                startActivity(intent)
             }
-            startActivity(intent)
         }
     }
 

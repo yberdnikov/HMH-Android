@@ -3,6 +3,9 @@ package com.hmh.hamyeonham.feature.onboarding
 import android.accessibilityservice.AccessibilityService
 import android.app.AppOpsManager
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -29,11 +32,16 @@ class OnBoardingActivity : AppCompatActivity() {
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        // 설치된 앱 목록 가져오기
+        val installedApps: List<PackageInfo> = packageManager.getInstalledPackages(PackageManager.GET_META_DATA)
+        Log.d("TAG", "installedApps: $installedApps")
+
     }
 
     private fun requirePermission() {
         binding.btnPermission.setOnClickListener {
             moveAppToTopInAccessibilitySettings(AccessibilityService::class.java)
+            // startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
         }
     }
 

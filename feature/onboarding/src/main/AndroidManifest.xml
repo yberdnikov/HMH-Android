@@ -6,6 +6,8 @@
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application>
         <activity
             android:name=".OnBoardingActivity"
@@ -24,6 +26,4 @@
                 android:resource="@xml/accessibility_service_config" />
         </service>
     </application>
-
-
 </manifest>

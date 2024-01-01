@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.hmh.hamyeonham.common.context.toast
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
 
-
 class OnBoardingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityOnBoardingBinding
@@ -42,6 +41,13 @@ class OnBoardingActivity : AppCompatActivity() {
         binding.btnUsage.setOnClickListener {
             requestUsageAccessPermission()
         }
+        binding.btnDrawOnOthers.setOnClickListener {
+            if (!hasOverlayPermission()) {
+                requestOverlayPermission()
+            } else {
+                toast("다른 앱 위에 그리기 권한이 이미 허용되어 있습니다.")
+            }
+        }
     }
 
     private fun requestUsageAccessPermission() {
@@ -50,12 +56,23 @@ class OnBoardingActivity : AppCompatActivity() {
                 val packageUri = Uri.parse("package:$packageName")
                 val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS, packageUri)
                 startActivity(intent)
-
             } catch (e: Exception) {
                 val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
                 startActivity(intent)
             }
+        } else {
+            toast("사용 정보 접근 권한이 이미 허용되어 있습니다.")
         }
+    }
+
+    private fun requestOverlayPermission() {
+        val packageUri = Uri.parse("package:$packageName")
+        val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, packageUri)
+        startActivity(intent)
+    }
+
+    private fun hasOverlayPermission(): Boolean {
+        return Settings.canDrawOverlays(this)
     }
 
     private fun isAccessibilityServiceEnabled(): Boolean {
@@ -71,6 +88,8 @@ class OnBoardingActivity : AppCompatActivity() {
         if (!isAccessibilityServiceEnabled()) {
             val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
             accessibilitySettingsLauncher.launch(intent)
+        } else {
+            toast("접근성 권한이 이미 허용되어 있습니다.")
         }
     }
 
@@ -80,7 +99,7 @@ class OnBoardingActivity : AppCompatActivity() {
         val stats = usageStatsManager.queryUsageStats(
             UsageStatsManager.INTERVAL_DAILY,
             time - 1000 * 60,
-            time
+            time,
         )
         return stats != null && stats.isNotEmpty()
     }

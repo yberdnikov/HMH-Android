@@ -1,18 +1,30 @@
 package com.hmh.hamyeonham.feature.onboarding
 
-import android.accessibilityservice.AccessibilityService
-import android.app.ActivityManager
-import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.hmh.hamyeonham.common.context.toast
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
 
 class OnBoardingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityOnBoardingBinding
+
+    private val accessibilitySettingsLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            if (isAccessibilityServiceEnabled()) {
+                toast("접근성 서비스가 활성화되었습니다.")
+            } else {
+                toast("접근성 서비스가 활성화되지 않았습니다.")
+            }
+        }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -38,7 +50,7 @@ class OnBoardingActivity : AppCompatActivity() {
     private fun openAccessibilitySettingsIfNeeded() {
         if (!isAccessibilityServiceEnabled()) {
             val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-            startActivity(intent)
+            accessibilitySettingsLauncher.launch(intent)
         }
     }
 }

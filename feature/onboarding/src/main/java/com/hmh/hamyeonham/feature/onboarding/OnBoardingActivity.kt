@@ -1,6 +1,9 @@
 package com.hmh.hamyeonham.feature.onboarding
 
+import android.app.usage.UsageStatsManager
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.result.ActivityResultLauncher
@@ -8,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.hmh.hamyeonham.common.context.toast
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
+
 
 class OnBoardingActivity : AppCompatActivity() {
 
@@ -35,6 +39,13 @@ class OnBoardingActivity : AppCompatActivity() {
         binding.btnAccessibility.setOnClickListener {
             openAccessibilitySettingsIfNeeded()
         }
+        binding.btnUsage.setOnClickListener {
+            if (!hasUsageStatsPermission()) {
+                val packageUri = Uri.parse("package:$packageName")
+                val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS, packageUri)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun isAccessibilityServiceEnabled(): Boolean {
@@ -51,5 +62,16 @@ class OnBoardingActivity : AppCompatActivity() {
             val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
             accessibilitySettingsLauncher.launch(intent)
         }
+    }
+
+    private fun hasUsageStatsPermission(): Boolean {
+        val usageStatsManager = getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+        val time = System.currentTimeMillis()
+        val stats = usageStatsManager.queryUsageStats(
+            UsageStatsManager.INTERVAL_DAILY,
+            time - 1000 * 60,
+            time
+        )
+        return stats != null && stats.isNotEmpty()
     }
 }

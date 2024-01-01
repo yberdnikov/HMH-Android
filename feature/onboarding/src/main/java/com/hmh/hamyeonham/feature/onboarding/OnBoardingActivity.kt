@@ -17,6 +17,7 @@ class OnBoardingActivity : AppCompatActivity() {
         super.onResume()
         if (hasUsageStatsPermission()) {
             toast("권한이 허용되어 있음")
+            requirePermission()
         } else {
             toast("권한이 허용되어 있지 않음")
             requirePermission()
@@ -32,7 +33,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
     private fun requirePermission() {
         binding.btnPermission.setOnClickListener {
-            startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+            moveAppToTopInAccessibilitySettings(AccessibilityService::class.java)
         }
     }
 
@@ -54,23 +55,36 @@ class OnBoardingActivity : AppCompatActivity() {
         return mode == AppOpsManager.MODE_ALLOWED
     }
 
-    private fun isAccessibilityServiceEnabled(service: Class<out AccessibilityService>): Boolean {
+    // 사용 접근 권한 앱 목록 순서 변경 함수
+    private fun moveAppToTopInAccessibilitySettings(service: Class<out AccessibilityService>) {
         val expectedId = packageName + "/" + service.canonicalName
+        Log.d("TAG1", "expectedId: $expectedId")
+        startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+
         val enabledServicesSetting = Settings.Secure.getString(
             contentResolver,
             Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
-        ) ?: return false
-        Log.d("TAG", "enabledServicesSetting: $enabledServicesSetting")
+        )
+        Log.d("TAG2", "enabledServicesSetting: $enabledServicesSetting")
 
-        return enabledServicesSetting.split(':').any { it.equals(expectedId, ignoreCase = true) }
-    }
-
-    private fun numberPickerTest() {
-        binding.run {
-//            numberPicker.npCustomHours.minValue = 1
-//            numberPicker.npCustomHours.maxValue = 6
-//            numberPicker.npCustomMinutes.minValue = 1
-//            numberPicker.npCustomMinutes.maxValue = 59
+        if (enabledServicesSetting == null) {
+            Log.e("TAG3", "Enabled services setting is null")
+            return
         }
+
+        // 서비스 목록 순서 재배열
+        val serviceList = enabledServicesSetting.split(':').toMutableList()
+        serviceList.remove(expectedId)
+        serviceList.add(0, expectedId)
+        Log.d("TAG4", "serviceList: $serviceList")
+        val updatedServicesSetting = serviceList.joinToString(":")
+        Log.d("TAG5", "updatedServicesSetting: $updatedServicesSetting")
+
+        // 변경된 서비스 목록을 설정에 저장
+        Settings.Secure.putString(
+            contentResolver,
+            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
+            updatedServicesSetting,
+        )
     }
 }

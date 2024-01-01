@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Parcelable
-import timber.log.Timber
+import android.util.Log
 import java.io.Serializable
 import kotlin.properties.ReadOnlyProperty
 
@@ -63,7 +63,7 @@ inline fun <reified T : Parcelable> Intent.getCompatibleParcelableExtra(key: Str
             getParcelableExtra(key)
         }
     } catch (e: ClassCastException) {
-        Timber.e("IntentExtensions", "Failed to cast Parcelable object", e)
+        Log.e("IntentExtensions", "Failed to cast Parcelable object", e)
         null
     }
 }

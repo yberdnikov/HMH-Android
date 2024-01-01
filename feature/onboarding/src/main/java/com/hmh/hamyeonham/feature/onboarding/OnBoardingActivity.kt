@@ -15,7 +15,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
     private val accessibilitySettingsLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
+            ActivityResultContracts.StartActivityForResult(),
         ) {
             if (isAccessibilityServiceEnabled()) {
                 toast("접근성 서비스가 활성화되었습니다.")
@@ -28,11 +28,11 @@ class OnBoardingActivity : AppCompatActivity() {
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        requirePermission()
+        clickRequireAccessibilityBtn()
     }
 
-    private fun requirePermission() {
-        binding.btnPermission.setOnClickListener {
+    private fun clickRequireAccessibilityBtn() {
+        binding.btnAccessibility.setOnClickListener {
             openAccessibilitySettingsIfNeeded()
         }
     }
@@ -41,7 +41,7 @@ class OnBoardingActivity : AppCompatActivity() {
         val service = packageName + "/" + OnBoardingAccessibilityService::class.java.canonicalName
         val enabledServicesSetting = Settings.Secure.getString(
             contentResolver,
-            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
+            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
         )
         return enabledServicesSetting?.contains(service) == true
     }

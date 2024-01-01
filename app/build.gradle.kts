@@ -35,6 +35,10 @@ dependencies {
     implementation(projects.core.common)
     implementation(projects.core.database)
 
+    // Feature
+    implementation(projects.feature.onboarding)
+    implementation(projects.feature.main)
+
     // Firebase
     implementation(platform(libs.firebase))
     implementation(libs.bundles.firebase)

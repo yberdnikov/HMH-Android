@@ -29,12 +29,14 @@ android {
 
 dependencies {
 
+    // Feature
+    implementation(projects.feature.onboarding)
+    implementation(projects.feature.main)
+
     // Firebase
     implementation(platform(libs.firebase))
     implementation(libs.bundles.firebase)
 
     // Splash
     implementation(libs.splash.screen)
-
-    implementation(projects.feature.onboarding)
 }

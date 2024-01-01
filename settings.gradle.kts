@@ -20,3 +20,4 @@ rootProject.name = "HMH-Android"
 include(":app")
 include(":core:common")
 include(":feature:onboarding")
+include(":feature:main")

@@ -7,17 +7,18 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.hmh.hamyeonham.feature.main.MainActivity
 import com.hmh.hamyeonham.feature.onboarding.OnBoardingActivity
 
-class MainActivity : AppCompatActivity() {
+class SampleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val splashScreen = installSplashScreen()
         initSplashAnimation(splashScreen)
 
-        setContentView(R.layout.activity_main)
-        Intent(this, OnBoardingActivity::class.java).let(::startActivity)
+        setContentView(R.layout.activity_sample)
+        Intent(this, MainActivity::class.java).let(::startActivity)
     }
 
     private fun initSplashAnimation(splashScreen: SplashScreen) {

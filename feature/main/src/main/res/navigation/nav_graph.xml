@@ -1,0 +1,18 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/home_dest">
+
+    <fragment
+        android:id="@+id/challenge_dest"
+        android:name="com.hmh.hamyeonham.feature.main.challenge.ChallengeFragment"
+        android:label="Challenge Fragment" />
+    <fragment
+        android:id="@+id/home_dest"
+        android:name="com.hmh.hamyeonham.feature.main.home.HomeFragment"
+        android:label="Home Fragment" />
+    <fragment
+        android:id="@+id/my_page_dest"
+        android:name="com.hmh.hamyeonham.feature.main.mypage.MyPageFragment"
+        android:label="MyPage Fragment" />
+</navigation>

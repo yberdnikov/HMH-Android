@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/challenge_dest"
+        android:icon="@color/material_dynamic_neutral0"
+        android:title="@string/challenge" />
+    <item
+        android:id="@+id/home_dest"
+        android:icon="@color/material_dynamic_neutral0"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/my_page_dest"
+        android:icon="@color/material_dynamic_neutral0"
+        android:title="@string/my_page" />
+</menu>

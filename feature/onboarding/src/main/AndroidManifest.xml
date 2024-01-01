@@ -6,7 +6,6 @@
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
 
-
     <application>
         <activity
             android:name=".OnBoardingActivity"

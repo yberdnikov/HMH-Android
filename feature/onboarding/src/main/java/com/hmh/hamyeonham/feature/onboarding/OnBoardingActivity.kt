@@ -5,7 +5,6 @@ import android.app.AppOpsManager
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -33,9 +32,16 @@ class OnBoardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         // 설치된 앱 목록 가져오기
-        val installedApps: List<PackageInfo> = packageManager.getInstalledPackages(PackageManager.GET_META_DATA)
+        val installedApps: List<PackageInfo> =
+            packageManager.getInstalledPackages(PackageManager.GET_META_DATA)
         Log.d("TAG", "installedApps: $installedApps")
+        for (packageInfo in installedApps) {
+            val appName: String = packageInfo.applicationInfo.loadLabel(packageManager).toString()
+            val packageName: String = packageInfo.packageName
+            val flags = packageInfo.applicationInfo.flags
 
+            Log.d("AppInfo", "Name: $appName, Package: $packageName, Flags: $flags")
+        }
     }
 
     private fun requirePermission() {

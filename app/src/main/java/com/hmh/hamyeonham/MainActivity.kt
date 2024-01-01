@@ -1,12 +1,13 @@
 package com.hmh.hamyeonham
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.hmh.hamyeonham.feature.login.LoginActivity
 import com.kakao.sdk.common.KakaoSdk
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initKakaoSdk()
+        Intent(this, LoginActivity::class.java).let(::startActivity)
     }
 
     private fun initKakaoSdk() {

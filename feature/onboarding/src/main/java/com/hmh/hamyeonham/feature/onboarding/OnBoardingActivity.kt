@@ -40,11 +40,20 @@ class OnBoardingActivity : AppCompatActivity() {
             openAccessibilitySettingsIfNeeded()
         }
         binding.btnUsage.setOnClickListener {
-            if (!hasUsageStatsPermission()) {
+            requestUsageAccessPermission()
+        }
+    }
+
+    private fun requestUsageAccessPermission() {
+        if (!hasUsageStatsPermission()) {
+            val intent = try {
                 val packageUri = Uri.parse("package:$packageName")
-                val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS, packageUri)
-                startActivity(intent)
+                Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS, packageUri)
+
+            } catch (e: Exception) {
+                Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
             }
+            startActivity(intent)
         }
     }
 

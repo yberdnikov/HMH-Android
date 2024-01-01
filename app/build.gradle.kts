@@ -28,6 +28,12 @@ android {
 }
 
 dependencies {
+    // Feature
+    implementation(projects.feature.onboarding)
+
+    // Core
+    implementation(projects.core.common)
+    implementation(projects.core.database)
 
     // Firebase
     implementation(platform(libs.firebase))
@@ -35,6 +41,4 @@ dependencies {
 
     // Splash
     implementation(libs.splash.screen)
-
-    implementation(projects.feature.onboarding)
 }

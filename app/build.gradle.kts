@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     hmh("application")
     hmh("compose")
@@ -14,6 +16,14 @@ android {
         applicationId = "com.hmh.hamyeonham"
         versionCode = libs.versions.versionCode.get().toInt()
         versionName = libs.versions.appVersion.get()
+
+        buildConfigField(
+            "String",
+            "KAKAO_NATIVE_APP_KEY",
+            gradleLocalProperties(rootDir).getProperty("kakao.native.app.key"),
+        )
+        manifestPlaceholders["KAKAO_NATIVE_APP_KEY"] =
+            gradleLocalProperties(rootDir).getProperty("kakao.native.app.key")
     }
 
     signingConfigs {

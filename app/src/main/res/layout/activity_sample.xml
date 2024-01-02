@@ -6,17 +6,61 @@
     android:background="@color/black">
 
 
-
-
-    <Button
-        android:id="@+id/bt_usagestat"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/view_usagestat_total"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:padding="20dp"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rv_usagestat">
+        <TextView
+            android:id="@+id/tv_usagestat_total_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@id/pb_usagestat_total"
+            android:text="@string/usagestat_total_title"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/tv_usagestat_total_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_usagestat_total_title"
+            app:layout_constraintStart_toStartOf="@id/pb_usagestat_total"
+            android:text="4시간"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/tv_usagestat_total_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_usagestat_total_title"
+            app:layout_constraintEnd_toEndOf="@id/pb_usagestat_total"
+            android:text="2시간 30분 남음"
+            android:textColor="@color/white"/>
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/pb_usagestat_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_usagestat_total_hour"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:progress="30"
+            app:trackThickness="10dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_usagestat"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/view_usagestat_total"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="get usage stats"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

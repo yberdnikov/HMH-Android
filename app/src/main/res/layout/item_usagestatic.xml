@@ -36,6 +36,7 @@
         app:layout_constraintTop_toTopOf="@id/iv_itemusagestat_appicon" />
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/pb_item_usagestat"
         style="@style/Theme.HMHAndroid.main.progressbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

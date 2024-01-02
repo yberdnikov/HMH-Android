@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SampleActivity : AppCompatActivity() {
-    private val viewModel by viewModels<MainViewModel>()
+    private val viewModel by viewModels<StaticsViewModel>()
     private lateinit var binding: ActivitySampleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,18 +24,25 @@ class SampleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val splashScreen = installSplashScreen()
         initSplashAnimation(splashScreen)
-        setContentView(R.layout.activity_sample)
         lifecycleScope.launch {
-            viewModel.usageStatsList.collect {
+            viewModel.totalUsageStatsList.collect {
                 it.forEach {
-                    Log.d(
-                        "MainActivity",
-                        "packageName: ${getAppNameFromPackageName(it.packageName)}",
-                    )
-                    Log.d("MainActivity", "totalTimeInForeground: ${it.totalTimeInForeground}")
+                    if (it.packageName in viewModel.mockAppNameList) {
+                        Log.d(
+                            "MainActivity",
+                            "packageName: ${it.packageName}",
+                        )
+                        Log.d(
+                            "MainActivity",
+                            "appName: ${getAppNameFromPackageName(it.packageName)}",
+                        )
+                        Log.d("MainActivity", "totalTimeInForeground: ${it.totalTimeInForeground}")
+                    }
                 }
             }
         }
+        setContentView(R.layout.activity_sample)
+//        Intent(this, StaticsActivity::class.java).let(::startActivity)
     }
 
     private fun initSplashAnimation(splashScreen: SplashScreen) {

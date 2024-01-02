@@ -13,4 +13,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
+
+    // time
+    implementation(projects.core.common)
 }

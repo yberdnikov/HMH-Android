@@ -1,6 +1,5 @@
 package com.hmh.hamyeonham
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.usagestats.model.UsageStat
@@ -10,12 +9,25 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel
+class StaticsViewModel
     @Inject
     constructor(
         private val usageStatsRepository: UsageStatsRepository,
     ) : ViewModel() {
-        val usageStatsList = MutableStateFlow<List<UsageStat>>(emptyList())
+        val totalUsageStatsList = MutableStateFlow<List<UsageStat>>(emptyList())
+        val mockAppNameList =
+            listOf<String>(
+                // hmh
+                "HMH-Android",
+                // kakaotalk
+                "com.kakao.talk",
+                // Google Play 서비스
+                "com.google.android.gms",
+                // 유튜브
+                "com.google.android.youtube",
+                // 크롬
+                "com.android.chrome",
+            )
 
         init {
             val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
@@ -26,13 +38,6 @@ class MainViewModel
             startTime: Long,
             endTime: Long,
         ) {
-            usageStatsList.value = usageStatsRepository.getUsageStats(startTime, endTime)
-        }
-
-        fun printUsageStats() {
-            for (i in usageStatsList.value.listIterator()) {
-                Log.d("usage id", i.packageName.toString())
-                Log.d("usage time", i.totalTimeInForeground.toString())
-            }
+            totalUsageStatsList.value = usageStatsRepository.getUsageStats(startTime, endTime)
         }
     }

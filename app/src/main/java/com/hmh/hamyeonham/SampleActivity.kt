@@ -1,18 +1,18 @@
 package com.hmh.hamyeonham
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.hmh.hamyeonham.databinding.ActivitySampleBinding
+import com.hmh.hamyeonham.statistics.StaticsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SampleActivity : AppCompatActivity() {
-    private val viewModel by viewModels<StaticsViewModel>()
     private lateinit var binding: ActivitySampleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,28 +20,8 @@ class SampleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val splashScreen = installSplashScreen()
         initSplashAnimation(splashScreen)
-//        lifecycleScope.launch {
-//            viewModel.totalUsageStatsList.collect {
-//                it.forEach {
-//                    if (it.packageName in viewModel.mockAppNameList) {
-//                        Log.d(
-//                            "MainActivity",
-//                            "packageName: ${it.packageName}",
-//                        )
-//                        Log.d(
-//                            "MainActivity",
-//                            "appName: ${getAppNameFromPackageName(it.packageName)}",
-//                        )
-//                        Log.d("MainActivity", "totalTimeInForeground: ${it.totalTimeInForeground}")
-//                    }
-//                }
-//            }
-//        }
-        val usageStaticsAdapter = UsageStaticsAdapter(viewModel.getSelectedUsageStatList(), this)
-        binding.rvUsagestat.adapter = usageStaticsAdapter
-//        binding.rvUsagestat.addItemDecoration(CustomItemDecoration())
-        setContentView(R.layout.activity_sample)
-//        Intent(this, StaticsActivity::class.java).let(::startActivity)
+        setContentView(binding.root)
+        startActivity(Intent(this, StaticsActivity::class.java))
     }
 
     private fun initSplashAnimation(splashScreen: SplashScreen) {

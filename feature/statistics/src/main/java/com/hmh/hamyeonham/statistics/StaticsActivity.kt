@@ -1,29 +1,38 @@
-package com.hmh.hamyeonham.feature.statistics
+package com.hmh.hamyeonham.statistics
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
+import com.hmh.hamyeonham.common.view.viewBinding
+import com.hmh.hamyeonham.feature.statistics.databinding.ActivityStaticsBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class StaticsActivity : AppCompatActivity() {
     private val staticsViewModel by viewModels<StaticsViewModel>()
+    private val binding by viewBinding(ActivityStaticsBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_statics)
-//        collectUsageStatsList()
+        setContentView(binding.root)
+        collectUsageStatsList()
     }
 
-//    private fun collectUsageStatsList() {
-//        lifecycleScope.launch {
-//            staticsViewModel.usageStatsList.collect {
-//                it.forEach {
-//                    Log.d(
-//                        "MainActivity",
-//                        "packageName: ${getAppNameFromPackageName(it.packageName)}",
-//                    )
-//                    Log.d("MainActivity", "totalTimeInForeground: ${it.totalTimeInForeground}")
-//                }
-//            }
-//        }
-//    }
+    private fun collectUsageStatsList() {
+        val usageStaticsAdapter = UsageStaticsAdapter()
+        binding.rvStatics.run {
+            adapter = usageStaticsAdapter
+            layoutManager = LinearLayoutManager(this@StaticsActivity)
+        }
+        lifecycleScope.launch {
+            staticsViewModel.totalUsageStatsList.collect {
+                usageStaticsAdapter.submitList(it)
+            }
+        }
+    }
 }

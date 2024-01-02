@@ -92,15 +92,10 @@ fun Context.getAppNameFromPackageName(packageName: String): String =
         "Unknown"
     }
 
-fun Context.getAppIconFromPackageName(packageName: String): Drawable =
-    try {
-        requireNotNull(packageManager.getApplicationLogo(packageName))
-    } catch (e: IllegalArgumentException) {
-        requireNotNull(
-            ResourcesCompat.getDrawable(
-                resources,
-                R.drawable.ic_launcher_foreground,
-                null,
-            ),
-        )
+fun Context.getAppIconFromPackageName(packageName: String): Drawable? {
+    return try {
+        packageManager.getApplicationLogo(packageName)
+    } catch (e: Exception) {
+        ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground)
     }
+}

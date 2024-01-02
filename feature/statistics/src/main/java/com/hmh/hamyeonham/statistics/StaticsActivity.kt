@@ -1,10 +1,11 @@
 package com.hmh.hamyeonham.feature.statistics
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 
 class StaticsActivity : AppCompatActivity() {
-//    private val staticsViewModel by viewModels<StaticsViewModel>()
+    private val staticsViewModel by viewModels<StaticsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

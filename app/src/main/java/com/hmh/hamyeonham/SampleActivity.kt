@@ -1,18 +1,14 @@
 package com.hmh.hamyeonham
 
 import android.os.Bundle
-import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.lifecycleScope
-import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
 import com.hmh.hamyeonham.databinding.ActivitySampleBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SampleActivity : AppCompatActivity() {
@@ -24,23 +20,26 @@ class SampleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val splashScreen = installSplashScreen()
         initSplashAnimation(splashScreen)
-        lifecycleScope.launch {
-            viewModel.totalUsageStatsList.collect {
-                it.forEach {
-                    if (it.packageName in viewModel.mockAppNameList) {
-                        Log.d(
-                            "MainActivity",
-                            "packageName: ${it.packageName}",
-                        )
-                        Log.d(
-                            "MainActivity",
-                            "appName: ${getAppNameFromPackageName(it.packageName)}",
-                        )
-                        Log.d("MainActivity", "totalTimeInForeground: ${it.totalTimeInForeground}")
-                    }
-                }
-            }
-        }
+//        lifecycleScope.launch {
+//            viewModel.totalUsageStatsList.collect {
+//                it.forEach {
+//                    if (it.packageName in viewModel.mockAppNameList) {
+//                        Log.d(
+//                            "MainActivity",
+//                            "packageName: ${it.packageName}",
+//                        )
+//                        Log.d(
+//                            "MainActivity",
+//                            "appName: ${getAppNameFromPackageName(it.packageName)}",
+//                        )
+//                        Log.d("MainActivity", "totalTimeInForeground: ${it.totalTimeInForeground}")
+//                    }
+//                }
+//            }
+//        }
+        val usageStaticsAdapter = UsageStaticsAdapter(viewModel.getSelectedUsageStatList(), this)
+        binding.rvUsagestat.adapter = usageStaticsAdapter
+//        binding.rvUsagestat.addItemDecoration(CustomItemDecoration())
         setContentView(R.layout.activity_sample)
 //        Intent(this, StaticsActivity::class.java).let(::startActivity)
     }

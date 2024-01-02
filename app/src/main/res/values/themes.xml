@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <style name="Theme.HMHAndroid" parent="Theme.AppCompat.Light.NoActionBar" />
+    <style name="Theme.HMHAndroid" parent="Theme.MaterialComponents.Light.NoActionBar" />
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">#121212</item>
@@ -8,7 +8,7 @@
         <item name="postSplashScreenTheme">@style/Theme.HMHAndroid</item>
     </style>
 
-    <style name="Theme.HMHAndroid.main.progressbar" parent="Theme.App.Starting">
+    <style name="Theme.HMHAndroid.main.progressbar" parent="Theme.HMHAndroid">
         <item name = "trackThickness">64dp</item>
         <item name = "trackCornerRadius">10dp</item>
         <item name = "trackColor">#202028</item>

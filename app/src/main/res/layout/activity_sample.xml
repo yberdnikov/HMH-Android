@@ -39,6 +39,7 @@
             app:layout_constraintEnd_toEndOf="@id/pb_usagestat_total"
             android:text="2시간 30분 남음"
             android:textColor="@color/white"/>
+
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/pb_usagestat_total"
             android:layout_width="match_parent"

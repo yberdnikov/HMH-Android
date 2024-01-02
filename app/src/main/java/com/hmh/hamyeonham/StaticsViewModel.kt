@@ -15,6 +15,7 @@ class StaticsViewModel
         private val usageStatsRepository: UsageStatsRepository,
     ) : ViewModel() {
         val totalUsageStatsList = MutableStateFlow<List<UsageStat>>(emptyList())
+        private val selectedUsageStatsList: MutableList<UsageStat> = mutableListOf()
         val mockAppNameList =
             listOf<String>(
                 // hmh
@@ -39,5 +40,14 @@ class StaticsViewModel
             endTime: Long,
         ) {
             totalUsageStatsList.value = usageStatsRepository.getUsageStats(startTime, endTime)
+        }
+
+        fun getSelectedUsageStatList(): List<UsageStat> {
+            for (it in totalUsageStatsList.value.listIterator()) {
+                if (it.packageName in mockAppNameList) {
+                    selectedUsageStatsList.add(it)
+                }
+            }
+            return selectedUsageStatsList
         }
     }

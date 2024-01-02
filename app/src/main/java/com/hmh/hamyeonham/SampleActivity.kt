@@ -21,7 +21,7 @@ class SampleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sample)
 
         initKakaoSdk()
-        Intent(this, MainActivity::class.java).let(::startActivity)
+        Intent(this, LoginActivity::class.java).let(::startActivity)
     }
 
     private fun initKakaoSdk() {

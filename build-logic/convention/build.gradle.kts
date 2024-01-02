@@ -13,6 +13,7 @@ java {
 dependencies {
     compileOnly(libs.agp)
     compileOnly(libs.kotlin.gradleplugin)
+    compileOnly(libs.ksp.gradlePlugin)
 }
 
 gradlePlugin {
@@ -32,6 +33,10 @@ gradlePlugin {
         create("android-hilt") {
             id = "com.hmh.hamyeonham.hilt"
             implementationClass = "com.hmh.hamyeonham.plugin.AndroidHiltPlugin"
+        }
+        create("android-room") {
+            id = "com.hmh.hamyeonham.room"
+            implementationClass = "com.hmh.hamyeonham.plugin.AndroidRoomConventionPlugin"
         }
         create("kotlin-serialization") {
             id = "com.hmh.hamyeonham.serialization"

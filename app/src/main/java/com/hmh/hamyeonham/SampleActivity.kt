@@ -1,6 +1,5 @@
 package com.hmh.hamyeonham
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.animation.Animation
@@ -11,34 +10,51 @@ import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
-import com.hmh.hamyeonham.statistics.StaticsActivity
+import com.hmh.hamyeonham.databinding.ActivitySampleBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.Calendar
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-
+class SampleActivity : AppCompatActivity() {
     private val viewModel by viewModels<MainViewModel>()
+    private lateinit var binding: ActivitySampleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding = ActivitySampleBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
-
         val splashScreen = installSplashScreen()
         initSplashAnimation(splashScreen)
-        setContentView(R.layout.activity_main)
-        val intent = Intent(this, StaticsActivity::class.java)
-        startActivity(intent)
-
+        setContentView(R.layout.activity_sample)
+//        val intent = Intent(this, StaticsActivity::class.java)
+//        startActivity(intent)
+        getUsageStats()
         lifecycleScope.launch {
             viewModel.usageStatsList.collect {
                 it.forEach {
                     Log.d(
                         "MainActivity",
-                        "packageName: ${getAppNameFromPackageName(it.packageName)}"
+                        "packageName: ${getAppNameFromPackageName(it.packageName)}",
                     )
                     Log.d("MainActivity", "totalTimeInForeground: ${it.totalTimeInForeground}")
                 }
             }
+        }
+    }
+
+    private fun getUsageStats() {
+        Log.e("get usage stats function", "start here")
+        binding.btUsagestat.setOnClickListener {
+            Log.e("setOnClickListener", "btUsageStat")
+            val endTime = System.currentTimeMillis()
+            val startDate = Calendar.getInstance()
+            startDate.set(Calendar.HOUR_OF_DAY, 0)
+            startDate.set(Calendar.MINUTE, 0)
+            startDate.set(Calendar.SECOND, 0)
+            val startTime = startDate.getTimeInMillis()
+            Log.e("endtime", endTime.toString())
+            Log.e("start time", startTime.toString())
+            viewModel.getUsageStats(startTime, endTime)
         }
     }
 

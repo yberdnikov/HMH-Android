@@ -28,6 +28,16 @@ android {
 }
 
 dependencies {
+    // Feature
+    implementation(projects.feature.onboarding)
+
+    // Core
+    implementation(projects.core.common)
+    implementation(projects.core.database)
+
+    // Feature
+    implementation(projects.feature.onboarding)
+    implementation(projects.feature.main)
 
     // Feature
     implementation(projects.feature.statistics)

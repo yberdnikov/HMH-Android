@@ -2,14 +2,17 @@ package com.hmh.hamyeonham.feature.login
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.hmh.hamyeonham.common.context.toast
-import com.hmh.hamyeonham.feature.login.databinding.ActivityLoginBinding
 import com.hmh.hamyeonham.feature.login.databinding.ActivityUserInfoBinding
 import com.kakao.sdk.user.UserApiClient
 
 class UserInfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserInfoBinding
+
+    private val userInfoViewModel: UserInfoViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityUserInfoBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)

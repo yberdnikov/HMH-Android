@@ -2,6 +2,7 @@ package com.hmh.hamyeonham.feature.login
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.hmh.hamyeonham.common.context.toast
 import com.hmh.hamyeonham.feature.login.databinding.ActivityLoginBinding
@@ -12,6 +13,8 @@ import com.kakao.sdk.user.UserApiClient
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+
+    private val loginViewModel: LoginViewModel by viewModels()
 
     private val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         when {

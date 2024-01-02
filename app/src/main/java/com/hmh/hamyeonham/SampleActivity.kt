@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
-import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.databinding.ActivitySampleBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -36,21 +34,6 @@ class SampleActivity : AppCompatActivity() {
                     )
                     Log.d("MainActivity", "totalTimeInForeground: ${it.totalTimeInForeground}")
                 }
-            }
-        }
-        btUsageClick()
-    }
-
-    private fun btUsageClick() {
-        val button = findViewById<Button>(R.id.bt_usagestat)
-        button.setOnClickListener {
-            Log.d("bt listener", "start hrere")
-            val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
-            viewModel.getUsageStats(startTime, endTime)
-            for (i in 0..1) {
-                val us = viewModel.usageStatsList.value[i]
-                Log.d("usage id", us.packageName.toString())
-                Log.d("usage time", us.totalTimeInForeground.toString())
             }
         }
     }

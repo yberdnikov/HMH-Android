@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.statistics
+package com.hmh.hamyeonham.feature.statistics
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,8 +10,8 @@ import com.hmh.hamyeonham.usagestats.model.UsageStat
 class UsageStaticsAdapter : ListAdapter<UsageStat, UsageStaticsViewHolder>(
     ItemDiffCallback<UsageStat>(
         onItemsTheSame = { old, new -> old.packageName == new.packageName },
-        onContentsTheSame = { old, new -> old == new }
-    )
+        onContentsTheSame = { old, new -> old == new },
+    ),
 ) {
     override fun onCreateViewHolder(
         parent: ViewGroup,

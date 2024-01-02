@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.Material3.Light">
+        <item name="colorControlNormal">#FFFFFF</item>
+        <item name="android:background">#FFFFFF</item>
+    </style>
+    <style name = "AppTheme.statics.progressbar" parent = "AppTheme">
+        <item name = "trackThickness">80dp</item>
+        <item name = "trackCornerRadius">10dp</item>
+        <item name = "trackColor">#202028</item>
+        <item name = "indicatorColor">#4428EC</item>
+    </style>
+</resources>

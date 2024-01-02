@@ -31,5 +31,6 @@ internal fun Project.configureAndroidCommonPlugin() {
         "implementation"(libs.findLibrary("appcompat").get())
         "implementation"(libs.findBundle("lifecycle").get())
         "implementation"(libs.findLibrary("material").get())
+        "implementation"(libs.findLibrary("fragment.ktx").get())
     }
 }

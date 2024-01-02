@@ -4,16 +4,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
+import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.databinding.ActivitySampleBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.util.Calendar
 
 @AndroidEntryPoint
 class SampleActivity : AppCompatActivity() {
@@ -26,9 +27,6 @@ class SampleActivity : AppCompatActivity() {
         val splashScreen = installSplashScreen()
         initSplashAnimation(splashScreen)
         setContentView(R.layout.activity_sample)
-//        val intent = Intent(this, StaticsActivity::class.java)
-//        startActivity(intent)
-        getUsageStats()
         lifecycleScope.launch {
             viewModel.usageStatsList.collect {
                 it.forEach {
@@ -40,21 +38,20 @@ class SampleActivity : AppCompatActivity() {
                 }
             }
         }
+        btUsageClick()
     }
 
-    private fun getUsageStats() {
-        Log.e("get usage stats function", "start here")
-        binding.btUsagestat.setOnClickListener {
-            Log.e("setOnClickListener", "btUsageStat")
-            val endTime = System.currentTimeMillis()
-            val startDate = Calendar.getInstance()
-            startDate.set(Calendar.HOUR_OF_DAY, 0)
-            startDate.set(Calendar.MINUTE, 0)
-            startDate.set(Calendar.SECOND, 0)
-            val startTime = startDate.getTimeInMillis()
-            Log.e("endtime", endTime.toString())
-            Log.e("start time", startTime.toString())
+    private fun btUsageClick() {
+        val button = findViewById<Button>(R.id.bt_usagestat)
+        button.setOnClickListener {
+            Log.d("bt listener", "start hrere")
+            val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
             viewModel.getUsageStats(startTime, endTime)
+            for (i in 0..1) {
+                val us = viewModel.usageStatsList.value[i]
+                Log.d("usage id", us.packageName.toString())
+                Log.d("usage time", us.totalTimeInForeground.toString())
+            }
         }
     }
 

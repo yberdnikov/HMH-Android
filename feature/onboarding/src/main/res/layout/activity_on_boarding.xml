@@ -7,6 +7,15 @@
     tools:context=".OnBoardingActivity">
 
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/fl_onboarding_container"
+        app:layout_constraintBottom_toTopOf="@+id/btn_onboarding_next"
+        />
     <Button
         android:id="@+id/btn_onboarding_next"
         android:layout_width="match_parent"

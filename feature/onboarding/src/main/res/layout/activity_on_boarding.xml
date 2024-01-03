@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".OnBoardingActivity">
 
-    <include
-        android:id="@+id/numberPicker"
-        layout="@layout/dialog_numberpicker_custom"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/btn_accessibility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="접근성 허용하러 가기"
+        app:layout_constraintBottom_toTopOf="@+id/btn_usage"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_marginBottom="30dp"/>
 
+    <Button
+        android:id="@+id/btn_usage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사용 정보접근 허용하러 가기"
+        app:layout_constraintBottom_toTopOf="@+id/btn_draw_on_others"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="30dp"/>
+
+    <Button
+        android:id="@+id/btn_draw_on_others"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="다른 앱 위에 그리기허용하러 가기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

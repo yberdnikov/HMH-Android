@@ -2,4 +2,13 @@
     <string name="challenge">챌린지</string>
     <string name="home">홈</string>
     <string name="my_page">마이페이지</string>
+
+    <string name = "mypage_earned_point">보유 포인트</string>
+    <string name="mypage_point_unit">P</string>
+    <string name="mypage_badge_collection">배지 컬렉션</string>
+<string name="mypage_journey">지금까지의 여정</string>
+<string name="mypage_store">상점</string>
+    <string name="mypage_info">정보</string>
+    <string name="mypage_termofuse">이용약관</string>
+    <string name="mypage_privacy">개인정보처리방침</string>
 </resources>

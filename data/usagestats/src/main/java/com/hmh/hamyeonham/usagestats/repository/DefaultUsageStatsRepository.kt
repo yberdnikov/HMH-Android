@@ -35,12 +35,8 @@ class DefaultUsageStatsRepository
             vararg packageNames: String,
         ): List<UsageStat> {
             val usageStatsList = getUsageStats(startTime, endTime)
-            return packageNames.map { packageName ->
-                val totalUsageTime =
-                    usageStatsList
-                        .filter { it.packageName == packageName }
-                        .sumOf { it.totalTimeInForeground }
-                UsageStat(packageName, totalUsageTime)
+            return usageStatsList.filter {
+                packageNames.contains(it.packageName)
             }
         }
 
@@ -50,12 +46,10 @@ class DefaultUsageStatsRepository
             packageNames: List<String>,
         ): List<UsageStat> {
             val usageStatsList = getUsageStats(startTime, endTime)
-            return packageNames.map { packageName ->
-                val totalUsageTime =
-                    usageStatsList
-                        .filter { it.packageName == packageName }
-                        .sumOf { it.totalTimeInForeground }
-                UsageStat(packageName, totalUsageTime)
-            }
+            val newUsageStatsList =
+                usageStatsList.filter {
+                    packageNames.contains(it.packageName)
+                }
+            return newUsageStatsList
         }
     }

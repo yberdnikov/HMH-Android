@@ -51,7 +51,7 @@ fun getCurrentDayStartEndEpochMillis(): Pair<Long, Long> {
     return Pair(startOfDay, endOfDay)
 }
 
-fun convertMillisecondsToMinute(ms: Long) = TimeUnit.MILLISECONDS.toSeconds(ms)
+fun convertMillisecondsToMinute(ms: Long) = TimeUnit.MILLISECONDS.toMinutes(ms)
 
 fun convertTimeToString(time: Long): String {
     val hour = convertMillisecondsToMinute(time) / 60

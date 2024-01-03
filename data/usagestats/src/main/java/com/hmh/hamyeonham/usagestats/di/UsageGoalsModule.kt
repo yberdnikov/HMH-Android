@@ -17,10 +17,10 @@ object UsageGoalsModule {
     @Singleton
     fun provideUsageGoalModels(): List<UsageGoalModel> {
         return listOf(
-            UsageGoalModel("total", 15686 * 3),
+            UsageGoalModel("total", 201519990),
             UsageGoalModel("com.kakao.talk", 15686 * 2),
             UsageGoalModel("com.google.android.gms", 7134),
-            UsageGoalModel("com.google.android.youtube", 7134),
+            UsageGoalModel("com.google.android.youtube", 71349),
             UsageGoalModel("com.android.chrome", 39445),
         )
     }

@@ -8,19 +8,19 @@
 
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vp_explore"
+        android:id="@+id/vp_login"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/indicator_viewpager_image_dots"
+        app:layout_constraintBottom_toTopOf="@id/indicator_login_dots"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="70dp"
         android:layout_marginBottom="30dp"
         />
 
     <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-        android:id="@+id/indicator_viewpager_image_dots"
+        android:id="@+id/indicator_login_dots"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginBottom="86dp"

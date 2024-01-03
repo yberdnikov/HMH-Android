@@ -1,6 +1,6 @@
 package com.hmh.hamyeonham.usagestats.model
 
-data class UsageGoal(
+data class UsageGoalModel(
     val packageName: String,
     val goalTime: Long,
 )

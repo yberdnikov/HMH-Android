@@ -11,11 +11,6 @@ class OnBoardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.run {
-            numberPicker.npCustomHours.minValue = 1
-            numberPicker.npCustomHours.maxValue = 6
-            numberPicker.npCustomMinutes.minValue = 1
-            numberPicker.npCustomMinutes.maxValue = 59
-        }
+
     }
 }

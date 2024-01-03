@@ -16,13 +16,14 @@ object UsageGoalsModule {
     @Provides
     @Singleton
     fun provideUsageGoalModels(): List<UsageGoalModel> {
-        return listOf(
+        val usageGoalList = listOf(
             UsageGoalModel("total", 201519990),
             UsageGoalModel("com.kakao.talk", 15686 * 2),
             UsageGoalModel("com.google.android.gms", 7134),
             UsageGoalModel("com.google.android.youtube", 71349),
             UsageGoalModel("com.android.chrome", 39445),
         )
+        return usageGoalList
     }
 
     @Module

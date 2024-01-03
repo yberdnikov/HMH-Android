@@ -14,8 +14,10 @@ class UsageStaticsTotalViewHolder(
 ) :
     RecyclerView.ViewHolder(binding.root) {
     fun onBind(usageStatAndGoal: UsageStatAndGoal) {
-        binding.tvStaticsHour.text = convertTimeToString(usageStatAndGoal.goalTime)
-        binding.pbStatics.setProgress(getUsedPercentage(usageStatAndGoal.totalTimeInForeground, usageStatAndGoal.goalTime))
-        binding.tvStaticsLeftHour.text = getLeftTimeInString(usageStatAndGoal.totalTimeInForeground, usageStatAndGoal.goalTime)
+        binding.run {
+            tvStaticsHour.text = convertTimeToString(usageStatAndGoal.goalTime)
+            pbStatics.setProgress(getUsedPercentage(usageStatAndGoal.totalTimeInForeground, usageStatAndGoal.goalTime))
+            tvStaticsLeftHour.text = getLeftTimeInString(usageStatAndGoal.totalTimeInForeground, usageStatAndGoal.goalTime)
+        }
     }
 }

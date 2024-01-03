@@ -19,11 +19,6 @@ class StaticsViewModel
         init {
             val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
             getStatics(startTime, endTime)
-//            for (i in usageStatList.value) {
-//                Log.d("app name", i.packageName)
-//                Log.d("total time", i.totalTimeInForeground.toString())
-//                Log.d("goal time", i.goalTime.toString())
-//            }
         }
 
         private fun getStatics(

@@ -6,8 +6,13 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
+import java.util.Properties
 
 internal fun Project.configureAndroidCommonPlugin() {
+
+    val properties = Properties().apply {
+        load(rootProject.file("local.properties").inputStream())
+    }
 
     apply<AndroidKotlinPlugin>()
     apply<KotlinSerializationPlugin>()
@@ -20,7 +25,7 @@ internal fun Project.configureAndroidCommonPlugin() {
         defaultConfig {
             val kakaoApiKey = properties["kakaoApiKey"] as? String ?: ""
 
-            manifestPlaceholders["kakaoApiKey"] = properties["kakaoApiKey"] as? String ?: ""
+            manifestPlaceholders["kakaoApiKey"] = properties["kakaoApiKey"] as String
 
             buildConfigField("String", "KAKAO_API_KEY", "\"${kakaoApiKey}\"")
         }

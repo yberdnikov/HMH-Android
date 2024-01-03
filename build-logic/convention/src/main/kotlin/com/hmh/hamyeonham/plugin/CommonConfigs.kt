@@ -6,7 +6,6 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
-import java.util.Properties
 
 internal fun Project.configureAndroidCommonPlugin() {
 
@@ -18,7 +17,13 @@ internal fun Project.configureAndroidCommonPlugin() {
     apply<AndroidHiltPlugin>()
 
     extensions.getByType<BaseExtension>().apply {
-        defaultConfig {}
+        defaultConfig {
+            val kakaoApiKey = properties["kakaoApiKey"] as? String ?: ""
+
+            manifestPlaceholders["kakaoApiKey"] = properties["kakaoApiKey"] as? String ?: ""
+
+            buildConfigField("String", "KAKAO_API_KEY", "\"${kakaoApiKey}\"")
+        }
         buildFeatures.apply {
             viewBinding = true
             buildConfig = true

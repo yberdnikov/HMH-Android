@@ -16,4 +16,7 @@ dependencies {
 
     // kakao
     implementation(libs.kakao.login)
+
+    implementation (libs.dot.indicator)
+
 }

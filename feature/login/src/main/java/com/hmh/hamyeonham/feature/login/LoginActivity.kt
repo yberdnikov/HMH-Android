@@ -52,8 +52,8 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewPagerAdapter = LoginViewPagerAdapter(dummyImageList)
         binding.run {
-            vpExplore.adapter = loginViewPagerAdapter
-            indicatorViewpagerImageDots.attachTo(binding.vpExplore)
+            vpLogin.adapter = loginViewPagerAdapter
+            indicatorLoginDots.attachTo(binding.vpLogin)
         }
     }
 

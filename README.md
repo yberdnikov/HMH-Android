@@ -25,7 +25,7 @@
 
 <h2>Activity Graph</h2>
 
-![Alt](https://repobeats.axiom.co/api/embed/8aafd7e55d7655ad9ec829f95a445ba7f7758e58.svg "Repobeats analytics image")
+![Alt](https://repobeats.axiom.co/api/embed/d2c401ae723c367a03ed9fb81ea6e6e7cfbee2ea.svg "Repobeats analytics image")
 
 ## Contributors ✨
 

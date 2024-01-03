@@ -18,6 +18,19 @@ class LoginActivity : AppCompatActivity() {
     private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var loginViewPagerAdapter: LoginViewPagerAdapter
 
+    // 삭제 예정
+    private val dummyImageList = listOf(
+        DummyImage(
+            Image = R.drawable.login_sample_rectagle_viewpager,
+        ),
+        DummyImage(
+            Image = R.drawable.login_sample_rectagle_viewpager,
+        ),
+        DummyImage(
+            Image = R.drawable.login_sample_rectagle_viewpager,
+        ),
+    )
+
     private val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         when {
             error != null -> {
@@ -37,23 +50,10 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             loginWithKakaoApp()
         }
-
         setLoginViewPager()
     }
 
     private fun setLoginViewPager() {
-        val dummyImageList = listOf(
-            DummyImage(
-                Image = R.drawable.login_sample_rectagle_viewpager,
-            ),
-            DummyImage(
-                Image = R.drawable.login_sample_rectagle_viewpager,
-            ),
-            DummyImage(
-                Image = R.drawable.login_sample_rectagle_viewpager,
-            ),
-        )
-
         loginViewPagerAdapter = LoginViewPagerAdapter(dummyImageList)
         binding.run {
             vpLogin.adapter = loginViewPagerAdapter

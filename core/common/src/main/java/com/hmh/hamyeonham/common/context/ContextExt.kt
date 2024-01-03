@@ -14,7 +14,6 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.snackbar.Snackbar
 import com.hmh.hamyeonham.common.R
 
@@ -93,9 +92,11 @@ fun Context.getAppNameFromPackageName(packageName: String): String =
     }
 
 fun Context.getAppIconFromPackageName(packageName: String): Drawable? {
-    return try {
-        packageManager.getApplicationLogo(packageName)
-    } catch (e: Exception) {
-        ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground)
+    try {
+        val appInfo = packageManager.getApplicationInfo(packageName, 0)
+        return appInfo.loadIcon(packageManager)
+    } catch (e: PackageManager.NameNotFoundException) {
+        e.printStackTrace()
     }
+    return ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground)
 }

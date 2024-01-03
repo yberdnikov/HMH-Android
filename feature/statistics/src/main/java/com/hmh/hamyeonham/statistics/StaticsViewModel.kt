@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.feature.statistics
+package com.hmh.hamyeonham.statistics
 
 import androidx.lifecycle.ViewModel
 import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis

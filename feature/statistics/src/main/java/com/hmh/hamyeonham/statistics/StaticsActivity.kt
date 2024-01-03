@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.feature.statistics
+package com.hmh.hamyeonham.statistics
 
 import android.os.Bundle
 import androidx.activity.viewModels

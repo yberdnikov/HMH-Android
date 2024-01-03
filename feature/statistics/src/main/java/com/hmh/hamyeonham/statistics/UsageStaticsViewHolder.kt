@@ -1,6 +1,7 @@
-package com.hmh.hamyeonham.feature.statistics
+package com.hmh.hamyeonham.statistics
 
 import android.content.Context
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.hmh.hamyeonham.common.context.getAppIconFromPackageName
 import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
@@ -16,15 +17,17 @@ class UsageStaticsViewHolder(
     fun onBind(usageStat: UsageStat) {
         binding.tvItemusagestatAppname.text =
             context.getAppNameFromPackageName(usageStat.packageName)
-        binding.tvItemusagestatLeftHour.text = usageStat.totalTimeInForeground.toString()
+        binding.tvItemusagestatLeftHour.text = convertMsToMin(usageStat.totalTimeInForeground).toString()
         binding.ivItemusagestatAppicon.setImageDrawable(context.getAppIconFromPackageName(usageStat.packageName))
         binding.pbItemUsagestat.setProgress(getUsedPercentage(usageStat.totalTimeInForeground))
     }
 
     private fun getUsedPercentage(usedTime: Long): Int {
         val usedMin = convertMsToMin(usedTime)
-        val goal = 3600
-        return ((usedMin / goal) * 100).toInt()
+        val goal = 100
+        Log.d("usedMin", usedMin.toString())
+        Log.d("return", (usedMin * 100 / goal).toInt().toString())
+        return (usedMin * 100 / goal).toInt()
     }
 
     private fun convertMsToMin(ms: Long) = TimeUnit.MILLISECONDS.toSeconds(ms)

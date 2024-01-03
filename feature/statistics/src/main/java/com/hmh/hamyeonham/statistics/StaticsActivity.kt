@@ -5,6 +5,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hmh.hamyeonham.common.time.convertTimeToString
+import com.hmh.hamyeonham.common.time.getLeftTimeInString
+import com.hmh.hamyeonham.common.time.getUsedPercentage
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.statistics.databinding.ActivityStaticsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,7 +33,15 @@ class StaticsActivity : AppCompatActivity() {
         lifecycleScope.launch {
             staticsViewModel.usageStatList.collect {
                 usageStaticsAdapter.submitList(it)
+                bindTotalUsage()
             }
         }
+    }
+
+    private fun bindTotalUsage() {
+        val usageStatAndGoal = staticsViewModel.usageStatList.value[0]
+        binding.tvStaticsHour.text = convertTimeToString(usageStatAndGoal.goalTime)
+        binding.pbStatics.setProgress(getUsedPercentage(usageStatAndGoal.totalTimeInForeground, usageStatAndGoal.goalTime))
+        binding.tvStaticsLeftHour.text = getLeftTimeInString(usageStatAndGoal.totalTimeInForeground, usageStatAndGoal.goalTime)
     }
 }

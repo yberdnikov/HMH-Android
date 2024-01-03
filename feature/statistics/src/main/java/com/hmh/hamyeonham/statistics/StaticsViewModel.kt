@@ -15,7 +15,6 @@ class StaticsViewModel
         private val staticsUseCase: StaticsUseCase,
     ) : ViewModel() {
         val usageStatList = MutableStateFlow<List<UsageStatAndGoal>>(emptyList())
-        val totalUsage = MutableStateFlow<Long>(0)
 
         init {
             val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
@@ -26,8 +25,6 @@ class StaticsViewModel
             startTime: Long,
             endTime: Long,
         ) {
-            val result = staticsUseCase.getStatics(startTime, endTime)
-            usageStatList.value = result.first
-            totalUsage.value = result.second
+            usageStatList.value = staticsUseCase.getStatics(startTime, endTime)
         }
     }

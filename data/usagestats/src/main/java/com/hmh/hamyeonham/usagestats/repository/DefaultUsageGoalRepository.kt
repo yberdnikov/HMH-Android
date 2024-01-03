@@ -1,23 +1,21 @@
 package com.hmh.hamyeonham.usagestats.repository
 
-import com.hmh.hamyeonham.usagestats.datasource.UsageGoalsDataSource
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
+import com.hmh.hamyeonham.usagestats.model.UsageGoalModel
 import javax.inject.Inject
 
 class DefaultUsageGoalsRepository
     @Inject
     constructor(
-        private val usageGoalDataSource: UsageGoalsDataSource,
+        private val usageGoalList: List<UsageGoalModel>,
     ) : UsageGoalsRepository {
         override fun getUsageGoals(): List<UsageGoal> {
-            val usageGoalsList = usageGoalDataSource.getUsageGoals()
-            return usageGoalsList.map { usageGoalModel ->
-                UsageGoal(usageGoalModel.packageName, usageGoalModel.goalTime)
+            return usageGoalList.map { it ->
+                UsageGoal(it.packageName, it.goalTime)
             }
         }
 
         override fun getUsageGoalTime(packageName: String): Long {
-            val usageGoalsList = usageGoalDataSource.getUsageGoals()
-            return usageGoalsList.firstOrNull { it.packageName == packageName }?.goalTime ?: 0
+            return usageGoalList.firstOrNull { it.packageName == packageName }?.goalTime ?: 0
         }
     }

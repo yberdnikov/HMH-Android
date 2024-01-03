@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
-        android:text="@string/all_time_left"
+        android:text="@string/all_left"
         app:layout_constraintBottom_toBottomOf="@id/pb_item_usagestat"
         app:layout_constraintEnd_toEndOf="@id/pb_item_usagestat"
         app:layout_constraintTop_toTopOf="@id/pb_item_usagestat" />

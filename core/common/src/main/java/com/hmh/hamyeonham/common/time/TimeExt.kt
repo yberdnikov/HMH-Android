@@ -56,16 +56,29 @@ fun convertMillisecondsToMinute(ms: Long) = TimeUnit.MILLISECONDS.toMinutes(ms)
 fun convertTimeToString(time: Long): String {
     val hour = convertMillisecondsToMinute(time) / 60
     val min = convertMillisecondsToMinute(time) % 60
-    return "$hour : $min"
+    val result = ""
+    if (hour > 0) result.plus("$hour 시간")
+    if (min > 0) result.plus("$min 분")
+
+    Log.d("time", time.toString())
+    Log.d("converted", time.toString())
+
+    Log.d("hour", hour.toString())
+    Log.d("min", convertMillisecondsToMinute(time).toString())
+
+    Log.d("result", result.toString())
+    return result
 }
 
 fun getUsedPercentage(
     usage: Long,
     goal: Long,
 ): Int {
-    Log.d("usedMin", usage.toString())
-    Log.d("return", (usage * 100 / goal).toInt().toString())
-    return (usage * 100 / goal).toInt()
+    try {
+        return (usage * 100 / goal).toInt()
+    } catch (e: ArithmeticException) {
+        return 0
+    }
 }
 
 fun getLeftTimeInString(

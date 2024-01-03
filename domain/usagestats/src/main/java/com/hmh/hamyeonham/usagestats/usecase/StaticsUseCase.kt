@@ -14,11 +14,14 @@ class StaticsUseCase
         fun getStatics(
             startTime: Long,
             endTime: Long,
-        ): Pair<List<UsageStatAndGoal>, Long> {
+        ): List<UsageStatAndGoal> {
+            val totalUsage =
+                getTotalUsage(startTime, endTime)
             val appUsageStat =
                 getAppUsageStat(startTime, endTime)
-            val totalUsage = getTotalUsage(startTime, endTime)
-            return Pair(appUsageStat, totalUsage)
+            val totalUsageStatAndGoal =
+                UsageStatAndGoal("total", totalUsage, usageGoalsRepository.getUsageGoalTime("total"))
+            return listOf(totalUsageStatAndGoal) + appUsageStat
         }
 
         private fun getAppUsageStat(
@@ -26,13 +29,16 @@ class StaticsUseCase
             endTime: Long,
         ): List<UsageStatAndGoal> {
             val appList = getAppList()
-            return usageStatsRepository.getUsageTimeForPackages(startTime, endTime, appList).map {
-                UsageStatAndGoal(
-                    it.packageName,
-                    it.totalTimeInForeground,
-                    usageGoalsRepository.getUsageGoalTime(it.packageName),
-                )
-            }
+
+            val usageStatAndGoal =
+                usageStatsRepository.getUsageTimeForPackages(startTime, endTime, appList).map {
+                    UsageStatAndGoal(
+                        it.packageName,
+                        it.totalTimeInForeground,
+                        usageGoalsRepository.getUsageGoalTime(it.packageName),
+                    )
+                }
+            return usageStatAndGoal
         }
 
         private fun getTotalUsage(

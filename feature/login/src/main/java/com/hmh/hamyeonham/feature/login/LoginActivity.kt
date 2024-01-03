@@ -38,6 +38,10 @@ class LoginActivity : AppCompatActivity() {
             loginWithKakaoApp()
         }
 
+        setLoginViewPager()
+    }
+
+    private fun setLoginViewPager() {
         val dummyImageList = listOf(
             DummyImage(
                 Image = R.drawable.login_sample_rectagle_viewpager,

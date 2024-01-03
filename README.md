@@ -38,8 +38,8 @@
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/KwakEuiJin"><img src="https://avatars.githubusercontent.com/u/93872496?v=4?s=100" width="100px;" alt="KwakEuiJin"/><br/><sub><b>KwakEuiJin</b></sub></a><br /><a href="https://github.com/Team-HMH/HMH-Android/commits?author=KwakEuiJin" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kangyuri1114"><img src="https://avatars.githubusercontent.com/u/83583757?v=4?s=100" width="100px;" alt="KangYuri"/><br/><sub><b>Jihyeon An</b></sub></a><br /><a href="https://github.com/Team-HMH/HMH-Android/commits?author=kangyuri1114" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/memoryBangwool"><img src="https://avatars.githubusercontent.com/u/84266681?v=4?s=100" width="100px;" alt="JiHyun Kyoung"/><br /><sub><b>JaewonSeo</b></sub></a><br/><a href="https://github.com/Team-HMH/HMH-Android/commits?author=memoryBangwool" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kangyuri1114"><img src="https://avatars.githubusercontent.com/u/83583757?v=4?s=100" width="100px;" alt="KangYuri"/><br/><sub><b>KangYuri</b></sub></a><br /><a href="https://github.com/Team-HMH/HMH-Android/commits?author=kangyuri1114" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/memoryBangwool"><img src="https://avatars.githubusercontent.com/u/84266681?v=4?s=100" width="100px;" alt="JiHyun Kyoung"/><br /><sub><b>JiHyun Kyoung</b></sub></a><br/><a href="https://github.com/Team-HMH/HMH-Android/commits?author=memoryBangwool" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

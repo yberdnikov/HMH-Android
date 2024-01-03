@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginBottom="86dp"
-        app:dotsColor="#FFFFFF"
+        app:dotsColor="#121212"
         app:dotsCornerRadius="8dp"
         app:dotsSize="6dp"
         app:dotsSpacing="4dp"
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:progressMode="true"
-        app:selectedDotColor="#FFFFFF" />
+        app:selectedDotColor="#121212" />
 
 
     <ImageView

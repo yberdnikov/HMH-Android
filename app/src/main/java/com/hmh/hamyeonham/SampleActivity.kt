@@ -18,7 +18,7 @@ class SampleActivity : AppCompatActivity() {
         initSplashAnimation(splashScreen)
 
         setContentView(R.layout.activity_sample)
-        Intent(this, MainActivity::class.java).let(::startActivity)
+        Intent(this, OnBoardingActivity::class.java).let(::startActivity)
     }
 
     private fun initSplashAnimation(splashScreen: SplashScreen) {

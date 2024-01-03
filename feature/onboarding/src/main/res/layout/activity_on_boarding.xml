@@ -6,11 +6,5 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".OnBoardingActivity">
 
-    <include
-        android:id="@+id/numberPicker"
-        layout="@layout/dialog_numberpicker_custom"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.hmh.hamyeonham.common.context.toast
+import com.hmh.hamyeonham.feature.login.data.DummyImage
 import com.hmh.hamyeonham.feature.login.databinding.ActivityLoginBinding
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
@@ -15,6 +16,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     private val loginViewModel: LoginViewModel by viewModels()
+    private lateinit var loginViewPagerAdapter: LoginViewPagerAdapter
 
     private val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         when {
@@ -34,6 +36,24 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener {
             loginWithKakaoApp()
+        }
+
+        val dummyImageList = listOf(
+            DummyImage(
+                Image = R.drawable.login_sample_rectagle_viewpager,
+            ),
+            DummyImage(
+                Image = R.drawable.login_sample_rectagle_viewpager,
+            ),
+            DummyImage(
+                Image = R.drawable.login_sample_rectagle_viewpager,
+            ),
+        )
+
+        loginViewPagerAdapter = LoginViewPagerAdapter(dummyImageList)
+        binding.run {
+            vpExplore.adapter = loginViewPagerAdapter
+            indicatorViewpagerImageDots.attachTo(binding.vpExplore)
         }
     }
 

@@ -7,8 +7,9 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.hmh.hamyeonham.feature.login.LoginActivity
+import com.kakao.sdk.common.KakaoSdk
 import com.hmh.hamyeonham.feature.main.MainActivity
-import com.hmh.hamyeonham.feature.onboarding.OnBoardingActivity
 
 class SampleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +19,13 @@ class SampleActivity : AppCompatActivity() {
         initSplashAnimation(splashScreen)
 
         setContentView(R.layout.activity_sample)
-        Intent(this, OnBoardingActivity::class.java).let(::startActivity)
+
+        initKakaoSdk()
+        Intent(this, LoginActivity::class.java).let(::startActivity)
+    }
+
+    private fun initKakaoSdk() {
+        KakaoSdk.init(this, BuildConfig.KAKAO_API_KEY)
     }
 
     private fun initSplashAnimation(splashScreen: SplashScreen) {

@@ -13,15 +13,12 @@ class UsageGoalsDataSource {
     @Provides
     @Singleton
     fun getUsageGoals(): List<UsageGoalModel> {
-        val usageGoalList =
-            listOf(
-                UsageGoalModel("total", 201519990),
-                UsageGoalModel("com.kakao.talk", 15686 * 2),
-                UsageGoalModel("com.google.android.gms", 7134),
-                UsageGoalModel("com.google.android.youtube", 71349),
-                UsageGoalModel("com.android.chrome", 39445),
-            )
-
-        return usageGoalList
+        return listOf(
+            UsageGoalModel("total", 201519990),
+            UsageGoalModel("com.kakao.talk", 15686 * 2),
+            UsageGoalModel("com.google.android.gms", 7134),
+            UsageGoalModel("com.google.android.youtube", 71349),
+            UsageGoalModel("com.android.chrome", 39445),
+        )
     }
 }

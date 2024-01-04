@@ -9,22 +9,20 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class StaticsViewModel
-    @Inject
-    constructor(
-        private val staticsUseCase: StaticsUseCase,
-    ) : ViewModel() {
-        val usageStatAndGoalList = MutableStateFlow<List<UsageStatAndGoal>>(emptyList())
+class StaticsViewModel @Inject constructor(
+    private val staticsUseCase: StaticsUseCase
+) : ViewModel() {
+    val usageStatAndGoalList = MutableStateFlow<List<UsageStatAndGoal>>(emptyList())
 
-        init {
-            val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
-            getUsageStatsAndGoals(startTime, endTime)
-        }
-
-        private fun getUsageStatsAndGoals(
-            startTime: Long,
-            endTime: Long,
-        ) {
-            usageStatAndGoalList.value = staticsUseCase.getUsageStatsAndGoals(startTime, endTime)
-        }
+    init {
+        val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
+        getUsageStatsAndGoals(startTime, endTime)
     }
+
+    private fun getUsageStatsAndGoals(
+        startTime: Long,
+        endTime: Long,
+    ) {
+        usageStatAndGoalList.value = staticsUseCase.getUsageStatsAndGoals(startTime, endTime)
+    }
+}

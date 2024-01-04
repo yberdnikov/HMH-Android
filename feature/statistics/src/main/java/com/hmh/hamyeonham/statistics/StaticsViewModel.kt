@@ -14,17 +14,17 @@ class StaticsViewModel
     constructor(
         private val staticsUseCase: StaticsUseCase,
     ) : ViewModel() {
-        val usageStatList = MutableStateFlow<List<UsageStatAndGoal>>(emptyList())
+        val usageStatAndGoalList = MutableStateFlow<List<UsageStatAndGoal>>(emptyList())
 
         init {
             val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
-            getStatics(startTime, endTime)
+            getUsageStatsAndGoals(startTime, endTime)
         }
 
-        private fun getStatics(
+        private fun getUsageStatsAndGoals(
             startTime: Long,
             endTime: Long,
         ) {
-            usageStatList.value = staticsUseCase.getStatics(startTime, endTime)
+            usageStatAndGoalList.value = staticsUseCase.getUsageStatsAndGoals(startTime, endTime)
         }
     }

@@ -58,7 +58,7 @@ fun convertTimeToString(time: Long): String {
     val min = convertMillisecondsToMinute(time) % 60
     var result = ""
     if (hour > 0) result = result.plus("$hour 시간")
-    if (min > 0) result = result.plus("$min 분")
+    if (min >= 0) result = result.plus("$min 분")
 
     Log.d("time", time.toString())
     Log.d("converted", convertMillisecondsToMinute(time).toString())

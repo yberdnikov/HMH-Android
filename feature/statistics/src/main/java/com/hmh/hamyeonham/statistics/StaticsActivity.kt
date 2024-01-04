@@ -28,7 +28,7 @@ class StaticsActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@StaticsActivity)
         }
         lifecycleScope.launch {
-            staticsViewModel.usageStatList.collect {
+            staticsViewModel.usageStatAndGoalList.collect {
                 usageStaticsAdapter.submitList(it)
             }
         }

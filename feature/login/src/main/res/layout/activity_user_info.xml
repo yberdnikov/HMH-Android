@@ -4,34 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OnBoardingActivity">
+    tools:context=".UserInfoActivity">
 
-    <Button
-        android:id="@+id/btn_accessibility"
+    <TextView
+        android:id="@+id/tv_login_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="접근성 허용하러 가기"
-        app:layout_constraintBottom_toTopOf="@+id/btn_usage"
+        android:layout_marginTop="100dp"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="30dp"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="nickname" />
 
     <Button
-        android:id="@+id/btn_usage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="사용 정보접근 허용하러 가기"
-        app:layout_constraintBottom_toTopOf="@+id/btn_draw_on_others"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="30dp"/>
-
-    <Button
-        android:id="@+id/btn_draw_on_others"
+        android:id="@+id/btn_login_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:text="다른 앱 위에 그리기허용하러 가기"
+        android:text="로그아웃"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

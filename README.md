@@ -105,7 +105,7 @@
 - [Kotlin Code Convention](https://www.notion.so/msmmx/Kotlin-Convention-5ab4410e68c949c287804d2380c51af4)
 - [XML Convention](https://www.notion.so/msmmx/XML-Convention-b11209ba2b404df08f251383c7d3c316)
 - [name convention](https://www.notion.so/msmmx/name-convention-ca8bab7da7314b30b2a962755854b11e)
-- [GitHub Convention]([https://www.notion.so/msmmx/b75d3559813e478f9f6d73e9c818834b?pvs=4#bc0bf41e7df9421391dc1000d25a17c6](https://www.notion.so/msmmx/Git-Convention-e7785302d1a94a71b8f330c5a050bc41))
+- [GitHub Convention](https://www.notion.so/msmmx/Git-Convention-e7785302d1a94a71b8f330c5a050bc41)
 
 
 This project follows the all-contributors specification. Contributions of any kind welcome!

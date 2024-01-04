@@ -9,8 +9,7 @@ import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
 class UsageStaticsTotalViewHolder(
     private val binding: ItemUsagestaticTotalBinding,
     private val context: Context,
-) :
-    RecyclerView.ViewHolder(binding.root) {
+) : RecyclerView.ViewHolder(binding.root) {
     fun onBind(usageStatAndGoal: UsageStatAndGoal) {
         binding.run {
             tvStaticsHour.text = convertTimeToString(usageStatAndGoal.goalTime)

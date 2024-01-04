@@ -11,8 +11,7 @@ import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
 class UsageStaticsViewHolder(
     private val binding: ItemUsagestaticBinding,
     private val context: Context,
-) :
-    RecyclerView.ViewHolder(binding.root) {
+) : RecyclerView.ViewHolder(binding.root) {
     fun onBind(usageStatAndGoal: UsageStatAndGoal) {
         binding.run {
             tvItemusagestatAppname.text =

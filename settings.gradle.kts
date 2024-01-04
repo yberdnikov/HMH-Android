@@ -13,6 +13,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { setUrl("https://devrepo.kakao.com/nexus/content/groups/public/") }
     }
 }
 
@@ -20,8 +21,11 @@ rootProject.name = "HMH-Android"
 include(":app")
 include(":core:common")
 include(":core:database")
+
 include(":feature:onboarding")
 include(":feature:main")
+include(":feature:statistics")
+include(":feature:login")
+
 include(":data:usagestats")
 include(":domain:usagestats")
-include(":feature:statistics")

@@ -16,9 +16,23 @@ android {
         versionName = libs.versions.appVersion.get()
     }
 
+    signingConfigs {
+        getByName("debug") {
+            keyAlias = "android_debug_key"
+            keyPassword = "android"
+            storeFile = File("${project.rootDir.absolutePath}/keystore/debug.keystore")
+            storePassword = "android"
+        }
+    }
+
     buildTypes {
+        debug {
+            isDebuggable = true
+            signingConfig = signingConfigs.getByName("debug")
+        }
         release {
             isMinifyEnabled = false
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
@@ -28,16 +42,6 @@ android {
 }
 
 dependencies {
-    // Feature
-    implementation(projects.feature.onboarding)
-
-    // Core
-    implementation(projects.core.common)
-    implementation(projects.core.database)
-
-    // Feature
-    implementation(projects.feature.onboarding)
-    implementation(projects.feature.main)
 
     // Feature
     implementation(projects.feature.statistics)
@@ -57,4 +61,12 @@ dependencies {
 
     // Splash
     implementation(libs.splash.screen)
+
+    // Features
+    implementation(projects.feature.login)
+    implementation(projects.feature.onboarding)
+    implementation(projects.feature.main)
+
+    // kakao
+    implementation(libs.kakao.login)
 }

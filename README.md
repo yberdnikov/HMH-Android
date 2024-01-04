@@ -1,7 +1,6 @@
-# HMH Android
+# 하면함 Android
 
-## 스크린 타임 제한을 통한 디지털 디톡스 하면함!
-
+## 스마트폰 중독 탈출, 너도 하면함!
 <br/>
 <div align="center">
   <p align="center">
@@ -37,9 +36,9 @@
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/KwakEuiJin"><img src="https://avatars.githubusercontent.com/u/93872496?v=4?s=100" width="100px;" alt="KwakEuiJin"/><br/><sub><b>KwakEuiJin</b></sub></a><br /><a href="https://github.com/Team-HMH/HMH-Android/commits?author=KwakEuiJin" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kangyuri1114"><img src="https://avatars.githubusercontent.com/u/83583757?v=4?s=100" width="100px;" alt="KangYuri"/><br/><sub><b>KangYuri</b></sub></a><br /><a href="https://github.com/Team-HMH/HMH-Android/commits?author=kangyuri1114" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/memoryBangwool"><img src="https://avatars.githubusercontent.com/u/84266681?v=4?s=100" width="100px;" alt="JiHyun Kyoung"/><br /><sub><b>JiHyun Kyoung</b></sub></a><br/><a href="https://github.com/Team-HMH/HMH-Android/commits?author=memoryBangwool" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/KwakEuiJin"><img src="https://avatars.githubusercontent.com/u/93872496?v=4?s=100" width="100px;" alt="Kwak EuiJin"/><br/><sub><b>KwakEuiJin</b></sub></a><br /><a href="https://github.com/Team-HMH/HMH-Android/commits?author=KwakEuiJin" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kangyuri1114"><img src="https://avatars.githubusercontent.com/u/83583757?v=4?s=100" width="100px;" alt="Kang Yuri"/><br/><sub><b>KangYuri</b></sub></a><br /><a href="https://github.com/Team-HMH/HMH-Android/commits?author=kangyuri1114" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/memoryBangwool"><img src="https://avatars.githubusercontent.com/u/84266681?v=4?s=100" width="100px;" alt="Kyoung JiHyun"/><br /><sub><b>JiHyun Kyoung</b></sub></a><br/><a href="https://github.com/Team-HMH/HMH-Android/commits?author=memoryBangwool" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
@@ -55,5 +54,58 @@
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+## Folder Tree 📁
+
+- 📁 app
+  - 📁 build
+  - 📄 build.gradle.kts
+  - 📄 google-services.json
+  - 📁 libs
+  - 📄 proguard-rules.pro
+  - 📁 src
+- 📁 build-logic
+  - 📁 convention
+  - 📁 gradle
+  - 📄 gradle.properties
+  - 📄 settings.gradle.kts
+- 📄 build.gradle.kts
+- 📁 buildSrc
+  - 📁 build
+  - 📄 build.gradle.kts
+  - 📄 gradle.properties
+  - 📄 settings.gradle.kts
+  - 📁 src
+- 📁 core
+  - 📁 common
+  - 📁 database
+- 📁 data
+  - 📁 usagestats
+- 📁 domain
+  - 📁 usagestats
+- 📁 feature
+  - 📁 login
+  - 📁 main
+  - 📁 onboarding
+  - 📁 statistics
+- 📁 gradle
+  - 📄 libs.versions.toml
+  - 📁 wrapper
+- 📄 gradle.properties
+- 📄 gradlew
+- 📄 gradlew.bat
+- 📄 local.properties
+- 📄 settings.gradle.kts 
+
+## Progress Board 📋
+- [Team-HMH-Android](https://github.com/orgs/Team-HMH/projects/1)
+
+  
+## Code Convention 💻
+- [Kotlin Code Convention](https://www.notion.so/msmmx/Kotlin-Convention-5ab4410e68c949c287804d2380c51af4)
+- [XML Convention](https://www.notion.so/msmmx/XML-Convention-b11209ba2b404df08f251383c7d3c316)
+- [name convention](https://www.notion.so/msmmx/name-convention-ca8bab7da7314b30b2a962755854b11e)
+- [GitHub Convention]([https://www.notion.so/msmmx/b75d3559813e478f9f6d73e9c818834b?pvs=4#bc0bf41e7df9421391dc1000d25a17c6](https://www.notion.so/msmmx/Git-Convention-e7785302d1a94a71b8f330c5a050bc41))
+
 
 This project follows the all-contributors specification. Contributions of any kind welcome!

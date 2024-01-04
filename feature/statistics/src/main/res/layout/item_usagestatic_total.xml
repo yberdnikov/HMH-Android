@@ -17,7 +17,7 @@
         android:id="@+id/tv_statics_hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="4시간"
+        android:text=""
         app:layout_constraintStart_toStartOf="@id/tv_statics_goal_title"
         app:layout_constraintTop_toBottomOf="@id/tv_statics_goal_title" />
 
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="6dp"
-        android:text="2시간 30분"
+        android:text=""
         app:layout_constraintEnd_toStartOf="@id/tv_statics_left_title"
         app:layout_constraintTop_toBottomOf="@id/pb_statics" />
 
@@ -46,10 +46,12 @@
         android:text="@string/all_left"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pb_statics" />
+
     <ImageView
         android:id="@+id/iv_statics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/item_usagestatic_appicon_description"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

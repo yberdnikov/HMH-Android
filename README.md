@@ -56,4 +56,47 @@
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
+## Folder Tree 📁
+
+- 📁 app
+  - 📁 build
+  - 📄 build.gradle.kts
+  - 📄 google-services.json
+  - 📁 libs
+  - 📄 proguard-rules.pro
+  - 📁 src
+- 📁 build-logic
+  - 📁 convention
+  - 📁 gradle
+  - 📄 gradle.properties
+  - 📄 settings.gradle.kts
+- 📄 build.gradle.kts
+- 📁 buildSrc
+  - 📁 build
+  - 📄 build.gradle.kts
+  - 📄 gradle.properties
+  - 📄 settings.gradle.kts
+  - 📁 src
+- 📁 core
+  - 📁 common
+  - 📁 database
+- 📁 data
+  - 📁 usagestats
+- 📁 domain
+  - 📁 usagestats
+- 📁 feature
+  - 📁 login
+  - 📁 main
+  - 📁 onboarding
+  - 📁 statistics
+- 📁 gradle
+  - 📄 libs.versions.toml
+  - 📁 wrapper
+- 📄 gradle.properties
+- 📄 gradlew
+- 📄 gradlew.bat
+- 📄 local.properties
+- 📄 settings.gradle.kts 
+
+
 This project follows the all-contributors specification. Contributions of any kind welcome!

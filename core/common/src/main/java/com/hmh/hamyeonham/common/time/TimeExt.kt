@@ -2,7 +2,6 @@ package com.hmh.hamyeonham.common.time
 
 import android.content.Context
 import android.text.format.DateUtils
-import android.util.Log
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
@@ -59,6 +58,5 @@ fun convertTimeToString(time: Long): String {
     var result = ""
     if (hour > 0) result = result.plus("$hour" + "시간")
     if (min >= 0) result = result.plus("$min" + "분")
-    Log.d("result", result.toString())
     return result
 }

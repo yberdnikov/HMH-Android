@@ -12,7 +12,7 @@
             android:name=".OnboardingSelectDataActivity"
             android:exported="false" />
         <activity
-            android:name=".OnBoardingActivity"
+            android:name=".OnboardingActivity"
             android:exported="false" />
 
         <service

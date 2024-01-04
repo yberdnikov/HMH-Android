@@ -18,7 +18,13 @@ class OnboardingSelectDataFragment : Fragment() {
         private const val ARG_BTN3 = "btn3"
         private const val ARG_BTN4 = "btn4"
 
-        fun newInstance(question: String, btn1: String, btn2: String, btn3: String, btn4: String): OnboardingSelectDataFragment {
+        fun newInstance(
+            question: String,
+            btn1: String,
+            btn2: String,
+            btn3: String,
+            btn4: String,
+        ): OnboardingSelectDataFragment {
             val fragment = OnboardingSelectDataFragment()
             val args = Bundle()
             args.putString(ARG_QUESTION, question)
@@ -49,11 +55,13 @@ class OnboardingSelectDataFragment : Fragment() {
         val btn3 = requireArguments().getString(ARG_BTN3)
         val btn4 = requireArguments().getString(ARG_BTN4)
 
-        binding.tvOnbaordingSelectDataQuestion.text = question
-        binding.btnOnboardingSelectData1.text = btn1
-        binding.btnOnboardingSelectData2.text = btn2
-        binding.btnOnboardingSelectData3.text = btn3
-        binding.btnOnboardingSelectData4.text = btn4
+        binding.run {
+            tvOnbaordingSelectDataQuestion.text = question
+            btnOnboardingSelectData1.text = btn1
+            btnOnboardingSelectData2.text = btn2
+            btnOnboardingSelectData3.text = btn3
+            btnOnboardingSelectData4.text = btn4
+        }
     }
 
     override fun onDestroyView() {

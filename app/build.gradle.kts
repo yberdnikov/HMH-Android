@@ -43,6 +43,18 @@ android {
 
 dependencies {
 
+    // Feature
+    implementation(projects.feature.statistics)
+
+    // Domain
+    implementation(projects.domain.usagestats)
+
+    // Data
+    implementation(projects.data.usagestats)
+
+    // Core
+    implementation(projects.core.common)
+
     // Firebase
     implementation(platform(libs.firebase))
     implementation(libs.bundles.firebase)

@@ -1,31 +1,24 @@
 package com.hmh.hamyeonham
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.hmh.hamyeonham.feature.login.LoginActivity
-import com.kakao.sdk.common.KakaoSdk
-import com.hmh.hamyeonham.feature.main.MainActivity
+import com.hmh.hamyeonham.common.view.viewBinding
+import com.hmh.hamyeonham.databinding.ActivitySampleBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SampleActivity : AppCompatActivity() {
+    private val binding by viewBinding(ActivitySampleBinding::inflate)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val splashScreen = installSplashScreen()
         initSplashAnimation(splashScreen)
-
-        setContentView(R.layout.activity_sample)
-
-        initKakaoSdk()
-        Intent(this, LoginActivity::class.java).let(::startActivity)
-    }
-
-    private fun initKakaoSdk() {
-        KakaoSdk.init(this, BuildConfig.KAKAO_API_KEY)
+        setContentView(binding.root)
     }
 
     private fun initSplashAnimation(splashScreen: SplashScreen) {

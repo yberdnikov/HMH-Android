@@ -3,6 +3,8 @@ package com.hmh.hamyeonham.feature.onboarding
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.hmh.hamyeonham.feature.onboarding.OnBoardingQuestionList.OnBoardingQuestionProblem
+import com.hmh.hamyeonham.feature.onboarding.OnBoardingQuestionList.OnBoardingQuestionTime
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
 
 class OnBoardingActivity : AppCompatActivity() {
@@ -24,21 +26,19 @@ class OnBoardingActivity : AppCompatActivity() {
 
     private fun setOnboardingFragment(): Pair<OnboardingSelectDataFragment, OnboardingSelectDataFragment> {
         val fragment1 = OnboardingSelectDataFragment.newInstance(
-            "하루 평균 휴대폰을 \n" +
-                "얼마나 사용하시나요?",
-            "1-4시간",
-            "4-8시간",
-            "8-12시간",
-            "12시간 이상",
+            OnBoardingQuestionTime[0],
+            OnBoardingQuestionTime[1],
+            OnBoardingQuestionTime[2],
+            OnBoardingQuestionTime[3],
+            OnBoardingQuestionTime[4],
         )
 
         val fragment2 = OnboardingSelectDataFragment.newInstance(
-            "휴대폰을 사용할 때\n" +
-                "어떤 문제를 겪고 계시나요?",
-            "중독이 너무 심해요",
-            "무의식적으로 사용하게 돼요",
-            "스스로 제어가 안돼요",
-            "일상생활에 영향을 끼쳐요",
+            OnBoardingQuestionProblem[0],
+            OnBoardingQuestionProblem[1],
+            OnBoardingQuestionProblem[2],
+            OnBoardingQuestionProblem[3],
+            OnBoardingQuestionProblem[4],
         )
         return Pair(fragment1, fragment2)
     }

@@ -68,21 +68,3 @@ fun convertTimeToString(time: Long): String {
     Log.d("result", result.toString())
     return result
 }
-
-fun getUsedPercentage(
-    usage: Long,
-    goal: Long,
-): Int {
-    try {
-        return (usage * 100 / goal).toInt()
-    } catch (e: ArithmeticException) {
-        return 0
-    }
-}
-
-fun getLeftTimeInString(
-    usage: Long,
-    goal: Long,
-): String {
-    return convertTimeToString(goal - usage)
-}

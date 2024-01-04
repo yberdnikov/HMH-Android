@@ -3,8 +3,8 @@ package com.hmh.hamyeonham.feature.onboarding
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.hmh.hamyeonham.feature.onboarding.OnBoardingQuestionList.OnBoardingQuestionProblem
-import com.hmh.hamyeonham.feature.onboarding.OnBoardingQuestionList.OnBoardingQuestionTime
+import com.hmh.hamyeonham.feature.onboarding.OnboardingQuestionList.OnboardingQuestionProblem
+import com.hmh.hamyeonham.feature.onboarding.OnboardingQuestionList.OnboardingQuestionTime
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnboardingSelectDataBinding
 
 class OnboardingSelectDataActivity : AppCompatActivity() {
@@ -26,19 +26,19 @@ class OnboardingSelectDataActivity : AppCompatActivity() {
 
     private fun setOnboardingFragment(): Pair<OnboardingSelectDataFragment, OnboardingSelectDataFragment> {
         val fragment1 = OnboardingSelectDataFragment.newInstance(
-            OnBoardingQuestionTime[0],
-            OnBoardingQuestionTime[1],
-            OnBoardingQuestionTime[2],
-            OnBoardingQuestionTime[3],
-            OnBoardingQuestionTime[4],
+            OnboardingQuestionTime[0],
+            OnboardingQuestionTime[1],
+            OnboardingQuestionTime[2],
+            OnboardingQuestionTime[3],
+            OnboardingQuestionTime[4],
         )
 
         val fragment2 = OnboardingSelectDataFragment.newInstance(
-            OnBoardingQuestionProblem[0],
-            OnBoardingQuestionProblem[1],
-            OnBoardingQuestionProblem[2],
-            OnBoardingQuestionProblem[3],
-            OnBoardingQuestionProblem[4],
+            OnboardingQuestionProblem[0],
+            OnboardingQuestionProblem[1],
+            OnboardingQuestionProblem[2],
+            OnboardingQuestionProblem[3],
+            OnboardingQuestionProblem[4],
         )
         return Pair(fragment1, fragment2)
     }

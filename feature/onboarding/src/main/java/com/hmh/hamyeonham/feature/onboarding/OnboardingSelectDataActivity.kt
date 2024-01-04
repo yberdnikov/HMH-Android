@@ -14,12 +14,17 @@ class OnboardingSelectDataActivity : AppCompatActivity() {
         binding = ActivityOnboardingSelectDataBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initOnboardingDataFragment()
+    }
+
+    private fun initOnboardingDataFragment() {
         fragmentHandler = OnboardingFragmentHandler(
             supportFragmentManager,
             binding.flOnboardingContainer.id,
         )
 
-        val (fragment1, fragment2) = fragmentHandler.setOnboardingFragments()
+        val (fragment1, fragment2) =
+            fragmentHandler.setOnboardingFragments()
 
         fragmentHandler.addFragment(fragment1, "fragment1_tag")
         binding.btnOnboardingNext.setOnClickListener {

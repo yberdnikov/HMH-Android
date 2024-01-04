@@ -11,6 +11,7 @@ import com.hmh.hamyeonham.feature.login.LoginActivity
 import com.kakao.sdk.common.KakaoSdk
 import com.hmh.hamyeonham.feature.main.MainActivity
 import com.hmh.hamyeonham.feature.onboarding.OnBoardingActivity
+import com.hmh.hamyeonham.feature.onboarding.OnboardingSelectDataActivity
 
 class SampleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +23,7 @@ class SampleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sample)
 
         initKakaoSdk()
-        Intent(this, OnBoardingActivity::class.java).let(::startActivity)
+        Intent(this, OnboardingSelectDataActivity::class.java).let(::startActivity)
     }
 
     private fun initKakaoSdk() {

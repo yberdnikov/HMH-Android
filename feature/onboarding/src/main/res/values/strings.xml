@@ -1,3 +1,4 @@
 <resources>
     <string name="accessibility_service_description">화면 동작 감지</string>
+    <string name="all_next">다음</string>
 </resources>

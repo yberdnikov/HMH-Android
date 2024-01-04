@@ -46,7 +46,6 @@ class OnBoardingActivity : AppCompatActivity() {
     private fun addFragment(fragment: Fragment, tag: String) {
         supportFragmentManager.beginTransaction()
             .replace(binding.flOnboardingContainer.id, fragment, tag)
-            .addToBackStack(null)
             .commit()
     }
 

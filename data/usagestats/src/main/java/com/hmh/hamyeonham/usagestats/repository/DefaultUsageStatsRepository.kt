@@ -53,6 +53,7 @@ class DefaultUsageStatsRepository
             packageNames: List<String>,
         ): List<UsageStat> {
             val usageStatsList = getUsageStats(startTime, endTime)
+            printList(usageStatsList)
             val newUsageStatList: List<UsageStat> =
                 packageNames.map { packageName ->
                     UsageStat(

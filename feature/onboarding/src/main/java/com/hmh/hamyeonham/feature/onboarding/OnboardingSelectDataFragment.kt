@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnboardingSelectDataBinding
 
 class OnboardingSelectDataFragment : Fragment() {
-    private var _binding: FragmentOnboardingSelectDataBinding? = null
-    private val binding get() = _binding!!
+    private val binding by viewBinding(FragmentOnboardingSelectDataBinding::bind)
 
     companion object {
         private const val ARG_QUESTION = "question"
@@ -42,8 +42,7 @@ class OnboardingSelectDataFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        _binding = FragmentOnboardingSelectDataBinding.inflate(inflater, container, false)
-        return binding.root
+        return FragmentOnboardingSelectDataBinding.inflate(inflater, container, false).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,7 +64,7 @@ class OnboardingSelectDataFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding.root.removeAllViewsInLayout()
         super.onDestroyView()
-        _binding = null
     }
 }

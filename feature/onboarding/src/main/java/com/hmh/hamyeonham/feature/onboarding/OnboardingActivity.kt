@@ -10,11 +10,12 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.hmh.hamyeonham.common.context.toast
+import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnboardingBinding
 
 class OnboardingActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityOnboardingBinding
+    private val binding by viewBinding(ActivityOnboardingBinding::inflate)
 
     private val accessibilitySettingsLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(
@@ -28,7 +29,6 @@ class OnboardingActivity : AppCompatActivity() {
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityOnboardingBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         clickRequireAccessibilityBtn()

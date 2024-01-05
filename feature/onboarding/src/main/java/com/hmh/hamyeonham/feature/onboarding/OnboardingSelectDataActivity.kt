@@ -2,16 +2,16 @@ package com.hmh.hamyeonham.feature.onboarding
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnboardingSelectDataBinding
 
 class OnboardingSelectDataActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityOnboardingSelectDataBinding
+    private val binding by viewBinding(ActivityOnboardingSelectDataBinding::inflate)
     private lateinit var fragmentHandler: OnboardingFragmentHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityOnboardingSelectDataBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initOnboardingDataFragment()

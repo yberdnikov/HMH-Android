@@ -16,10 +16,23 @@ class OnboardingSelectDataActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // initOnboardingDataFragment()
+
+        val pagerAdapter = FragmentStateAdapter(this)
+
+        pagerAdapter.addOnboardingFragments(RequestPermissionFragment())
+        pagerAdapter.addOnboardingFragments(SelectAppFragment())
+        pagerAdapter.addOnboardingFragments(SelectScreentimeGoalFragment())
+
+        binding.vpOnboardingContainer.adapter = pagerAdapter
+        binding.btnOnboardingNext.setOnClickListener {
+            val currentItem = binding.vpOnboardingContainer.currentItem
+            if (currentItem < pagerAdapter.itemCount - 1) {
+                binding.vpOnboardingContainer.currentItem = currentItem + 1
+            }
+        }
     }
 
     private fun initOnboardingDataFragment() {
-
         val (fragment1, fragment2) =
             setOnboardingFragments()
 

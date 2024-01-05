@@ -2,6 +2,8 @@ package com.hmh.hamyeonham.feature.onboarding
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.hmh.hamyeonham.common.activity.addFragment
+import com.hmh.hamyeonham.common.activity.replaceFragment
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnboardingSelectDataBinding
 
@@ -26,10 +28,9 @@ class OnboardingSelectDataActivity : AppCompatActivity() {
         val (fragment1, fragment2) =
             fragmentHandler.setOnboardingFragments()
 
-        fragmentHandler.addFragment(fragment1, "fragment1_tag")
+        addFragment(binding.flOnboardingContainer.id, fragment1, "fragment1_tag")
         binding.btnOnboardingNext.setOnClickListener {
-            // replaceFragment(binding.flOnboardingContainer.id, fragment2)
-            fragmentHandler.replaceFragment(fragment2, "fragment2_tag")
+            replaceFragment(binding.flOnboardingContainer.id, fragment2, "fragment2_tag")
         }
     }
 }

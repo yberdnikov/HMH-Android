@@ -19,6 +19,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tv_onbaording_select_data_description"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_onbaording_select_data_question"
+        android:layout_marginTop="7dp"
+        android:layout_marginStart="21dp"
+        tools:text="해당 문항은 최대 2개의 복수 응답이 가능해요"
+        android:textSize="13sp"
+        />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_onboarding_select_data_1"
         android:layout_width="match_parent"

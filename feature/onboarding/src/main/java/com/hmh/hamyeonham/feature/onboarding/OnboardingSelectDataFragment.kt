@@ -55,7 +55,7 @@ class OnboardingSelectDataFragment : Fragment() {
         val btn4 = requireArguments().getString(ARG_BTN4)
 
         binding.run {
-            tvOnbaordingSelectDataQuestion.text = question
+            tvOnboardingSelectDataQuestion.text = question
             btnOnboardingSelectData1.text = btn1
             btnOnboardingSelectData2.text = btn2
             btnOnboardingSelectData3.text = btn3

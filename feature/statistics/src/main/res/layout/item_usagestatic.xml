@@ -37,7 +37,7 @@
         android:layout_marginTop="19dp"
         android:text="Instagram"
         android:textColor="#FFFFFF"
-        android:textSize="15sp"
+        android:textSize="11sp"
         app:layout_constraintStart_toEndOf="@id/iv_itemusagestat_appicon"
         app:layout_constraintTop_toTopOf="@id/pb_item_usagestat" />
 
@@ -48,7 +48,7 @@
         android:layout_marginStart="15dp"
         android:text="1h 20m"
         android:textColor="#FFFFFF"
-        android:textSize="17sp"
+        android:textSize="12            sp"
         app:layout_constraintTop_toBottomOf="@id/tv_itemusagestat_appname"
         app:layout_constraintStart_toEndOf="@id/iv_itemusagestat_appicon" />
 
@@ -62,13 +62,13 @@
         app:layout_constraintEnd_toStartOf="@id/tv_itemusagestat_time_left_title"
         app:layout_constraintTop_toTopOf="@id/pb_item_usagestat"
         android:textColor="#FFFFFF"
-        android:textSize="22sp"/>
+        android:textSize="15sp"/>
 
     <TextView
         android:id="@+id/tv_itemusagestat_time_left_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="13dp"
         android:text="@string/all_left"
         app:layout_constraintBottom_toBottomOf="@id/pb_item_usagestat"
         app:layout_constraintEnd_toEndOf="@id/pb_item_usagestat"

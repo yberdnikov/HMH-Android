@@ -62,9 +62,4 @@ class OnboardingSelectDataFragment : Fragment() {
             btnOnboardingSelectData4.text = btn4
         }
     }
-
-    override fun onDestroyView() {
-        binding.root.removeAllViewsInLayout()
-        super.onDestroyView()
-    }
 }

@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SelectAppFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/tv_onbaording_select_app_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="SelectAppFragment" />
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="21dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/onbaording_select_app_title"
+        android:textColor="#121212"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv_onbaording_select_app_description"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="7dp"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_onbaording_select_app_title"
+        android:text="@string/onbaording_select_app_description" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

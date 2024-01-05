@@ -28,9 +28,9 @@ class OnboardingSelectDataActivity : AppCompatActivity() {
         val (fragment1, fragment2) =
             fragmentHandler.setOnboardingFragments()
 
-        addFragment(binding.flOnboardingContainer.id, fragment1, "fragment1_tag")
+        addFragment(binding.flOnboardingContainer.id, fragment1)
         binding.btnOnboardingNext.setOnClickListener {
-            replaceFragment(binding.flOnboardingContainer.id, fragment2, "fragment2_tag")
+            replaceFragment(binding.flOnboardingContainer.id, fragment2)
         }
     }
 }

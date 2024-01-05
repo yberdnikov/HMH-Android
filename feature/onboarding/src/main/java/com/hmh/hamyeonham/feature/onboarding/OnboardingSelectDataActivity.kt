@@ -10,7 +10,6 @@ import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnboardingSelec
 class OnboardingSelectDataActivity : AppCompatActivity() {
 
     private val binding by viewBinding(ActivityOnboardingSelectDataBinding::inflate)
-    private lateinit var fragmentHandler: OnboardingFragmentHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,17 +19,31 @@ class OnboardingSelectDataActivity : AppCompatActivity() {
     }
 
     private fun initOnboardingDataFragment() {
-        fragmentHandler = OnboardingFragmentHandler(
-            supportFragmentManager,
-            binding.flOnboardingContainer.id,
-        )
 
         val (fragment1, fragment2) =
-            fragmentHandler.setOnboardingFragments()
+            setOnboardingFragments()
 
         addFragment(binding.flOnboardingContainer.id, fragment1)
         binding.btnOnboardingNext.setOnClickListener {
             replaceFragment(binding.flOnboardingContainer.id, fragment2)
         }
+    }
+
+    private fun setOnboardingFragments(): Pair<OnboardingSelectDataFragment, OnboardingSelectDataFragment> {
+        val fragment1 = OnboardingSelectDataFragment.newInstance(
+            OnboardingQuestionList.OnboardingQuestionTime[0],
+            OnboardingQuestionList.OnboardingQuestionTime[1],
+            OnboardingQuestionList.OnboardingQuestionTime[2],
+            OnboardingQuestionList.OnboardingQuestionTime[3],
+            OnboardingQuestionList.OnboardingQuestionTime[4],
+        )
+        val fragment2 = OnboardingSelectDataFragment.newInstance(
+            OnboardingQuestionList.OnboardingQuestionProblem[0],
+            OnboardingQuestionList.OnboardingQuestionProblem[1],
+            OnboardingQuestionList.OnboardingQuestionProblem[2],
+            OnboardingQuestionList.OnboardingQuestionProblem[3],
+            OnboardingQuestionList.OnboardingQuestionProblem[4],
+        )
+        return Pair(fragment1, fragment2)
     }
 }

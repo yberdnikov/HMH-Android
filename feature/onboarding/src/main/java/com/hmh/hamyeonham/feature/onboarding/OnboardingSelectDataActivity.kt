@@ -15,7 +15,7 @@ class OnboardingSelectDataActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        initOnboardingDataFragment()
+        // initOnboardingDataFragment()
     }
 
     private fun initOnboardingDataFragment() {
@@ -23,9 +23,9 @@ class OnboardingSelectDataActivity : AppCompatActivity() {
         val (fragment1, fragment2) =
             setOnboardingFragments()
 
-        addFragment(binding.flOnboardingContainer.id, fragment1)
+        addFragment(binding.vpOnboardingContainer.id, fragment1)
         binding.btnOnboardingNext.setOnClickListener {
-            replaceFragment(binding.flOnboardingContainer.id, fragment2)
+            replaceFragment(binding.vpOnboardingContainer.id, fragment2)
         }
     }
 

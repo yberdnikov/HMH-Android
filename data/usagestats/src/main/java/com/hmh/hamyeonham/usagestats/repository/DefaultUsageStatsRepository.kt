@@ -1,6 +1,5 @@
 package com.hmh.hamyeonham.usagestats.repository
 
-import android.util.Log
 import com.hmh.hamyeonham.usagestats.datasource.UsageStatsDataSource
 import com.hmh.hamyeonham.usagestats.model.UsageStat
 import javax.inject.Inject
@@ -53,7 +52,6 @@ class DefaultUsageStatsRepository
             packageNames: List<String>,
         ): List<UsageStat> {
             val usageStatsList = getUsageStats(startTime, endTime)
-            printList(usageStatsList)
             val newUsageStatList: List<UsageStat> =
                 packageNames.map { packageName ->
                     UsageStat(
@@ -63,12 +61,5 @@ class DefaultUsageStatsRepository
                     )
                 }
             return newUsageStatList
-        }
-
-        private fun printList(list: List<UsageStat>) {
-            Log.d("class name", "dusr")
-            for (i in list) {
-                Log.d("package name", i.packageName)
-            }
         }
     }

@@ -1,7 +1,6 @@
 package com.hmh.hamyeonham.statistics
 
 import android.content.Context
-import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.hmh.hamyeonham.common.time.convertTimeToString
 import com.hmh.hamyeonham.feature.statistics.databinding.ItemUsagestaticTotalBinding
@@ -17,6 +16,5 @@ class UsageStaticsTotalViewHolder(
             pbStatics.progress = usageStatAndGoal.usedPercentage
             tvStaticsTimeLeft.text = convertTimeToString(usageStatAndGoal.timeLeft)
         }
-        Log.d("binding", usageStatAndGoal.packageName)
     }
 }

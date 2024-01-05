@@ -8,8 +8,8 @@
         android:id="@+id/pb_item_usagestat"
         style="@style/AppTheme.statics.rec.progressbar"
         android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_marginVertical="10dp"
+        android:layout_height="71dp"
+        android:layout_marginBottom="12dp"
         android:progress="30"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,12 +18,13 @@
 
     <ImageView
         android:id="@+id/iv_itemusagestat_appicon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginVertical="12dp"
-        android:layout_marginStart="15dp"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:layout_marginVertical="17dp"
+        android:layout_marginStart="17dp"
         android:contentDescription="@string/item_usagestatic_appicon_description"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/img_item_usagestatic_instagram"
+        app:layout_constraintDimensionRatio="1"
         app:layout_constraintBottom_toBottomOf="@id/pb_item_usagestat"
         app:layout_constraintStart_toStartOf="@id/pb_item_usagestat"
         app:layout_constraintTop_toTopOf="@id/pb_item_usagestat" />
@@ -33,30 +34,47 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="@id/pb_item_usagestat"
+        android:layout_marginTop="19dp"
+        android:text="Instagram"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@id/iv_itemusagestat_appicon"
         app:layout_constraintTop_toTopOf="@id/pb_item_usagestat" />
 
     <TextView
-        android:id="@+id/tv_itemusagestat_left_hour"
+        android:id="@+id/tv_itemusagestat_goal_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="1h 20m"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_itemusagestat_appname"
+        app:layout_constraintStart_toEndOf="@id/iv_itemusagestat_appicon" />
+
+    <TextView
+        android:id="@+id/tv_itemusagestat_time_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="6dp"
-        android:text=""
+        android:text="30m"
         app:layout_constraintBottom_toBottomOf="@id/pb_item_usagestat"
-        app:layout_constraintEnd_toStartOf="@id/tv_itemusagestat_timeleft"
-        app:layout_constraintTop_toTopOf="@id/pb_item_usagestat" />
+        app:layout_constraintEnd_toStartOf="@id/tv_itemusagestat_time_left_title"
+        app:layout_constraintTop_toTopOf="@id/pb_item_usagestat"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"/>
 
     <TextView
-        android:id="@+id/tv_itemusagestat_timeleft"
+        android:id="@+id/tv_itemusagestat_time_left_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
         android:text="@string/all_left"
         app:layout_constraintBottom_toBottomOf="@id/pb_item_usagestat"
         app:layout_constraintEnd_toEndOf="@id/pb_item_usagestat"
-        app:layout_constraintTop_toTopOf="@id/pb_item_usagestat" />
+        app:layout_constraintTop_toTopOf="@id/pb_item_usagestat"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

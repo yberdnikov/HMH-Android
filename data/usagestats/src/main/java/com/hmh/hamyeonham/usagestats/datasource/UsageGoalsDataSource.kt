@@ -1,19 +1,12 @@
 package com.hmh.hamyeonham.usagestats.datasource
 
 import com.hmh.hamyeonham.usagestats.model.UsageGoalModel
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import javax.inject.Inject
 
-@Module
-@InstallIn(SingletonComponent::class)
-class UsageGoalsDataSource {
-    @Provides
-    @Singleton
-    fun getUsageGoals(): List<UsageGoalModel> {
-        val usageGoalList =
+class UsageGoalsDataSource
+    @Inject
+    constructor() {
+        var usageGoalList =
             listOf(
                 UsageGoalModel("total", 201519990),
                 UsageGoalModel("com.kakao.talk", 15686 * 2),
@@ -22,6 +15,7 @@ class UsageGoalsDataSource {
                 UsageGoalModel("com.android.chrome", 39445),
             )
 
-        return usageGoalList
+        fun getUsageGoals(): List<UsageGoalModel> {
+            return usageGoalList
+        }
     }
-}

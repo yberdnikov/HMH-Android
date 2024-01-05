@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
     <TextView
         android:id="@+id/tv_statics_goal_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
         android:text="@string/all_goal_time"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="15sp"/>
 
     <TextView
         android:id="@+id/tv_statics_hour"
@@ -19,7 +20,8 @@
         android:layout_height="wrap_content"
         android:text=""
         app:layout_constraintStart_toStartOf="@id/tv_statics_goal_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_statics_goal_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_statics_goal_title"
+        android:textSize="31sp"/>
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/pb_statics"
@@ -31,38 +33,34 @@
         app:layout_constraintTop_toBottomOf="@id/tv_statics_hour" />
 
     <TextView
-        android:id="@+id/tv_statics_left_hour"
+        android:id="@+id/tv_statics_time_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="6dp"
         android:text=""
-        app:layout_constraintEnd_toStartOf="@id/tv_statics_left_title"
-        app:layout_constraintTop_toBottomOf="@id/pb_statics" />
+        app:layout_constraintEnd_toStartOf="@id/tv_statics_time_left_title"
+        app:layout_constraintTop_toBottomOf="@id/pb_statics"
+        android:textSize="12sp"/>
 
     <TextView
-        android:id="@+id/tv_statics_left_title"
+        android:id="@+id/tv_statics_time_left_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
         android:text="@string/all_left"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pb_statics" />
+        app:layout_constraintTop_toBottomOf="@id/pb_statics"
+        android:textSize="12sp"/>
 
     <ImageView
         android:id="@+id/iv_statics"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="216dp"
         android:contentDescription="@string/item_usagestatic_appicon_description"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_statics_left_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_statics_time_left_title" />
 
-    <TextView
-        android:id="@+id/tv_statics_left_app"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/all_time_left"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_statics" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

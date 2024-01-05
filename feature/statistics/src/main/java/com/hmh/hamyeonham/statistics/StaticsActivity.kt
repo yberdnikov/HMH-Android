@@ -1,6 +1,7 @@
 package com.hmh.hamyeonham.statistics
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -29,6 +30,8 @@ class StaticsActivity : AppCompatActivity() {
         }
         lifecycleScope.launch {
             staticsViewModel.usageStatAndGoalList.collect {
+                for (i in it)
+                    Log.d("collect in activity", i.packageName)
                 usageStaticsAdapter.submitList(it)
             }
         }

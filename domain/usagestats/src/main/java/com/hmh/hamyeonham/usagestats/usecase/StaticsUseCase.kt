@@ -29,7 +29,6 @@ class StaticsUseCase
             endTime: Long,
         ): List<UsageStatAndGoal> {
             val appList = getSelectedAppList()
-
             val usageStatAndGoal =
                 usageStatsRepository.getUsageTimeForPackages(startTime, endTime, appList).map {
                     UsageStatAndGoal(
@@ -48,5 +47,5 @@ class StaticsUseCase
             usageStatsRepository.getUsageStats(startTime, endTime)
                 .sumOf { it.totalTimeInForeground }
 
-        private fun getSelectedAppList(): List<String> = usageGoalsRepository.getUsageGoals().map { it.packageName }
+        private fun getSelectedAppList(): List<String> = usageGoalsRepository.getUsageGoalsForApps().map { it.packageName }
     }

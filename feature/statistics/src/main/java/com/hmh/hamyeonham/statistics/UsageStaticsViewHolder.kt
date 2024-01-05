@@ -1,7 +1,6 @@
 package com.hmh.hamyeonham.statistics
 
 import android.content.Context
-import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.hmh.hamyeonham.common.context.getAppIconFromPackageName
 import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
@@ -23,8 +22,8 @@ class UsageStaticsViewHolder(
                 ),
             )
             tvItemusagestatTimeLeft.text = convertTimeToString(usageStatAndGoal.timeLeft)
+            tvItemusagestatGoalTime.text = convertTimeToString(usageStatAndGoal.goalTime)
             pbItemUsagestat.progress = usageStatAndGoal.usedPercentage
-            Log.d("binding", usageStatAndGoal.packageName)
         }
     }
 }

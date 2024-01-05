@@ -1,5 +1,6 @@
 package com.hmh.hamyeonham.usagestats.repository
 
+import android.util.Log
 import com.hmh.hamyeonham.usagestats.datasource.UsageStatsDataSource
 import com.hmh.hamyeonham.usagestats.model.UsageStat
 import javax.inject.Inject
@@ -35,9 +36,15 @@ class DefaultUsageStatsRepository
             vararg packageNames: String,
         ): List<UsageStat> {
             val usageStatsList = getUsageStats(startTime, endTime)
-            return usageStatsList.filter {
-                packageNames.contains(it.packageName)
-            }
+            val newUsageStatList: List<UsageStat> =
+                packageNames.map { packageName ->
+                    UsageStat(
+                        packageName,
+                        usageStatsList.filter { it.packageName == packageName }
+                            .sumOf { it.totalTimeInForeground },
+                    )
+                }
+            return newUsageStatList
         }
 
         override fun getUsageTimeForPackages(
@@ -46,10 +53,21 @@ class DefaultUsageStatsRepository
             packageNames: List<String>,
         ): List<UsageStat> {
             val usageStatsList = getUsageStats(startTime, endTime)
-            val newUsageStatsList =
-                usageStatsList.filter {
-                    packageNames.contains(it.packageName)
+            val newUsageStatList: List<UsageStat> =
+                packageNames.map { packageName ->
+                    UsageStat(
+                        packageName,
+                        usageStatsList.filter { it.packageName == packageName }
+                            .sumOf { it.totalTimeInForeground },
+                    )
                 }
-            return newUsageStatsList
+            return newUsageStatList
+        }
+
+        private fun printList(list: List<UsageStat>) {
+            Log.d("class name", "dusr")
+            for (i in list) {
+                Log.d("package name", i.packageName)
+            }
         }
     }

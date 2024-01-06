@@ -4,30 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="20dp"
     android:background="#000000"
+    android:paddingHorizontal="20dp"
     tools:context="com.hmh.hamyeonham.statistics.StaticsActivity">
 
     <TextView
         android:id="@+id/tv_statics_hmh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="23dp"
         android:text="@string/hmh"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="23dp"
-        android:layout_marginStart="4dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_statics_main"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cl_statics_total"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_statics_hmh"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_marginTop="38dp">
 
         <TextView
-            android:id="@+id/tv_statics_goal_title"
+            android:id="@+id/tv_statics_total_goal_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="9dp"
@@ -37,37 +37,37 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_statics_hour"
+            android:id="@+id/tv_statics_total_goal_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text=""
             android:textSize="31sp"
-            app:layout_constraintStart_toStartOf="@id/tv_statics_goal_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_statics_goal_title" />
+            app:layout_constraintStart_toStartOf="@id/tv_statics_total_goal_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_statics_total_goal_title" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/pb_statics"
+            android:id="@+id/pb_statics_total"
             style="@style/AppTheme.statics.main.progressbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:progress="30"
-            app:layout_constraintStart_toStartOf="@id/tv_statics_goal_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_statics_hour" />
+            app:layout_constraintStart_toStartOf="@id/tv_statics_total_goal_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_statics_total_goal_time" />
 
         <TextView
-            android:id="@+id/tv_statics_time_left"
+            android:id="@+id/tv_statics_total_time_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="6dp"
             android:text=""
             android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@id/tv_statics_time_left_title"
-            app:layout_constraintTop_toTopOf="@id/tv_statics_time_left_title" />
+            app:layout_constraintEnd_toStartOf="@id/tv_statics_total_time_left_title"
+            app:layout_constraintTop_toTopOf="@id/tv_statics_total_time_left_title" />
 
         <TextView
-            android:id="@+id/tv_statics_time_left_title"
+            android:id="@+id/tv_statics_total_time_left_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="9dp"
@@ -75,7 +75,7 @@
             android:text="@string/all_left"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pb_statics" />
+            app:layout_constraintTop_toBottomOf="@id/pb_statics_total" />
 
         <ImageView
             android:id="@+id/iv_statics"
@@ -85,9 +85,7 @@
             android:src="@drawable/ic_launcher_foreground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_statics_time_left_title" />
-
-
+            app:layout_constraintTop_toBottomOf="@id/tv_statics_total_time_left_title" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -97,7 +95,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_statics_hmh"
-        android:layout_marginTop="38dp"/>
+        app:layout_constraintTop_toBottomOf="@id/cl_statics_total" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

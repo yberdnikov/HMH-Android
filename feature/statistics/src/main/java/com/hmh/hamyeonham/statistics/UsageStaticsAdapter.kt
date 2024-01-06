@@ -3,13 +3,11 @@ package com.hmh.hamyeonham.statistics
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.hmh.hamyeonham.common.view.ItemDiffCallback
 import com.hmh.hamyeonham.feature.statistics.databinding.ItemUsagestaticBinding
-import com.hmh.hamyeonham.feature.statistics.databinding.ItemUsagestaticTotalBinding
 import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
 
-class UsageStaticsAdapter : ListAdapter<UsageStatAndGoal, RecyclerView.ViewHolder>(
+class UsageStaticsAdapter : ListAdapter<UsageStatAndGoal, UsageStaticsViewHolder>(
     ItemDiffCallback<UsageStatAndGoal>(
         onItemsTheSame = { old, new -> old.packageName == new.packageName },
         onContentsTheSame = { old, new -> old == new },
@@ -18,36 +16,36 @@ class UsageStaticsAdapter : ListAdapter<UsageStatAndGoal, RecyclerView.ViewHolde
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): RecyclerView.ViewHolder {
+    ): UsageStaticsViewHolder  {
         val inflater = LayoutInflater.from(parent.context)
-        when (viewType) {
-            TOTAL_ITEM_TYPE -> {
-                val binding = ItemUsagestaticTotalBinding.inflate(inflater, parent, false)
-                return UsageStaticsTotalViewHolder(binding, parent.context)
-            }
+//        when (viewType) {
+//            TOTAL_ITEM_TYPE -> {
+//                val binding = ItemUsagestaticTotalBinding.inflate(inflater, parent, false)
+//                return UsageStaticsTotalViewHolder(binding, parent.context)
+//            }
 
-            else -> {
-                val binding = ItemUsagestaticBinding.inflate(inflater, parent, false)
-                return UsageStaticsViewHolder(binding, parent.context)
-            }
-        }
+//            else -> {
+        val binding = ItemUsagestaticBinding.inflate(inflater, parent, false)
+        return UsageStaticsViewHolder(binding, parent.context)
+//            }
+//        }
     }
 
     override fun onBindViewHolder(
-        holder: RecyclerView.ViewHolder,
+        holder: UsageStaticsViewHolder,
         position: Int,
     ) {
-        when (position) {
-            0 -> {
-                val holder = holder as UsageStaticsTotalViewHolder
-                holder.onBind(currentList[position])
-            }
+//        when (position) {
+//            0 -> {
+//                val holder = holder as UsageStaticsTotalViewHolder
+//                holder.onBind(currentList[position])
+//            }
 
-            else -> {
-                val holder = holder as UsageStaticsViewHolder
-                holder.onBind(currentList[position])
-            }
-        }
+//            else -> {
+        val holder = holder as UsageStaticsViewHolder
+        holder.onBind(currentList[position])
+//            }
+//        }
     }
 
     override fun getItemViewType(position: Int): Int {

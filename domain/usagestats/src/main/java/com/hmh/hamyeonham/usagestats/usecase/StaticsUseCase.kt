@@ -15,29 +15,16 @@ class StaticsUseCase
             startTime: Long,
             endTime: Long,
         ): List<UsageStatAndGoal> {
-            val totalUsage =
-                getTotalUsage(startTime, endTime)
-            val usageForSelectedApps =
-                getUsageStatsAndGoalsForSelectedApps(startTime, endTime)
-            val totalUsageStatAndGoal =
-                UsageStatAndGoal("total", totalUsage, usageGoalsRepository.getUsageGoalTime("total"))
-            return listOf(totalUsageStatAndGoal) + usageForSelectedApps
+            return getUsageStatsAndGoalsForSelectedApps(startTime, endTime)
         }
 
-        private fun getUsageStatsAndGoalsForSelectedApps(
+        fun getTotalUsageStatsAndGoals(
             startTime: Long,
             endTime: Long,
-        ): List<UsageStatAndGoal> {
-            val appList = getSelectedAppList()
-            val usageStatAndGoal =
-                usageStatsRepository.getUsageTimeForPackages(startTime, endTime, appList).map {
-                    UsageStatAndGoal(
-                        it.packageName,
-                        it.totalTimeInForeground,
-                        usageGoalsRepository.getUsageGoalTime(it.packageName),
-                    )
-                }
-            return usageStatAndGoal
+        ): UsageStatAndGoal {
+            val totalUsage =
+                getTotalUsage(startTime, endTime)
+            return UsageStatAndGoal("total", totalUsage, usageGoalsRepository.getUsageGoalTime("total"))
         }
 
         private fun getTotalUsage(
@@ -46,6 +33,22 @@ class StaticsUseCase
         ): Long =
             usageStatsRepository.getUsageStats(startTime, endTime)
                 .sumOf { it.totalTimeInForeground }
+
+        private fun getUsageStatsAndGoalsForSelectedApps(
+            startTime: Long,
+            endTime: Long,
+        ): List<UsageStatAndGoal> {
+            val selectedAppList = getSelectedAppList()
+            val usageStatAndGoal =
+                usageStatsRepository.getUsageTimeForPackages(startTime, endTime, selectedAppList).map {
+                    UsageStatAndGoal(
+                        it.packageName,
+                        it.totalTimeInForeground,
+                        usageGoalsRepository.getUsageGoalTime(it.packageName),
+                    )
+                }
+            return usageStatAndGoal
+        }
 
         private fun getSelectedAppList(): List<String> = usageGoalsRepository.getUsageGoalsForApps().map { it.packageName }
     }

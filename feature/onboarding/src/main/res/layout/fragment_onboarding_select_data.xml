@@ -37,14 +37,14 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="19dp"
         android:layout_marginTop="93dp"
-        android:background="@drawable/onboarding_data_list"
+        android:background="@drawable/onboarding_selector_btn_data"
         android:gravity="center"
         tools:text="1-4시간"
         android:textColor="#DBDAE7"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_onboarding_select_data_question" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_onboarding_select_data_description" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_onboarding_select_data_2"
@@ -52,7 +52,7 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="19dp"
         android:layout_marginTop="9dp"
-        android:background="@drawable/onboarding_data_list"
+        android:background="@drawable/onboarding_selector_btn_data"
         android:gravity="center"
         tools:text="1-4시간"
         android:textColor="#DBDAE7"
@@ -67,7 +67,7 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="19dp"
         android:layout_marginTop="9dp"
-        android:background="@drawable/onboarding_data_list"
+        android:background="@drawable/onboarding_selector_btn_data"
         android:gravity="center"
         tools:text="1-4시간"
         android:textColor="#DBDAE7"
@@ -82,7 +82,7 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="19dp"
         android:layout_marginTop="9dp"
-        android:background="@drawable/onboarding_data_list"
+        android:background="@drawable/onboarding_selector_btn_data"
         android:gravity="center"
         tools:text="1-4시간"
         android:textColor="#DBDAE7"

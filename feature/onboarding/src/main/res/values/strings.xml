@@ -25,4 +25,5 @@
     <string name="onboarding_done_sing_up_image">celebrate sign up image</string>
     <string name="onboarding_done_sing_up_title">회원가입이 완료되었어요</string>
     <string name="onboarding_done_sing_up_description">하면함에서 휴대폰 중독을 벗어나\n목표를 달성해보세요!</string>
+    <string name="all_okay">확인</string>
 </resources>

@@ -9,6 +9,9 @@
 
     <application>
         <activity
+            android:name=".DoneSingUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".OnboardingSelectDataActivity"
             android:exported="false" />
         <activity

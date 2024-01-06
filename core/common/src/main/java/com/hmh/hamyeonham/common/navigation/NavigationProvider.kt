@@ -4,8 +4,6 @@ import android.content.Intent
 
 interface NavigationProvider {
     fun toOnboarding(): Intent
-    fun toLicense(): Intent
-    fun toHome(): Intent
-    fun toAlbumList(albumId: Long): Intent
-    fun toSignUp(): Intent
+    fun toLogin(): Intent
+    fun toUserInfo(): Intent
 }

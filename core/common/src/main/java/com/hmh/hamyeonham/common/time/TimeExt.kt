@@ -56,7 +56,6 @@ fun convertTimeToString(time: Long): String {
 
     return buildString {
         if (hours > 0) append("$hours 시간")
-        append(" ")
-        if (minutes > 0 || hours == 0L) append("$minutes 분")
+        if (minutes > 0 || hours == 0L) append(" $minutes 분")
     }.trim()
 }

@@ -8,8 +8,6 @@ android {
 }
 
 dependencies {
-    // Feature
-    implementation(projects.feature.statistics)
 
     // Common
     implementation(projects.core.common)

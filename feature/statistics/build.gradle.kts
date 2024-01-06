@@ -9,13 +9,14 @@ android {
 }
 
 dependencies {
+
     // Domain
     implementation(projects.domain.usagestats)
+
+    // Core
+    implementation(projects.core.common)
 
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
-
-    // time
-    implementation(projects.core.common)
 }

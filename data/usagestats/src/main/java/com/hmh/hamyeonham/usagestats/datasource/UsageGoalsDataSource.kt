@@ -18,6 +18,7 @@ class UsageGoalsDataSource
                 UsageGoalModel("com.android.providers.calendar", 1000000),
                 UsageGoalModel("com.lge.sizechangable.weather.platform", 1000000),
                 UsageGoalModel("com.hmh.hamyeonham", 1000000),
+                UsageGoalModel("com.discord", 1000000),
             )
 
         fun getUsageGoals(): List<UsageGoalModel> {

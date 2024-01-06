@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.hmh.hamyeonham.common.context.toast
 import com.hmh.hamyeonham.feature.login.data.DummyImage
 import com.hmh.hamyeonham.feature.login.databinding.ActivityLoginBinding
+import com.hmh.hamyeonham.statistics.StaticsActivity
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
@@ -86,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun moveToUserInfoActivity() {
-        startActivity(Intent(this, UserInfoActivity::class.java))
+        startActivity(Intent(this, StaticsActivity::class.java))
         finish()
     }
 }

@@ -52,10 +52,11 @@ class OnBoardingActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             if (isAccessibilityServiceEnabled() && hasUsageStatsPermission() && hasOverlayPermission()) {
                 toast("모든 권한이 허용되었습니다.")
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             } else {
                 toast("모든 권한을 허용해주세요.")
             }
-            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 

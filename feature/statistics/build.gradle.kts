@@ -9,7 +9,9 @@ android {
 }
 
 dependencies {
+    // Domain
     implementation(projects.domain.usagestats)
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)

@@ -24,6 +24,7 @@ class OnboardingSelectDataActivity : AppCompatActivity() {
         pagerAdapter.addOnboardingFragments(SelectScreentimeGoalFragment())
 
         binding.vpOnboardingContainer.adapter = pagerAdapter
+        binding.vpOnboardingContainer.isUserInputEnabled = false
         binding.btnOnboardingNext.setOnClickListener {
             val currentItem = binding.vpOnboardingContainer.currentItem
             if (currentItem < pagerAdapter.itemCount - 1) {

@@ -1,23 +1,26 @@
 package com.hmh.hamyeonham.feature.login
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.hmh.hamyeonham.common.context.toast
+import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.feature.login.data.DummyImage
 import com.hmh.hamyeonham.feature.login.databinding.ActivityLoginBinding
-import com.hmh.hamyeonham.statistics.StaticsActivity
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var loginViewPagerAdapter: LoginViewPagerAdapter
+
+    @Inject
+    lateinit var navigationProvider: NavigationProvider
 
     // 삭제 예정
     private val dummyImageList = listOf(
@@ -87,7 +90,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun moveToUserInfoActivity() {
-        startActivity(Intent(this, StaticsActivity::class.java))
+        startActivity(navigationProvider.toStatics())
         finish()
     }
 }

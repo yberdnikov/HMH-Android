@@ -14,7 +14,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(binding.fcvMain.id) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(binding.fcvMain.id) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bnvMain.setupWithNavController(navController)
     }

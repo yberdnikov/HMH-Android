@@ -5,7 +5,7 @@ import com.hmh.hamyeonham.usagestats.model.UsageStat
 import javax.inject.Inject
 
 class DefaultUsageStatsRepository @Inject constructor(
-    private val usageStatsDataSource: UsageStatsDataSource
+    private val usageStatsDataSource: UsageStatsDataSource,
 ) : UsageStatsRepository {
     override fun getUsageStats(
         startTime: Long,

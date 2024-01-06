@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.hmh.hamyeonham.common.context.toast
+import com.hmh.hamyeonham.feature.login.LoginActivity
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
 
 class OnBoardingActivity : AppCompatActivity() {
@@ -47,6 +48,14 @@ class OnBoardingActivity : AppCompatActivity() {
             } else {
                 toast("다른 앱 위에 그리기 권한이 이미 허용되어 있습니다.")
             }
+        }
+        binding.btnLogin.setOnClickListener {
+            if (isAccessibilityServiceEnabled() && hasUsageStatsPermission() && hasOverlayPermission()) {
+                toast("모든 권한이 허용되었습니다.")
+            } else {
+                toast("모든 권한을 허용해주세요.")
+            }
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 

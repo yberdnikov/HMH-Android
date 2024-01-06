@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class StaticsUseCase @Inject constructor(
     private val usageStatsRepository: UsageStatsRepository,
-    private val usageGoalsRepository: UsageGoalsRepository
+    private val usageGoalsRepository: UsageGoalsRepository,
 ) {
     fun getUsageStatsAndGoals(
         startTime: Long,

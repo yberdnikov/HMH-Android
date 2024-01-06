@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:text="유튜브"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="@id/pb_item_usagestat"
         app:layout_constraintStart_toEndOf="@id/iv_itemusagestat_appicon"
         app:layout_constraintTop_toTopOf="@id/pb_item_usagestat" />
@@ -44,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="6dp"
         android:text="2시간"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="@id/pb_item_usagestat"
         app:layout_constraintEnd_toStartOf="@id/tv_itemusagestat_timeleft"
         app:layout_constraintTop_toTopOf="@id/pb_item_usagestat" />
@@ -54,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
         android:text="@string/all_left"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="@id/pb_item_usagestat"
         app:layout_constraintEnd_toEndOf="@id/pb_item_usagestat"
         app:layout_constraintTop_toTopOf="@id/pb_item_usagestat" />

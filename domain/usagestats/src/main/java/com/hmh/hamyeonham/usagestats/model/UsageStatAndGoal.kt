@@ -7,17 +7,9 @@ data class UsageStatAndGoal(
 ) {
     private val challengeSuccess: Boolean = (goalTime - totalTimeInForeground) >= 0
     val timeLeft: Long by lazy {
-        if (challengeSuccess) {
-            goalTime - totalTimeInForeground
-        } else {
-            0L
-        }
+        if (challengeSuccess) goalTime - totalTimeInForeground else 0L
     }
     val usedPercentage: Int by lazy {
-        if (challengeSuccess) {
-            (totalTimeInForeground * 100 / goalTime).toInt()
-        } else {
-            100
-        }
+        if (challengeSuccess) (totalTimeInForeground * 100 / goalTime).toInt() else 100
     }
 }

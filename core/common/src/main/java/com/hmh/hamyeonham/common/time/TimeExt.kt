@@ -50,13 +50,13 @@ fun getCurrentDayStartEndEpochMillis(): Pair<Long, Long> {
     return Pair(startOfDay, endOfDay)
 }
 
-fun convertMillisecondsToMinute(ms: Long) = TimeUnit.MILLISECONDS.toMinutes(ms)
-
 fun convertTimeToString(time: Long): String {
-    val hour = convertMillisecondsToMinute(time) / 60
-    val min = convertMillisecondsToMinute(time) % 60
-    var result = ""
-    if (hour > 0) result = result.plus("$hour" + "시간")
-    if (min >= 0) result = result.plus("$min" + "분")
-    return result
+    val hours = TimeUnit.MILLISECONDS.toHours(time)
+    val minutes = TimeUnit.MILLISECONDS.toMinutes(time) % 60
+
+    return buildString {
+        if (hours > 0) append("$hours 시간")
+        append(" ")
+        if (minutes > 0 || hours == 0L) append("$minutes 분")
+    }.trim()
 }

@@ -10,6 +10,10 @@ import java.util.Properties
 
 internal fun Project.configureAndroidCommonPlugin() {
 
+    val properties = Properties().apply {
+        load(rootProject.file("local.properties").inputStream())
+    }
+
     apply<AndroidKotlinPlugin>()
     apply<KotlinSerializationPlugin>()
     with(plugins) {
@@ -18,7 +22,13 @@ internal fun Project.configureAndroidCommonPlugin() {
     apply<AndroidHiltPlugin>()
 
     extensions.getByType<BaseExtension>().apply {
-        defaultConfig {}
+        defaultConfig {
+            val kakaoApiKey = properties["kakaoApiKey"] as? String ?: ""
+
+            manifestPlaceholders["kakaoApiKey"] = properties["kakaoApiKey"] as String
+
+            buildConfigField("String", "KAKAO_API_KEY", "\"${kakaoApiKey}\"")
+        }
         buildFeatures.apply {
             viewBinding = true
             buildConfig = true

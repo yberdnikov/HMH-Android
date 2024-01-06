@@ -13,6 +13,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { setUrl("https://devrepo.kakao.com/nexus/content/groups/public/") }
     }
 }
 
@@ -23,3 +24,9 @@ include(":core:database")
 include(":feature:onboarding")
 include(":feature:main")
 include(":core:design_system")
+
+include(":feature:statistics")
+include(":feature:login")
+
+include(":data:usagestats")
+include(":domain:usagestats")

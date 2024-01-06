@@ -12,7 +12,6 @@
         android:id="@+id/np_custom_hours"
         android:layout_width="50dp"
         android:layout_height="100dp"
-        android:theme="@style/AppTheme.NumberPicker"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

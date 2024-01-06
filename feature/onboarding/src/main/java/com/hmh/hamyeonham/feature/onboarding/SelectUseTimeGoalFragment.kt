@@ -18,4 +18,15 @@ class SelectUseTimeGoalFragment : Fragment() {
     ): View? {
         return FragmentSelectUseTimeGoalBinding.inflate(inflater, container, false).root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.run {
+            npOnboardingUseTimeGoalHour.minValue = 1
+            npOnboardingUseTimeGoalHour.maxValue = 6
+            npOnboardingUseTimeGoalMinute.minValue = 1
+            npOnboardingUseTimeGoalMinute.maxValue = 6
+        }
+    }
 }

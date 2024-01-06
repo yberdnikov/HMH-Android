@@ -18,4 +18,13 @@ class SelectScreentimeGoalFragment : Fragment() {
     ): View? {
         return FragmentSelectScreentimeGoalBinding.inflate(inflater, container, false).root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.run {
+            npOnboardingScreentimeGoal.minValue = 1
+            npOnboardingScreentimeGoal.maxValue = 6
+        }
+    }
 }

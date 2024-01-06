@@ -5,7 +5,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hmh.hamyeonham.common.time.convertTimeToString
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.statistics.databinding.ActivityStaticsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,20 +29,8 @@ class StaticsActivity : AppCompatActivity() {
         }
         lifecycleScope.launch {
             staticsViewModel.usageStatAndGoalList.collect {
-                bindUsageTotalView()
                 usageStaticsAdapter.submitList(it)
             }
         }
-    }
-
-    private fun bindUsageTotalView() {
-        binding.tvStaticsTotalTimeLeft.text =
-            convertTimeToString(
-                staticsViewModel.totalUsageStatAndGoal.value.timeLeft,
-            )
-        binding.tvStaticsTotalGoalTime.text =
-            convertTimeToString(
-                staticsViewModel.totalUsageStatAndGoal.value.goalTime,
-            )
     }
 }

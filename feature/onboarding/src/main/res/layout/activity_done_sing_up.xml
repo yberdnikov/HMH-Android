@@ -43,18 +43,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_onboarding_done_sing_up_image" />
 
+
     <TextView
         android:id="@+id/tv_onboarding_done_sing_up_description"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="21dp"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/onboarding_done_sing_up_description"
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_onboarding_done_sing_up_title" />
-
+        app:layout_constraintTop_toBottomOf="@+id/tv_onboarding_done_sing_up_title"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_onboarding_done_next"

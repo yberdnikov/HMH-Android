@@ -67,6 +67,7 @@ dependencies {
 
     // Core
     implementation(projects.core.common)
+    implementation(projects.core.designSystem)
 
     // Firebase
     implementation(platform(libs.firebase))

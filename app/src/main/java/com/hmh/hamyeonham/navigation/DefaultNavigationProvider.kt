@@ -10,7 +10,7 @@ import com.hmh.hamyeonham.statistics.StaticsActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class DefaultNavigation @Inject constructor(
+class DefaultNavigationProvider @Inject constructor(
     @ApplicationContext private val context: Context
 ) : NavigationProvider {
     override fun toOnboarding(): Intent {

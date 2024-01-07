@@ -6,19 +6,19 @@
         <item name="android:background">#000000</item>
     </style>
 
-    <style name="AppTheme.statics.rec.progressbar" parent="AppTheme">
-        <item name="trackThickness">80dp</item>
-        <item name="trackCornerRadius">10dp</item>
+    <style name="AppTheme.statics.progressbar" parent="AppTheme">
+        <item name="trackThickness">71dp</item>
+        <item name="trackCornerRadius">6dp</item>
         <item name="trackColor">#202028</item>
-        <item name="indicatorColor">#4428EC</item>
+        <item name="indicatorColor">#B33D17D3</item>
     </style>
 
 
-    <style name="AppTheme.statics.main.progressbar" parent="AppTheme">
+    <style name="AppTheme.statics.progressbar.main" parent="AppTheme">
         <item name="trackThickness">6dp</item>
-        <item name="trackCornerRadius">3dp</item>
-        <item name="trackColor">#202028</item>
-        <item name="indicatorColor">#4428EC</item>
+        <item name="trackCornerRadius">6dp</item>
+        <item name="trackColor">#50505E</item>
+        <item name="indicatorColor">#EBECF4</item>
     </style>
 
 

@@ -8,9 +8,9 @@ class UsageGoalsDataSource
 constructor() {
     var usageGoalList =
         listOf(
-            UsageGoalModel("total", 10000000),
-            UsageGoalModel("com.kakao.talk", 1000000),
-            UsageGoalModel("com.hmh.hamyeonham", 1000000),
+            UsageGoalModel("total", 40000000),
+            UsageGoalModel("com.kakao.talk", 3000000),
+            UsageGoalModel("com.hmh.hamyeonham", 3000000),
             UsageGoalModel("com.google.android.gms", 500000),
             UsageGoalModel("com.google.android.youtube", 3000000),
             UsageGoalModel("com.android.chrome", 1000000),

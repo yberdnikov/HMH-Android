@@ -16,12 +16,12 @@
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/pb_statics_total"
-        style="@style/AppTheme.statics.main.progressbar"
+        style="@style/AppTheme.statics.progressbar.main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="27dp"
         android:layout_marginBottom="33dp"
+        android:layout_marginHorizontal="20dp"
         android:progress="30"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

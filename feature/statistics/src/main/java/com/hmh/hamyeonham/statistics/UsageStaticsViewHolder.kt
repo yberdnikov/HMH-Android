@@ -1,6 +1,8 @@
 package com.hmh.hamyeonham.statistics
 
+import android.animation.ObjectAnimator
 import android.content.Context
+import android.view.animation.AccelerateInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import com.hmh.hamyeonham.common.context.getAppIconFromPackageName
 import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
@@ -13,6 +15,18 @@ class UsageStaticsViewHolder(
     private val context: Context,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun onBind(usageStatAndGoal: UsageStatAndGoal) {
+        bindAttributes(usageStatAndGoal)
+        initbindAndAnimateProgress(usageStatAndGoal.usedPercentage)
+    }
+
+    private fun initbindAndAnimateProgress(progressTo: Int) {
+        ObjectAnimator.ofInt(binding.pbItemUsagestat, "progress", 0, progressTo).apply {
+            interpolator = AccelerateInterpolator()
+            start()
+        }
+    }
+
+    private fun bindAttributes(usageStatAndGoal: UsageStatAndGoal) {
         binding.run {
             tvItemusagestatAppname.text =
                 context.getAppNameFromPackageName(usageStatAndGoal.packageName)

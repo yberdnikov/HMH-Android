@@ -1,5 +1,6 @@
 package com.hmh.hamyeonham.usagestats.repository
 
+import android.util.Log
 import com.hmh.hamyeonham.usagestats.datasource.UsageStatsDataSource
 import com.hmh.hamyeonham.usagestats.model.UsageStat
 import javax.inject.Inject
@@ -44,10 +45,8 @@ class DefaultUsageStatsRepository @Inject constructor(
         packageNames: List<String>,
     ): List<UsageStat> {
         val usageStatsList = getUsageStats(startTime, endTime)
-        val newUsageStatsList =
-            usageStatsList.filter {
-                packageNames.contains(it.packageName)
-            }
-        return newUsageStatsList
+        return usageStatsList.filter {
+            packageNames.contains(it.packageName)
+        }
     }
 }

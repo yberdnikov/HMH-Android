@@ -30,7 +30,7 @@ class GetUsageStatsListUseCase @Inject constructor(
         endTime: Long,
     ): List<UsageStatAndGoal> {
         val appList = getSelectedPackageList()
-        return usageStatsRepository.getUsageTimeForPackages(startTime, endTime, appList)
+        return usageStatsRepository.getUsageStatForPackages(startTime, endTime, appList)
             .map {
                 createUsageStatAndGoal(
                     it.packageName,

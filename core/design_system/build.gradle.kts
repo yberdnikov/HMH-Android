@@ -8,4 +8,6 @@ android {
 }
 
 dependencies {
+    // Splash
+    implementation(libs.splash.screen)
 }

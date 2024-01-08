@@ -4,4 +4,5 @@
     <string name = "all_left">남음</string>
     <string name = "all_time_left">남은시간</string>
     <string name="item_usagestatic_appicon_description">iv_itemusagestat_appicon</string>
+    <string name="item_usagestatic_total_blackhole">블랙홀이\n가까워지고 있어요!</string>
 </resources>

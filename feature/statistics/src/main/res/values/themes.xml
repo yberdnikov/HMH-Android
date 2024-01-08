@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="Theme.Material3.Light">
-        <item name="colorControlNormal">#FFFFFF</item>
-        <item name="android:background">#000000</item>
-    </style>
-
-    <style name="AppTheme.statics.progressbar" parent="AppTheme">
+    <style name="Widget.Hmh.Progressbar" parent="Widget.AppCompat.ProgressBar.Horizontal">
         <item name="trackThickness">71dp</item>
         <item name="trackCornerRadius">6dp</item>
         <item name="trackColor">#202028</item>
@@ -14,13 +9,12 @@
     </style>
 
 
-    <style name="AppTheme.statics.progressbar.main" parent="AppTheme">
+    <style name="Widget.Hmh.ProgressbarMain" parent="AppTheme">
         <item name="trackThickness">6dp</item>
         <item name="trackCornerRadius">6dp</item>
         <item name="trackColor">#50505E</item>
         <item name="indicatorColor">#EBECF4</item>
     </style>
-
 
 
 </resources>

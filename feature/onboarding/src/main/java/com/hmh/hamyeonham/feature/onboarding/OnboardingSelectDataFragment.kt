@@ -13,6 +13,7 @@ class OnboardingSelectDataFragment : Fragment() {
 
     companion object {
         private const val ARG_QUESTION = "question"
+        private const val ARG_DESCRIPTION = "description"
         private const val ARG_BTN1 = "btn1"
         private const val ARG_BTN2 = "btn2"
         private const val ARG_BTN3 = "btn3"
@@ -20,6 +21,7 @@ class OnboardingSelectDataFragment : Fragment() {
 
         fun newInstance(
             question: String,
+            description: String,
             btn1: String,
             btn2: String,
             btn3: String,
@@ -28,6 +30,7 @@ class OnboardingSelectDataFragment : Fragment() {
             val fragment = OnboardingSelectDataFragment()
             val args = Bundle()
             args.putString(ARG_QUESTION, question)
+            args.putString(ARG_DESCRIPTION, description)
             args.putString(ARG_BTN1, btn1)
             args.putString(ARG_BTN2, btn2)
             args.putString(ARG_BTN3, btn3)
@@ -49,6 +52,7 @@ class OnboardingSelectDataFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val question = requireArguments().getString(ARG_QUESTION)
+        val description = requireArguments().getString(ARG_DESCRIPTION)
         val btn1 = requireArguments().getString(ARG_BTN1)
         val btn2 = requireArguments().getString(ARG_BTN2)
         val btn3 = requireArguments().getString(ARG_BTN3)
@@ -56,6 +60,7 @@ class OnboardingSelectDataFragment : Fragment() {
 
         binding.run {
             tvOnboardingSelectDataQuestion.text = question
+            tvOnboardingSelectDataDescription.text = description
             btnOnboardingSelectData1.text = btn1
             btnOnboardingSelectData2.text = btn2
             btnOnboardingSelectData3.text = btn3

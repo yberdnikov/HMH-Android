@@ -1,10 +1,9 @@
 package com.hmh.hamyeonham.feature.onboarding
 
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.hmh.hamyeonham.common.activity.addFragment
-import com.hmh.hamyeonham.common.activity.replaceFragment
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnboardingSelectDataBinding
 
@@ -16,14 +15,39 @@ class OnboardingSelectDataActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // initOnboardingDataFragment()
-
         val pagerAdapter = FragmentStateAdapter(this)
+        setOnboardingFragmets(pagerAdapter)
+        setAdapter(pagerAdapter)
+    }
 
+    private fun setOnboardingFragmets(pagerAdapter: FragmentStateAdapter) {
+        pagerAdapter.addOnboardingFragments(
+            OnboardingSelectDataFragment.newInstance(
+                OnboardingQuestionList.OnboardingQuestionTime[0],
+                OnboardingQuestionList.OnboardingQuestionTime[1],
+                OnboardingQuestionList.OnboardingQuestionTime[2],
+                OnboardingQuestionList.OnboardingQuestionTime[3],
+                OnboardingQuestionList.OnboardingQuestionTime[4],
+                OnboardingQuestionList.OnboardingQuestionTime[5],
+            ),
+        )
+        pagerAdapter.addOnboardingFragments(
+            OnboardingSelectDataFragment.newInstance(
+                OnboardingQuestionList.OnboardingQuestionProblem[0],
+                OnboardingQuestionList.OnboardingQuestionProblem[1],
+                OnboardingQuestionList.OnboardingQuestionProblem[2],
+                OnboardingQuestionList.OnboardingQuestionProblem[3],
+                OnboardingQuestionList.OnboardingQuestionProblem[4],
+                OnboardingQuestionList.OnboardingQuestionProblem[5],
+            ),
+        )
+        pagerAdapter.addOnboardingFragments(SelectScreentimeGoalFragment())
         pagerAdapter.addOnboardingFragments(RequestPermissionFragment())
         pagerAdapter.addOnboardingFragments(SelectAppFragment())
-        pagerAdapter.addOnboardingFragments(SelectScreentimeGoalFragment())
+        pagerAdapter.addOnboardingFragments(SelectUseTimeGoalFragment())
+    }
 
+    private fun setAdapter(pagerAdapter: FragmentStateAdapter) {
         binding.vpOnboardingContainer.adapter = pagerAdapter
         binding.vpOnboardingContainer.isUserInputEnabled = false
         binding.btnOnboardingNext.setOnClickListener {
@@ -33,36 +57,12 @@ class OnboardingSelectDataActivity : AppCompatActivity() {
             }
             if (currentItem == pagerAdapter.itemCount - 1) {
                 pagerAdapter.removeOnboardingFragments()
-                startActivity(Intent(this, DoneSingUpActivity::class.java))
+                startActivity(
+                    Intent(this, DoneSingUpActivity::class.java).addFlags(
+                        FLAG_ACTIVITY_NO_ANIMATION,
+                    ),
+                )
             }
         }
-    }
-
-    private fun initOnboardingDataFragment() {
-        val (fragment1, fragment2) =
-            setOnboardingFragments()
-
-        addFragment(binding.vpOnboardingContainer.id, fragment1)
-        binding.btnOnboardingNext.setOnClickListener {
-            replaceFragment(binding.vpOnboardingContainer.id, fragment2)
-        }
-    }
-
-    private fun setOnboardingFragments(): Pair<OnboardingSelectDataFragment, OnboardingSelectDataFragment> {
-        val fragment1 = OnboardingSelectDataFragment.newInstance(
-            OnboardingQuestionList.OnboardingQuestionTime[0],
-            OnboardingQuestionList.OnboardingQuestionTime[1],
-            OnboardingQuestionList.OnboardingQuestionTime[2],
-            OnboardingQuestionList.OnboardingQuestionTime[3],
-            OnboardingQuestionList.OnboardingQuestionTime[4],
-        )
-        val fragment2 = OnboardingSelectDataFragment.newInstance(
-            OnboardingQuestionList.OnboardingQuestionProblem[0],
-            OnboardingQuestionList.OnboardingQuestionProblem[1],
-            OnboardingQuestionList.OnboardingQuestionProblem[2],
-            OnboardingQuestionList.OnboardingQuestionProblem[3],
-            OnboardingQuestionList.OnboardingQuestionProblem[4],
-        )
-        return Pair(fragment1, fragment2)
     }
 }

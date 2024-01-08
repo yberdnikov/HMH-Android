@@ -1,6 +1,7 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.HMH" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowBackground">@color/blackground</item>
 
         <!-- Customize your theme here. -->
         <item name="blackground">@color/blackground</item>

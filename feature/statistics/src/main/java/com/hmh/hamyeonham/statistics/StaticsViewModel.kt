@@ -1,16 +1,17 @@
 package com.hmh.hamyeonham.statistics
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
-import com.hmh.hamyeonham.usagestats.usecase.StaticsUseCase
+import com.hmh.hamyeonham.usagestats.usecase.GetUsageStatsListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
 class StaticsViewModel @Inject constructor(
-    private val staticsUseCase: StaticsUseCase
+    private val getUsageStatsListUseCase: GetUsageStatsListUseCase
 ) : ViewModel() {
     val usageStatAndGoalList = MutableStateFlow<List<UsageStatAndGoal>>(emptyList())
 
@@ -19,10 +20,15 @@ class StaticsViewModel @Inject constructor(
         getUsageStatsAndGoals(startTime, endTime)
     }
 
-    private fun getUsageStatsAndGoals(
-        startTime: Long,
-        endTime: Long,
-    ) {
-        usageStatAndGoalList.value = staticsUseCase.getUsageStatsAndGoals(startTime, endTime)
+    private fun getUsageStatsAndGoals(startTime: Long, endTime: Long) {
+        usageStatAndGoalList.value = getUsageStatsListUseCase.getUsageStatsAndGoals(startTime, endTime)
+        Log.d("usageStatAndGoalList.value", usageStatAndGoalList.value.toString())
+        usageStatAndGoalList.value.forEach {
+            Log.d("usage.packageName", it.packageName)
+            Log.d("usage.totalTimeInForeground", it.totalTimeInForeground.toString())
+            Log.d("usage.goalTime", it.goalTime.toString())
+            Log.d("usage.timeLeft", it.timeLeft.toString())
+            Log.d("usage.usedPercentage", it.usedPercentage.toString())
+        }
     }
 }

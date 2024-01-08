@@ -10,12 +10,18 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.hmh.hamyeonham.common.context.toast
-import com.hmh.hamyeonham.feature.login.LoginActivity
+import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class OnBoardingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityOnBoardingBinding
+
+    @Inject
+    lateinit var navigationProvider: NavigationProvider
 
     private val accessibilitySettingsLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(
@@ -52,10 +58,11 @@ class OnBoardingActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             if (isAccessibilityServiceEnabled() && hasUsageStatsPermission() && hasOverlayPermission()) {
                 toast("모든 권한이 허용되었습니다.")
+                startActivity(navigationProvider.toLogin())
+                finish()
             } else {
                 toast("모든 권한을 허용해주세요.")
             }
-            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 

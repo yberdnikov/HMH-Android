@@ -8,11 +8,16 @@ android {
 }
 
 dependencies {
+
+    // Common
     implementation(projects.core.common)
 
     // kakao
     implementation(libs.kakao.login)
 
-    implementation(libs.dot.indicator)
+    // coil
     implementation(libs.coil.core)
+
+    // dot indicator
+    implementation(libs.dot.indicator)
 }

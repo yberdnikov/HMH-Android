@@ -17,7 +17,6 @@
 - [Android App Architecture](https://developer.android.com/topic/architecture)
 - [Dagger-Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 - [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html), [Flow](https://kotlinlang.org/docs/flow.html)
-- [Jetpack Compose](https://developer.android.com/jetpack/compose)
 - [Material 3](https://m3.material.io/)
 - [Gradle Version Catalog](https://docs.gradle.org/current/userguide/platforms.html)
   and [Custom Convention Plugins](https://docs.gradle.org/current/samples/sample_convention_plugins.html)

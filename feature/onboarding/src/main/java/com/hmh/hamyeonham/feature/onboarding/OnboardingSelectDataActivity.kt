@@ -41,6 +41,16 @@ class OnboardingSelectDataActivity : AppCompatActivity() {
                 OnboardingQuestionList.OnboardingQuestionProblem[5],
             ),
         )
+        pagerAdapter.addOnboardingFragments(
+            OnboardingSelectDataFragment.newInstance(
+                OnboardingQuestionList.OnboardingChallengePeriod[0],
+                OnboardingQuestionList.OnboardingChallengePeriod[1],
+                OnboardingQuestionList.OnboardingChallengePeriod[2],
+                OnboardingQuestionList.OnboardingChallengePeriod[3],
+                OnboardingQuestionList.OnboardingChallengePeriod[4],
+                OnboardingQuestionList.OnboardingChallengePeriod[5],
+            ),
+        )
         pagerAdapter.addOnboardingFragments(SelectScreentimeGoalFragment())
         pagerAdapter.addOnboardingFragments(RequestPermissionFragment())
         pagerAdapter.addOnboardingFragments(SelectAppFragment())

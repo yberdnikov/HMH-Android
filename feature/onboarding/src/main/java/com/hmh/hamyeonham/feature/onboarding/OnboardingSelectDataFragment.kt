@@ -28,13 +28,14 @@ class OnboardingSelectDataFragment : Fragment() {
             btn4: String,
         ): OnboardingSelectDataFragment {
             val fragment = OnboardingSelectDataFragment()
-            val args = Bundle()
-            args.putString(ARG_QUESTION, question)
-            args.putString(ARG_DESCRIPTION, description)
-            args.putString(ARG_BTN1, btn1)
-            args.putString(ARG_BTN2, btn2)
-            args.putString(ARG_BTN3, btn3)
-            args.putString(ARG_BTN4, btn4)
+            val args = Bundle().apply {
+                putString(ARG_QUESTION, question)
+                putString(ARG_DESCRIPTION, description)
+                putString(ARG_BTN1, btn1)
+                putString(ARG_BTN2, btn2)
+                putString(ARG_BTN3, btn3)
+                putString(ARG_BTN4, btn4)
+            }
             fragment.arguments = args
             return fragment
         }
@@ -58,7 +59,7 @@ class OnboardingSelectDataFragment : Fragment() {
         val btn3 = requireArguments().getString(ARG_BTN3)
         val btn4 = requireArguments().getString(ARG_BTN4)
 
-        binding.run {
+        binding.apply {
             tvOnboardingSelectDataQuestion.text = question
             tvOnboardingSelectDataDescription.text = description
             btnOnboardingSelectData1.text = btn1

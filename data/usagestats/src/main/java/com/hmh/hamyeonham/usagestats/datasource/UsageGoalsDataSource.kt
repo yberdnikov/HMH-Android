@@ -3,9 +3,7 @@ package com.hmh.hamyeonham.usagestats.datasource
 import com.hmh.hamyeonham.usagestats.model.UsageGoalModel
 import javax.inject.Inject
 
-class UsageGoalsDataSource
-@Inject
-constructor() {
+class UsageGoalsDataSource @Inject constructor() {
     var usageGoalList =
         listOf(
             UsageGoalModel("total", 40000000),

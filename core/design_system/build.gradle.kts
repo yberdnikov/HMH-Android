@@ -4,9 +4,8 @@ plugins {
 }
 
 android {
-    namespace = "com.hmh.hamyeonham.feature.onboarding"
+    namespace = "com.hmh.hamyeonham.core.design_system"
 }
 
 dependencies {
-    implementation(projects.core.common)
 }

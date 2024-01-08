@@ -17,7 +17,6 @@
 - [Android App Architecture](https://developer.android.com/topic/architecture)
 - [Dagger-Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 - [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html), [Flow](https://kotlinlang.org/docs/flow.html)
-- [Jetpack Compose](https://developer.android.com/jetpack/compose)
 - [Material 3](https://m3.material.io/)
 - [Gradle Version Catalog](https://docs.gradle.org/current/userguide/platforms.html)
   and [Custom Convention Plugins](https://docs.gradle.org/current/samples/sample_convention_plugins.html)
@@ -105,7 +104,7 @@
 - [Kotlin Code Convention](https://www.notion.so/msmmx/Kotlin-Convention-5ab4410e68c949c287804d2380c51af4)
 - [XML Convention](https://www.notion.so/msmmx/XML-Convention-b11209ba2b404df08f251383c7d3c316)
 - [name convention](https://www.notion.so/msmmx/name-convention-ca8bab7da7314b30b2a962755854b11e)
-- [GitHub Convention](https://www.notion.so/msmmx/b75d3559813e478f9f6d73e9c818834b?pvs=4#bc0bf41e7df9421391dc1000d25a17c6)
+- [GitHub Convention](https://www.notion.so/msmmx/Git-Convention-e7785302d1a94a71b8f330c5a050bc41)
 
 
 This project follows the all-contributors specification. Contributions of any kind welcome!

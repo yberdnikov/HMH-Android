@@ -1,6 +1,6 @@
 package com.hmh.hamyeonham.feature.onboarding
 
-enum class OnboardingFragmentType {
+enum class OnBoardingFragmentType {
     REQUEST_PERMISSION,
     SELECT_APP,
     SELECT_SCREENTIME_GOAL,

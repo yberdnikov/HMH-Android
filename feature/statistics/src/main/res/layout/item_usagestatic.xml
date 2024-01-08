@@ -5,14 +5,13 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="20dp">
 
-    <ProgressBar
+    <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/pb_item_usagestat"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        style="@style/Widget.Hmh.ProgressIndicator"
         android:layout_width="0dp"
-        android:layout_height="71dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:progress="30"
-        android:progressDrawable="@drawable/ll_statics_progress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +37,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
         android:layout_marginTop="2dp"
-        android:text="Instagram"
         android:textColor="?gray1"
         app:layout_constraintStart_toEndOf="@id/iv_itemusagestat_appicon"
         app:layout_constraintTop_toTopOf="@id/iv_itemusagestat_appicon" />
@@ -49,7 +47,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
-        android:text="1h 20m"
         android:textColor="?white_text"
         app:layout_constraintBottom_toBottomOf="@id/iv_itemusagestat_appicon"
         app:layout_constraintStart_toStartOf="@id/tv_itemusagestat_appname" />
@@ -60,7 +57,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="6dp"
-        android:text="30m"
         android:textColor="?white_text"
         app:layout_constraintBottom_toBottomOf="@id/pb_item_usagestat"
         app:layout_constraintEnd_toStartOf="@id/tv_itemusagestat_time_left_title"

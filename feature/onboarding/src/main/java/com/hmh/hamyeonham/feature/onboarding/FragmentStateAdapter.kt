@@ -17,11 +17,9 @@ class FragmentStateAdapter(fragmentActivity: FragmentActivity) :
 
     fun addOnboardingFragments(fragment: Fragment) {
         onboardingFragments.add(fragment)
-        notifyItemInserted(onboardingFragments.size-1)
     }
 
     fun removeOnboardingFragments() {
         onboardingFragments.removeLast()
-        notifyItemRemoved(onboardingFragments.size)
     }
 }

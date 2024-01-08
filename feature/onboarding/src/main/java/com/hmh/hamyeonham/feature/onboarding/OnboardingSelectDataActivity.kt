@@ -1,5 +1,6 @@
 package com.hmh.hamyeonham.feature.onboarding
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.hmh.hamyeonham.common.activity.addFragment
@@ -29,6 +30,10 @@ class OnboardingSelectDataActivity : AppCompatActivity() {
             val currentItem = binding.vpOnboardingContainer.currentItem
             if (currentItem < pagerAdapter.itemCount - 1) {
                 binding.vpOnboardingContainer.currentItem = currentItem + 1
+            }
+            if (currentItem == pagerAdapter.itemCount - 1) {
+                pagerAdapter.removeOnboardingFragments()
+                startActivity(Intent(this, DoneSingUpActivity::class.java))
             }
         }
     }

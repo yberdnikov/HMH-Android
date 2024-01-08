@@ -11,6 +11,7 @@ import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.OnBoardingFragmentType
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectDataBinding
 import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingSelectDataViewModel
+import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -19,7 +20,7 @@ import kotlinx.coroutines.flow.onEach
 class OnBoardingSelectDataFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingSelectDataBinding::bind)
     private val viewModel by viewModels<OnBoardingSelectDataViewModel>()
-
+    private val activityViewModel by viewModels<OnBoardingViewModel>({ requireActivity() })
     companion object {
         private const val ARG_FRAGMENT_TYPE = "ARG_FRAGMENT_TYPE"
         fun newInstance(fragmentType: OnBoardingFragmentType): OnBoardingSelectDataFragment {
@@ -44,6 +45,19 @@ class OnBoardingSelectDataFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initFragmentType()
         initViews()
+
+        binding.btnOnboardingSelectData1.setOnClickListener {
+            activityViewModel.onClickFragmentBtn(1)
+        }
+        binding.btnOnboardingSelectData2.setOnClickListener {
+            activityViewModel.onClickFragmentBtn(2)
+        }
+        binding.btnOnboardingSelectData3.setOnClickListener {
+            activityViewModel.onClickFragmentBtn(3)
+        }
+        binding.btnOnboardingSelectData4.setOnClickListener {
+            activityViewModel.onClickFragmentBtn(4)
+        }
     }
 
     private fun initFragmentType() {

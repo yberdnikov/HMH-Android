@@ -2,7 +2,7 @@
 <resources>
 
     <style name="AppTheme.NumberPicker" parent="Theme.Material3.Light">
-        <item name="colorControlNormal">#FFFFFF</item>
+        <item name="colorControlNormal">#121212</item>
         <item name="android:background">#FFFFFF</item>
     </style>
 </resources>

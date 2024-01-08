@@ -1,2 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.HMH" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Display -->
+        <item name="textAppearanceDisplayLarge">@style/TextAppearance.Hmh.DisplayLarge</item>
+        <item name="textAppearanceDisplayMedium">@style/TextAppearance.Hmh.DisplayMedium</item>
+        <item name="textAppearanceDisplaySmall">@style/TextAppearance.Hmh.DisplaySmall</item>
+        <!--Head line -->
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.Hmh.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Hmh.HeadlineMedium</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.Hmh.HeadlineSmall</item>
+        <!-- Title -->
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.Hmh.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.Hmh.TitleMedium</item>
+        <!-- Body -->
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Hmh.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Hmh.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.Hmh.BodySmall</item>
+        <!-- Label -->
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.Hmh.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.Hmh.LabelMedium</item>
+    </style>
+
+</resources>

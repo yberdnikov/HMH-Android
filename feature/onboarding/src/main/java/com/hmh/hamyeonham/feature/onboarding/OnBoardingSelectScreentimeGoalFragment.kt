@@ -6,27 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.hmh.hamyeonham.common.view.viewBinding
-import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentSelectUseTimeGoalBinding
+import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectScreentimeGoalBinding
 
-class SelectUseTimeGoalFragment : Fragment() {
-    private val binding by viewBinding(FragmentSelectUseTimeGoalBinding::bind)
+class OnBoardingSelectScreentimeGoalFragment : Fragment() {
+    private val binding by viewBinding(FragmentOnBoardingSelectScreentimeGoalBinding::bind)
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return FragmentSelectUseTimeGoalBinding.inflate(inflater, container, false).root
+        return FragmentOnBoardingSelectScreentimeGoalBinding.inflate(inflater, container, false).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.run {
-            npOnboardingUseTimeGoalHour.minValue = 1
-            npOnboardingUseTimeGoalHour.maxValue = 6
-            npOnboardingUseTimeGoalMinute.minValue = 0
-            npOnboardingUseTimeGoalMinute.maxValue = 59
+            npOnboardingScreentimeGoal.minValue = 1
+            npOnboardingScreentimeGoal.maxValue = 6
         }
     }
 }

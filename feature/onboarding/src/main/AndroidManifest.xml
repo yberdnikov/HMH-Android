@@ -9,17 +9,17 @@
 
     <application>
         <activity
-            android:name=".DoneSingUpActivity"
+            android:name=".OnBoardingDoneSingUpActivity"
             android:exported="false" />
         <activity
-            android:name=".OnboardingSelectDataActivity"
+            android:name=".OnBoardingSelectDataActivity"
             android:exported="false" />
         <activity
-            android:name=".OnboardingActivity"
+            android:name=".OnBoardingActivity"
             android:exported="false" />
 
         <service
-            android:name=".OnboardingAccessibilityService"
+            android:name=".OnBoardingAccessibilityService"
             android:exported="true"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>

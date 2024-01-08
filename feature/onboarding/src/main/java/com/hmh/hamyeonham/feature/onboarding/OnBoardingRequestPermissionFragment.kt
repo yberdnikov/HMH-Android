@@ -6,16 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.hmh.hamyeonham.common.view.viewBinding
-import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentRequestPermissionBinding
+import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingRequestPermissionBinding
 
-class RequestPermissionFragment : Fragment() {
-    private val binding by viewBinding(FragmentRequestPermissionBinding::bind)
+class OnBoardingRequestPermissionFragment : Fragment() {
+    private val binding by viewBinding(FragmentOnBoardingRequestPermissionBinding::bind)
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return FragmentRequestPermissionBinding.inflate(inflater, container, false).root
+        return FragmentOnBoardingRequestPermissionBinding.inflate(inflater, container, false).root
     }
 }

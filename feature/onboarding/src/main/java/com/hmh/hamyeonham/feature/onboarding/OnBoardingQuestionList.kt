@@ -1,8 +1,8 @@
 package com.hmh.hamyeonham.feature.onboarding
 
-object OnboardingQuestionList {
+object OnBoardingQuestionList {
     // 문구 확정 시 string resource로 변경
-    val OnboardingQuestionTime = listOf(
+    val OnBoardingQuestionTime = listOf(
         "하루 평균 휴대폰을\n얼마나 사용하시나요?",
         "",
         "1-4시간",
@@ -11,7 +11,7 @@ object OnboardingQuestionList {
         "12시간 이상",
     )
 
-    val OnboardingQuestionProblem = listOf(
+    val OnBoardingQuestionProblem = listOf(
         "휴대폰을 사용할 때\n어떤 문제를 겪고 계시나요?",
         "해당 문항은 최대 2개의 복수 응답이 가능해요",
         "중독이 너무 심해요",
@@ -20,7 +20,7 @@ object OnboardingQuestionList {
         "일상생활에 영향을 끼쳐요",
     )
 
-    val OnboardingChallengePeriod = listOf(
+    val OnBoardingChallengePeriod = listOf(
         "챌린지 기간을 선택해주세요",
         "첫 챌린지로 가볍게 도전하기 좋은 7일을 추천해요!",
         "7일",

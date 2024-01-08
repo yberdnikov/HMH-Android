@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.hmh.hamyeonham.common.view.viewBinding
-import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnboardingSelectDataBinding
+import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectDataBinding
 
-class OnboardingSelectDataFragment : Fragment() {
-    private val binding by viewBinding(FragmentOnboardingSelectDataBinding::bind)
+class OnBoardingSelectDataFragment : Fragment() {
+    private val binding by viewBinding(FragmentOnBoardingSelectDataBinding::bind)
 
     companion object {
         private const val ARG_QUESTION = "question"
@@ -26,8 +26,8 @@ class OnboardingSelectDataFragment : Fragment() {
             btn2: String,
             btn3: String,
             btn4: String,
-        ): OnboardingSelectDataFragment {
-            val fragment = OnboardingSelectDataFragment()
+        ): OnBoardingSelectDataFragment {
+            val fragment = OnBoardingSelectDataFragment()
             val args = Bundle().apply {
                 putString(ARG_QUESTION, question)
                 putString(ARG_DESCRIPTION, description)
@@ -46,7 +46,7 @@ class OnboardingSelectDataFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return FragmentOnboardingSelectDataBinding.inflate(inflater, container, false).root
+        return FragmentOnBoardingSelectDataBinding.inflate(inflater, container, false).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

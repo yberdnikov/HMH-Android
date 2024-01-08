@@ -11,11 +11,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.hmh.hamyeonham.common.context.toast
 import com.hmh.hamyeonham.common.view.viewBinding
-import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnboardingBinding
+import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
 
-class OnboardingActivity : AppCompatActivity() {
+class OnBoardingActivity : AppCompatActivity() {
 
-    private val binding by viewBinding(ActivityOnboardingBinding::inflate)
+    private val binding by viewBinding(ActivityOnBoardingBinding::inflate)
 
     private val accessibilitySettingsLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(
@@ -76,7 +76,7 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun isAccessibilityServiceEnabled(): Boolean {
-        val service = packageName + "/" + OnboardingAccessibilityService::class.java.canonicalName
+        val service = packageName + "/" + OnBoardingAccessibilityService::class.java.canonicalName
         val enabledServicesSetting = Settings.Secure.getString(
             contentResolver,
             Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,

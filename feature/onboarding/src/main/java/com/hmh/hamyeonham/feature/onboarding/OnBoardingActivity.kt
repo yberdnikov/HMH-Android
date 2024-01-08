@@ -55,15 +55,6 @@ class OnBoardingActivity : AppCompatActivity() {
                 toast("다른 앱 위에 그리기 권한이 이미 허용되어 있습니다.")
             }
         }
-        binding.btnLogin.setOnClickListener {
-            if (isAccessibilityServiceEnabled() && hasUsageStatsPermission() && hasOverlayPermission()) {
-                toast("모든 권한이 허용되었습니다.")
-                startActivity(navigationProvider.toLogin())
-                finish()
-            } else {
-                toast("모든 권한을 허용해주세요.")
-            }
-        }
     }
 
     private fun requestUsageAccessPermission() {

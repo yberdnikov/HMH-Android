@@ -35,7 +35,7 @@ class GetUsageStatsListUseCase @Inject constructor(
                 createUsageStatAndGoal(
                     it.packageName,
                     it.totalTimeInForeground,
-                    it.packageName
+                    it.packageName,
                 )
             }
     }
@@ -48,12 +48,13 @@ class GetUsageStatsListUseCase @Inject constructor(
     }
 
     private fun getSelectedPackageList(): List<String> =
-        usageGoalsRepository.getUsageGoals().map { it.packageName }.distinct()
+        usageGoalsRepository.getUsageGoals().filter { it.packageName != TOTAL }
+            .map { it.packageName }.distinct()
 
     private fun createUsageStatAndGoal(
         packageName: String,
         totalTimeInForeground: Long,
-        goalKey: String
+        goalKey: String,
     ): UsageStatAndGoal {
         val goalTime = usageGoalsRepository.getUsageGoalTime(goalKey)
         return UsageStatAndGoal(packageName, totalTimeInForeground, goalTime)

@@ -14,13 +14,13 @@ interface UsageStatsRepository {
         packageName: String,
     ): Long
 
-    fun getUsageTimeForPackages(
+    fun getUsageStatForPackages(
         startTime: Long,
         endTime: Long,
         vararg packageNames: String,
     ): List<UsageStat>
 
-    fun getUsageTimeForPackages(
+    fun getUsageStatForPackages(
         startTime: Long,
         endTime: Long,
         packageNames: List<String>,

@@ -22,8 +22,8 @@ class SampleActivity : AppCompatActivity() {
         val splashScreen = installSplashScreen()
         initSplashAnimation(splashScreen)
         setContentView(binding.root)
-        startActivity(Intent(this, OnBoardingActivity::class.java))
-        //startActivity(Intent(this, StaticsActivity::class.java))
+//        startActivity(Intent(this, OnBoardingActivity::class.java))
+        startActivity(Intent(this, StaticsActivity::class.java))
         finish()
     }
 

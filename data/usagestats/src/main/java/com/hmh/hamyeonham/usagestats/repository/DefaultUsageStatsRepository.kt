@@ -27,7 +27,7 @@ class DefaultUsageStatsRepository @Inject constructor(
             ?: 0
     }
 
-    override fun getUsageTimeForPackages(
+    override fun getUsageStatForPackages(
         startTime: Long,
         endTime: Long,
         vararg packageNames: String,
@@ -38,7 +38,7 @@ class DefaultUsageStatsRepository @Inject constructor(
         }
     }
 
-    override fun getUsageTimeForPackages(
+    override fun getUsageStatForPackages(
         startTime: Long,
         endTime: Long,
         packageNames: List<String>,

@@ -16,45 +16,49 @@ class OnboardingSelectDataActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val pagerAdapter = FragmentStateAdapter(this)
-        setOnboardingFragmets(pagerAdapter)
+        setOnboardingFragments(pagerAdapter)
         setAdapter(pagerAdapter)
     }
 
-    private fun setOnboardingFragmets(pagerAdapter: FragmentStateAdapter) {
-        pagerAdapter.addOnboardingFragments(
-            OnboardingSelectDataFragment.newInstance(
-                OnboardingQuestionList.OnboardingQuestionTime[0],
-                OnboardingQuestionList.OnboardingQuestionTime[1],
-                OnboardingQuestionList.OnboardingQuestionTime[2],
-                OnboardingQuestionList.OnboardingQuestionTime[3],
-                OnboardingQuestionList.OnboardingQuestionTime[4],
-                OnboardingQuestionList.OnboardingQuestionTime[5],
-            ),
-        )
-        pagerAdapter.addOnboardingFragments(
-            OnboardingSelectDataFragment.newInstance(
-                OnboardingQuestionList.OnboardingQuestionProblem[0],
-                OnboardingQuestionList.OnboardingQuestionProblem[1],
-                OnboardingQuestionList.OnboardingQuestionProblem[2],
-                OnboardingQuestionList.OnboardingQuestionProblem[3],
-                OnboardingQuestionList.OnboardingQuestionProblem[4],
-                OnboardingQuestionList.OnboardingQuestionProblem[5],
-            ),
-        )
-        pagerAdapter.addOnboardingFragments(
-            OnboardingSelectDataFragment.newInstance(
-                OnboardingQuestionList.OnboardingChallengePeriod[0],
-                OnboardingQuestionList.OnboardingChallengePeriod[1],
-                OnboardingQuestionList.OnboardingChallengePeriod[2],
-                OnboardingQuestionList.OnboardingChallengePeriod[3],
-                OnboardingQuestionList.OnboardingChallengePeriod[4],
-                OnboardingQuestionList.OnboardingChallengePeriod[5],
-            ),
-        )
-        pagerAdapter.addOnboardingFragments(SelectScreentimeGoalFragment())
-        pagerAdapter.addOnboardingFragments(RequestPermissionFragment())
-        pagerAdapter.addOnboardingFragments(SelectAppFragment())
-        pagerAdapter.addOnboardingFragments(SelectUseTimeGoalFragment())
+    private fun setOnboardingFragments(pagerAdapter: FragmentStateAdapter) {
+        pagerAdapter.apply {
+            addOnboardingFragments(
+                OnboardingSelectDataFragment.newInstance(
+                    OnboardingQuestionList.OnboardingQuestionTime[0],
+                    OnboardingQuestionList.OnboardingQuestionTime[1],
+                    OnboardingQuestionList.OnboardingQuestionTime[2],
+                    OnboardingQuestionList.OnboardingQuestionTime[3],
+                    OnboardingQuestionList.OnboardingQuestionTime[4],
+                    OnboardingQuestionList.OnboardingQuestionTime[5],
+                ),
+            )
+
+            addOnboardingFragments(
+                OnboardingSelectDataFragment.newInstance(
+                    OnboardingQuestionList.OnboardingQuestionProblem[0],
+                    OnboardingQuestionList.OnboardingQuestionProblem[1],
+                    OnboardingQuestionList.OnboardingQuestionProblem[2],
+                    OnboardingQuestionList.OnboardingQuestionProblem[3],
+                    OnboardingQuestionList.OnboardingQuestionProblem[4],
+                    OnboardingQuestionList.OnboardingQuestionProblem[5],
+                ),
+            )
+
+            addOnboardingFragments(
+                OnboardingSelectDataFragment.newInstance(
+                    OnboardingQuestionList.OnboardingChallengePeriod[0],
+                    OnboardingQuestionList.OnboardingChallengePeriod[1],
+                    OnboardingQuestionList.OnboardingChallengePeriod[2],
+                    OnboardingQuestionList.OnboardingChallengePeriod[3],
+                    OnboardingQuestionList.OnboardingChallengePeriod[4],
+                    OnboardingQuestionList.OnboardingChallengePeriod[5],
+                ),
+            )
+            addOnboardingFragments(SelectScreentimeGoalFragment())
+            addOnboardingFragments(RequestPermissionFragment())
+            addOnboardingFragments(SelectAppFragment())
+            addOnboardingFragments(SelectUseTimeGoalFragment())
+        }
     }
 
     private fun setAdapter(pagerAdapter: FragmentStateAdapter) {

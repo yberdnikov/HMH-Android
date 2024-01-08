@@ -8,6 +8,7 @@ class UsageGoalsDataSource @Inject constructor() {
         listOf(
             UsageGoalModel("total", 20000000),
             UsageGoalModel("com.kakao.talk", 3000000),
+            UsageGoalModel("com.netflix.mediaclient", 3000000),
             UsageGoalModel("com.hmh.hamyeonham", 3000000),
             UsageGoalModel("com.google.android.gms", 500000),
             UsageGoalModel("com.google.android.youtube", 3000000),

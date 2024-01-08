@@ -67,6 +67,7 @@
         android:layout_marginEnd="6dp"
         android:text="1시간 30분"
         android:textColor="?white_text"
+        app:layout_constraintBottom_toBottomOf="@id/tv_statics_total_time_left_title"
         app:layout_constraintEnd_toStartOf="@id/tv_statics_total_time_left_title"
         app:layout_constraintTop_toTopOf="@id/tv_statics_total_time_left_title" />
 
@@ -77,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="9dp"
         android:layout_marginEnd="9dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="17dp"
         android:text="@string/all_left"
         android:textColor="?gray1"
         app:layout_constraintBottom_toTopOf="@id/pb_statics_total"

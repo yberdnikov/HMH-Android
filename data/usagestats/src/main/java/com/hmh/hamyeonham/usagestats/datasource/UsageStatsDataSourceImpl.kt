@@ -15,8 +15,6 @@ class UsageStatsDataSourceImpl @Inject constructor(
             startTime,
             endTime,
         )?.map { UsageStatModel(it.packageName, it.totalTimeInForeground) } ?: emptyList()
-        for (i in usageStatModelList)
-            Log.d("packageList", i.packageName)
         return usageStatModelList
     }
 }

@@ -33,7 +33,7 @@ class DefaultUsageStatsRepository @Inject constructor(
         vararg packageNames: String,
     ): List<UsageStat> {
         val usageStatList = getUsageStats(startTime, endTime)
-        val newUsageStatList = packageNames.map { packageName ->
+        return packageNames.map { packageName ->
             UsageStat(
                 packageName,
                 usageStatList.find {
@@ -41,7 +41,6 @@ class DefaultUsageStatsRepository @Inject constructor(
                 }?.totalTimeInForeground ?: 0,
             )
         }
-        return newUsageStatList
     }
 
     override fun getUsageStatForPackages(

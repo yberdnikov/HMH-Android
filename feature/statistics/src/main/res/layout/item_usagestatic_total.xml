@@ -42,9 +42,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/all_goal_time"
-        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@id/tv_statics_total_hour"
-        app:layout_constraintStart_toStartOf="@id/pb_statics_total" />
+        app:layout_constraintStart_toStartOf="@id/pb_statics_total"
+        android:textAppearance="?textAppearanceLabelMedium"
+        android:textColor="?color"/>
 
     <TextView
         android:id="@+id/tv_statics_total_time_left"

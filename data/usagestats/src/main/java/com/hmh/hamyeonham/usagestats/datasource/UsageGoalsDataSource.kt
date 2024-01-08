@@ -6,7 +6,7 @@ import javax.inject.Inject
 class UsageGoalsDataSource @Inject constructor() {
     var usageGoalList =
         listOf(
-            UsageGoalModel("total", 40000000),
+            UsageGoalModel("total", 20000000),
             UsageGoalModel("com.kakao.talk", 3000000),
             UsageGoalModel("com.hmh.hamyeonham", 3000000),
             UsageGoalModel("com.google.android.gms", 500000),

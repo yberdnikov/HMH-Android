@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.feature.onboarding
+package com.hmh.hamyeonham.feature.onboarding.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

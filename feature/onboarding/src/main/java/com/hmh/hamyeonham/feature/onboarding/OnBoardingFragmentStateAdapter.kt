@@ -3,59 +3,41 @@ package com.hmh.hamyeonham.feature.onboarding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.hmh.hamyeonham.feature.onboarding.fragment.OnBoardingRequestPermissionFragment
+import com.hmh.hamyeonham.feature.onboarding.fragment.OnBoardingSelectAppFragment
+import com.hmh.hamyeonham.feature.onboarding.fragment.OnBoardingSelectDataFragment
+import com.hmh.hamyeonham.feature.onboarding.fragment.OnBoardingSelectScreenTimeFragment
+
+enum class OnBoardingFragmentType {
+    REQUEST_PERMISSION,
+    SELECT_APP,
+    SELECT_SCREEN_TIME_GOAL,
+    SELECT_DATA_TIME,
+    SELECT_DATA_PROBLEM,
+    SELECT_DATA_PERIOD,
+    SELECT_USE_TIME_GOAL,
+}
 
 class OnBoardingFragmentStateAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
-    var onBoardingFragments: ArrayList<Fragment> = ArrayList()
     override fun getItemCount(): Int {
-        return onBoardingFragments.size
+        return OnBoardingFragmentType.entries.size
     }
 
     override fun createFragment(position: Int): Fragment {
-        return onBoardingFragments[position]
-    }
-
-    fun removeOnboardingFragments() {
-        onBoardingFragments.removeLast()
-    }
-
-    fun addOnboardingFragment(fragmentType: OnBoardingFragmentType) {
-        val fragment = when (fragmentType) {
+        return when (val fragmentType = position.toOnBoardingFragmentType()) {
+            OnBoardingFragmentType.SELECT_DATA_TIME -> OnBoardingSelectDataFragment.newInstance(fragmentType)
+            OnBoardingFragmentType.SELECT_DATA_PROBLEM -> OnBoardingSelectDataFragment.newInstance(fragmentType)
+            OnBoardingFragmentType.SELECT_DATA_PERIOD -> OnBoardingSelectDataFragment.newInstance(fragmentType)
+            OnBoardingFragmentType.SELECT_SCREEN_TIME_GOAL -> OnBoardingSelectScreenTimeFragment()
             OnBoardingFragmentType.REQUEST_PERMISSION -> OnBoardingRequestPermissionFragment()
             OnBoardingFragmentType.SELECT_APP -> OnBoardingSelectAppFragment()
-            OnBoardingFragmentType.SELECT_SCREENTIME_GOAL -> OnBoardingSelectScreentimeGoalFragment()
-            OnBoardingFragmentType.SELECT_DATA_TIME -> OnBoardingSelectDataFragment.newInstance(
-                OnBoardingQuestionList.OnBoardingQuestionTime[0],
-                OnBoardingQuestionList.OnBoardingQuestionTime[1],
-                OnBoardingQuestionList.OnBoardingQuestionTime[2],
-                OnBoardingQuestionList.OnBoardingQuestionTime[3],
-                OnBoardingQuestionList.OnBoardingQuestionTime[4],
-                OnBoardingQuestionList.OnBoardingQuestionTime[5],
-            )
-
-            OnBoardingFragmentType.SELECT_DATA_PROBLEM -> OnBoardingSelectDataFragment.newInstance(
-                OnBoardingQuestionList.OnBoardingQuestionProblem[0],
-                OnBoardingQuestionList.OnBoardingQuestionProblem[1],
-                OnBoardingQuestionList.OnBoardingQuestionProblem[2],
-                OnBoardingQuestionList.OnBoardingQuestionProblem[3],
-                OnBoardingQuestionList.OnBoardingQuestionProblem[4],
-                OnBoardingQuestionList.OnBoardingQuestionProblem[5],
-            )
-
-            OnBoardingFragmentType.SELECT_DATA_PERIOD -> OnBoardingSelectDataFragment.newInstance(
-                OnBoardingQuestionList.OnBoardingChallengePeriod[0],
-                OnBoardingQuestionList.OnBoardingChallengePeriod[1],
-                OnBoardingQuestionList.OnBoardingChallengePeriod[2],
-                OnBoardingQuestionList.OnBoardingChallengePeriod[3],
-                OnBoardingQuestionList.OnBoardingChallengePeriod[4],
-                OnBoardingQuestionList.OnBoardingChallengePeriod[5],
-            )
-
-            OnBoardingFragmentType.SELECT_USE_TIME_GOAL -> OnBoardingSelectUseTimeGoalFragment()
-            else -> {
-                throw IllegalArgumentException("Unknown fragment type")
-            }
+            OnBoardingFragmentType.SELECT_USE_TIME_GOAL -> OnBoardingSelectScreenTimeFragment()
         }
-        onBoardingFragments.add(fragment)
+    }
+
+    private fun Int.toOnBoardingFragmentType(): OnBoardingFragmentType {
+        return OnBoardingFragmentType.entries.getOrNull(this)
+            ?: OnBoardingFragmentType.SELECT_DATA_TIME
     }
 }

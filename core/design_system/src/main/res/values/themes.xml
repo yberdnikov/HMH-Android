@@ -1,6 +1,20 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.HMH" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_purple_button</item>
+        <item name="colorOnPrimary">@color/white_text</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary70">@color/blue_purple_opacity_70</item>
+        <item name="colorSecondary22">@color/blue_purple_opacity_22</item>
+        <item name="colorOutline">@color/blue_purple_line</item>
+
+        <item name="colorOnBackground">@color/blackground</item>
+
+        <item name="colorOnSurface">@color/blue_purple_progress</item>
+
         <!-- Display -->
         <item name="textAppearanceDisplayLarge">@style/TextAppearance.Hmh.DisplayLarge</item>
         <item name="textAppearanceDisplayMedium">@style/TextAppearance.Hmh.DisplayMedium</item>

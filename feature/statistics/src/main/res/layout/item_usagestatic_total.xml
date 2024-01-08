@@ -6,10 +6,9 @@
 
     <TextView
         android:id="@+id/tv_statics_goal_title"
-        style="?textAppearanceDisplaySmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="목표이용시간\n어아어아"
+        android:text="@string/all_goal_time"
         android:textColor="#ffffff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

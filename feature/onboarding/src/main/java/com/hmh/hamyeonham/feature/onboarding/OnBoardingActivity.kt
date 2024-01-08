@@ -10,12 +10,19 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.hmh.hamyeonham.common.context.toast
+import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class OnBoardingActivity : AppCompatActivity() {
 
     private val binding by viewBinding(ActivityOnBoardingBinding::inflate)
+
+    @Inject
+    lateinit var navigationProvider: NavigationProvider
 
     private val accessibilitySettingsLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(
@@ -46,6 +53,15 @@ class OnBoardingActivity : AppCompatActivity() {
                 requestOverlayPermission()
             } else {
                 toast("다른 앱 위에 그리기 권한이 이미 허용되어 있습니다.")
+            }
+        }
+        binding.btnLogin.setOnClickListener {
+            if (isAccessibilityServiceEnabled() && hasUsageStatsPermission() && hasOverlayPermission()) {
+                toast("모든 권한이 허용되었습니다.")
+                startActivity(navigationProvider.toLogin())
+                finish()
+            } else {
+                toast("모든 권한을 허용해주세요.")
             }
         }
     }

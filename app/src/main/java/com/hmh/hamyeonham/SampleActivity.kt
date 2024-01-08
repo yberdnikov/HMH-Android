@@ -1,6 +1,5 @@
 package com.hmh.hamyeonham
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -9,8 +8,6 @@ import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.databinding.ActivitySampleBinding
-import com.hmh.hamyeonham.feature.onboarding.OnBoardingSelectDataActivity
-import com.kakao.sdk.common.KakaoSdk
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,16 +18,9 @@ class SampleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val splashScreen = installSplashScreen()
         initSplashAnimation(splashScreen)
-        initKakaoSdk()
         setContentView(binding.root)
-
-        Intent(this, OnBoardingSelectDataActivity::class.java).apply {
-            startActivity(this)
-        }
-    }
-
-    private fun initKakaoSdk() {
-        KakaoSdk.init(this, BuildConfig.KAKAO_API_KEY)
+        startActivity(Intent(this, OnBoardingActivity::class.java))
+        finish()
     }
 
     private fun initSplashAnimation(splashScreen: SplashScreen) {

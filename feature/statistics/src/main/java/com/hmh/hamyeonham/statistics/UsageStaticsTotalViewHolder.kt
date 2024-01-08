@@ -3,7 +3,6 @@ package com.hmh.hamyeonham.statistics
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import com.hmh.hamyeonham.common.time.convertTimeToString
 import com.hmh.hamyeonham.feature.statistics.databinding.ItemUsagestaticTotalBinding

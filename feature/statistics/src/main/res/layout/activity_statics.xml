@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#17171B"
+    android:background="@color/blackground"
     tools:context="com.hmh.hamyeonham.statistics.StaticsActivity">
 
     <TextView
@@ -25,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_statics_hmh"
-        android:layout_marginTop="24dp"/>
+        android:layout_marginTop="22dp" />
 
     <Button
         android:id="@+id/btn_logout"

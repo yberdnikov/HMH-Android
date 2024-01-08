@@ -1,6 +1,5 @@
 package com.hmh.hamyeonham.usagestats.repository
 
-import android.util.Log
 import com.hmh.hamyeonham.usagestats.datasource.UsageStatsDataSource
 import com.hmh.hamyeonham.usagestats.model.UsageStat
 import javax.inject.Inject
@@ -33,10 +32,16 @@ class DefaultUsageStatsRepository @Inject constructor(
         endTime: Long,
         vararg packageNames: String,
     ): List<UsageStat> {
-        val usageStatsList = getUsageStats(startTime, endTime)
-        return usageStatsList.filter {
-            packageNames.contains(it.packageName)
+        val usageStatList = getUsageStats(startTime, endTime)
+        val newUsageStatList = packageNames.map { packageName ->
+            UsageStat(
+                packageName,
+                usageStatList.find {
+                    packageName == it.packageName
+                }?.totalTimeInForeground ?: 0,
+            )
         }
+        return newUsageStatList
     }
 
     override fun getUsageStatForPackages(
@@ -44,9 +49,15 @@ class DefaultUsageStatsRepository @Inject constructor(
         endTime: Long,
         packageNames: List<String>,
     ): List<UsageStat> {
-        val usageStatsList = getUsageStats(startTime, endTime)
-        return usageStatsList.filter {
-            packageNames.contains(it.packageName)
+        val usageStatList = getUsageStats(startTime, endTime)
+        val newUsageStatList = packageNames.map { packageName ->
+            UsageStat(
+                packageName,
+                usageStatList.find {
+                    packageName == it.packageName
+                }?.totalTimeInForeground ?: 0,
+            )
         }
+        return newUsageStatList
     }
 }

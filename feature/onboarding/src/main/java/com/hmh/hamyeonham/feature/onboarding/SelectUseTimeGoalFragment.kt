@@ -25,8 +25,8 @@ class SelectUseTimeGoalFragment : Fragment() {
         binding.run {
             npOnboardingUseTimeGoalHour.minValue = 1
             npOnboardingUseTimeGoalHour.maxValue = 6
-            npOnboardingUseTimeGoalMinute.minValue = 1
-            npOnboardingUseTimeGoalMinute.maxValue = 6
+            npOnboardingUseTimeGoalMinute.minValue = 0
+            npOnboardingUseTimeGoalMinute.maxValue = 59
         }
     }
 }

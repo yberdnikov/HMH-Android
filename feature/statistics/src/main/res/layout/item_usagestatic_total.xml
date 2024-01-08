@@ -15,12 +15,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        style="@style/TextAppearance.App.DisplaySmall"
+        style="?textAppearanceDisplaySmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="33dp"
         android:text="@string/item_usagestatic_total_blackhole"
-        android:textColor="@color/white_text"
+        android:textColor="?white_text"
         app:layout_constraintStart_toStartOf="@id/tv_statics_total_goal_title"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,12 +40,12 @@
 
     <TextView
         android:id="@+id/tv_statics_total_hour"
-        style="@style/TextAppearance.App.DisplayMedium"
+        style="?textAppearanceDisplayMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:text="3h"
-        android:textColor="@color/white_text"
+        android:textColor="?white_text"
         app:layout_constraintBottom_toTopOf="@id/pb_statics_total"
         app:layout_constraintStart_toStartOf="@id/pb_statics_total" />
 
@@ -54,32 +54,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/all_goal_time"
-        android:textAppearance="@style/TextAppearance.App.LabelMedium"
-        android:textColor="@color/gray1"
+        android:textAppearance="?textAppearanceLabelMedium"
+        android:textColor="?gray1"
         app:layout_constraintBottom_toTopOf="@id/tv_statics_total_hour"
         app:layout_constraintStart_toStartOf="@id/pb_statics_total" />
 
     <TextView
         android:id="@+id/tv_statics_total_time_left"
-        style="@style/TextAppearance.App.BodySmall"
+        style="?textAppearanceBodySmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="6dp"
         android:text="1시간 30분"
-        android:textColor="@color/white_text"
+        android:textColor="?white_text"
         app:layout_constraintEnd_toStartOf="@id/tv_statics_total_time_left_title"
         app:layout_constraintTop_toTopOf="@id/tv_statics_total_time_left_title" />
 
     <TextView
         android:id="@+id/tv_statics_total_time_left_title"
-        style="@style/TextAppearance.App.LabelLarge"
+        style="?textAppearanceLabelLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="9dp"
         android:layout_marginEnd="9dp"
         android:layout_marginBottom="12dp"
         android:text="@string/all_left"
-        android:textColor="@color/gray1"
+        android:textColor="?gray1"
         app:layout_constraintBottom_toTopOf="@id/pb_statics_total"
         app:layout_constraintEnd_toEndOf="@id/pb_statics_total" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,46 +32,46 @@
 
     <TextView
         android:id="@+id/tv_itemusagestat_appname"
-        style="@style/TextAppearance.App.LabelLarge"
+        style="?textAppearanceLabelLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
         android:layout_marginTop="2dp"
         android:text="Instagram"
-        android:textColor="@color/gray1"
+        android:textColor="?gray1"
         app:layout_constraintStart_toEndOf="@id/iv_itemusagestat_appicon"
         app:layout_constraintTop_toTopOf="@id/iv_itemusagestat_appicon" />
 
     <TextView
         android:id="@+id/tv_itemusagestat_goal_time"
-        style="@style/TextAppearance.App.BodySmall"
+        style="?textAppearanceBodySmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1h 20m"
-        android:textColor="@color/white_text"
+        android:textColor="?white_text"
         app:layout_constraintStart_toStartOf="@id/tv_itemusagestat_appname"
         app:layout_constraintTop_toBottomOf="@id/tv_itemusagestat_appname" />
 
     <TextView
         android:id="@+id/tv_itemusagestat_time_left"
-        style="@style/TextAppearance.App.TitleMedium"
+        style="?textAppearanceTitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="6dp"
         android:text="30m"
-        android:textColor="@color/white_text"
+        android:textColor="?white_text"
         app:layout_constraintBottom_toBottomOf="@id/pb_item_usagestat"
         app:layout_constraintEnd_toStartOf="@id/tv_itemusagestat_time_left_title"
         app:layout_constraintTop_toTopOf="@id/pb_item_usagestat" />
 
     <TextView
         android:id="@+id/tv_itemusagestat_time_left_title"
-        style="@style/TextAppearance.App.BodyLarge"
+        style="?textAppearanceBodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:text="@string/all_left"
-        android:textColor="@color/gray2"
+        android:textColor="?gray2"
         app:layout_constraintBottom_toBottomOf="@id/pb_item_usagestat"
         app:layout_constraintEnd_toEndOf="@id/pb_item_usagestat"
         app:layout_constraintTop_toTopOf="@id/pb_item_usagestat" />

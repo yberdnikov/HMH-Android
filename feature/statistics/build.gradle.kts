@@ -15,7 +15,7 @@ dependencies {
 
     // Core
     implementation(projects.core.common)
-    implementation(projects.core.designSystem)
+    implementation(projects.core.designsystem)
 
     // others
     implementation(libs.appcompat)

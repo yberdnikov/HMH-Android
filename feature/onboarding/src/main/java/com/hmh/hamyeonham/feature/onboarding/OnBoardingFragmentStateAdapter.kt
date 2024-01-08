@@ -9,12 +9,12 @@ import com.hmh.hamyeonham.feature.onboarding.fragment.OnBoardingSelectDataFragme
 import com.hmh.hamyeonham.feature.onboarding.fragment.OnBoardingSelectScreenTimeFragment
 
 enum class OnBoardingFragmentType {
-    REQUEST_PERMISSION,
-    SELECT_APP,
-    SELECT_SCREEN_TIME_GOAL,
     SELECT_DATA_TIME,
     SELECT_DATA_PROBLEM,
     SELECT_DATA_PERIOD,
+    SELECT_SCREEN_TIME_GOAL,
+    REQUEST_PERMISSION,
+    SELECT_APP,
     SELECT_USE_TIME_GOAL,
 }
 
@@ -26,9 +26,18 @@ class OnBoardingFragmentStateAdapter(fragmentActivity: FragmentActivity) :
 
     override fun createFragment(position: Int): Fragment {
         return when (val fragmentType = position.toOnBoardingFragmentType()) {
-            OnBoardingFragmentType.SELECT_DATA_TIME -> OnBoardingSelectDataFragment.newInstance(fragmentType)
-            OnBoardingFragmentType.SELECT_DATA_PROBLEM -> OnBoardingSelectDataFragment.newInstance(fragmentType)
-            OnBoardingFragmentType.SELECT_DATA_PERIOD -> OnBoardingSelectDataFragment.newInstance(fragmentType)
+            OnBoardingFragmentType.SELECT_DATA_TIME -> OnBoardingSelectDataFragment.newInstance(
+                fragmentType,
+            )
+
+            OnBoardingFragmentType.SELECT_DATA_PROBLEM -> OnBoardingSelectDataFragment.newInstance(
+                fragmentType,
+            )
+
+            OnBoardingFragmentType.SELECT_DATA_PERIOD -> OnBoardingSelectDataFragment.newInstance(
+                fragmentType,
+            )
+
             OnBoardingFragmentType.SELECT_SCREEN_TIME_GOAL -> OnBoardingSelectScreenTimeFragment()
             OnBoardingFragmentType.REQUEST_PERMISSION -> OnBoardingRequestPermissionFragment()
             OnBoardingFragmentType.SELECT_APP -> OnBoardingSelectAppFragment()

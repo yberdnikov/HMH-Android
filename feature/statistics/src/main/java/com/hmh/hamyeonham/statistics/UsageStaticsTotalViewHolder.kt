@@ -20,8 +20,8 @@ class UsageStaticsTotalViewHolder(
         binding.run {
             tvStaticsTotalHour.text = convertTimeToString(usageStatAndGoal.goalTime)
             pbStaticsTotal.progress = usageStatAndGoal.usedPercentage
-//            tvStaticsTotalTimeLeft.text = convertTimeToString(usageStatAndGoal.timeLeft)
-            setSpannable(usageStatAndGoal)
+            tvStaticsTotalTimeLeft.text = convertTimeToString(usageStatAndGoal.timeLeft)
+//            setSpannable(usageStatAndGoal)
         }
         startProgressAnimation(usageStatAndGoal.usedPercentage)
     }

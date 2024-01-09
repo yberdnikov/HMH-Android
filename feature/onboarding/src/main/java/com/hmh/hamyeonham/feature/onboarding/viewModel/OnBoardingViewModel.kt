@@ -22,7 +22,7 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
     val buttonInfoList = _buttonInfoList.asStateFlow()
 
     private val _canClickActivityNextButton = MutableStateFlow(false)
-    val canClickActivityNextButton = _canClickActivityNextButton.asStateFlow()
+    val clickNextButtonEnable = _canClickActivityNextButton.asStateFlow()
 
     fun onClickFragmentBtn(index: Int) {
         _buttonInfoList.value = _buttonInfoList.value.map { buttonInfo ->

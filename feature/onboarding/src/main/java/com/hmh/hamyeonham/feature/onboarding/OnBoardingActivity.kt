@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
@@ -24,7 +25,7 @@ class OnBoardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initViewPager()
-        activeActivityNextBtn()
+        checkNextButtonEnable()
         backPressedCallback()
     }
 
@@ -63,10 +64,10 @@ class OnBoardingActivity : AppCompatActivity() {
         }
     }
 
-    private fun activeActivityNextBtn() {
-        viewModel.canClickActivityNextButton.onEach { canClickActivityNextButton ->
-            binding.btnOnboardingNext.isEnabled = canClickActivityNextButton
-            binding.btnOnboardingNext.isSelected = canClickActivityNextButton
+    private fun checkNextButtonEnable() {
+        viewModel.clickNextButtonEnable.flowWithLifecycle(lifecycle).onEach { clickNextButtonEnable ->
+            binding.btnOnboardingNext.isEnabled = clickNextButtonEnable
+            binding.btnOnboardingNext.isSelected = clickNextButtonEnable
         }.launchIn(lifecycleScope)
     }
 

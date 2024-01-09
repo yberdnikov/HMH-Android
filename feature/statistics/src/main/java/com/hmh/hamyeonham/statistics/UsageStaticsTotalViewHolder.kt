@@ -22,10 +22,11 @@ class UsageStaticsTotalViewHolder(
     }
 
     private fun startProgressAnimation(progressTo: Int) {
-        ObjectAnimator.ofInt(binding.pbItemusagestaticTotal, "progress", 0, progressTo).apply {
-            interpolator = AccelerateInterpolator()
-            start()
-        }
+        val objectAnimator =
+            ObjectAnimator.ofInt(binding.pbItemusagestaticTotal, "progress", 0, progressTo).apply {
+                interpolator = AccelerateInterpolator()
+            }
+        objectAnimator.start()
     }
 
     companion object {

@@ -20,10 +20,11 @@ class UsageStaticsViewHolder(
     }
 
     private fun initbindAndAnimateProgress(progressTo: Int) {
-        ObjectAnimator.ofInt(binding.pbItemUsagestat, "progress", 0, progressTo).apply {
-            interpolator = AccelerateInterpolator()
-            start()
-        }
+        val objectAnimator =
+            ObjectAnimator.ofInt(binding.pbItemUsagestat, "progress", 0, progressTo).apply {
+                interpolator = AccelerateInterpolator()
+            }
+        objectAnimator.start()
     }
 
     private fun bindAttributes(usageStatAndGoal: UsageStatAndGoal) {

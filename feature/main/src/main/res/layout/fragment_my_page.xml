@@ -33,7 +33,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="24dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/mypage_profileimg_50"
         app:layout_constraintBottom_toTopOf="@id/v_mypage_collections"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintStart_toStartOf="parent"

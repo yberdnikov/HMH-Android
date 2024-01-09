@@ -12,7 +12,7 @@ import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
 
 class OnBoardingSelectAppFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingSelectAppBinding::bind)
-    private val activityViewModel by viewModels<OnBoardingViewModel>({ requireActivity() })
+    private val activityViewModel by viewModels<OnBoardingViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

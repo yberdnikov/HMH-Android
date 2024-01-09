@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.OnBoardingFragmentType
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectDataBinding
@@ -20,7 +21,7 @@ import kotlinx.coroutines.flow.onEach
 class OnBoardingSelectDataFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingSelectDataBinding::bind)
     private val viewModel by viewModels<OnBoardingSelectDataViewModel>()
-    private val activityViewModel by viewModels<OnBoardingViewModel>({ requireActivity() })
+    private val activityViewModel by viewModels<OnBoardingViewModel>()
 
     companion object {
         private const val ARG_FRAGMENT_TYPE = "ARG_FRAGMENT_TYPE"
@@ -68,7 +69,7 @@ class OnBoardingSelectDataFragment : Fragment() {
             onboardingFragmentButtonList.forEachIndexed { i, button ->
                 button.isSelected = buttonInfoList[i].isClicked
             }
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
+        }.launchIn(viewLifeCycleScope)
     }
 
     private fun initFragmentType() {

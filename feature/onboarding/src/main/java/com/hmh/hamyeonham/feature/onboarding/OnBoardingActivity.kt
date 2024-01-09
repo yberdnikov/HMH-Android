@@ -26,7 +26,7 @@ class OnBoardingActivity : AppCompatActivity() {
         setContentView(binding.root)
         initViewPager()
         checkNextButtonEnable()
-        backPressedCallback()
+        setBackPressedCallback()
     }
 
     private fun initViewPager() {
@@ -71,7 +71,7 @@ class OnBoardingActivity : AppCompatActivity() {
         }.launchIn(lifecycleScope)
     }
 
-    private fun backPressedCallback() {
+    private fun setBackPressedCallback() {
         onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 navigateToPreviousOnboardingStep()

@@ -12,7 +12,7 @@ import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
 
 class OnBoardingSelectUseTimeFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingSelectUseTimeBinding::bind)
-    private val activityViewModel by viewModels<OnBoardingViewModel>({ requireActivity() })
+    private val activityViewModel by viewModels<OnBoardingViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,6 +31,5 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
             npOnboardingUseTimeGoalMinute.maxValue = 59
         }
         activityViewModel.activeActivityNextButton()
-
     }
 }

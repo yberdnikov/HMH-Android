@@ -8,6 +8,9 @@ android {
 }
 
 dependencies {
+
+    implementation(projects.domain.challenge)
+
     implementation(projects.core.common)
     implementation(projects.core.designsystem)
     implementation(projects.core.viewmodel.main)

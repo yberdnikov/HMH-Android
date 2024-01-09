@@ -9,5 +9,8 @@ android {
 }
 
 dependencies {
+
+    implementation(projects.domain.challenge)
+
     implementation(projects.core.common)
 }

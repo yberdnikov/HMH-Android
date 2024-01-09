@@ -6,11 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.flowWithLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
+import com.hmh.hamyeonham.common.fragment.viewLifeCycle
+import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.core.MainViewModel
 import com.hmh.hamyeonham.feature.challenge.databinding.FragmentChallengeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class ChallengeFragment : Fragment() {
@@ -29,6 +34,15 @@ class ChallengeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initChallengeRecyclerView()
+        collectMainState()
+    }
+
+    private fun collectMainState() {
+        val challengeAdapter = binding.rvChallengeCalendar.adapter as? ChallengeCalendarAdapter
+        activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach {
+            challengeAdapter?.submitList(it.challengeStatus.isSuccessList)
+        }.launchIn(viewLifeCycleScope)
+
     }
 
     private fun initChallengeRecyclerView() {

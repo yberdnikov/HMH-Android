@@ -4,16 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hmh.hamyeonham.challenge.model.ChallengeStatus
 import com.hmh.hamyeonham.common.view.ItemDiffCallback
 import com.hmh.hamyeonham.feature.challenge.R
 import com.hmh.hamyeonham.feature.challenge.databinding.ItemChallengeStatusBinding
 
 class ChallengeCalendarAdapter :
-    ListAdapter<ChallengeStatus, ChallengeCalendarAdapter.ChallengeStatusViewHolder>(
-        ItemDiffCallback<ChallengeStatus>(
+    ListAdapter<Boolean, ChallengeCalendarAdapter.ChallengeStatusViewHolder>(
+        ItemDiffCallback<Boolean>(
             onItemsTheSame = { oldItem, newItem ->
-                oldItem.isSuccessList == newItem.isSuccessList
+                oldItem == newItem
             },
             onContentsTheSame = { oldItem, newItem ->
                 oldItem == newItem
@@ -23,9 +22,8 @@ class ChallengeCalendarAdapter :
     class ChallengeStatusViewHolder(
         private val binding: ItemChallengeStatusBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ChallengeStatus, position: Int) {
+        fun bind(isSuccess: Boolean, position: Int) {
             binding.apply {
-                val isSuccess = item.isSuccessList.getOrNull(position)
                 val date = (position + 1).toString()
                 tvDate.text = date
                 ivChallengeStatus.setImageResource(getDrawableResource(isSuccess))

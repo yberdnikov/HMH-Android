@@ -24,12 +24,6 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
     private val _clickedFragmentBtn4 = MutableStateFlow(false)
     val clickedFragmentBtn4 = _clickedFragmentBtn4.asStateFlow()
 
-    private val _clickedFragmentNumberPicker = MutableStateFlow(false)
-    val clickedFragmentNumberPicker = _clickedFragmentNumberPicker.asStateFlow()
-
-    fun onClickFragmentNumberPicker() {
-        _clickedFragmentNumberPicker.value = !_clickedFragmentNumberPicker.value
-    }
     fun onClickFragmentBtn(index: Int) {
         when (index) {
             1 -> _clickedFragmentBtn1.value = !_clickedFragmentBtn1.value

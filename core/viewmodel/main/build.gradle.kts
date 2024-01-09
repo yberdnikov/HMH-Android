@@ -13,4 +13,7 @@ dependencies {
     implementation(projects.domain.challenge)
 
     implementation(projects.core.common)
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+
 }

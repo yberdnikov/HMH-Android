@@ -26,6 +26,7 @@ class OnBoardingActivity : AppCompatActivity() {
         viewModel.initializeButtonStates()
         viewModel.canClickActivityNextButton.onEach { canClickActivityNextButton ->
             binding.btnOnboardingNext.isEnabled = canClickActivityNextButton
+            binding.btnOnboardingNext.isSelected = canClickActivityNextButton
         }.launchIn(lifecycleScope)
     }
 

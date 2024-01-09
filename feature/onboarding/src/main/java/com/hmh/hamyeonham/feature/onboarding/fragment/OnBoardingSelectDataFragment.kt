@@ -60,7 +60,6 @@ class OnBoardingSelectDataFragment : Fragment() {
 
         onboardingFragmentButtonList.forEachIndexed { index, button ->
             button.setOnClickListener {
-                activityViewModel.initializeButtonStates() // 버튼 단일 선택을 위함
                 activityViewModel.onClickFragmentBtn(index + 1)
             }
         }

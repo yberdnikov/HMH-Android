@@ -1,7 +1,9 @@
 package com.hmh.hamyeonham.feature.onboarding.viewModel
 
 import androidx.lifecycle.ViewModel
+import com.hmh.hamyeonham.feature.onboarding.model.Challenge
 import com.hmh.hamyeonham.feature.onboarding.model.OnboardingBtnInfo
+import com.hmh.hamyeonham.feature.onboarding.model.OnboardingInformation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -28,7 +30,7 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
             if (buttonInfo.index == index) {
                 buttonInfo.copy(isClicked = !buttonInfo.isClicked)
             } else {
-                buttonInfo
+                buttonInfo.copy(isClicked = false)
             }
         }
 
@@ -46,13 +48,15 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
         _canClickActivityNextButton.value = true
     }
 
-    fun updateButtonText(index: Int, text: String) {
-        _buttonInfoList.value = _buttonInfoList.value.map { buttonInfo ->
-            if (buttonInfo.index == index) {
-                buttonInfo.copy(text = text)
-            } else {
-                buttonInfo
-            }
+    private fun updateOnboardingInformation() {
+        val selectedButton = _buttonInfoList.value.find { it.isClicked }
+        if (selectedButton != null) {
+            val onboardingInformation = OnboardingInformation(
+                usuallyUseTime = selectedButton.text,
+                problems = listOf(),
+                challenge = Challenge(1, 1),
+                apps = listOf(),
+            )
         }
     }
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
@@ -21,7 +22,7 @@ import kotlinx.coroutines.flow.onEach
 class OnBoardingSelectDataFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingSelectDataBinding::bind)
     private val viewModel by viewModels<OnBoardingSelectDataViewModel>()
-    private val activityViewModel by viewModels<OnBoardingViewModel>()
+    private val activityViewModel by activityViewModels<OnBoardingViewModel>()
 
     companion object {
         private const val ARG_FRAGMENT_TYPE = "ARG_FRAGMENT_TYPE"
@@ -61,7 +62,7 @@ class OnBoardingSelectDataFragment : Fragment() {
 
         onboardingFragmentButtonList.forEachIndexed { index, button ->
             button.setOnClickListener {
-                activityViewModel.onClickFragmentBtn(index + 1)
+                activityViewModel.onClickFragmentBtn(index)
             }
         }
 

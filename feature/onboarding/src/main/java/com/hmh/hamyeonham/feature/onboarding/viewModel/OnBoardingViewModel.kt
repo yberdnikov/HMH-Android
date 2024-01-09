@@ -11,14 +11,17 @@ import javax.inject.Inject
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor() : ViewModel() {
 
-    private val _buttonInfoList = MutableStateFlow<List<OnboardingBtnInfo>>(
-        listOf(
-            OnboardingBtnInfo(1, false, ""),
-            OnboardingBtnInfo(2, false, ""),
-            OnboardingBtnInfo(3, false, ""),
-            OnboardingBtnInfo(4, false, ""),
-        ),
-    )
+    private val _buttonInfoList =
+        MutableStateFlow<List<OnboardingBtnInfo>>(initializeButtonInfoList())
+
+    private fun initializeButtonInfoList(): List<OnboardingBtnInfo> {
+        val buttonInfoList = mutableListOf<OnboardingBtnInfo>()
+        for (index in 1..4) {
+            buttonInfoList.add(OnboardingBtnInfo(index, false, ""))
+        }
+        return buttonInfoList
+    }
+
     val buttonInfoList = _buttonInfoList.asStateFlow()
 
     private val _canClickActivityNextButton = MutableStateFlow(false)

@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectAppBinding
 import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
 
 class OnBoardingSelectAppFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingSelectAppBinding::bind)
-    private val activityViewModel by viewModels<OnBoardingViewModel>()
+    private val activityViewModel by activityViewModels<OnBoardingViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -35,6 +35,10 @@ class OnBoardingActivity : AppCompatActivity() {
                 navigateToPreviousOnboardingStep()
             }
         }
+        binding.ivOnboardingBack.setOnClickListener {
+            onBackPressedCallback.isEnabled = true
+            onBackPressedDispatcher.onBackPressed()
+        }
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 

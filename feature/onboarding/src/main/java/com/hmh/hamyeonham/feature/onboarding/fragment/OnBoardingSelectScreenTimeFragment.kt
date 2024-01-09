@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.NumberPicker
 import androidx.fragment.app.Fragment
 import com.hmh.hamyeonham.common.view.setupScreentimeGoalRange
 import com.hmh.hamyeonham.common.view.viewBinding
@@ -21,7 +20,7 @@ class OnBoardingSelectScreenTimeFragment : Fragment() {
         return FragmentOnBoardingSelectScreentimeBinding.inflate(
             inflater,
             container,
-            false
+            false,
         ).root
     }
 
@@ -29,6 +28,5 @@ class OnBoardingSelectScreenTimeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.npOnboardingScreentimeGoal.setupScreentimeGoalRange(1, 6)
-
     }
 }

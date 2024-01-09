@@ -70,7 +70,7 @@ dependencies {
 
     // Core
     implementation(projects.core.common)
-    implementation(projects.core.designSystem)
+    implementation(projects.core.designsystem)
     implementation(projects.core.database)
 
     // Firebase

@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.usagestats.model
+package com.hmh.hamyeonham.userinfo.model
 
 data class UserInfo(
     val name: String,

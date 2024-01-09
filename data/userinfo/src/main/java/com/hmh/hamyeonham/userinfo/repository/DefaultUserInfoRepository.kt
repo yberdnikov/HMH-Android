@@ -1,12 +1,12 @@
-package com.hmh.hamyeonham.usagestats.repository
+package com.hmh.hamyeonham.userinfo.repository
 
-import com.hmh.hamyeonham.usagestats.datasource.UserInfoDataSource
-import com.hmh.hamyeonham.usagestats.model.UserInfo
+import com.hmh.hamyeonham.userinfo.datasource.UserInfoDataSource
+import com.hmh.hamyeonham.userinfo.model.UserInfo
 import javax.inject.Inject
 
 class DefaultUserInfoRepository @Inject constructor(
     private val userInfoDataSource: UserInfoDataSource,
-) : UserInfoRepository {
+) : com.hmh.hamyeonham.userinfo.repository.UserInfoRepository {
     override fun getUserInfo(): UserInfo {
         val userInfoModel = userInfoDataSource.getUserInfoModel()
         return UserInfo(userInfoModel.name, userInfoModel.point)

@@ -4,346 +4,328 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_mypage_title"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+        <TextView
+            android:id="@+id/tv_mypage_title"
+            style="?textAppearanceTitleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:text="@string/my_page"
+            android:textColor="?white_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_mypage_title"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+    <ImageView
+        android:id="@+id/iv_mypage_profile"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/mypage_profileimg_50"
+        app:layout_constraintBottom_toTopOf="@id/v_mypage_collections"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_mypage_title" />
 
-                <TextView
-                    android:id="@+id/tv_mypage_title"
-                    style="?textAppearanceTitleLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="20dp"
-                    android:text="@string/my_page"
-                    android:textColor="?white_text"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_mypage_name"
+        style="?textAppearanceHeadlineLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="여민서"
+        android:textColor="@color/white_text"
+        app:layout_constraintBottom_toBottomOf="@id/iv_mypage_profile"
+        app:layout_constraintStart_toEndOf="@id/iv_mypage_profile"
+        app:layout_constraintTop_toTopOf="@id/iv_mypage_profile" />
 
-            <ImageView
-                android:id="@+id/iv_mypage_profile"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="24dp"
-                android:src="@drawable/mypage_profileimg_50"
-                app:layout_constraintBottom_toTopOf="@id/v_mypage_collections"
-                app:layout_constraintDimensionRatio="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_mypage_title" />
+    <View
+        android:id="@+id/v_mypage_collections"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/mypage_rectangle"
+        app:layout_constraintBottom_toTopOf="@id/v_mypage_journey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_mypage_profile" />
 
-            <TextView
-                android:id="@+id/tv_mypage_name"
-                style="?textAppearanceHeadlineLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="여민서"
-                android:textColor="@color/white_text"
-                app:layout_constraintBottom_toBottomOf="@id/iv_mypage_profile"
-                app:layout_constraintStart_toEndOf="@id/iv_mypage_profile"
-                app:layout_constraintTop_toTopOf="@id/iv_mypage_profile" />
+    <View
+        android:id="@+id/v_mypage_collection_line"
+        android:layout_width="1dp"
+        android:layout_height="57dp"
+        android:background="?gray4"
+        app:layout_constraintBottom_toBottomOf="@id/v_mypage_collections"
+        app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
+        app:layout_constraintStart_toStartOf="@id/v_mypage_collections"
+        app:layout_constraintTop_toTopOf="@id/v_mypage_collections" />
 
-            <View
-                android:id="@+id/v_mypage_collections"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginHorizontal="20dp"
-                android:background="@drawable/mypage_rectangle"
-                app:layout_constraintBottom_toTopOf="@id/v_mypage_journey"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_mypage_profile" />
+    <TextView
+        android:id="@+id/tv_mypage_point_title"
+        style="?textAppearanceBodyLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:text="@string/mypage_point_title"
+        android:textColor="?white_text"
+        app:layout_constraintEnd_toEndOf="@id/v_mypage_collection_line"
+        app:layout_constraintStart_toStartOf="@id/v_mypage_collections"
+        app:layout_constraintTop_toTopOf="@id/v_mypage_collections" />
 
-            <View
-                android:id="@+id/v_mypage_collection_line"
-                android:layout_width="1dp"
-                android:layout_height="57dp"
-                android:background="?gray4"
-                app:layout_constraintBottom_toBottomOf="@id/v_mypage_collections"
-                app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
-                app:layout_constraintStart_toStartOf="@id/v_mypage_collections"
-                app:layout_constraintTop_toTopOf="@id/v_mypage_collections" />
+    <TextView
+        android:id="@+id/tv_mypage_point"
+        style="?textAppearanceHeadlineMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="14dp"
+        android:text="100P"
+        android:textColor="?white_text"
+        app:layout_constraintBottom_toBottomOf="@id/v_mypage_collections"
+        app:layout_constraintEnd_toEndOf="@id/tv_mypage_point_title"
+        app:layout_constraintStart_toStartOf="@id/tv_mypage_point_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_mypage_point_title" />
 
-            <TextView
-                android:id="@+id/tv_mypage_point_title"
-                style="?textAppearanceBodyLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="19dp"
-                android:text="@string/mypage_point_title"
-                android:textColor="?white_text"
-                app:layout_constraintEnd_toEndOf="@id/v_mypage_collection_line"
-                app:layout_constraintStart_toStartOf="@id/v_mypage_collections"
-                app:layout_constraintTop_toTopOf="@id/v_mypage_collections" />
+    <TextView
+        android:id="@+id/tv_mypage_badge"
+        style="?textAppearanceBodyLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mypage_badge_collection"
+        android:textColor="?gray3"
+        app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
+        app:layout_constraintStart_toStartOf="@id/v_mypage_collection_line"
+        app:layout_constraintTop_toTopOf="@id/tv_mypage_point_title" />
 
-            <TextView
-                android:id="@+id/tv_mypage_point"
-                style="?textAppearanceHeadlineMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="14dp"
-                android:text="100P"
-                android:textColor="?white_text"
-                app:layout_constraintBottom_toBottomOf="@id/v_mypage_collections"
-                app:layout_constraintEnd_toEndOf="@id/tv_mypage_point_title"
-                app:layout_constraintStart_toStartOf="@id/tv_mypage_point_title"
-                app:layout_constraintTop_toBottomOf="@id/tv_mypage_point_title" />
+    <ImageView
+        android:id="@+id/iv_mypage_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/mypage_badgeicon_white_24"
+        app:layout_constraintEnd_toEndOf="@id/tv_mypage_badge"
+        app:layout_constraintStart_toStartOf="@id/tv_mypage_badge"
+        app:layout_constraintTop_toBottomOf="@id/tv_mypage_badge" />
 
-            <TextView
-                android:id="@+id/tv_mypage_badge"
-                style="?textAppearanceBodyLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mypage_badge_collection"
-                android:textColor="?gray3"
-                app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
-                app:layout_constraintStart_toStartOf="@id/v_mypage_collection_line"
-                app:layout_constraintTop_toTopOf="@id/tv_mypage_point_title" />
+    <View
+        android:id="@+id/v_mypage_journey"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@id/v_mypage_store"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_mypage_collections" />
 
-            <ImageView
-                android:id="@+id/iv_mypage_badge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/mypage_badgeicon_white_24"
-                app:layout_constraintEnd_toEndOf="@id/tv_mypage_badge"
-                app:layout_constraintStart_toStartOf="@id/tv_mypage_badge"
-                app:layout_constraintTop_toBottomOf="@id/tv_mypage_badge" />
+    <TextView
+        android:id="@+id/tv_mypage_journey"
+        style="?textAppearanceTitleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
+        android:drawableStart="@drawable/mypage_journeyicon_24"
+        android:drawablePadding="15dp"
+        android:text="@string/mypage_journey"
+        android:textColor="?gray5"
+        app:layout_constraintBottom_toBottomOf="@id/v_mypage_journey"
+        app:layout_constraintStart_toStartOf="@id/v_mypage_collections"
+        app:layout_constraintTop_toTopOf="@id/v_mypage_journey" />
 
-            <View
-                android:id="@+id/v_mypage_journey"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintBottom_toTopOf="@id/v_mypage_store"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/v_mypage_collections" />
+    <ImageView
+        android:id="@+id/iv_mypage_journey_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/all_arrowicon_24"
+        app:layout_constraintBottom_toBottomOf="@id/tv_mypage_journey"
+        app:layout_constraintDimensionRatio="1dp"
+        app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
+        app:layout_constraintTop_toTopOf="@id/tv_mypage_journey" />
 
-            <TextView
-                android:id="@+id/tv_mypage_journey"
-                style="?textAppearanceTitleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="15dp"
-                android:drawableStart="@drawable/mypage_journeyicon_24"
-                android:drawablePadding="15dp"
-                android:text="@string/mypage_journey"
-                android:textColor="?gray5"
-                app:layout_constraintBottom_toBottomOf="@id/v_mypage_journey"
-                app:layout_constraintStart_toStartOf="@id/v_mypage_collections"
-                app:layout_constraintTop_toTopOf="@id/v_mypage_journey" />
+    <View
+        android:id="@+id/v_mypage_divider1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?gray8"
+        app:layout_constraintBottom_toTopOf="@id/v_mypage_store"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_mypage_journey" />
 
-            <ImageView
-                android:id="@+id/iv_mypage_journey_button"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:src="@drawable/all_arrowicon_24"
-                app:layout_constraintBottom_toBottomOf="@id/tv_mypage_journey"
-                app:layout_constraintDimensionRatio="1dp"
-                app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
-                app:layout_constraintTop_toTopOf="@id/tv_mypage_journey" />
-
-            <View
-                android:id="@+id/v_mypage_divider1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?gray8"
-                app:layout_constraintBottom_toTopOf="@id/v_mypage_store"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/v_mypage_journey" />
-
-            <View
-                android:id="@+id/v_mypage_store"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                app:layout_constraintBottom_toTopOf="@id/v_mypage_divider2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/v_mypage_divider1" />
+    <View
+        android:id="@+id/v_mypage_store"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toTopOf="@id/v_mypage_divider2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_mypage_divider1" />
 
 
-            <TextView
-                android:id="@+id/tv_mypage_store"
-                style="?textAppearanceTitleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:layout_marginBottom="21dp"
-                android:drawableStart="@drawable/mypage_storeicon_24"
-                android:drawablePadding="15dp"
-                android:text="@string/mypage_store"
-                android:textColor="?gray5"
-                app:layout_constraintBottom_toBottomOf="@id/v_mypage_store"
-                app:layout_constraintStart_toStartOf="@id/tv_mypage_journey"
-                app:layout_constraintTop_toTopOf="@id/v_mypage_store" />
+    <TextView
+        android:id="@+id/tv_mypage_store"
+        style="?textAppearanceTitleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="21dp"
+        android:drawableStart="@drawable/mypage_storeicon_24"
+        android:drawablePadding="15dp"
+        android:text="@string/mypage_store"
+        android:textColor="?gray5"
+        app:layout_constraintBottom_toBottomOf="@id/v_mypage_store"
+        app:layout_constraintStart_toStartOf="@id/tv_mypage_journey"
+        app:layout_constraintTop_toTopOf="@id/v_mypage_store" />
 
-            <ImageView
-                android:id="@+id/iv_mypage_store_button"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:src="@drawable/all_arrowicon_24"
-                app:layout_constraintBottom_toBottomOf="@id/tv_mypage_store"
-                app:layout_constraintDimensionRatio="1"
-                app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
-                app:layout_constraintTop_toTopOf="@id/tv_mypage_store" />
+    <ImageView
+        android:id="@+id/iv_mypage_store_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/all_arrowicon_24"
+        app:layout_constraintBottom_toBottomOf="@id/tv_mypage_store"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
+        app:layout_constraintTop_toTopOf="@id/tv_mypage_store" />
 
-            <View
-                android:id="@+id/v_mypage_divider2"
-                android:layout_width="wrap_content"
-                android:layout_height="10dp"
-                android:background="?gray8"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/v_mypage_store" />
+    <View
+        android:id="@+id/v_mypage_divider2"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:background="?gray8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_mypage_store" />
 
-            <TextView
-                android:id="@+id/tv_mypage_info"
-                style="?textAppearanceTitleMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="12dp"
-                android:text="@string/mypage_info"
-                android:textColor="?gray2"
-                app:layout_constraintStart_toStartOf="@id/tv_mypage_store"
-                app:layout_constraintTop_toBottomOf="@id/v_mypage_divider2" />
+    <TextView
+        android:id="@+id/tv_mypage_info"
+        style="?textAppearanceTitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/mypage_info"
+        android:textColor="?gray2"
+        app:layout_constraintStart_toStartOf="@id/tv_mypage_store"
+        app:layout_constraintTop_toBottomOf="@id/v_mypage_divider2" />
 
-            <View
-                android:id="@+id/v_mypage_termofuse"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="4dp"
-                app:layout_constraintBottom_toTopOf="@id/v_mypage_privacy"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_mypage_info" />
+    <View
+        android:id="@+id/v_mypage_termofuse"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toTopOf="@id/v_mypage_privacy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_mypage_info" />
 
-            <TextView
-                android:id="@+id/tv_mypage_termofuse"
-                style="?textAppearanceTitleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="15dp"
-                android:text="@string/mypage_termofuse"
-                android:textColor="?white_text"
-                app:layout_constraintBottom_toBottomOf="@id/v_mypage_termofuse"
-                app:layout_constraintStart_toStartOf="@id/tv_mypage_info"
-                app:layout_constraintTop_toTopOf="@id/v_mypage_termofuse" />
+    <TextView
+        android:id="@+id/tv_mypage_termofuse"
+        style="?textAppearanceTitleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/mypage_termofuse"
+        android:textColor="?white_text"
+        app:layout_constraintBottom_toBottomOf="@id/v_mypage_termofuse"
+        app:layout_constraintStart_toStartOf="@id/tv_mypage_info"
+        app:layout_constraintTop_toTopOf="@id/v_mypage_termofuse" />
 
-            <ImageView
-                android:id="@+id/iv_mypage_termofuse_button"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:src="@drawable/all_arrowicon_24"
-                app:layout_constraintBottom_toBottomOf="@id/tv_mypage_termofuse"
-                app:layout_constraintDimensionRatio="1"
-                app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
-                app:layout_constraintTop_toTopOf="@id/tv_mypage_termofuse" />
+    <ImageView
+        android:id="@+id/iv_mypage_termofuse_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/all_arrowicon_24"
+        app:layout_constraintBottom_toBottomOf="@id/tv_mypage_termofuse"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
+        app:layout_constraintTop_toTopOf="@id/tv_mypage_termofuse" />
 
-            <View
-                android:id="@+id/v_mypage_divider3"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?gray8"
-                app:layout_constraintBottom_toTopOf="@id/v_mypage_privacy"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/v_mypage_termofuse" />
+    <View
+        android:id="@+id/v_mypage_divider3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?gray8"
+        app:layout_constraintBottom_toTopOf="@id/v_mypage_privacy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_mypage_termofuse" />
 
-            <View
-                android:id="@+id/v_mypage_privacy"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="19dp"
-                app:layout_constraintBottom_toTopOf="@id/v_mypage_divider4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/v_mypage_termofuse" />
+    <View
+        android:id="@+id/v_mypage_privacy"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="19dp"
+        app:layout_constraintBottom_toTopOf="@id/v_mypage_divider4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_mypage_termofuse" />
 
-            <TextView
-                android:id="@+id/tv_mypage_privacy"
-                style="?textAppearanceTitleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
-                android:layout_marginBottom="22dp"
-                android:text="@string/mypage_privacy"
-                android:textColor="?white_text"
-                app:layout_constraintBottom_toBottomOf="@id/v_mypage_privacy"
-                app:layout_constraintStart_toStartOf="@id/tv_mypage_info"
-                app:layout_constraintTop_toTopOf="@id/v_mypage_privacy" />
+    <TextView
+        android:id="@+id/tv_mypage_privacy"
+        style="?textAppearanceTitleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="22dp"
+        android:text="@string/mypage_privacy"
+        android:textColor="?white_text"
+        app:layout_constraintBottom_toBottomOf="@id/v_mypage_privacy"
+        app:layout_constraintStart_toStartOf="@id/tv_mypage_info"
+        app:layout_constraintTop_toTopOf="@id/v_mypage_privacy" />
 
-            <ImageView
-                android:id="@+id/iv_mypage_privacy_button"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:src="@drawable/all_arrowicon_24"
-                app:layout_constraintBottom_toBottomOf="@id/tv_mypage_privacy"
-                app:layout_constraintDimensionRatio="1"
-                app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
-                app:layout_constraintTop_toTopOf="@id/tv_mypage_privacy" />
+    <ImageView
+        android:id="@+id/iv_mypage_privacy_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/all_arrowicon_24"
+        app:layout_constraintBottom_toBottomOf="@id/tv_mypage_privacy"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
+        app:layout_constraintTop_toTopOf="@id/tv_mypage_privacy" />
 
-            <TextView
-                android:id="@+id/tv_mypage_logout"
-                style="?textAppearanceBodyLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="19dp"
-                android:text="로그아웃"
-                android:textColor="?gray3"
-                app:layout_constraintBottom_toBottomOf="@id/v_mypage_divider4"
-                app:layout_constraintEnd_toStartOf="@id/v_mypage_divider4"
-                app:layout_constraintTop_toTopOf="@id/v_mypage_divider4" />
+    <TextView
+        android:id="@+id/tv_mypage_logout"
+        style="?textAppearanceBodyLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="19dp"
+        android:text="로그아웃"
+        android:textColor="?gray3"
+        app:layout_constraintBottom_toBottomOf="@id/v_mypage_divider4"
+        app:layout_constraintEnd_toStartOf="@id/v_mypage_divider4"
+        app:layout_constraintTop_toTopOf="@id/v_mypage_divider4" />
 
-            <View
-                android:id="@+id/v_mypage_divider4"
-                android:layout_width="1dp"
-                android:layout_height="16dp"
-                android:layout_marginTop="19dp"
-                android:layout_marginBottom="24dp"
-                android:background="?gray3"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/v_mypage_privacy" />
+    <View
+        android:id="@+id/v_mypage_divider4"
+        android:layout_width="1dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="24dp"
+        android:background="?gray3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_mypage_privacy" />
 
-            <TextView
-                android:id="@+id/tv_mypage_withdrawal"
-                style="?textAppearanceBodyLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="19dp"
-                android:text="회원탈퇴"
-                android:textColor="?gray3"
-                app:layout_constraintBottom_toBottomOf="@id/v_mypage_divider4"
-                app:layout_constraintStart_toEndOf="@id/v_mypage_divider4"
-                app:layout_constraintTop_toTopOf="@id/v_mypage_divider4" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    <TextView
+        android:id="@+id/tv_mypage_withdrawal"
+        style="?textAppearanceBodyLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:text="회원탈퇴"
+        android:textColor="?gray3"
+        app:layout_constraintBottom_toBottomOf="@id/v_mypage_divider4"
+        app:layout_constraintStart_toEndOf="@id/v_mypage_divider4"
+        app:layout_constraintTop_toTopOf="@id/v_mypage_divider4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

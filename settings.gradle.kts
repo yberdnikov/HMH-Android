@@ -30,3 +30,4 @@ include(":feature:login")
 
 include(":data:usagestats")
 include(":domain:usagestats")
+include(":domain:userinfo")

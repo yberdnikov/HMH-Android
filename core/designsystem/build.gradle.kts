@@ -10,4 +10,6 @@ android {
 dependencies {
     // Splash
     implementation(libs.splash.screen)
+    // core
+    implementation(projects.core.designsystem)
 }

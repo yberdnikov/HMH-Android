@@ -16,7 +16,7 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
 
     private fun initializeButtonInfoList(): List<OnboardingBtnInfo> {
         val buttonInfoList = mutableListOf<OnboardingBtnInfo>()
-        for (index in 1..4) {
+        for (index in 0..3) {
             buttonInfoList.add(OnboardingBtnInfo(index, false, ""))
         }
         return buttonInfoList

@@ -23,7 +23,7 @@ include(":core:common")
 include(":core:database")
 include(":feature:onboarding")
 include(":feature:main")
-include(":core:design_system")
+include(":core:designsystem")
 
 include(":feature:statistics")
 include(":feature:login")

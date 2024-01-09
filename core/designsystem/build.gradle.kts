@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.hmh.hamyeonham.core.design_system"
+    namespace = "com.hmh.hamyeonham.core.designsystem"
 }
 
 dependencies {

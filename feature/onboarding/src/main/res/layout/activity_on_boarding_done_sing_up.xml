@@ -37,14 +37,16 @@
         android:layout_marginTop="30dp"
         android:gravity="center"
         android:text="@string/onboarding_done_sing_up_title"
-        android:textColor="#121212"
-        android:textSize="20sp"
+        android:textColor="?white_text"
+        style="?textAppearanceDisplaySmall"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_onboarding_done_sing_up_image" />
 
 
     <TextView
+        style="?textAppearanceBodyMedium"
+        android:textColor="?gray1"
         android:id="@+id/tv_onboarding_done_sing_up_description"
         android:layout_width="wrap_content"
         android:layout_height="0dp"

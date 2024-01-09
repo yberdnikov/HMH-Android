@@ -3,8 +3,8 @@
     <string name="all_next">다음</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="onboarding_request_permission_title">스크린타임 접근 허용이 필요해요</string>
-    <string name="onboarding_request_permission_description">언제든지 설정에서 스크린타임 권한을\n허용할 수 있어요</string>
+    <string name="onboarding_request_permission_title">스크린타임 권한 허용이 필요해요</string>
+    <string name="onboarding_request_permission_description">언제든지 설정에서 스크린타임 권한을\n변경할 수 있어요</string>
     <string name="onboarding_permission1_title">접근성 허용</string>
     <string name="onboarding_permission1_description">현재 실행중인 앱을 제한합니다</string>
     <string name="onboarding_permission1_content_description">onboarding_permission1_next_button</string>

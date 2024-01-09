@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.hmh.hamyeonham.common.view.setupScreentimeGoalRange
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectScreentimeBinding
 import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
@@ -29,11 +30,6 @@ class OnBoardingSelectScreenTimeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.run {
-            npOnboardingScreentimeGoal.minValue = 1
-            npOnboardingScreentimeGoal.maxValue = 6
-        }
-
-        activityViewModel.activeActivityNextButton()
+        binding.npOnboardingScreentimeGoal.setupScreentimeGoalRange(1, 6)
     }
 }

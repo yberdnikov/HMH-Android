@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.NumberPicker
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.hmh.hamyeonham.common.view.setupScreentimeGoalRange
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectUseTimeBinding
 import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
@@ -25,12 +27,7 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.run {
-            npOnboardingUseTimeGoalHour.minValue = 1
-            npOnboardingUseTimeGoalHour.maxValue = 6
-            npOnboardingUseTimeGoalMinute.minValue = 0
-            npOnboardingUseTimeGoalMinute.maxValue = 59
-        }
-        activityViewModel.activeActivityNextButton()
+        binding.npOnboardingUseTimeGoalHour.setupScreentimeGoalRange(1, 6)
+        binding.npOnboardingUseTimeGoalMinute.setupScreentimeGoalRange(0, 59)
     }
 }

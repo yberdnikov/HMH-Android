@@ -1,10 +1,9 @@
 package com.hmh.hamyeonham.statistics
 
-import android.animation.ObjectAnimator
 import android.content.Context
-import android.view.animation.AccelerateInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import com.hmh.hamyeonham.common.time.convertTimeToString
+import com.hmh.hamyeonham.common.view.initAndStartProgressBarAnimation
 import com.hmh.hamyeonham.feature.statistics.databinding.ItemUsagestaticTotalBinding
 import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
 
@@ -18,15 +17,10 @@ class UsageStaticsTotalViewHolder(
             pbItemusagestaticTotal.progress = usageStatAndGoal.usedPercentage
             tvItemusagestaticTotalTimeLeft.text = convertTimeToString(usageStatAndGoal.timeLeft)
         }
-        startProgressAnimation(usageStatAndGoal.usedPercentage)
-    }
-
-    private fun startProgressAnimation(progressTo: Int) {
-        val objectAnimator =
-            ObjectAnimator.ofInt(binding.pbItemusagestaticTotal, "progress", 0, progressTo).apply {
-                interpolator = AccelerateInterpolator()
-            }
-        objectAnimator.start()
+        initAndStartProgressBarAnimation(
+            binding.pbItemusagestaticTotal,
+            usageStatAndGoal.usedPercentage,
+        )
     }
 
     companion object {

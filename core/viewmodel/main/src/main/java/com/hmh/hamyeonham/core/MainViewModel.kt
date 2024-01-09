@@ -33,7 +33,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
         )
 
         // isSuccessList를 랜덤한 Boolean 값으로 채웁니다.
-        val fakeIsSuccessList = List(fakeApps.size) { Math.random() < 0.5 }
+        val fakeIsSuccessList = List(7) { null }
 
         // ChallengeStatus 인스턴스 생성
         return ChallengeStatus(

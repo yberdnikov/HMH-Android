@@ -22,7 +22,7 @@ class ChallengeCalendarAdapter :
     class ChallengeStatusViewHolder(
         private val binding: ItemChallengeStatusBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(isSuccess: Boolean, position: Int) {
+        fun bind(isSuccess: Boolean?, position: Int) {
             binding.apply {
                 val date = (position + 1).toString()
                 tvDate.text = date
@@ -50,6 +50,6 @@ class ChallengeCalendarAdapter :
     }
 
     override fun onBindViewHolder(holder: ChallengeStatusViewHolder, position: Int) {
-        holder.bind(getItem(position), position)
+        holder.bind(currentList.getOrNull(position), position)
     }
 }

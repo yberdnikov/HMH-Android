@@ -11,6 +11,12 @@
 
     <application>
         <activity
+            android:name=".OnBoardingDoneSingUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OnBoardingActivity"
+            android:exported="false" />
+        <activity
             android:name=".OnBoardingActivity"
             android:exported="false" />
 
@@ -26,9 +32,9 @@
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_service_config" />
         </service>
-
         <activity
             android:name=".LockActivity"
             android:exported="true" />
     </application>
+
 </manifest>

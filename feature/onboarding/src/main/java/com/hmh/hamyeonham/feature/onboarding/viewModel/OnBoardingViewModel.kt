@@ -40,8 +40,13 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
     }
 
     fun initializeButtonStates() {
+        val clickedButton = _buttonInfoList.value.find { it.isClicked }
         _buttonInfoList.value = _buttonInfoList.value.map { buttonInfo ->
-            buttonInfo.copy(isClicked = false)
+            if (clickedButton != null && buttonInfo.index == clickedButton.index) {
+                buttonInfo.copy(isClicked = false)
+            } else {
+                buttonInfo
+            }
         }
         _canClickActivityNextButton.value = false
     }

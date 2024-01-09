@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme.NumberPicker" parent="Theme.Material3.Light">
-        <item name="colorControlNormal">#121212</item>
+    <style name="AppTheme.NumberPicker" parent="Base.Theme.HMH">
+        <item name="colorControlNormal">?gray6</item>
         <item name="android:background">#00FFFFFF</item>
+        <item name="android:editTextColor">?white_text</item>
     </style>
 </resources>

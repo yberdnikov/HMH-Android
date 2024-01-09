@@ -10,21 +10,6 @@ import javax.inject.Inject
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor() : ViewModel() {
 
-    private val _canClickActivityNextButton = MutableStateFlow(true)
-    val canClickActivityNextButton = _canClickActivityNextButton.asStateFlow()
-
-    private val _clickedFragmentBtn1 = MutableStateFlow(false)
-    val clickedFragmentBtn1 = _clickedFragmentBtn1.asStateFlow()
-
-    private val _clickedFragmentBtn2 = MutableStateFlow(false)
-    val clickedFragmentBtn2 = _clickedFragmentBtn2.asStateFlow()
-
-    private val _clickedFragmentBtn3 = MutableStateFlow(false)
-    val clickedFragmentBtn3 = _clickedFragmentBtn3.asStateFlow()
-
-    private val _clickedFragmentBtn4 = MutableStateFlow(false)
-    val clickedFragmentBtn4 = _clickedFragmentBtn4.asStateFlow()
-
     private val _buttonInfoList = MutableStateFlow<List<OnboardingBtnInfo>>(
         listOf(
             OnboardingBtnInfo(1, false, ""),
@@ -35,10 +20,13 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
     )
     val buttonInfoList = _buttonInfoList.asStateFlow()
 
+    private val _canClickActivityNextButton = MutableStateFlow(false)
+    val canClickActivityNextButton = _canClickActivityNextButton.asStateFlow()
+
     fun onClickFragmentBtn(index: Int) {
         _buttonInfoList.value = _buttonInfoList.value.map { buttonInfo ->
             if (buttonInfo.index == index) {
-                OnboardingBtnInfo(index, !buttonInfo.isClicked, "")
+                buttonInfo.copy(isClicked = !buttonInfo.isClicked)
             } else {
                 buttonInfo
             }
@@ -49,7 +37,7 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
 
     fun initializeButtonStates() {
         _buttonInfoList.value = _buttonInfoList.value.map { buttonInfo ->
-            OnboardingBtnInfo(buttonInfo.index, false, "")
+            buttonInfo.copy(isClicked = false)
         }
         _canClickActivityNextButton.value = false
     }

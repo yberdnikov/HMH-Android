@@ -51,37 +51,25 @@ class OnBoardingSelectDataFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        val buttonList = listOf(
+        val onboardingFragmentButtonList = listOf(
             binding.btnOnboardingSelectData1,
             binding.btnOnboardingSelectData2,
             binding.btnOnboardingSelectData3,
             binding.btnOnboardingSelectData4,
         )
 
-        buttonList.forEachIndexed { index, button ->
+        onboardingFragmentButtonList.forEachIndexed { index, button ->
             button.setOnClickListener {
-                activityViewModel.initializeButtonStates()
+                activityViewModel.initializeButtonStates() // 버튼 단일 선택을 위함
                 activityViewModel.onClickFragmentBtn(index + 1)
             }
         }
 
-        val clickedFragmentBtnList = listOf(
-            activityViewModel.clickedFragmentBtn1,
-            activityViewModel.clickedFragmentBtn2,
-            activityViewModel.clickedFragmentBtn3,
-            activityViewModel.clickedFragmentBtn4,
-        )
-
-        clickedFragmentBtnList.forEachIndexed { index, clickedFragmentBtn ->
-            clickedFragmentBtn.onEach { clicked ->
-                buttonList.forEachIndexed { i, button ->
-                    button.isSelected = (i == index && clicked)
-                    if (i != index && clicked) {
-                        button.isSelected = false
-                    }
-                }
-            }.launchIn(viewLifecycleOwner.lifecycleScope)
-        }
+        activityViewModel.buttonInfoList.onEach { buttonInfoList ->
+            onboardingFragmentButtonList.forEachIndexed { i, button ->
+                button.isSelected = buttonInfoList[i].isClicked
+            }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun initFragmentType() {

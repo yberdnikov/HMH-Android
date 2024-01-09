@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@color/background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_top_appbar"
@@ -15,12 +15,11 @@
 
         <TextView
             android:id="@+id/tv_challenge_title"
-            style="?textAppearanceTitleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="18dp"
             android:text="@string/challenge"
-            android:textColor="?white_text"
+            android:textAppearance="?textAppearanceTitleLarge"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,13 +38,13 @@
 
     <TextView
         android:id="@+id/tv_total_goal_time"
-        style="?textAppearanceTitleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="29dp"
         android:layout_marginTop="17dp"
         android:text="@string/total_goal_time"
-        android:textColor="@color/white_text"
+        android:textAppearance="?textAppearanceTitleSmall"
+        android:textColor="@color/gray1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_top_appbar" />
 
@@ -53,9 +52,21 @@
         android:id="@+id/tv_total_goal_time_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="?textAppearanceDisplayLarge"
-        android:textColor="@color/white_text"
-        tools:text = "3시간" />
+        android:layout_marginTop="5dp"
+        android:text="3시간"
+        android:textAppearance="?textAppearanceDisplayLarge"
+        app:layout_constraintStart_toStartOf="@id/tv_total_goal_time"
+        app:layout_constraintTop_toBottomOf="@id/tv_total_goal_time" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_challenge_calendar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="26dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_total_goal_time_value" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

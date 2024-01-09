@@ -1,10 +1,10 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.HMH" parent="Theme.Material3.Light.NoActionBar">
-        <item name="android:windowBackground">@color/blackground</item>
+        <item name="android:windowBackground">@color/background</item>
 
         <!-- Customize your theme here. -->
-        <item name="blackground">@color/blackground</item>
+        <item name="blackground">@color/background</item>
         <item name="gray8">@color/gray8</item>
         <item name="gray7">@color/gray7</item>
         <item name="gray6">@color/gray6</item>

@@ -31,15 +31,16 @@ class OnBoardingActivity : AppCompatActivity() {
     private fun initViewPager() {
         val pagerAdapter = setOnboardingPageAdapter()
         binding.btnOnboardingNext.setOnClickListener {
+            viewModel.initializeButtonStates()
             navigateToNextOnboardingStep(pagerAdapter)
         }
         binding.ivOnboardingBack.setOnClickListener {
+            viewModel.initializeButtonStates()
             navigateToPreviousOnboardingStep()
         }
     }
 
     private fun navigateToPreviousOnboardingStep() {
-        viewModel.initializeButtonStates()
         binding.vpOnboardingContainer.let { viewPager ->
             val currentItem = viewPager.currentItem
             if (currentItem > 0) {
@@ -52,7 +53,6 @@ class OnBoardingActivity : AppCompatActivity() {
     }
 
     private fun navigateToNextOnboardingStep(pagerAdapter: OnBoardingFragmentStateAdapter) {
-        viewModel.initializeButtonStates()
         binding.vpOnboardingContainer.let { viewPager ->
             val currentItem = viewPager.currentItem
             val lastItem = pagerAdapter.itemCount - 1

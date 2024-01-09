@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     hmh("application")
     hmh("compose")
@@ -5,6 +7,10 @@ plugins {
     alias(libs.plugins.google.services)
     alias(libs.plugins.app.distribution)
     alias(libs.plugins.crashlytics)
+}
+
+val properties = Properties().apply {
+    load(rootProject.file("local.properties").inputStream())
 }
 
 android {
@@ -16,28 +22,56 @@ android {
         versionName = libs.versions.appVersion.get()
     }
 
+    signingConfigs {
+        getByName("debug") {
+            keyAlias = "android_debug_key"
+            keyPassword = "android"
+            storeFile = File("${project.rootDir.absolutePath}/keystore/debug.keystore")
+            storePassword = "android"
+        }
+        create("release") {
+            keyAlias = properties.getProperty("keyAlias")
+            keyPassword = properties.getProperty("keyPassword")
+            storeFile = File("${project.rootDir.absolutePath}/keystore/release.keystore.jks")
+            storePassword = properties.getProperty("storePassword")
+        }
+    }
+
     buildTypes {
+        debug {
+            isDebuggable = true
+            signingConfig = signingConfigs.getByName("debug")
+        }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 }
 
 dependencies {
+
     // Feature
+    implementation(projects.feature.statistics)
+    implementation(projects.feature.login)
     implementation(projects.feature.onboarding)
+    implementation(projects.feature.main)
+
+    // Domain
+    implementation(projects.domain.usagestats)
+
+    // Data
+    implementation(projects.data.usagestats)
 
     // Core
     implementation(projects.core.common)
+    implementation(projects.core.designsystem)
     implementation(projects.core.database)
-
-    // Feature
-    implementation(projects.feature.onboarding)
-    implementation(projects.feature.main)
 
     // Firebase
     implementation(platform(libs.firebase))
@@ -45,4 +79,7 @@ dependencies {
 
     // Splash
     implementation(libs.splash.screen)
+
+    // kakao
+    implementation(libs.kakao.login)
 }

@@ -2,7 +2,9 @@ package com.hmh.hamyeonham.common.context
 
 import android.app.Dialog
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Point
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.View
 import android.view.WindowInsets
@@ -13,6 +15,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
+import com.hmh.hamyeonham.common.R
 
 fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -22,17 +25,29 @@ fun Context.longToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
 
-fun Context.snackBar(anchorView: View, message: () -> String) {
+fun Context.snackBar(
+    anchorView: View,
+    message: () -> String,
+) {
     Snackbar.make(anchorView, message(), Snackbar.LENGTH_SHORT).show()
 }
 
-fun Context.stringOf(@StringRes resId: Int) = getString(resId)
+fun Context.stringOf(
+    @StringRes resId: Int,
+) = getString(resId)
 
-fun Context.colorOf(@ColorRes resId: Int) = ContextCompat.getColor(this, resId)
+fun Context.colorOf(
+    @ColorRes resId: Int,
+) = ContextCompat.getColor(this, resId)
 
-fun Context.drawableOf(@DrawableRes resId: Int) = ContextCompat.getDrawable(this, resId)
+fun Context.drawableOf(
+    @DrawableRes resId: Int,
+) = ContextCompat.getDrawable(this, resId)
 
-fun Context.dialogWidthPercent(dialog: Dialog?, percent: Double = 0.8) {
+fun Context.dialogWidthPercent(
+    dialog: Dialog?,
+    percent: Double = 0.8,
+) {
     val deviceSize = getDeviceSize()
     dialog?.window?.run {
         val params = attributes
@@ -48,9 +63,10 @@ fun Context.getDeviceSize(): IntArray {
         val windowMetrics = windowManager.currentWindowMetrics
         val windowInsets = windowMetrics.windowInsets
 
-        val insets = windowInsets.getInsetsIgnoringVisibility(
-            WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout()
-        )
+        val insets =
+            windowInsets.getInsetsIgnoringVisibility(
+                WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout(),
+            )
         val insetsWidth = insets.right + insets.left
         val insetsHeight = insets.top + insets.bottom
 
@@ -65,4 +81,22 @@ fun Context.getDeviceSize(): IntArray {
 
         return intArrayOf(size.x, size.y)
     }
+}
+
+fun Context.getAppNameFromPackageName(packageName: String): String =
+    try {
+        val appInfo = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA)
+        packageManager.getApplicationLabel(appInfo).toString()
+    } catch (e: PackageManager.NameNotFoundException) {
+        "Unknown"
+    }
+
+fun Context.getAppIconFromPackageName(packageName: String): Drawable? {
+    try {
+        val appInfo = packageManager.getApplicationInfo(packageName, 0)
+        return appInfo.loadIcon(packageManager)
+    } catch (e: PackageManager.NameNotFoundException) {
+        e.printStackTrace()
+    }
+    return ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground)
 }

@@ -9,16 +9,13 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val userInfoRepository: UserInfoRepository,
 ) : ViewModel() {
-    private lateinit var _userInfo: MutableStateFlow<UserInfo>
-    val userInfo: MutableStateFlow<UserInfo> by lazy {
-        _userInfo
-    }
+    val userInfo: MutableStateFlow<UserInfo> = MutableStateFlow<UserInfo>(UserInfo("", 0))
 
     init {
         getUserInfo()
     }
 
     private fun getUserInfo() {
-        _userInfo.value = userInfoRepository.getUserInfo()
+        userInfo.value = userInfoRepository.getUserInfo()
     }
 }

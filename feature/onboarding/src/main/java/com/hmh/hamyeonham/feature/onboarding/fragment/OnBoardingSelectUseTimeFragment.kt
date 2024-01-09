@@ -29,5 +29,6 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
 
         binding.npOnboardingUseTimeGoalHour.setupScreentimeGoalRange(1, 6)
         binding.npOnboardingUseTimeGoalMinute.setupScreentimeGoalRange(0, 59)
+        activityViewModel.activeActivityNextButton()
     }
 }

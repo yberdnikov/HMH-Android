@@ -42,11 +42,11 @@ class OnBoardingSelectDataFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initFragmentType()
+        initializeFragmentType()
         initViews()
     }
 
-    private fun initFragmentType() {
+    private fun initializeFragmentType() {
         val args = requireArguments().getString(ARG_FRAGMENT_TYPE)?.toOnboardingFragmentType()
         if (args != null) {
             viewModel.initQuestionData(args)

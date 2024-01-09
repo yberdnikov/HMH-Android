@@ -15,4 +15,5 @@ dependencies {
     implementation(libs.bundles.navigation)
 
     implementation(projects.core.common)
+    implementation(projects.core.designsystem)
 }

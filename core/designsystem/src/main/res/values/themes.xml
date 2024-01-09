@@ -3,6 +3,28 @@
     <style name="Base.Theme.HMH" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:windowBackground">@color/blackground</item>
 
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/gray7</item>
+        <item name="colorPrimaryVariant">@color/gray8</item>
+        <item name="colorOnPrimary">@color/white_btn</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/blackground</item>
+
+        <item name="colorSecondary">@color/gray3</item>
+        <item name="colorSecondaryVariant">@color/gray4</item>
+        <item name="colorOnSecondary">@color/white_text</item>
+
+        <!-- Customize your theme here. -->
+        <item name="colorOnBackground">@color/white_text</item>
+        <!-- Bottom nav bar active indicator color set -->
+        <item name="colorSecondaryContainer">@color/white_text</item>
+        <item name="colorOnSecondaryContainer">@color/gray2</item>
+        <!-- FAB shape custom -->
+        <item name="floatingActionButtonStyle">
+            @style/Widget.Material3.FloatingActionButton.Surface
+        </item>
+        <!-- Gray Scale Theme -->
+        <item name="colorOnSurface">@color/blue_purple_button</item>
         <!-- Customize your theme here. -->
         <item name="blackground">@color/blackground</item>
         <item name="gray8">@color/gray8</item>
@@ -14,6 +36,12 @@
         <item name="gray2">@color/gray2</item>
         <item name="gray1">@color/gray1</item>
         <item name="white_text">@color/white_text</item>
+
+        <!-- text color -->
+        <item name="android:textColor">@color/white_text</item>
+
+        <!-- button style -->
+        <item name="materialButtonStyle">@style/DefaultButtonStyle</item>
 
         <!-- Blue Purple Colors -->
         <item name="blue_purple_button">@color/blue_purple_button</item>
@@ -48,12 +76,14 @@
         <item name="textAppearanceLabelMedium">@style/TextAppearance.Hmh.LabelMedium</item>
     </style>
 
-    <style name="Theme.Pophory" parent="Base.Theme.HMH" />
-
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">#121212</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_background</item>
-        <item name="postSplashScreenTheme">@style/Theme.Pophory</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.HMH</item>
+    </style>
+
+    <style name="DefaultButtonStyle" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/blue_purple_button</item>
     </style>
 
 </resources>

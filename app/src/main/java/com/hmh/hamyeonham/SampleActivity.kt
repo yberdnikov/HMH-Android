@@ -11,6 +11,7 @@ import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.databinding.ActivitySampleBinding
 import com.hmh.hamyeonham.feature.onboarding.OnBoardingActivity
 import com.hmh.hamyeonham.statistics.StaticsActivity
+import com.hmh.hamyeonham.feature.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

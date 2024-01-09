@@ -1,15 +1,12 @@
 package com.hmh.hamyeonham.userinfo.di
 
-import android.app.usage.UsageStatsManager
-import android.content.Context
-import com.hmh.hamyeonham.userinfo.model.UserInfoModel
+import com.hmh.hamyeonham.userinfo.datasource.UserInfoDataSource
 import com.hmh.hamyeonham.userinfo.repository.DefaultUserInfoRepository
 import com.hmh.hamyeonham.userinfo.repository.UserInfoRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -18,8 +15,8 @@ import javax.inject.Singleton
 object UserInfoModule {
     @Provides
     @Singleton
-    fun provideUserInfo(): UserInfoModel {
-        return UserInfoModel
+    fun provideUserInfoDataSource(): UserInfoDataSource {
+        return UserInfoDataSource()
     }
 
     @Module

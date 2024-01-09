@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class DefaultUserInfoRepository @Inject constructor(
     private val userInfoDataSource: UserInfoDataSource,
-) : com.hmh.hamyeonham.userinfo.repository.UserInfoRepository {
+) : UserInfoRepository {
     override fun getUserInfo(): UserInfo {
         val userInfoModel = userInfoDataSource.getUserInfoModel()
         return UserInfo(userInfoModel.name, userInfoModel.point)

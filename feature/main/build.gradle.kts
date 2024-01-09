@@ -6,12 +6,11 @@ plugins {
 
 android {
     namespace = "com.hmh.hamyeonham.feature.main"
-
 }
 
 dependencies {
 
-    //Navigation
+    // Navigation
     implementation(libs.bundles.navigation)
 
     implementation(projects.core.common)

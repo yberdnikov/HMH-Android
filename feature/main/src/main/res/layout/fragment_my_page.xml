@@ -14,254 +14,134 @@
         <TextView
             android:id="@+id/tv_mypage_title"
             style="?textAppearanceTitleLarge"
-            android:textColor="?white_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="20dp"
             android:text="@string/my_page"
+            android:textColor="?white_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_mypage_profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="30dp"
+
+    <ImageView
+        android:id="@+id/iv_mypage_profile"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toTopOf="@id/v_mypage_collections"
+        app:layout_constraintDimensionRatio="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_mypage_title">
+        app:layout_constraintTop_toBottomOf="@id/cl_mypage_title" />
 
-        <ImageView
-            android:id="@+id/iv_mypage_profile"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_android_black_24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_mypage_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="여민서"
-            app:layout_constraintStart_toEndOf="@id/iv_mypage_profile"
-            app:layout_constraintTop_toTopOf="@id/iv_mypage_profile" />
-
-        <ImageView
-            android:id="@+id/iv_mypage_rectangle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/mypage_rectangle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_mypage_profile" />
-
-        <ImageView
-            android:id="@+id/iv_mypage_line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/mypage_line"
-            app:layout_constraintBottom_toBottomOf="@id/iv_mypage_rectangle"
-            app:layout_constraintEnd_toEndOf="@id/iv_mypage_rectangle"
-            app:layout_constraintStart_toStartOf="@id/iv_mypage_rectangle"
-            app:layout_constraintTop_toTopOf="@id/iv_mypage_rectangle" />
-
-        <TextView
-            android:id="@+id/tv_mypage_point_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mypage_earned_point"
-            app:layout_constraintEnd_toEndOf="@id/iv_mypage_line"
-            app:layout_constraintStart_toStartOf="@id/iv_mypage_rectangle"
-            app:layout_constraintTop_toTopOf="@id/iv_mypage_rectangle" />
-
-        <TextView
-            android:id="@+id/tv_mypage_point"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="100"
-            app:layout_constraintEnd_toEndOf="@id/tv_mypage_point_title"
-            app:layout_constraintStart_toStartOf="@id/tv_mypage_point_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_mypage_point_title" />
-
-        <TextView
-            android:id="@+id/tv_mypage_point_unit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="@string/mypage_point_unit"
-            app:layout_constraintStart_toEndOf="@id/tv_mypage_point"
-            app:layout_constraintTop_toTopOf="@id/tv_mypage_point" />
-
-        <TextView
-            android:id="@+id/tv_mypage_badge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mypage_badge_collection"
-            app:layout_constraintEnd_toEndOf="@id/iv_mypage_rectangle"
-            app:layout_constraintStart_toStartOf="@id/iv_mypage_line"
-            app:layout_constraintTop_toTopOf="@id/tv_mypage_point_title" />
-
-        <ImageView
-            android:id="@+id/iv_mypage_badge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/mypage_badgeicon_white_24"
-            app:layout_constraintEnd_toEndOf="@id/tv_mypage_badge"
-            app:layout_constraintStart_toStartOf="@id/tv_mypage_badge"
-            app:layout_constraintTop_toTopOf="@id/tv_mypage_point" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_mypage_menu"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_mypage_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_mypage_profile">
-
-        <ImageView
-            android:id="@+id/iv_mypage_journey"
-            android:layout_width="24dp"
-            android:layout_height="0dp"
-            android:src="@drawable/ic_android_black_24dp"
-            app:layout_constraintDimensionRatio="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_mypage_journey"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mypage_journey"
-            app:layout_constraintStart_toEndOf="@id/iv_mypage_journey"
-            app:layout_constraintTop_toTopOf="@id/iv_mypage_journey" />
-
-        <ImageView
-            android:id="@+id/iv_mypage_journey_button"
-            android:layout_width="24dp"
-            android:layout_height="0dp"
-            android:src="@drawable/ic_android_black_24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_mypage_journey" />
-
-        <ImageView
-            android:id="@+id/iv_mypage_store"
-            android:layout_width="24dp"
-            android:layout_height="0dp"
-            android:src="@drawable/ic_android_black_24dp"
-            app:layout_constraintDimensionRatio="1"
-            app:layout_constraintStart_toStartOf="@id/iv_mypage_journey"
-            app:layout_constraintTop_toBottomOf="@id/iv_mypage_journey" />
-
-        <TextView
-            android:id="@+id/tv_mypage_store"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mypage_store"
-            app:layout_constraintStart_toEndOf="@id/iv_mypage_store"
-            app:layout_constraintTop_toTopOf="@id/iv_mypage_store" />
-
-        <ImageView
-            android:id="@+id/iv_mypage_store_button"
-            android:layout_width="24dp"
-            android:layout_height="0dp"
-            android:src="@drawable/ic_android_black_24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_mypage_store" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="여민서"
+        app:layout_constraintBottom_toBottomOf="@id/iv_mypage_profile"
+        app:layout_constraintStart_toEndOf="@id/iv_mypage_profile"
+        app:layout_constraintTop_toTopOf="@id/iv_mypage_profile" />
 
     <View
-        android:id="@+id/v_mypage_divider"
+        android:id="@+id/v_mypage_collections"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/mypage_rectangle"
+        app:layout_constraintBottom_toTopOf="@id/v_mypage_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_mypage_profile" />
+
+    <View
+        android:id="@+id/v_mypage_collection_line"
+        android:layout_width="1dp"
+        android:layout_height="57dp"
+        android:src="@drawable/mypage_line"
+        app:layout_constraintBottom_toBottomOf="@id/v_mypage_collections"
+        app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
+        app:layout_constraintStart_toStartOf="@id/v_mypage_collections"
+        app:layout_constraintTop_toTopOf="@id/v_mypage_collections" />
+
+    <TextView
+        android:id="@+id/tv_mypage_point_title"
         android:layout_width="wrap_content"
-        android:layout_height="10dp"
-        android:background="#1B1B23"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_mypage_menu" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_mypage_info"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/cl_mypage_logout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/v_mypage_divider">
+        android:layout_marginTop="19dp"
+        android:text="@string/mypage_point_title"
+        app:layout_constraintEnd_toEndOf="@id/v_mypage_collection_line"
+        app:layout_constraintStart_toStartOf="@id/v_mypage_collections"
+        app:layout_constraintTop_toTopOf="@id/v_mypage_collections" />
 
-        <TextView
-            android:id="@+id/tv_mypage_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mypage_info"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_mypage_termofuse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mypage_termofuse"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_mypage_info" />
-
-        <ImageView
-            android:id="@+id/iv_mypage_termofuse_button"
-            android:layout_width="24dp"
-            android:layout_height="0dp"
-            android:src="@drawable/ic_android_black_24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_mypage_termofuse" />
-
-        <TextView
-            android:id="@+id/tv_mypage_privacy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mypage_privacy"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_mypage_termofuse" />
-
-        <ImageView
-            android:id="@+id/iv_mypage_privacy_button"
-            android:layout_width="24dp"
-            android:layout_height="0dp"
-            android:src="@drawable/ic_android_black_24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_mypage_privacy" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_mypage_logout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_mypage_point"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="14dp"
+        android:text="100P"
+        app:layout_constraintBottom_toBottomOf="@id/v_mypage_collections"
+        app:layout_constraintEnd_toEndOf="@id/tv_mypage_point_title"
+        app:layout_constraintStart_toStartOf="@id/tv_mypage_point_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_mypage_point_title" />
+
+    <TextView
+        android:id="@+id/tv_mypage_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mypage_badge_collection"
+        app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
+        app:layout_constraintStart_toStartOf="@id/v_mypage_collection_line"
+        app:layout_constraintTop_toTopOf="@id/tv_mypage_point_title" />
+
+    <ImageView
+        android:id="@+id/iv_mypage_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/mypage_badgeicon_white_24"
+        app:layout_constraintEnd_toEndOf="@id/tv_mypage_badge"
+        app:layout_constraintStart_toStartOf="@id/tv_mypage_badge"
+        app:layout_constraintTop_toBottomOf="@id/tv_mypage_badge" />
+
+
+    <View
+        android:id="@+id/v_mypage_menu"
+        android:layout_width="match_parent"
+        android:layout_height="497dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_mypage_collections" />
 
-        <TextView
-            android:id="@+id/tv_mypage_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="로그아웃"
-            app:layout_constraintEnd_toStartOf="@id/iv_mypage_logout_divider"
-            app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/iv_mypage_journey"
+        android:layout_width="24dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_android_black_24dp"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/iv_mypage_logout_divider"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/mypage_line_small"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/tv_mypage_journey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mypage_journey"
+        app:layout_constraintStart_toEndOf="@id/iv_mypage_journey"
+        app:layout_constraintTop_toTopOf="@id/iv_mypage_journey" />
 
-        <TextView
-            android:id="@+id/tv_mypage_withdrawal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="회원탈퇴"
-            app:layout_constraintStart_toEndOf="@id/iv_mypage_logout_divider"
-            app:layout_constraintTop_toTopOf="@id/tv_mypage_logout" />
+    <ImageView
+        android:id="@+id/iv_mypage_journey_button"
+        android:layout_width="24dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_android_black_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_mypage_journey" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

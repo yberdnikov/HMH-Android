@@ -30,3 +30,6 @@ include(":feature:login")
 
 include(":data:usagestats")
 include(":domain:usagestats")
+include(":core:viewmodel")
+include(":core:viewmodel:main")
+include(":feature:challenge")

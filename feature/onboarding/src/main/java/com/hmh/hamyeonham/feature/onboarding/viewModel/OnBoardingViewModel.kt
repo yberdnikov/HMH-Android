@@ -11,6 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor() : ViewModel() {
 
+
     private val _canClickActivityNextButton = MutableStateFlow(false)
     val canClickActivityNextButton = _canClickActivityNextButton.asStateFlow()
 
@@ -28,13 +29,13 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
 
     fun onClickFragmentBtn(index: Int) {
         when (index) {
-            1 -> _clickedFragmentBtn1.value = true
-            2 -> _clickedFragmentBtn2.value = true
-            3 -> _clickedFragmentBtn3.value = true
-            4 -> _clickedFragmentBtn4.value = true
+            1 -> _clickedFragmentBtn1.value = !_clickedFragmentBtn1.value
+            2 -> _clickedFragmentBtn2.value = !_clickedFragmentBtn2.value
+            3 -> _clickedFragmentBtn3.value = !_clickedFragmentBtn3.value
+            4 -> _clickedFragmentBtn4.value = !_clickedFragmentBtn4.value
         }
-        if (_clickedFragmentBtn1.value || _clickedFragmentBtn2.value || _clickedFragmentBtn3.value || _clickedFragmentBtn4.value) {
-            _canClickActivityNextButton.value = true
-        }
+
+        _canClickActivityNextButton.value =
+            _clickedFragmentBtn1.value || _clickedFragmentBtn2.value || _clickedFragmentBtn3.value || _clickedFragmentBtn4.value
     }
 }

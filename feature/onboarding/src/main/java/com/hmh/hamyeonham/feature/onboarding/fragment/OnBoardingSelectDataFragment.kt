@@ -21,6 +21,7 @@ class OnBoardingSelectDataFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingSelectDataBinding::bind)
     private val viewModel by viewModels<OnBoardingSelectDataViewModel>()
     private val activityViewModel by viewModels<OnBoardingViewModel>({ requireActivity() })
+
     companion object {
         private const val ARG_FRAGMENT_TYPE = "ARG_FRAGMENT_TYPE"
         fun newInstance(fragmentType: OnBoardingFragmentType): OnBoardingSelectDataFragment {
@@ -46,6 +47,11 @@ class OnBoardingSelectDataFragment : Fragment() {
         initFragmentType()
         initViews()
 
+        binding.btnOnboardingSelectData1.isSelected = activityViewModel.clickedFragmentBtn1.value
+        binding.btnOnboardingSelectData2.isSelected = activityViewModel.clickedFragmentBtn2.value
+        binding.btnOnboardingSelectData3.isSelected = activityViewModel.clickedFragmentBtn3.value
+        binding.btnOnboardingSelectData4.isSelected = activityViewModel.clickedFragmentBtn4.value
+
         binding.btnOnboardingSelectData1.setOnClickListener {
             activityViewModel.onClickFragmentBtn(1)
         }
@@ -58,6 +64,22 @@ class OnBoardingSelectDataFragment : Fragment() {
         binding.btnOnboardingSelectData4.setOnClickListener {
             activityViewModel.onClickFragmentBtn(4)
         }
+
+        activityViewModel.clickedFragmentBtn1.onEach { clickedFragmentBtn1 ->
+            binding.btnOnboardingSelectData1.isSelected = clickedFragmentBtn1
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+        activityViewModel.clickedFragmentBtn2.onEach { clickedFragmentBtn2 ->
+            binding.btnOnboardingSelectData2.isSelected = clickedFragmentBtn2
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+        activityViewModel.clickedFragmentBtn3.onEach { clickedFragmentBtn3 ->
+            binding.btnOnboardingSelectData3.isSelected = clickedFragmentBtn3
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+        activityViewModel.clickedFragmentBtn4.onEach { clickedFragmentBtn4 ->
+            binding.btnOnboardingSelectData4.isSelected = clickedFragmentBtn4
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun initFragmentType() {

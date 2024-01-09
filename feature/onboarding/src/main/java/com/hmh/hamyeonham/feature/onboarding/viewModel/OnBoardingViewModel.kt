@@ -34,7 +34,24 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
 
         _canClickActivityNextButton.value =
             _clickedFragmentBtn1.value || _clickedFragmentBtn2.value || _clickedFragmentBtn3.value || _clickedFragmentBtn4.value
+    }
 
+    fun onClickFragmentTwoBtn(index: Int) {
+        when (index) {
+            1 -> _clickedFragmentBtn1.value = !_clickedFragmentBtn1.value
+            2 -> _clickedFragmentBtn2.value = !_clickedFragmentBtn2.value
+            3 -> _clickedFragmentBtn3.value = !_clickedFragmentBtn3.value
+            4 -> _clickedFragmentBtn4.value = !_clickedFragmentBtn4.value
+        }
+
+        val selectedButtonsCount = listOf(
+            _clickedFragmentBtn1.value,
+            _clickedFragmentBtn2.value,
+            _clickedFragmentBtn3.value,
+            _clickedFragmentBtn4.value,
+        ).count { it }
+
+        _canClickActivityNextButton.value = selectedButtonsCount in 1..2
     }
 
     fun initializeButtonStates() {

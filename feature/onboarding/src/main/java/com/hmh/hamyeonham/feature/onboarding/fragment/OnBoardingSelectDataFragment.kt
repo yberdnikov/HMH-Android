@@ -51,60 +51,37 @@ class OnBoardingSelectDataFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        activityViewModel.initializeButtonStates()
+        val buttonList = listOf(
+            binding.btnOnboardingSelectData1,
+            binding.btnOnboardingSelectData2,
+            binding.btnOnboardingSelectData3,
+            binding.btnOnboardingSelectData4,
+        )
 
-        binding.btnOnboardingSelectData1.setOnClickListener {
-            activityViewModel.initializeButtonStates()
-            activityViewModel.onClickFragmentBtn(1)
-        }
-        binding.btnOnboardingSelectData2.setOnClickListener {
-            activityViewModel.initializeButtonStates()
-            activityViewModel.onClickFragmentBtn(2)
-        }
-        binding.btnOnboardingSelectData3.setOnClickListener {
-            activityViewModel.initializeButtonStates()
-            activityViewModel.onClickFragmentBtn(3)
-        }
-        binding.btnOnboardingSelectData4.setOnClickListener {
-            activityViewModel.initializeButtonStates()
-            activityViewModel.onClickFragmentBtn(4)
+        buttonList.forEachIndexed { index, button ->
+            button.setOnClickListener {
+                activityViewModel.initializeButtonStates()
+                activityViewModel.onClickFragmentBtn(index + 1)
+            }
         }
 
-        activityViewModel.clickedFragmentBtn1.onEach { clickedFragmentBtn1 ->
-            binding.btnOnboardingSelectData1.isSelected = clickedFragmentBtn1
-            if (clickedFragmentBtn1) {
-                binding.btnOnboardingSelectData2.isSelected = false
-                binding.btnOnboardingSelectData3.isSelected = false
-                binding.btnOnboardingSelectData4.isSelected = false
-            }
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
+        val clickedFragmentBtnList = listOf(
+            activityViewModel.clickedFragmentBtn1,
+            activityViewModel.clickedFragmentBtn2,
+            activityViewModel.clickedFragmentBtn3,
+            activityViewModel.clickedFragmentBtn4,
+        )
 
-        activityViewModel.clickedFragmentBtn2.onEach { clickedFragmentBtn2 ->
-            binding.btnOnboardingSelectData2.isSelected = clickedFragmentBtn2
-            if (clickedFragmentBtn2) {
-                binding.btnOnboardingSelectData1.isSelected = false
-                binding.btnOnboardingSelectData3.isSelected = false
-                binding.btnOnboardingSelectData4.isSelected = false
-            }
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
-
-        activityViewModel.clickedFragmentBtn3.onEach { clickedFragmentBtn3 ->
-            binding.btnOnboardingSelectData3.isSelected = clickedFragmentBtn3
-            if (clickedFragmentBtn3) {
-                binding.btnOnboardingSelectData1.isSelected = false
-                binding.btnOnboardingSelectData2.isSelected = false
-                binding.btnOnboardingSelectData4.isSelected = false
-            }
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
-
-        activityViewModel.clickedFragmentBtn4.onEach { clickedFragmentBtn4 ->
-            binding.btnOnboardingSelectData4.isSelected = clickedFragmentBtn4
-            if (clickedFragmentBtn4) {
-                binding.btnOnboardingSelectData1.isSelected = false
-                binding.btnOnboardingSelectData2.isSelected = false
-                binding.btnOnboardingSelectData3.isSelected = false
-            }
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
+        clickedFragmentBtnList.forEachIndexed { index, clickedFragmentBtn ->
+            clickedFragmentBtn.onEach { clicked ->
+                buttonList.forEachIndexed { i, button ->
+                    button.isSelected = (i == index && clicked)
+                    if (i != index && clicked) {
+                        button.isSelected = false
+                    }
+                }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
+        }
     }
 
     private fun initFragmentType() {

@@ -16,9 +16,6 @@
         <activity
             android:name=".OnBoardingActivity"
             android:exported="false" />
-        <activity
-            android:name=".OnBoardingActivity"
-            android:exported="false" />
 
         <service
             android:name=".OnBoardingAccessibilityService"

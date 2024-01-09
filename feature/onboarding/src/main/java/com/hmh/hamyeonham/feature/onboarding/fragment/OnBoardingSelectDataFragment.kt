@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.OnBoardingFragmentType
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectDataBinding
 import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingSelectDataViewModel
+import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -19,6 +22,7 @@ import kotlinx.coroutines.flow.onEach
 class OnBoardingSelectDataFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingSelectDataBinding::bind)
     private val viewModel by viewModels<OnBoardingSelectDataViewModel>()
+    private val activityViewModel by activityViewModels<OnBoardingViewModel>()
 
     companion object {
         private const val ARG_FRAGMENT_TYPE = "ARG_FRAGMENT_TYPE"
@@ -47,9 +51,9 @@ class OnBoardingSelectDataFragment : Fragment() {
     }
 
     private fun initializeFragmentType() {
-        val args = requireArguments().getString(ARG_FRAGMENT_TYPE)?.toOnboardingFragmentType()
-        if (args != null) {
-            viewModel.initQuestionData(args)
+        val fragmentType = requireArguments().getString(ARG_FRAGMENT_TYPE)?.toOnboardingFragmentType()
+        if (fragmentType != null) {
+            viewModel.initQuestionData(fragmentType)
         }
     }
 

@@ -16,7 +16,7 @@
     <string name="onboarding_permission3_content_description">onboarding_permission2_next_button</string>
     <string name="onboarding_select_app_title">중독을 방지하고 싶은\n특정 앱을 선택해주세요</string>
     <string name="onboarding_select_app_description">앱 마다 다른 시간을 선택하려면 설정에서\n변경할 수 있어요</string>
-    <string name="onboarding_screentime_goal_description">대부분의 사람들은 챌린지 기간 7일 설정 후\n스크린타임을 30% 감소하는데 성공했어요!</string>
+    <string name="onboarding_screentime_goal_description">목표 이용 시간은 최대 6시간까지 설정할 수 있어요</string>
     <string name="onboarding_screentime_goal_title">하루 목표 스크린 타임을\n설정해주세요</string>
     <string name="all_hour">시간</string>
     <string name="onboarding_use_time_goal_title">목표 사용 시간을 설정해주세요</string>

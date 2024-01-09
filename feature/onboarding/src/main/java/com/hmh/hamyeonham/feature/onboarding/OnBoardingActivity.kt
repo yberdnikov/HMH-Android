@@ -24,22 +24,18 @@ class OnBoardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initViewPager()
+        activeActivityNextBtn()
+        backPressedCallback()
+    }
 
-        viewModel.initializeButtonStates()
-        viewModel.canClickActivityNextButton.onEach { canClickActivityNextButton ->
-            binding.btnOnboardingNext.isEnabled = canClickActivityNextButton
-            binding.btnOnboardingNext.isSelected = canClickActivityNextButton
-        }.launchIn(lifecycleScope)
-        onBackPressedCallback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                navigateToPreviousOnboardingStep()
-            }
+    private fun initViewPager() {
+        val pagerAdapter = setOnboardingPageAdapter()
+        binding.btnOnboardingNext.setOnClickListener {
+            navigateToNextOnboardingStep(pagerAdapter)
         }
         binding.ivOnboardingBack.setOnClickListener {
-            onBackPressedCallback.isEnabled = true
-            onBackPressedDispatcher.onBackPressed()
+            navigateToPreviousOnboardingStep()
         }
-        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     private fun navigateToPreviousOnboardingStep() {
@@ -55,18 +51,6 @@ class OnBoardingActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        onBackPressedCallback.remove()
-        super.onDestroy()
-    }
-
-    private fun initViewPager() {
-        val pagerAdapter = setOnboardingPageAdapter()
-        binding.btnOnboardingNext.setOnClickListener {
-            navigateToNextOnboardingStep(pagerAdapter)
-        }
-    }
-
     private fun navigateToNextOnboardingStep(pagerAdapter: OnBoardingFragmentStateAdapter) {
         viewModel.initializeButtonStates()
         binding.vpOnboardingContainer.let { viewPager ->
@@ -75,6 +59,21 @@ class OnBoardingActivity : AppCompatActivity() {
             when {
                 currentItem < lastItem -> viewPager.currentItem = currentItem + 1
                 currentItem == lastItem -> startOnBoardingDoneSignUpActivity()
+            }
+        }
+    }
+
+    private fun activeActivityNextBtn() {
+        viewModel.canClickActivityNextButton.onEach { canClickActivityNextButton ->
+            binding.btnOnboardingNext.isEnabled = canClickActivityNextButton
+            binding.btnOnboardingNext.isSelected = canClickActivityNextButton
+        }.launchIn(lifecycleScope)
+    }
+
+    private fun backPressedCallback() {
+        onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                navigateToPreviousOnboardingStep()
             }
         }
     }
@@ -96,5 +95,10 @@ class OnBoardingActivity : AppCompatActivity() {
             isUserInputEnabled = false
         }
         return pagerAdapter
+    }
+
+    override fun onDestroy() {
+        onBackPressedCallback.remove()
+        super.onDestroy()
     }
 }

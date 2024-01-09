@@ -25,7 +25,6 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <ImageView
         android:id="@+id/iv_mypage_profile"
         android:layout_width="0dp"
@@ -303,6 +302,7 @@
         android:layout_height="16dp"
         android:layout_marginTop="19dp"
         android:layout_marginBottom="24dp"
+        android:background="?gray3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

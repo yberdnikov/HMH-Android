@@ -34,6 +34,7 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
 
         _canClickActivityNextButton.value =
             _clickedFragmentBtn1.value || _clickedFragmentBtn2.value || _clickedFragmentBtn3.value || _clickedFragmentBtn4.value
+
     }
 
     fun initializeButtonStates() {

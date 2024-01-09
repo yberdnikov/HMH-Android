@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectUseTimeBinding
+import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
 
 class OnBoardingSelectUseTimeFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingSelectUseTimeBinding::bind)
-
+    private val activityViewModel by viewModels<OnBoardingViewModel>({ requireActivity() })
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,5 +30,7 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
             npOnboardingUseTimeGoalMinute.minValue = 0
             npOnboardingUseTimeGoalMinute.maxValue = 59
         }
+        activityViewModel.activeActivityNextButton()
+
     }
 }

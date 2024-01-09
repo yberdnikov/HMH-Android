@@ -1,7 +1,6 @@
 package com.hmh.hamyeonham.feature.onboarding.viewModel
 
 import androidx.lifecycle.ViewModel
-import com.hmh.hamyeonham.feature.onboarding.model.Challenge
 import com.hmh.hamyeonham.feature.onboarding.model.OnboardingBtnInfo
 import com.hmh.hamyeonham.feature.onboarding.model.OnboardingInformation
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -54,7 +53,7 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
             val onboardingInformation = OnboardingInformation(
                 usuallyUseTime = selectedButton.text,
                 problems = listOf(),
-                challenge = Challenge(1, 1),
+                challenge = listOf(),
                 apps = listOf(),
             )
         }

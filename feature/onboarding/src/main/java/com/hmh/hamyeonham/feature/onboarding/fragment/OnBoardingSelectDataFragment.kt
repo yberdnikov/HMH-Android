@@ -46,11 +46,12 @@ class OnBoardingSelectDataFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initFragmentType()
         initViews()
+    }
 
-        binding.btnOnboardingSelectData1.isSelected = activityViewModel.clickedFragmentBtn1.value
-        binding.btnOnboardingSelectData2.isSelected = activityViewModel.clickedFragmentBtn2.value
-        binding.btnOnboardingSelectData3.isSelected = activityViewModel.clickedFragmentBtn3.value
-        binding.btnOnboardingSelectData4.isSelected = activityViewModel.clickedFragmentBtn4.value
+    override fun onResume() {
+        super.onResume()
+
+        activityViewModel.initializeButtonStates()
 
         binding.btnOnboardingSelectData1.setOnClickListener {
             activityViewModel.onClickFragmentBtn(1)

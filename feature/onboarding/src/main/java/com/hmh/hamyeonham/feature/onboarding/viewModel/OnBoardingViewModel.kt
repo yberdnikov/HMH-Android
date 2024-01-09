@@ -1,16 +1,13 @@
 package com.hmh.hamyeonham.feature.onboarding.viewModel
 
 import androidx.lifecycle.ViewModel
-import com.hmh.hamyeonham.feature.onboarding.model.OnBoardingQuestion
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
-
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor() : ViewModel() {
-
 
     private val _canClickActivityNextButton = MutableStateFlow(false)
     val canClickActivityNextButton = _canClickActivityNextButton.asStateFlow()
@@ -37,5 +34,13 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
 
         _canClickActivityNextButton.value =
             _clickedFragmentBtn1.value || _clickedFragmentBtn2.value || _clickedFragmentBtn3.value || _clickedFragmentBtn4.value
+    }
+
+    fun initializeButtonStates() {
+        _clickedFragmentBtn1.value = false
+        _clickedFragmentBtn2.value = false
+        _clickedFragmentBtn3.value = false
+        _clickedFragmentBtn4.value = false
+        _canClickActivityNextButton.value = false
     }
 }

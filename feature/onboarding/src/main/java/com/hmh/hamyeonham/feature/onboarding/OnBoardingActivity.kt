@@ -23,6 +23,7 @@ class OnBoardingActivity : AppCompatActivity() {
         setContentView(binding.root)
         initViewPager()
 
+        viewModel.initializeButtonStates()
         viewModel.canClickActivityNextButton.onEach { canClickActivityNextButton ->
             binding.btnOnboardingNext.isEnabled = canClickActivityNextButton
         }.launchIn(lifecycleScope)

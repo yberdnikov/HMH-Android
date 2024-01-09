@@ -5,9 +5,10 @@ import com.hmh.hamyeonham.usagestats.model.UserInfo
 import javax.inject.Inject
 
 class DefaultUserInfoRepository @Inject constructor(
-    userInfoDataSource: UserInfoDataSource,
+    private val userInfoDataSource: UserInfoDataSource,
 ) : UserInfoRepository {
     override fun getUserInfo(): UserInfo {
-        TODO("Not yet implemented")
+        val userInfoModel = userInfoDataSource.getUserInfoModel()
+        return UserInfo(userInfoModel.name, userInfoModel.point)
     }
 }

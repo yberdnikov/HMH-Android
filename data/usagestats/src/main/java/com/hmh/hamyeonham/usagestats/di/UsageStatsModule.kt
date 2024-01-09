@@ -6,8 +6,10 @@ import com.hmh.hamyeonham.usagestats.datasource.UsageStatsDataSource
 import com.hmh.hamyeonham.usagestats.datasource.UsageStatsDataSourceImpl
 import com.hmh.hamyeonham.usagestats.repository.DefaultUsageGoalsRepository
 import com.hmh.hamyeonham.usagestats.repository.DefaultUsageStatsRepository
+import com.hmh.hamyeonham.usagestats.repository.DefaultUserInfoRepository
 import com.hmh.hamyeonham.usagestats.repository.UsageGoalsRepository
 import com.hmh.hamyeonham.usagestats.repository.UsageStatsRepository
+import com.hmh.hamyeonham.usagestats.repository.UserInfoRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -40,5 +42,9 @@ object UsageStatsModule {
         @Binds
         @Singleton
         fun provideUsageGoalsRepository(usageGoalsRepository: DefaultUsageGoalsRepository): UsageGoalsRepository
+
+        @Binds
+        @Singleton
+        fun provideUserInfoRepository(userInfoRepository: DefaultUserInfoRepository): UserInfoRepository
     }
 }

@@ -2,6 +2,7 @@ package com.hmh.hamyeonham.feature.onboarding
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -17,6 +18,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
     private val binding by viewBinding(ActivityOnBoardingBinding::inflate)
     private val viewModel by viewModels<OnBoardingViewModel>()
+    private lateinit var onBackPressedCallback: OnBackPressedCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,30 @@ class OnBoardingActivity : AppCompatActivity() {
             binding.btnOnboardingNext.isEnabled = canClickActivityNextButton
             binding.btnOnboardingNext.isSelected = canClickActivityNextButton
         }.launchIn(lifecycleScope)
+        onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                navigateToPreviousOnboardingStep()
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+    }
+
+    private fun navigateToPreviousOnboardingStep() {
+        viewModel.initializeButtonStates()
+        binding.vpOnboardingContainer.let { viewPager ->
+            val currentItem = viewPager.currentItem
+            if (currentItem > 0) {
+                viewPager.currentItem = currentItem - 1
+            } else {
+                onBackPressedCallback.isEnabled = false
+                onBackPressedDispatcher.onBackPressed()
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        onBackPressedCallback.remove()
+        super.onDestroy()
     }
 
     private fun initViewPager() {
@@ -38,6 +64,7 @@ class OnBoardingActivity : AppCompatActivity() {
     }
 
     private fun navigateToNextOnboardingStep(pagerAdapter: OnBoardingFragmentStateAdapter) {
+        viewModel.initializeButtonStates()
         binding.vpOnboardingContainer.let { viewPager ->
             val currentItem = viewPager.currentItem
             val lastItem = pagerAdapter.itemCount - 1

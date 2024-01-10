@@ -6,12 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.flowWithLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hmh.hamyeonham.common.fragment.viewLifeCycle
+import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
+import com.hmh.hamyeonham.core.MainViewModel
 import com.hmh.hamyeonham.feature.main.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -29,19 +33,21 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initStaticsRecyclerView()
         collectUsageStatsList()
     }
 
-    private fun collectUsageStatsList() {
-        val usageStaticsAdapter = UsageStaticsAdapter()
+    private fun initStaticsRecyclerView() {
         binding.rvStatics.run {
-            adapter = usageStaticsAdapter
+            adapter = UsageStaticsAdapter()
             layoutManager = LinearLayoutManager(requireContext())
         }
-        lifecycleScope.launch {
-            activityViewModel.usageStatAndGoalList.collect {
-                usageStaticsAdapter.submitList(it)
-            }
-        }
+    }
+
+    private fun collectUsageStatsList() {
+        val usageStaticsAdapter = binding.rvStatics.adapter as? UsageStaticsAdapter
+        activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach {
+            usageStaticsAdapter?.submitList(it.usgeStatsList)
+        }.launchIn(viewLifeCycleScope)
     }
 }

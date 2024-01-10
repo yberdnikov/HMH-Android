@@ -9,6 +9,7 @@ android {
 
 dependencies {
 
+    implementation(projects.domain.usagestats)
     implementation(projects.domain.challenge)
 
     implementation(projects.core.common)

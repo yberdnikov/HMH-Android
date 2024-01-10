@@ -9,7 +9,9 @@ import androidx.fragment.app.activityViewModels
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.core.MainViewModel
 import com.hmh.hamyeonham.feature.mypage.databinding.FragmentMyPageBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MyPageFragment : Fragment() {
     private val binding by viewBinding(FragmentMyPageBinding::bind)
     private val mainViewModel by activityViewModels<MainViewModel>()

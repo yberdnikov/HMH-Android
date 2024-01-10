@@ -1,8 +1,8 @@
 package com.hmh.hamyeonham.feature.onboarding.viewModel
 
 import androidx.lifecycle.ViewModel
-import com.hmh.hamyeonham.feature.onboarding.model.OnboardingBtnInfo
-import com.hmh.hamyeonham.feature.onboarding.model.OnboardingInformation
+import com.hmh.hamyeonham.feature.onboarding.model.OnBoardingBtnInfo
+import com.hmh.hamyeonham.feature.onboarding.model.OnBoardingInformation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,12 +12,12 @@ import javax.inject.Inject
 class OnBoardingViewModel @Inject constructor() : ViewModel() {
 
     private val _buttonInfoList =
-        MutableStateFlow<List<OnboardingBtnInfo>>(initializeButtonInfoList())
+        MutableStateFlow<List<OnBoardingBtnInfo>>(initializeButtonInfoList())
 
-    private fun initializeButtonInfoList(): List<OnboardingBtnInfo> {
-        val buttonInfoList = mutableListOf<OnboardingBtnInfo>()
+    private fun initializeButtonInfoList(): List<OnBoardingBtnInfo> {
+        val buttonInfoList = mutableListOf<OnBoardingBtnInfo>()
         for (index in 0..3) {
-            buttonInfoList.add(OnboardingBtnInfo(index, false, ""))
+            buttonInfoList.add(OnBoardingBtnInfo(index, false, ""))
         }
         return buttonInfoList
     }
@@ -58,7 +58,7 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
     private fun updateOnboardingInformation() {
         val selectedButton = _buttonInfoList.value.find { it.isClicked }
         if (selectedButton != null) {
-            val onboardingInformation = OnboardingInformation(
+            val onboardingInformation = OnBoardingInformation(
                 usuallyUseTime = selectedButton.text,
                 problems = listOf(),
                 challenge = listOf(),

@@ -13,7 +13,7 @@ import javax.inject.Inject
 class DefaultNavigationProvider @Inject constructor(
     @ApplicationContext private val context: Context
 ) : NavigationProvider {
-    override fun toOnboarding(): Intent {
+    override fun toOnBoarding(): Intent {
         return Intent(context, OnBoardingActivity::class.java)
     }
 

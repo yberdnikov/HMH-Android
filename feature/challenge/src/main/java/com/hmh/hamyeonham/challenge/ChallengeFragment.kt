@@ -8,9 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.hmh.hamyeonham.challenge.calendar.ChallengeCalendarAdapter
 import com.hmh.hamyeonham.common.fragment.viewLifeCycle
 import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
+import com.hmh.hamyeonham.common.view.VerticalSpaceItemDecoration
+import com.hmh.hamyeonham.common.view.dp
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.core.MainViewModel
 import com.hmh.hamyeonham.feature.challenge.databinding.FragmentChallengeBinding
@@ -35,13 +38,16 @@ class ChallengeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initChallengeRecyclerView()
+        initChallengeGoalsRecyclerView()
         collectMainState()
     }
 
     private fun collectMainState() {
         val challengeAdapter = binding.rvChallengeCalendar.adapter as? ChallengeCalendarAdapter
+        val challengeGoalsAdapter = binding.rvAppUsageGoals.adapter as? ChallengeUsageGoalsAdapter
         activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach {
             challengeAdapter?.submitList(it.challengeStatus.isSuccessList)
+            challengeGoalsAdapter?.submitList(it.usageGoals)
         }.launchIn(viewLifeCycleScope)
 
     }
@@ -50,6 +56,14 @@ class ChallengeFragment : Fragment() {
         binding.rvChallengeCalendar.run {
             layoutManager = GridLayoutManager(requireContext(), 7)
             adapter = ChallengeCalendarAdapter()
+        }
+    }
+
+    private fun initChallengeGoalsRecyclerView() {
+        binding.rvAppUsageGoals.run {
+            adapter = ChallengeUsageGoalsAdapter()
+            layoutManager = LinearLayoutManager(requireContext())
+            addItemDecoration(VerticalSpaceItemDecoration(9.dp))
         }
     }
 }

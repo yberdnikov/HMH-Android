@@ -34,7 +34,7 @@ class ChallengeCalendarAdapter :
             return when (isSuccess) {
                 true -> R.drawable.ic_challenge_success_38
                 false -> R.drawable.ic_challenge_fail_38
-                else -> R.drawable.shape_background_radius8
+                else -> R.drawable.shape_background_radius8_blackground
             }
         }
     }

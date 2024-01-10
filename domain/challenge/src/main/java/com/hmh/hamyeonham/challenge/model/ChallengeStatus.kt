@@ -1,6 +1,5 @@
 package com.hmh.hamyeonham.challenge.model
 
-
 data class ChallengeStatus(
     val apps: List<App> = emptyList(),
     val isSuccessList: List<Boolean?> = emptyList(),
@@ -9,6 +8,6 @@ data class ChallengeStatus(
 ) {
     data class App(
         val appCode: String,
-        val appGoalTime: Int
+        val appGoalTime: Int,
     )
 }

@@ -11,7 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
-
     private val binding by viewBinding(FragmentHomeBinding::bind)
 
     override fun onCreateView(

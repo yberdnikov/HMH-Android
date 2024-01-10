@@ -25,6 +25,7 @@ include(":feature:login")
 include(":feature:challenge")
 include(":feature:onboarding")
 include(":feature:main")
+include(":feature:mypage")
 
 include(":data:usagestats")
 include(":data:onboarding")
@@ -38,5 +39,3 @@ include(":core:common")
 include(":core:database")
 include(":core:designsystem")
 include(":core:viewmodel:main")
-
-include(":feature:mypage")

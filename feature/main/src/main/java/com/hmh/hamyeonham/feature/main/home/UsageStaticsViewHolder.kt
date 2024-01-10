@@ -10,8 +10,8 @@ import com.hmh.hamyeonham.common.context.getAppIconFromPackageName
 import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
 import com.hmh.hamyeonham.common.time.convertTimeToString
 import com.hmh.hamyeonham.common.view.initAndStartProgressBarAnimation
-import com.hmh.hamyeonham.feature.statistics.R
-import com.hmh.hamyeonham.feature.statistics.databinding.ItemUsagestaticBinding
+import com.hmh.hamyeonham.feature.main.R
+import com.hmh.hamyeonham.feature.main.databinding.ItemUsagestaticBinding
 import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
 
 class UsageStaticsViewHolder(

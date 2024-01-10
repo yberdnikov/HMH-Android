@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hmh.hamyeonham.common.view.ItemDiffCallback
-import com.hmh.hamyeonham.feature.statistics.databinding.ItemUsagestaticBinding
-import com.hmh.hamyeonham.feature.statistics.databinding.ItemUsagestaticTotalBinding
+import com.hmh.hamyeonham.feature.main.databinding.ItemUsagestaticBinding
+import com.hmh.hamyeonham.feature.main.databinding.ItemUsagestaticTotalBinding
 import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
 
 class UsageStaticsAdapter : ListAdapter<UsageStatAndGoal, RecyclerView.ViewHolder>(

@@ -9,8 +9,8 @@ import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.RecyclerView
 import com.hmh.hamyeonham.common.time.convertTimeToString
 import com.hmh.hamyeonham.common.view.initAndStartProgressBarAnimation
-import com.hmh.hamyeonham.feature.statistics.R
-import com.hmh.hamyeonham.feature.statistics.databinding.ItemUsagestaticTotalBinding
+import com.hmh.hamyeonham.feature.main.R
+import com.hmh.hamyeonham.feature.main.databinding.ItemUsagestaticTotalBinding
 import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
 
 class UsageStaticsTotalViewHolder(

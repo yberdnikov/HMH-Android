@@ -18,8 +18,8 @@ class GetUsageStatsListUseCase @Inject constructor(
         startTime: Long,
         endTime: Long,
     ): List<UsageStatAndGoal> {
-        val totalUsage = getTotalUsage(startTime, endTime)
         val usageForSelectedApps = getUsageStatsAndGoalsForSelectedApps(startTime, endTime)
+        val totalUsage = getTotalUsage(usageForSelectedApps)
         val totalUsageStatAndGoal =
             UsageStatAndGoal(TOTAL, totalUsage, usageGoalsRepository.getUsageGoalTime(TOTAL))
         return listOf(totalUsageStatAndGoal) + usageForSelectedApps
@@ -41,10 +41,11 @@ class GetUsageStatsListUseCase @Inject constructor(
     }
 
     private fun getTotalUsage(
-        startTime: Long,
-        endTime: Long,
-    ): Long = usageStatsRepository.getUsageStats(startTime, endTime).sumOf {
-        it.totalTimeInForeground
+        usageStatAndGoalList: List<UsageStatAndGoal>,
+    ): Long {
+        return usageStatAndGoalList.sumOf {
+            it.totalTimeInForeground
+        }
     }
 
     private fun getSelectedPackageList(): List<String> =

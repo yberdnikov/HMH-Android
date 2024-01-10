@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hmh.hamyeonham.statistics.StaticsActivity">
+    tools:context="com.hmh.hamyeonham.feature.main.MainActivity">
 
     <TextView
         android:id="@+id/tv_hmh_title"

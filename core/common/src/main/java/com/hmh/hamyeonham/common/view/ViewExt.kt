@@ -69,3 +69,14 @@ class GridSpacingItemDecoration(
         }
     }
 }
+
+class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) : RecyclerView.ItemDecoration() {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        val position = parent.getChildAdapterPosition(view)
+
+        // 첫 번째와 마지막 아이템을 제외한 경우에만 마진 적용
+        if (position != 0) {
+            outRect.top = verticalSpaceHeight
+        }
+    }
+}

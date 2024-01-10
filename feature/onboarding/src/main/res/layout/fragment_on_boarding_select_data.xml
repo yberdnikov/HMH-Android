@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.OnBoardingSelectDataFragment">
+
+
+    <TextView
+        android:id="@+id/tv_onboarding_select_data_question"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="21dp"
+        android:layout_marginTop="30dp"
+        tools:text="하루 평균 휴대폰을 \n얼마나 사용하시나요?"
+        android:textColor="#121212"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_onboarding_select_data_description"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_onboarding_select_data_question"
+        android:layout_marginTop="7dp"
+        android:layout_marginStart="21dp"
+        tools:text="해당 문항은 최대 2개의 복수 응답이 가능해요"
+        android:textSize="13sp"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_onboarding_select_data_1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="19dp"
+        android:layout_marginTop="93dp"
+        android:background="@drawable/onboarding_selector_btn_data"
+        android:gravity="center"
+        tools:text="1-4시간"
+        android:textColor="#DBDAE7"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_onboarding_select_data_description" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_onboarding_select_data_2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="19dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/onboarding_selector_btn_data"
+        android:gravity="center"
+        tools:text="1-4시간"
+        android:textColor="#DBDAE7"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_onboarding_select_data_1" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_onboarding_select_data_3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="19dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/onboarding_selector_btn_data"
+        android:gravity="center"
+        tools:text="1-4시간"
+        android:textColor="#DBDAE7"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_onboarding_select_data_2" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_onboarding_select_data_4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="19dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/onboarding_selector_btn_data"
+        android:gravity="center"
+        tools:text="1-4시간"
+        android:textColor="#DBDAE7"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_onboarding_select_data_3" />
+</androidx.constraintlayout.widget.ConstraintLayout>

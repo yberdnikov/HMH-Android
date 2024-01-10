@@ -9,3 +9,9 @@ fun AppCompatActivity.replaceFragment(containerViewId: Int, fragment: Fragment) 
         replace(containerViewId, fragment)
     }
 }
+
+fun AppCompatActivity.addFragment(containerViewId: Int, fragment: Fragment) {
+    supportFragmentManager.commit {
+        add(containerViewId, fragment)
+    }
+}

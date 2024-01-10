@@ -1,122 +1,105 @@
 package com.hmh.hamyeonham.feature.onboarding
 
-import android.app.usage.UsageStatsManager
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.hmh.hamyeonham.common.context.toast
-import com.hmh.hamyeonham.common.navigation.NavigationProvider
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
+import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class OnBoardingActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityOnBoardingBinding
-
-    @Inject
-    lateinit var navigationProvider: NavigationProvider
-
-    private val accessibilitySettingsLauncher: ActivityResultLauncher<Intent> =
-        registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult(),
-        ) {
-            if (isAccessibilityServiceEnabled()) {
-                toast("접근성 서비스가 활성화되었습니다.")
-            } else {
-                toast("접근성 서비스가 활성화되지 않았습니다.")
-            }
-        }
+    private val binding by viewBinding(ActivityOnBoardingBinding::inflate)
+    private val viewModel by viewModels<OnBoardingViewModel>()
+    private lateinit var onBackPressedCallback: OnBackPressedCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        clickRequireAccessibilityBtn()
+        initViewPager()
+        checkNextButtonEnable()
+        setBackPressedCallback()
     }
 
-    private fun clickRequireAccessibilityBtn() {
-        binding.btnAccessibility.setOnClickListener {
-            openAccessibilitySettingsIfNeeded()
+    private fun initViewPager() {
+        val pagerAdapter = setOnboardingPageAdapter()
+        binding.btnOnboardingNext.setOnClickListener {
+            viewModel.initializeButtonStates()
+            navigateToNextOnboardingStep(pagerAdapter)
         }
-        binding.btnUsage.setOnClickListener {
-            requestUsageAccessPermission()
+        binding.ivOnboardingBack.setOnClickListener {
+            viewModel.initializeButtonStates()
+            navigateToPreviousOnboardingStep()
         }
-        binding.btnDrawOnOthers.setOnClickListener {
-            if (!hasOverlayPermission()) {
-                requestOverlayPermission()
+    }
+
+    private fun navigateToPreviousOnboardingStep() {
+        binding.vpOnboardingContainer.let { viewPager ->
+            val currentItem = viewPager.currentItem
+            if (currentItem > 0) {
+                viewPager.currentItem = currentItem - 1
             } else {
-                toast("다른 앱 위에 그리기 권한이 이미 허용되어 있습니다.")
-            }
-        }
-        binding.btnLogin.setOnClickListener {
-            if (isAccessibilityServiceEnabled() && hasUsageStatsPermission() && hasOverlayPermission()) {
-                toast("모든 권한이 허용되었습니다.")
-                startActivity(navigationProvider.toLogin())
-                finish()
-            } else {
-                toast("모든 권한을 허용해주세요.")
+                onBackPressedCallback.isEnabled = false
+                onBackPressedDispatcher.onBackPressed()
             }
         }
     }
 
-    private fun requestUsageAccessPermission() {
-        if (!hasUsageStatsPermission()) {
-            try {
-                val packageUri = Uri.parse("package:$packageName")
-                val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS, packageUri)
-                startActivity(intent)
-            } catch (e: Exception) {
-                val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
-                startActivity(intent)
+    private fun navigateToNextOnboardingStep(pagerAdapter: OnBoardingFragmentStateAdapter) {
+        binding.vpOnboardingContainer.let { viewPager ->
+            val currentItem = viewPager.currentItem
+            val lastItem = pagerAdapter.itemCount - 1
+            when {
+                currentItem < lastItem -> viewPager.currentItem = currentItem + 1
+                currentItem == lastItem -> startOnBoardingDoneSignUpActivity()
             }
-        } else {
-            toast("사용 정보 접근 권한이 이미 허용되어 있습니다.")
         }
     }
 
-    private fun requestOverlayPermission() {
-        val packageUri = Uri.parse("package:$packageName")
-        val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, packageUri)
+    private fun checkNextButtonEnable() {
+        viewModel.clickNextButtonEnable.flowWithLifecycle(lifecycle).onEach { clickNextButtonEnable ->
+            binding.btnOnboardingNext.isEnabled = clickNextButtonEnable
+            binding.btnOnboardingNext.isSelected = clickNextButtonEnable
+        }.launchIn(lifecycleScope)
+    }
+
+    private fun setBackPressedCallback() {
+        onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                navigateToPreviousOnboardingStep()
+            }
+        }
+    }
+
+    private fun startOnBoardingDoneSignUpActivity() {
+        val intent = Intent(this, OnBoardingDoneSingUpActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
         startActivity(intent)
+        finish()
     }
 
-    private fun hasOverlayPermission(): Boolean {
-        return Settings.canDrawOverlays(this)
-    }
-
-    private fun isAccessibilityServiceEnabled(): Boolean {
-        val service = packageName + "/" + OnBoardingAccessibilityService::class.java.canonicalName
-        val enabledServicesSetting = Settings.Secure.getString(
-            contentResolver,
-            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
-        )
-        return enabledServicesSetting?.contains(service) == true
-    }
-
-    private fun openAccessibilitySettingsIfNeeded() {
-        if (!isAccessibilityServiceEnabled()) {
-            val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-            accessibilitySettingsLauncher.launch(intent)
-        } else {
-            toast("접근성 권한이 이미 허용되어 있습니다.")
+    private fun setOnboardingPageAdapter(): OnBoardingFragmentStateAdapter {
+        val pagerAdapter = OnBoardingFragmentStateAdapter(this)
+        binding.vpOnboardingContainer.run {
+            adapter = pagerAdapter
+            isUserInputEnabled = false
         }
+        return pagerAdapter
     }
 
-    private fun hasUsageStatsPermission(): Boolean {
-        val usageStatsManager = getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
-        val time = System.currentTimeMillis()
-        val stats = usageStatsManager.queryUsageStats(
-            UsageStatsManager.INTERVAL_DAILY,
-            time - 1000 * 60,
-            time,
-        )
-        return stats != null && stats.isNotEmpty()
+    override fun onDestroy() {
+        onBackPressedCallback.remove()
+        super.onDestroy()
     }
 }

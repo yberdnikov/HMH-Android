@@ -4,7 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.hmh.hamyeonham.challenge.model.ChallengeStatus
 import com.hmh.hamyeonham.core.MainViewModel
 import com.hmh.hamyeonham.usagestats.usecase.GetUsageGoalsUseCase
-import dagger.hilt.android.testing.HiltAndroidRule
 import io.mockk.mockk
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest

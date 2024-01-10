@@ -1,7 +1,5 @@
 package com.hmh.hamyeonham.feature.onboarding.fragment
 
-import android.app.usage.UsageStatsManager
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -15,13 +13,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.hmh.hamyeonham.common.fragment.toast
+import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
-import com.hmh.hamyeonham.feature.onboarding.OnBoardingAccessibilityService
 import com.hmh.hamyeonham.feature.onboarding.R
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingRequestPermissionBinding
 import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingRequestPermissionViewModel
 import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class OnBoardingRequestPermissionFragment : Fragment() {
@@ -33,7 +33,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),
         ) {
-            if (checkAccessibilityServiceEnabled()) {
+            if (viewModel.permissionsState.value.isAccessibilityEnabled) {
                 toast(getString(R.string.success_accessibility_settings))
             }
         }
@@ -42,7 +42,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),
         ) {
-            if (hasOverlayPermission()) {
+            if (viewModel.permissionsState.value.isOverlayEnabled) {
                 toast(getString(R.string.success_overlay_permission))
             }
         }
@@ -51,7 +51,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),
         ) {
-            if (hasUsageStatsPermission()) {
+            if (viewModel.permissionsState.value.isUsageStatsEnabled) {
                 toast(getString(R.string.success_usage_stats_permission))
             }
         }
@@ -66,28 +66,33 @@ class OnBoardingRequestPermissionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateNextButtonState()
+
+        viewModel.permissionsState.onEach { permissionsState ->
+            updateNextButtonState(permissionsState)
+        }.launchIn(viewLifeCycleScope)
+
         clickRequireAccessibilityButton()
+        viewModel.checkPermissions(requireContext())
     }
 
     private fun clickRequireAccessibilityButton() {
         binding.run {
             clOnboardingPermission1.setOnClickListener {
-                if (checkAccessibilityServiceEnabled()) {
+                if (viewModel.permissionsState.value.isAccessibilityEnabled) {
                     toast(getString(R.string.already_accessibility_settings))
                 } else {
                     requestAccessibilitySettings()
                 }
             }
             clOnboardingPermission2.setOnClickListener {
-                if (hasUsageStatsPermission()) {
+                if (viewModel.permissionsState.value.isUsageStatsEnabled) {
                     toast(getString(R.string.already_usage_stats_permission))
                 } else {
                     requestUsageAccessPermission()
                 }
             }
             clOnboardingPermission3.setOnClickListener {
-                if (hasOverlayPermission()) {
+                if (viewModel.permissionsState.value.isOverlayEnabled) {
                     toast(getString(R.string.already_overlay_permission))
                 } else {
                     requestOverlayPermission()
@@ -96,31 +101,17 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         }
     }
 
-    private fun updateNextButtonState() {
-        if (checkAccessibilityServiceEnabled() && hasUsageStatsPermission() && hasOverlayPermission()) {
+    private fun updateNextButtonState(permissionsState: OnBoardingRequestPermissionViewModel.PermissionsState) {
+        if (permissionsState.isAccessibilityEnabled && permissionsState.isUsageStatsEnabled && permissionsState.isOverlayEnabled) {
             activityViewModel.activeActivityNextButton()
         }
     }
 
-    private fun checkAccessibilityServiceEnabled(): Boolean {
-        val service =
-            requireContext().packageName + "/" + OnBoardingAccessibilityService::class.java.canonicalName
-        val enabledServicesSetting = Settings.Secure.getString(
-            requireContext().contentResolver,
-            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
-        )
-        return enabledServicesSetting?.contains(service) == true
-    }
-
     private fun requestAccessibilitySettings() {
-        if (!checkAccessibilityServiceEnabled()) {
+        if (!viewModel.permissionsState.value.isAccessibilityEnabled) {
             val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
             accessibilitySettingsLauncher.launch(intent)
         }
-    }
-
-    private fun hasOverlayPermission(): Boolean {
-        return Settings.canDrawOverlays(requireContext())
     }
 
     private fun requestOverlayPermission() {
@@ -128,18 +119,6 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, packageUri)
         startActivity(intent)
         overlayPermissionLauncher.launch(intent)
-    }
-
-    private fun hasUsageStatsPermission(): Boolean {
-        val usageStatsManager =
-            requireContext().getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
-        val time = System.currentTimeMillis()
-        val stats = usageStatsManager.queryUsageStats(
-            UsageStatsManager.INTERVAL_DAILY,
-            time - 1000 * 60,
-            time,
-        )
-        return stats != null && stats.isNotEmpty()
     }
 
     private fun requestUsageAccessPermission() {

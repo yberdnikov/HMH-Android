@@ -28,4 +28,10 @@
     <string name="all_okay">확인</string>
     <string name="onboarding_select_data_question">하루 평균 휴대폰을 \n얼마나 사용하시나요?</string>
     <string name="onboarding_select_data_description">해당 문항은 최대 2개까지 선택할 수 있어요</string>
+    <string name="success_accessibility_settings">접근성 허용이 승인되었습니다</string>
+    <string name="success_overlay_permission">다른 앱 위에 그리기 허용이 승인되었습니다</string>
+    <string name="success_usage_stats_permission">사용 정보 접근 허용이 승인되었습니다</string>
+    <string name="already_accessibility_settings">이미 권한이 허용되어 있습니다</string>
+    <string name="already_usage_stats_permission">이미 권한이 허용되어 있습니다</string>
+    <string name="already_overlay_permission">이미 권한이 허용되어 있습니다</string>
 </resources>

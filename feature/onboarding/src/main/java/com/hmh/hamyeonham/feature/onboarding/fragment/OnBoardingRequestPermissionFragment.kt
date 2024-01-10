@@ -16,6 +16,7 @@ import androidx.fragment.app.activityViewModels
 import com.hmh.hamyeonham.common.fragment.toast
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.OnBoardingAccessibilityService
+import com.hmh.hamyeonham.feature.onboarding.R
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingRequestPermissionBinding
 import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +32,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
             ActivityResultContracts.StartActivityForResult(),
         ) {
             if (isAccessibilityServiceEnabled()) {
-                toast("접근성 허용이 승인되었습니다")
+                toast(getString(R.string.success_accessibility_settings))
             }
         }
 
@@ -40,7 +41,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
             ActivityResultContracts.StartActivityForResult(),
         ) {
             if (hasOverlayPermission()) {
-                toast("다른 앱 위에 그리기 허용이 승인되었습니다")
+                toast(getString(R.string.success_overlay_permission))
             }
         }
 
@@ -49,7 +50,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
             ActivityResultContracts.StartActivityForResult(),
         ) {
             if (hasUsageStatsPermission()) {
-                toast("사용 정보 접근 허용이 승인되었습니다")
+                toast(getString(R.string.success_usage_stats_permission))
             }
         }
 
@@ -70,22 +71,22 @@ class OnBoardingRequestPermissionFragment : Fragment() {
     private fun clickRequireAccessibilityButton() {
         binding.clOnboardingPermission1.setOnClickListener { // 접근 권한 허용
             if (isAccessibilityServiceEnabled()) {
-                toast("접근성 허용이 이미 승인되어 있습니다")
+                toast(getString(R.string.already_accessibility_settings))
             } else {
                 requestAccessibilitySettings()
             }
         }
         binding.clOnboardingPermission2.setOnClickListener { // 사용 정보 접근 권한 허용
             if (hasUsageStatsPermission()) {
-                toast("사용 정보 접근 권한이 이미 허용되어 있습니다.")
+                toast(getString(R.string.already_usage_stats_permission))
             }
             requestUsageAccessPermission()
         }
         binding.clOnboardingPermission3.setOnClickListener { // 다른 앱 위에 그리기 권한 허용
             if (hasOverlayPermission()) {
-                toast("사용 정보 접근 권한이 이미 허용되어 있습니다.")
+                toast(getString(R.string.already_overlay_permission))
             } else {
-                requestUsageAccessPermission()
+                requestOverlayPermission()
             }
         }
         if (isAccessibilityServiceEnabled() && hasUsageStatsPermission() && hasOverlayPermission()) {
@@ -140,17 +141,15 @@ class OnBoardingRequestPermissionFragment : Fragment() {
 
     // 사용 정보 접근 권한 요청
     private fun requestUsageAccessPermission() {
-        if (!hasUsageStatsPermission()) {
-            try {
-                val packageUri = Uri.parse("package:" + requireContext().packageName)
-                val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS, packageUri)
-                startActivity(intent)
-                usageStatsPermissionLauncher.launch(intent)
-            } catch (e: Exception) {
-                val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
-                startActivity(intent)
-                usageStatsPermissionLauncher.launch(intent)
-            }
+        try {
+            val packageUri = Uri.parse("package:" + requireContext().packageName)
+            val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS, packageUri)
+            startActivity(intent)
+            usageStatsPermissionLauncher.launch(intent)
+        } catch (e: Exception) {
+            val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+            startActivity(intent)
+            usageStatsPermissionLauncher.launch(intent)
         }
     }
 }

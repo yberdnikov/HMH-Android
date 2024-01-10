@@ -19,16 +19,24 @@ dependencyResolutionManagement {
 
 rootProject.name = "HMH-Android"
 include(":app")
-include(":core:common")
-include(":core:database")
-include(":feature:onboarding")
-include(":feature:main")
-include(":core:designsystem")
 
 include(":feature:statistics")
 include(":feature:login")
+include(":feature:challenge")
+include(":feature:onboarding")
+include(":feature:main")
 
 include(":data:usagestats")
-include(":domain:usagestats")
-include(":domain:userinfo")
+include(":data:onboarding")
 include(":data:userinfo")
+
+include(":domain:userinfo")
+include(":domain:usagestats")
+include(":domain:challenge")
+
+include(":core:common")
+include(":core:database")
+include(":core:designsystem")
+include(":core:viewmodel:main")
+
+

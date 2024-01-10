@@ -39,6 +39,11 @@ class LoginActivity : AppCompatActivity() {
         Log.d("LoginActivity", viewModel.isSuccessKakaoLogin.value.toString())
         viewModel.isSuccessKakaoLogin.flowWithLifecycle(lifecycle).onEach { successLogin ->
             if (successLogin) {
+                viewModel.getKakaoUserNickname()
+                viewModel.kakaoNickname.flowWithLifecycle(lifecycle).onEach { nickname ->
+                    // 닉네임 저장
+                }.launchIn(lifecycleScope)
+
                 moveToOnBoardingActivity()
             }
         }.launchIn(lifecycleScope)

@@ -21,13 +21,18 @@ class LoginViewModel : ViewModel() {
     private val _refreshToken = MutableStateFlow<String?>(null)
     val refreshToken: StateFlow<String?> = _refreshToken
 
+    private val _kakaoNickname = MutableStateFlow<String?>("")
+    val kakaoNickname: StateFlow<String?> = _kakaoNickname
 
     private var kakaoAccountCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error == null && token != null) {
             _accessToken.value = token.accessToken
             _refreshToken.value = token.refreshToken
             _isSuccessKakaoLogin.value = true
-            Log.d("LoginViewModel", "accessToken: ${_accessToken.value}, refreshToken: ${_refreshToken.value}")
+            Log.d(
+                "LoginViewModel",
+                "accessToken: ${_accessToken.value}, refreshToken: ${_refreshToken.value}",
+            )
         }
     }
 
@@ -54,6 +59,17 @@ class LoginViewModel : ViewModel() {
                 context = context,
                 callback = kakaoAccountCallback,
             )
+        }
+    }
+
+    fun getKakaoUserNickname() {
+        UserApiClient.instance.me { user, error ->
+            if (error != null) {
+                // 닉네임 정보 얻기 실패 시
+            } else if (user != null) {
+                val kakaoNickname = user.kakaoAccount?.profile?.nickname
+                _kakaoNickname.value = kakaoNickname
+            }
         }
     }
 }

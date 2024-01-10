@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="@id/iv_appicon" />
 
     <TextView
-        android:id="@+id/tv_goal_time"
+        android:id="@+id/tv_app_goal_time"
         style="?textAppearanceBodySmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
         app:layout_constraintStart_toStartOf="@id/tv_appname" />
 
     <TextView
-        android:id="@+id/tv_time_left"
+        android:id="@+id/tv_app_time_left"
         style="?textAppearanceTitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

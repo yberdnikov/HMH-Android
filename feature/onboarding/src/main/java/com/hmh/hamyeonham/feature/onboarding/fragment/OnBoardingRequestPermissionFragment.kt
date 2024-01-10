@@ -61,7 +61,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         return FragmentOnBoardingRequestPermissionBinding.inflate(inflater, container, false).root
     }
 

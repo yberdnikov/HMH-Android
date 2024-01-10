@@ -13,24 +13,27 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.hmh.hamyeonham.common.fragment.toast
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.OnBoardingAccessibilityService
 import com.hmh.hamyeonham.feature.onboarding.R
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingRequestPermissionBinding
+import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingRequestPermissionViewModel
 import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class OnBoardingRequestPermissionFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingRequestPermissionBinding::bind)
+    private val viewModel by viewModels<OnBoardingRequestPermissionViewModel>()
     private val activityViewModel by activityViewModels<OnBoardingViewModel>()
 
     private val accessibilitySettingsLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),
         ) {
-            if (isAccessibilityServiceEnabled()) {
+            if (checkAccessibilityServiceEnabled()) {
                 toast(getString(R.string.success_accessibility_settings))
             }
         }
@@ -70,7 +73,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
     private fun clickRequireAccessibilityButton() {
         binding.run {
             clOnboardingPermission1.setOnClickListener {
-                if (isAccessibilityServiceEnabled()) {
+                if (checkAccessibilityServiceEnabled()) {
                     toast(getString(R.string.already_accessibility_settings))
                 } else {
                     requestAccessibilitySettings()
@@ -94,12 +97,12 @@ class OnBoardingRequestPermissionFragment : Fragment() {
     }
 
     private fun updateNextButtonState() {
-        if (isAccessibilityServiceEnabled() && hasUsageStatsPermission() && hasOverlayPermission()) {
+        if (checkAccessibilityServiceEnabled() && hasUsageStatsPermission() && hasOverlayPermission()) {
             activityViewModel.activeActivityNextButton()
         }
     }
 
-    private fun isAccessibilityServiceEnabled(): Boolean {
+    private fun checkAccessibilityServiceEnabled(): Boolean {
         val service =
             requireContext().packageName + "/" + OnBoardingAccessibilityService::class.java.canonicalName
         val enabledServicesSetting = Settings.Secure.getString(
@@ -110,7 +113,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
     }
 
     private fun requestAccessibilitySettings() {
-        if (!isAccessibilityServiceEnabled()) {
+        if (!checkAccessibilityServiceEnabled()) {
             val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
             accessibilitySettingsLauncher.launch(intent)
         }

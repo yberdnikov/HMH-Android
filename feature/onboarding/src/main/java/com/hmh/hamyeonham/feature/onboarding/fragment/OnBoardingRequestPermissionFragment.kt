@@ -26,7 +26,6 @@ class OnBoardingRequestPermissionFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingRequestPermissionBinding::bind)
     private val activityViewModel by activityViewModels<OnBoardingViewModel>()
 
-    // 권한 허용에 대한 결과를 받기 위한 ActivityResultLauncher
     private val accessibilitySettingsLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),
@@ -69,20 +68,20 @@ class OnBoardingRequestPermissionFragment : Fragment() {
 
     // 각 버튼 클릭 시 권한 요청
     private fun clickRequireAccessibilityButton() {
-        binding.clOnboardingPermission1.setOnClickListener { // 접근 권한 허용
+        binding.clOnboardingPermission1.setOnClickListener {
             if (isAccessibilityServiceEnabled()) {
                 toast(getString(R.string.already_accessibility_settings))
             } else {
                 requestAccessibilitySettings()
             }
         }
-        binding.clOnboardingPermission2.setOnClickListener { // 사용 정보 접근 권한 허용
+        binding.clOnboardingPermission2.setOnClickListener {
             if (hasUsageStatsPermission()) {
                 toast(getString(R.string.already_usage_stats_permission))
             }
             requestUsageAccessPermission()
         }
-        binding.clOnboardingPermission3.setOnClickListener { // 다른 앱 위에 그리기 권한 허용
+        binding.clOnboardingPermission3.setOnClickListener {
             if (hasOverlayPermission()) {
                 toast(getString(R.string.already_overlay_permission))
             } else {
@@ -94,7 +93,6 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         }
     }
 
-    // 접근 권한 허용 되었는지 확인
     private fun isAccessibilityServiceEnabled(): Boolean {
         val service =
             requireContext().packageName + "/" + OnBoardingAccessibilityService::class.java.canonicalName
@@ -105,7 +103,6 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         return enabledServicesSetting?.contains(service) == true
     }
 
-    // 접근 권한 요청 함수
     private fun requestAccessibilitySettings() {
         if (!isAccessibilityServiceEnabled()) {
             val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
@@ -113,12 +110,10 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         }
     }
 
-    // 다른 앱 위에 그리기 허용 되었는지 확인
     private fun hasOverlayPermission(): Boolean {
         return Settings.canDrawOverlays(requireContext())
     }
 
-    // 다른 앱 위에 그리기 권한 요청 함수
     private fun requestOverlayPermission() {
         val packageUri = Uri.parse("package:" + requireContext().packageName)
         val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, packageUri)
@@ -126,7 +121,6 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         overlayPermissionLauncher.launch(intent)
     }
 
-    // 사용 정보 접근 권한 허용 되었는지 확인
     private fun hasUsageStatsPermission(): Boolean {
         val usageStatsManager =
             requireContext().getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
@@ -139,7 +133,6 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         return stats != null && stats.isNotEmpty()
     }
 
-    // 사용 정보 접근 권한 요청
     private fun requestUsageAccessPermission() {
         try {
             val packageUri = Uri.parse("package:" + requireContext().packageName)

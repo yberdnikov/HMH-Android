@@ -25,14 +25,31 @@ class OnBoardingRequestPermissionFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingRequestPermissionBinding::bind)
     private val activityViewModel by activityViewModels<OnBoardingViewModel>()
 
+    // 권한 허용에 대한 결과를 받기 위한 ActivityResultLauncher
     private val accessibilitySettingsLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),
         ) {
             if (isAccessibilityServiceEnabled()) {
-                toast("접근성 서비스가 활성화되었습니다.")
-            } else {
-                toast("접근성 서비스가 활성화되지 않았습니다.")
+                toast("접근성 허용이 승인되었습니다")
+            }
+        }
+
+    private val overlayPermissionLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult(),
+        ) {
+            if (hasOverlayPermission()) {
+                toast("다른 앱 위에 그리기 허용이 승인되었습니다")
+            }
+        }
+
+    private val usageStatsPermissionLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult(),
+        ) {
+            if (hasUsageStatsPermission()) {
+                toast("사용 정보 접근 허용이 승인되었습니다")
             }
         }
 
@@ -46,16 +63,22 @@ class OnBoardingRequestPermissionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activityViewModel.activeActivityNextButton()
         clickRequireAccessibilityButton()
     }
 
     // 각 버튼 클릭 시 권한 요청
     private fun clickRequireAccessibilityButton() {
         binding.clOnboardingPermission1.setOnClickListener { // 접근 권한 허용
-            requestAccessibilitySettings()
+            if (isAccessibilityServiceEnabled()) {
+                toast("접근성 허용이 이미 승인되어 있습니다")
+            } else {
+                requestAccessibilitySettings()
+            }
         }
         binding.clOnboardingPermission2.setOnClickListener { // 사용 정보 접근 권한 허용
+            if (hasUsageStatsPermission()) {
+                toast("사용 정보 접근 권한이 이미 허용되어 있습니다.")
+            }
             requestUsageAccessPermission()
         }
         binding.clOnboardingPermission3.setOnClickListener { // 다른 앱 위에 그리기 권한 허용
@@ -66,7 +89,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
             }
         }
         if (isAccessibilityServiceEnabled() && hasUsageStatsPermission() && hasOverlayPermission()) {
-            // 다음 버튼 활성화
+            activityViewModel.activeActivityNextButton()
         } else {
             // 다음 버튼 비활성화
         }
@@ -88,8 +111,6 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         if (!isAccessibilityServiceEnabled()) {
             val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
             accessibilitySettingsLauncher.launch(intent)
-        } else {
-            // toast("접근성 권한이 이미 허용되어 있습니다.")
         }
     }
 
@@ -103,6 +124,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         val packageUri = Uri.parse("package:" + requireContext().packageName)
         val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, packageUri)
         startActivity(intent)
+        overlayPermissionLauncher.launch(intent)
     }
 
     // 사용 정보 접근 권한 허용 되었는지 확인
@@ -125,12 +147,12 @@ class OnBoardingRequestPermissionFragment : Fragment() {
                 val packageUri = Uri.parse("package:" + requireContext().packageName)
                 val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS, packageUri)
                 startActivity(intent)
+                usageStatsPermissionLauncher.launch(intent)
             } catch (e: Exception) {
                 val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
                 startActivity(intent)
+                usageStatsPermissionLauncher.launch(intent)
             }
-        } else {
-            toast("사용 정보 접근 권한이 이미 허용되어 있습니다.")
         }
     }
 }

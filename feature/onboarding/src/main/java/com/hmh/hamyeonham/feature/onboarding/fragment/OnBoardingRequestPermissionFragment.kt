@@ -17,6 +17,7 @@ import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.R
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingRequestPermissionBinding
+import com.hmh.hamyeonham.feature.onboarding.model.OnBoardingPermissionsState
 import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingRequestPermissionViewModel
 import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,7 +61,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         return FragmentOnBoardingRequestPermissionBinding.inflate(inflater, container, false).root
     }
 
@@ -101,7 +102,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         }
     }
 
-    private fun updateNextButtonState(permissionsState: OnBoardingRequestPermissionViewModel.PermissionsState) {
+    private fun updateNextButtonState(permissionsState: OnBoardingPermissionsState) {
         if (permissionsState.isAccessibilityEnabled && permissionsState.isUsageStatsEnabled && permissionsState.isOverlayEnabled) {
             activityViewModel.activeActivityNextButton()
         }

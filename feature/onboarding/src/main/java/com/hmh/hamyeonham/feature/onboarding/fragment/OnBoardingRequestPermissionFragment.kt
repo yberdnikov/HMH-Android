@@ -63,30 +63,37 @@ class OnBoardingRequestPermissionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        updateNextButtonState()
         clickRequireAccessibilityButton()
     }
 
     private fun clickRequireAccessibilityButton() {
-        binding.clOnboardingPermission1.setOnClickListener {
-            if (isAccessibilityServiceEnabled()) {
-                toast(getString(R.string.already_accessibility_settings))
-            } else {
-                requestAccessibilitySettings()
+        binding.run {
+            clOnboardingPermission1.setOnClickListener {
+                if (isAccessibilityServiceEnabled()) {
+                    toast(getString(R.string.already_accessibility_settings))
+                } else {
+                    requestAccessibilitySettings()
+                }
+            }
+            clOnboardingPermission2.setOnClickListener {
+                if (hasUsageStatsPermission()) {
+                    toast(getString(R.string.already_usage_stats_permission))
+                } else {
+                    requestUsageAccessPermission()
+                }
+            }
+            clOnboardingPermission3.setOnClickListener {
+                if (hasOverlayPermission()) {
+                    toast(getString(R.string.already_overlay_permission))
+                } else {
+                    requestOverlayPermission()
+                }
             }
         }
-        binding.clOnboardingPermission2.setOnClickListener {
-            if (hasUsageStatsPermission()) {
-                toast(getString(R.string.already_usage_stats_permission))
-            }
-            requestUsageAccessPermission()
-        }
-        binding.clOnboardingPermission3.setOnClickListener {
-            if (hasOverlayPermission()) {
-                toast(getString(R.string.already_overlay_permission))
-            } else {
-                requestOverlayPermission()
-            }
-        }
+    }
+
+    private fun updateNextButtonState() {
         if (isAccessibilityServiceEnabled() && hasUsageStatsPermission() && hasOverlayPermission()) {
             activityViewModel.activeActivityNextButton()
         }

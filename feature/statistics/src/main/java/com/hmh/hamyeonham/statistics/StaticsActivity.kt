@@ -24,14 +24,14 @@ class StaticsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         collectUsageStatsList()
-        initViews()
+        // initViews()
     }
 
-    private fun initViews() {
-        binding.btnLogout.setOnClickListener {
-            startActivity(navigationProvider.toUserInfo())
-        }
-    }
+//    private fun initViews() {
+//        binding.btnLogout.setOnClickListener {
+//            startActivity(navigationProvider. toUserInfo())
+//        }
+//    }
 
     private fun collectUsageStatsList() {
         val usageStaticsAdapter = UsageStaticsAdapter()

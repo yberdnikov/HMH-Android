@@ -1,6 +1,6 @@
 package com.hmh.hamyeonham.feature.onboarding.model
 
-data class OnBoardingInformation(
+data class OnboardingInformation(
     val usuallyUseTime: String = "",
     val problems: List<Problem> = emptyList(),
     val challenge: List<Challenge> = emptyList(),

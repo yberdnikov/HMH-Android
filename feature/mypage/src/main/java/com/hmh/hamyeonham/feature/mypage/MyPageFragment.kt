@@ -1,12 +1,14 @@
-package com.hmh.hamyeonham.feature.main.mypage
+package com.hmh.hamyeonham.feature.mypage
 
 import android.os.Bundle
+import android.system.Os.bind
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.hmh.hamyeonham.common.view.viewBinding
+import com.hmh.hamyeonham.core.MainViewModel
 import com.hmh.hamyeonham.feature.main.MainViewModel
 import com.hmh.hamyeonham.feature.main.databinding.FragmentMyPageBinding
 import com.hmh.hamyeonham.userinfo.model.UserInfo

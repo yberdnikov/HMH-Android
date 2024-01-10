@@ -40,3 +40,4 @@ include(":core:designsystem")
 include(":core:viewmodel:main")
 
 
+include(":feature:mypage")

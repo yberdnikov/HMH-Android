@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.challenge
+package com.hmh.hamyeonham.challenge.calendar
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -32,9 +32,9 @@ class ChallengeCalendarAdapter :
 
         private fun getDrawableResource(isSuccess: Boolean?): Int {
             return when (isSuccess) {
-                true -> R.drawable.ic_challenge_success
-                false -> R.drawable.ic_challenge_fail
-                else -> R.drawable.challenge_shape_background_radius8
+                true -> R.drawable.ic_challenge_success_38
+                false -> R.drawable.ic_challenge_fail_38
+                else -> R.drawable.shape_background_radius8
             }
         }
     }

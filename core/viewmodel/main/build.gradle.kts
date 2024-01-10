@@ -9,10 +9,12 @@ android {
 }
 
 dependencies {
-
+    implementation(projects.domain.usagestats)
     implementation(projects.domain.challenge)
 
     implementation(projects.core.common)
+
+    // TEST
     testImplementation("androidx.arch.core:core-testing:2.2.0")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
 

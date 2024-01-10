@@ -1,7 +1,6 @@
 package com.hmh.hamyeonham.feature.mypage
 
 import android.os.Bundle
-import android.system.Os.bind
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.core.MainViewModel
-import com.hmh.hamyeonham.feature.main.MainViewModel
-import com.hmh.hamyeonham.feature.main.databinding.FragmentMyPageBinding
-import com.hmh.hamyeonham.userinfo.model.UserInfo
+import com.hmh.hamyeonham.feature.mypage.databinding.FragmentMyPageBinding
 
 class MyPageFragment : Fragment() {
     private val binding by viewBinding(FragmentMyPageBinding::bind)
@@ -26,7 +23,7 @@ class MyPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bindViewWithUserInfo(mainViewModel.userInfo.value)
+        bindViewWithUserInfo()
 //        collectAndBindUserInfo()
     }
 
@@ -38,8 +35,8 @@ class MyPageFragment : Fragment() {
 //        }
 //    }
 
-    private fun bindViewWithUserInfo(userInfo: UserInfo) {
-        binding.tvMypageName.text = userInfo.name
-        binding.tvMypagePoint.text = userInfo.point.toString()
+    private fun bindViewWithUserInfo() {
+        binding.tvMypageName.text = "여민서"
+        binding.tvMypagePoint.text = "0 P"
     }
 }

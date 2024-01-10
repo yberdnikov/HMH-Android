@@ -11,6 +11,7 @@ android {
 dependencies {
     implementation(projects.domain.usagestats)
     implementation(projects.domain.challenge)
+    implementation(projects.domain.userinfo)
 
     implementation(projects.core.common)
 

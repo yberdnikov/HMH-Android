@@ -1,9 +1,7 @@
 package com.hmh.hamyeonham.core
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.hmh.hamyeonham.challenge.model.ChallengeStatus
-import com.hmh.hamyeonham.common.time.convertTimeToString
 import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
 import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
@@ -56,10 +54,6 @@ class MainViewModel @Inject constructor(
         val usageStatsList = usageStatsListUsecase.getUsageStatsAndGoals(startTime, endTime)
         updateState {
             copy(usgeStatsList = usageStatsListUsecase.getUsageStatsAndGoals(startTime, endTime))
-        }
-        for (i in usageStatsList) {
-            Log.d("package name", i.packageName)
-            Log.d("used time", convertTimeToString(i.totalTimeInForeground))
         }
     }
 }

@@ -49,7 +49,6 @@ class ChallengeFragment : Fragment() {
             challengeAdapter?.submitList(it.challengeStatus.isSuccessList)
             challengeGoalsAdapter?.submitList(it.usageGoals)
         }.launchIn(viewLifeCycleScope)
-
     }
 
     private fun initChallengeRecyclerView() {

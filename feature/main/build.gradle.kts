@@ -9,10 +9,10 @@ android {
 
 dependencies {
 
-    //Feature
+    // Feature
     implementation(projects.feature.challenge)
 
-    //Navigation
+    // Navigation
     implementation(libs.bundles.navigation)
 
     implementation(projects.core.common)

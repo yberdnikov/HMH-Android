@@ -82,16 +82,14 @@ class OnBoardingRequestPermissionFragment : Fragment() {
             requestUsageAccessPermission()
         }
         binding.clOnboardingPermission3.setOnClickListener { // 다른 앱 위에 그리기 권한 허용
-            if (!hasOverlayPermission()) {
-                requestOverlayPermission()
+            if (hasOverlayPermission()) {
+                toast("사용 정보 접근 권한이 이미 허용되어 있습니다.")
             } else {
-                toast("다른 앱 위에 그리기 권한이 이미 허용되어 있습니다.")
+                requestUsageAccessPermission()
             }
         }
         if (isAccessibilityServiceEnabled() && hasUsageStatsPermission() && hasOverlayPermission()) {
             activityViewModel.activeActivityNextButton()
-        } else {
-            // 다음 버튼 비활성화
         }
     }
 

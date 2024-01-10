@@ -19,6 +19,5 @@ inline fun <reified T : BaseInterpolator> initAndStartAnimation(
 ) {
     ObjectAnimator.ofInt(view, propertyName, from, to).apply {
         interpolator = newInterpolator
-    }
-        .start()
+    }.start()
 }

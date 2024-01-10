@@ -55,23 +55,10 @@
         style="?textAppearanceTitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="6dp"
-        android:textColor="?white_text"
-        app:layout_constraintBottom_toBottomOf="@id/pb_item_usagestat"
-        app:layout_constraintEnd_toStartOf="@id/tv_itemusagestat_time_left_title"
-        app:layout_constraintTop_toTopOf="@id/pb_item_usagestat" />
-
-    <TextView
-        android:id="@+id/tv_itemusagestat_time_left_title"
-        style="?textAppearanceBodyLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:text="@string/all_left"
-        android:textColor="?gray2"
+        android:textColor="?white_text"
         app:layout_constraintBottom_toBottomOf="@id/pb_item_usagestat"
         app:layout_constraintEnd_toEndOf="@id/pb_item_usagestat"
         app:layout_constraintTop_toTopOf="@id/pb_item_usagestat" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

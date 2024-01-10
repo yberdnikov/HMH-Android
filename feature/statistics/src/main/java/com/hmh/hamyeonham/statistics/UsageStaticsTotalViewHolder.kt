@@ -1,9 +1,15 @@
 package com.hmh.hamyeonham.statistics
 
 import android.content.Context
+import android.text.SpannableStringBuilder
+import android.text.Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+import android.text.style.ForegroundColorSpan
+import androidx.core.content.ContextCompat.getColor
+import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.RecyclerView
 import com.hmh.hamyeonham.common.time.convertTimeToString
 import com.hmh.hamyeonham.common.view.initAndStartProgressBarAnimation
+import com.hmh.hamyeonham.feature.statistics.R
 import com.hmh.hamyeonham.feature.statistics.databinding.ItemUsagestaticTotalBinding
 import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
 
@@ -15,15 +21,32 @@ class UsageStaticsTotalViewHolder(
         binding.run {
             tvItemusagestaticTotalHour.text = convertTimeToString(usageStatAndGoal.goalTime)
             pbItemusagestaticTotal.progress = usageStatAndGoal.usedPercentage
-            tvItemusagestaticTotalTimeLeft.text = convertTimeToString(usageStatAndGoal.timeLeft)
         }
+        bindTotalLeftWithSpannable(usageStatAndGoal)
         initAndStartProgressBarAnimation(
             binding.pbItemusagestaticTotal,
             usageStatAndGoal.usedPercentage,
         )
     }
 
-    companion object {
-        private const val LEFT = "남음"
+    fun bindTotalLeftWithSpannable(usageStatAndGoal: UsageStatAndGoal) {
+        val builder = SpannableStringBuilder(
+            convertTimeToString(usageStatAndGoal.timeLeft) + " " + getString(
+                context,
+                R.string.all_left,
+            ),
+        )
+        builder.setSpan(
+            ForegroundColorSpan(
+                getColor(
+                    context,
+                    com.hmh.hamyeonham.core.designsystem.R.color.gray1,
+                ),
+            ),
+            builder.length - 2,
+            builder.length,
+            SPAN_INCLUSIVE_EXCLUSIVE,
+        )
+        binding.tvItemusagestaticTotalTimeLeft.text = builder
     }
 }

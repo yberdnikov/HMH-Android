@@ -48,7 +48,7 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
                 buttonInfo
             }
         }
-        _canClickActivityNextButton.value = false
+        _canClickActivityNextButton.value = true
     }
 
     fun activeActivityNextButton() {

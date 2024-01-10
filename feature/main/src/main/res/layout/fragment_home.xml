@@ -7,7 +7,7 @@
     tools:context="com.hmh.hamyeonham.statistics.StaticsActivity">
 
     <TextView
-        android:id="@+id/tv_statics_hmh"
+        android:id="@+id/tv_hmh_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -24,6 +24,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_statics_hmh" />
+        app:layout_constraintTop_toBottomOf="@id/tv_hmh_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

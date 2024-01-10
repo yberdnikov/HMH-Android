@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="20dp"
-            android:text="@string/my_page"
+            android:text="@string/mypage_title"
             android:textColor="?white_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -26,65 +26,65 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/iv_mypage_profile"
+        android:id="@+id/iv_profile"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="24dp"
         android:src="@drawable/ic_profile_50"
-        app:layout_constraintBottom_toTopOf="@id/v_mypage_collections"
+        app:layout_constraintBottom_toTopOf="@id/v_collections"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_mypage_title" />
 
     <TextView
-        android:id="@+id/tv_mypage_name"
+        android:id="@+id/tv_user_name"
         style="?textAppearanceHeadlineLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="여민서"
         android:textColor="@color/white_text"
-        app:layout_constraintBottom_toBottomOf="@id/iv_mypage_profile"
-        app:layout_constraintStart_toEndOf="@id/iv_mypage_profile"
-        app:layout_constraintTop_toTopOf="@id/iv_mypage_profile" />
+        app:layout_constraintBottom_toBottomOf="@id/iv_profile"
+        app:layout_constraintStart_toEndOf="@id/iv_profile"
+        app:layout_constraintTop_toTopOf="@id/iv_profile" />
 
     <View
-        android:id="@+id/v_mypage_collections"
+        android:id="@+id/v_collections"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="20dp"
         android:background="@drawable/shape_background_radius7_gray6"
-        app:layout_constraintBottom_toTopOf="@id/v_mypage_journey"
+        app:layout_constraintBottom_toTopOf="@id/v_journey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_mypage_profile" />
+        app:layout_constraintTop_toBottomOf="@id/iv_profile" />
 
     <View
-        android:id="@+id/v_mypage_collection_line"
+        android:id="@+id/v_collection_line"
         android:layout_width="1dp"
         android:layout_height="57dp"
         android:background="?gray4"
-        app:layout_constraintBottom_toBottomOf="@id/v_mypage_collections"
-        app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
-        app:layout_constraintStart_toStartOf="@id/v_mypage_collections"
-        app:layout_constraintTop_toTopOf="@id/v_mypage_collections" />
+        app:layout_constraintBottom_toBottomOf="@id/v_collections"
+        app:layout_constraintEnd_toEndOf="@id/v_collections"
+        app:layout_constraintStart_toStartOf="@id/v_collections"
+        app:layout_constraintTop_toTopOf="@id/v_collections" />
 
     <TextView
-        android:id="@+id/tv_mypage_point_title"
+        android:id="@+id/tv_point_title"
         style="?textAppearanceBodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
         android:text="@string/mypage_point_title"
         android:textColor="?white_text"
-        app:layout_constraintEnd_toEndOf="@id/v_mypage_collection_line"
-        app:layout_constraintStart_toStartOf="@id/v_mypage_collections"
-        app:layout_constraintTop_toTopOf="@id/v_mypage_collections" />
+        app:layout_constraintEnd_toEndOf="@id/v_collection_line"
+        app:layout_constraintStart_toStartOf="@id/v_collections"
+        app:layout_constraintTop_toTopOf="@id/v_collections" />
 
     <TextView
-        android:id="@+id/tv_mypage_point"
+        android:id="@+id/tv_point"
         style="?textAppearanceHeadlineMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -92,44 +92,44 @@
         android:layout_marginBottom="14dp"
         android:text="100P"
         android:textColor="?white_text"
-        app:layout_constraintBottom_toBottomOf="@id/v_mypage_collections"
-        app:layout_constraintEnd_toEndOf="@id/tv_mypage_point_title"
-        app:layout_constraintStart_toStartOf="@id/tv_mypage_point_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_mypage_point_title" />
+        app:layout_constraintBottom_toBottomOf="@id/v_collections"
+        app:layout_constraintEnd_toEndOf="@id/tv_point_title"
+        app:layout_constraintStart_toStartOf="@id/tv_point_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_point_title" />
 
     <TextView
-        android:id="@+id/tv_mypage_badge"
+        android:id="@+id/tv_badge_title"
         style="?textAppearanceBodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/mypage_badge_collection"
         android:textColor="?gray3"
-        app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
-        app:layout_constraintStart_toStartOf="@id/v_mypage_collection_line"
-        app:layout_constraintTop_toTopOf="@id/tv_mypage_point_title" />
+        app:layout_constraintEnd_toEndOf="@id/v_collections"
+        app:layout_constraintStart_toStartOf="@id/v_collection_line"
+        app:layout_constraintTop_toTopOf="@id/tv_point_title" />
 
     <ImageView
-        android:id="@+id/iv_mypage_badge"
+        android:id="@+id/iv_badge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_badge_white_24"
-        app:layout_constraintEnd_toEndOf="@id/tv_mypage_badge"
-        app:layout_constraintStart_toStartOf="@id/tv_mypage_badge"
-        app:layout_constraintTop_toBottomOf="@id/tv_mypage_badge" />
+        app:layout_constraintEnd_toEndOf="@id/tv_badge_title"
+        app:layout_constraintStart_toStartOf="@id/tv_badge_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_badge_title" />
 
     <View
-        android:id="@+id/v_mypage_journey"
+        android:id="@+id/v_journey"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@id/v_mypage_store"
+        app:layout_constraintBottom_toTopOf="@id/v_store"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/v_mypage_collections" />
+        app:layout_constraintTop_toBottomOf="@id/v_collections" />
 
     <TextView
-        android:id="@+id/tv_mypage_journey"
+        android:id="@+id/tv_journey"
         style="?textAppearanceTitleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -139,41 +139,41 @@
         android:drawablePadding="15dp"
         android:text="@string/mypage_journey"
         android:textColor="?gray5"
-        app:layout_constraintBottom_toBottomOf="@id/v_mypage_journey"
-        app:layout_constraintStart_toStartOf="@id/v_mypage_collections"
-        app:layout_constraintTop_toTopOf="@id/v_mypage_journey" />
+        app:layout_constraintBottom_toBottomOf="@id/v_journey"
+        app:layout_constraintStart_toStartOf="@id/v_collections"
+        app:layout_constraintTop_toTopOf="@id/v_journey" />
 
     <ImageView
-        android:id="@+id/iv_mypage_journey_button"
+        android:id="@+id/iv_journey_button"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:src="@drawable/ic_arrow_24"
-        app:layout_constraintBottom_toBottomOf="@id/tv_mypage_journey"
+        app:layout_constraintBottom_toBottomOf="@id/tv_journey"
         app:layout_constraintDimensionRatio="1dp"
-        app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
-        app:layout_constraintTop_toTopOf="@id/tv_mypage_journey" />
+        app:layout_constraintEnd_toEndOf="@id/v_collections"
+        app:layout_constraintTop_toTopOf="@id/tv_journey" />
 
     <View
-        android:id="@+id/v_mypage_divider1"
+        android:id="@+id/v_divider1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?gray8"
-        app:layout_constraintBottom_toTopOf="@id/v_mypage_store"
+        app:layout_constraintBottom_toTopOf="@id/v_store"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/v_mypage_journey" />
+        app:layout_constraintTop_toBottomOf="@id/v_journey" />
 
     <View
-        android:id="@+id/v_mypage_store"
+        android:id="@+id/v_store"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:layout_constraintBottom_toTopOf="@id/v_mypage_divider2"
+        app:layout_constraintBottom_toTopOf="@id/v_divider2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/v_mypage_divider1" />
+        app:layout_constraintTop_toBottomOf="@id/v_divider1" />
 
 
     <TextView
-        android:id="@+id/tv_mypage_store"
+        android:id="@+id/tv_store"
         style="?textAppearanceTitleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -183,31 +183,31 @@
         android:drawablePadding="15dp"
         android:text="@string/mypage_store"
         android:textColor="?gray5"
-        app:layout_constraintBottom_toBottomOf="@id/v_mypage_store"
-        app:layout_constraintStart_toStartOf="@id/tv_mypage_journey"
-        app:layout_constraintTop_toTopOf="@id/v_mypage_store" />
+        app:layout_constraintBottom_toBottomOf="@id/v_store"
+        app:layout_constraintStart_toStartOf="@id/tv_journey"
+        app:layout_constraintTop_toTopOf="@id/v_store" />
 
     <ImageView
-        android:id="@+id/iv_mypage_store_button"
+        android:id="@+id/iv_store_button"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:src="@drawable/ic_arrow_24"
-        app:layout_constraintBottom_toBottomOf="@id/tv_mypage_store"
+        app:layout_constraintBottom_toBottomOf="@id/tv_store"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
-        app:layout_constraintTop_toTopOf="@id/tv_mypage_store" />
+        app:layout_constraintEnd_toEndOf="@id/v_collections"
+        app:layout_constraintTop_toTopOf="@id/tv_store" />
 
     <View
-        android:id="@+id/v_mypage_divider2"
+        android:id="@+id/v_divider2"
         android:layout_width="wrap_content"
         android:layout_height="10dp"
         android:background="?gray8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/v_mypage_store" />
+        app:layout_constraintTop_toBottomOf="@id/v_store" />
 
     <TextView
-        android:id="@+id/tv_mypage_info"
+        android:id="@+id/tv_info_title"
         style="?textAppearanceTitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -215,21 +215,21 @@
         android:layout_marginBottom="12dp"
         android:text="@string/mypage_info"
         android:textColor="?gray2"
-        app:layout_constraintStart_toStartOf="@id/tv_mypage_store"
-        app:layout_constraintTop_toBottomOf="@id/v_mypage_divider2" />
+        app:layout_constraintStart_toStartOf="@id/tv_store"
+        app:layout_constraintTop_toBottomOf="@id/v_divider2" />
 
     <View
-        android:id="@+id/v_mypage_termofuse"
+        android:id="@+id/v_termofuse"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="4dp"
-        app:layout_constraintBottom_toTopOf="@id/v_mypage_privacy"
+        app:layout_constraintBottom_toTopOf="@id/v_privacy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_mypage_info" />
+        app:layout_constraintTop_toBottomOf="@id/tv_info_title" />
 
     <TextView
-        android:id="@+id/tv_mypage_termofuse"
+        android:id="@+id/tv_termofuse"
         style="?textAppearanceTitleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -237,41 +237,41 @@
         android:layout_marginBottom="15dp"
         android:text="@string/mypage_termofuse"
         android:textColor="?white_text"
-        app:layout_constraintBottom_toBottomOf="@id/v_mypage_termofuse"
-        app:layout_constraintStart_toStartOf="@id/tv_mypage_info"
-        app:layout_constraintTop_toTopOf="@id/v_mypage_termofuse" />
+        app:layout_constraintBottom_toBottomOf="@id/v_termofuse"
+        app:layout_constraintStart_toStartOf="@id/tv_info_title"
+        app:layout_constraintTop_toTopOf="@id/v_termofuse" />
 
     <ImageView
-        android:id="@+id/iv_mypage_termofuse_button"
+        android:id="@+id/iv_termofuse_button"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:src="@drawable/ic_arrow_24"
-        app:layout_constraintBottom_toBottomOf="@id/tv_mypage_termofuse"
+        app:layout_constraintBottom_toBottomOf="@id/tv_termofuse"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
-        app:layout_constraintTop_toTopOf="@id/tv_mypage_termofuse" />
+        app:layout_constraintEnd_toEndOf="@id/v_collections"
+        app:layout_constraintTop_toTopOf="@id/tv_termofuse" />
 
     <View
-        android:id="@+id/v_mypage_divider3"
+        android:id="@+id/v_divider3"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?gray8"
-        app:layout_constraintBottom_toTopOf="@id/v_mypage_privacy"
+        app:layout_constraintBottom_toTopOf="@id/v_privacy"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/v_mypage_termofuse" />
+        app:layout_constraintTop_toBottomOf="@id/v_termofuse" />
 
     <View
-        android:id="@+id/v_mypage_privacy"
+        android:id="@+id/v_privacy"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="19dp"
-        app:layout_constraintBottom_toTopOf="@id/v_mypage_divider4"
+        app:layout_constraintBottom_toTopOf="@id/v_divider4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/v_mypage_termofuse" />
+        app:layout_constraintTop_toBottomOf="@id/v_termofuse" />
 
     <TextView
-        android:id="@+id/tv_mypage_privacy"
+        android:id="@+id/tv_privacy"
         style="?textAppearanceTitleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -279,34 +279,34 @@
         android:layout_marginBottom="22dp"
         android:text="@string/mypage_privacy"
         android:textColor="?white_text"
-        app:layout_constraintBottom_toBottomOf="@id/v_mypage_privacy"
-        app:layout_constraintStart_toStartOf="@id/tv_mypage_info"
-        app:layout_constraintTop_toTopOf="@id/v_mypage_privacy" />
+        app:layout_constraintBottom_toBottomOf="@id/v_privacy"
+        app:layout_constraintStart_toStartOf="@id/tv_info_title"
+        app:layout_constraintTop_toTopOf="@id/v_privacy" />
 
     <ImageView
-        android:id="@+id/iv_mypage_privacy_button"
+        android:id="@+id/iv_privacy_button"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:src="@drawable/ic_arrow_24"
-        app:layout_constraintBottom_toBottomOf="@id/tv_mypage_privacy"
+        app:layout_constraintBottom_toBottomOf="@id/tv_privacy"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@id/v_mypage_collections"
-        app:layout_constraintTop_toTopOf="@id/tv_mypage_privacy" />
+        app:layout_constraintEnd_toEndOf="@id/v_collections"
+        app:layout_constraintTop_toTopOf="@id/tv_privacy" />
 
     <TextView
-        android:id="@+id/tv_mypage_logout"
+        android:id="@+id/tv_logout"
         style="?textAppearanceBodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="19dp"
         android:text="로그아웃"
         android:textColor="?gray3"
-        app:layout_constraintBottom_toBottomOf="@id/v_mypage_divider4"
-        app:layout_constraintEnd_toStartOf="@id/v_mypage_divider4"
-        app:layout_constraintTop_toTopOf="@id/v_mypage_divider4" />
+        app:layout_constraintBottom_toBottomOf="@id/v_divider4"
+        app:layout_constraintEnd_toStartOf="@id/v_divider4"
+        app:layout_constraintTop_toTopOf="@id/v_divider4" />
 
     <View
-        android:id="@+id/v_mypage_divider4"
+        android:id="@+id/v_divider4"
         android:layout_width="1dp"
         android:layout_height="16dp"
         android:layout_marginTop="19dp"
@@ -315,17 +315,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/v_mypage_privacy" />
+        app:layout_constraintTop_toBottomOf="@id/v_privacy" />
 
     <TextView
-        android:id="@+id/tv_mypage_withdrawal"
+        android:id="@+id/tv_withdrawal"
         style="?textAppearanceBodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
         android:text="회원탈퇴"
         android:textColor="?gray3"
-        app:layout_constraintBottom_toBottomOf="@id/v_mypage_divider4"
-        app:layout_constraintStart_toEndOf="@id/v_mypage_divider4"
-        app:layout_constraintTop_toTopOf="@id/v_mypage_divider4" />
+        app:layout_constraintBottom_toBottomOf="@id/v_divider4"
+        app:layout_constraintStart_toEndOf="@id/v_divider4"
+        app:layout_constraintTop_toTopOf="@id/v_divider4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

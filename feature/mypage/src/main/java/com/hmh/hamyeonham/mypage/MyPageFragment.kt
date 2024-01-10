@@ -41,7 +41,6 @@ class MyPageFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         collectMainState()
-//        collectAndBindUserInfo()
     }
 
     private fun collectMainState() {

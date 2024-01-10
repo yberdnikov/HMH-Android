@@ -66,7 +66,6 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         clickRequireAccessibilityButton()
     }
 
-    // 각 버튼 클릭 시 권한 요청
     private fun clickRequireAccessibilityButton() {
         binding.clOnboardingPermission1.setOnClickListener {
             if (isAccessibilityServiceEnabled()) {

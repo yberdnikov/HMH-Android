@@ -50,8 +50,8 @@ class MyPageFragment : Fragment() {
     }
 
     private fun bindMyPageWithUserInfo(userInfo: UserInfo) {
-        binding.tvMypageName.text = userInfo.name
-        binding.tvMypagePoint.text = buildPointString(userInfo.point)
+        binding.tvUserName.text = userInfo.name
+        binding.tvPoint.text = buildPointString(userInfo.point)
     }
 
     private fun buildPointString(point: Int): SpannableStringBuilder {

@@ -28,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.btnLogin.setOnClickListener {
+        binding.ivLoginBackground.setOnClickListener {
             viewModel.loginWithKakaoApp(this)
         }
         setLoginViewPager()

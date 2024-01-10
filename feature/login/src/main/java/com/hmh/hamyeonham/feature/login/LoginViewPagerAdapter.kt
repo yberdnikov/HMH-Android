@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.hmh.hamyeonham.feature.login.model.LoginViewImageList
 import com.hmh.hamyeonham.feature.login.databinding.ItemLoginViewPagerBinding
+import com.hmh.hamyeonham.feature.login.model.LoginViewImageList
 
 class LoginViewPagerAdapter(private val imageList: List<LoginViewImageList>) :
     RecyclerView.Adapter<LoginViewPagerAdapter.PagerViewHolder>() {

@@ -23,26 +23,23 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/abl_appsearch"
+
+    <com.google.android.material.search.SearchBar
+        android:id="@+id/sb_appselection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/appselection_searchbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_top_appbar">
-
-        <com.google.android.material.search.SearchBar
-            android:id="@+id/search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/appselection_searchbar" />
-    </com.google.android.material.appbar.AppBarLayout>
+        app:layout_constraintTop_toBottomOf="@id/cl_top_appbar" />
 
     <com.google.android.material.search.SearchView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:hint="서치뷰힌트"
-        app:layout_anchor="@id/abl_appsearch">
-        <!-- Search suggestions/results go here (ScrollView, RecyclerView, etc.). -->
+        app:layout_anchor="@id/sb_appselection"
+        app:layout_constraintBottom_toTopOf="@id/bt_appselection"
+        app:layout_constraintTop_toBottomOf="@id/sb_appselection">
+
     </com.google.android.material.search.SearchView>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -51,7 +48,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bt_appselection"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/abl_appsearch" />
+        app:layout_constraintTop_toBottomOf="@id/sb_appselection" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bt_appselection"
@@ -60,7 +57,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="22dp"
-        android:background="@drawable/change_selector_btn_next"
+        android:background="@drawable/appselection_selector_btn_next"
         android:paddingVertical="14dp"
         android:text="@string/appselection_done"
         android:textAppearance="?textAppearanceTitleMedium"

@@ -22,6 +22,6 @@ class AppselectionAdapter :
     }
 
     override fun onBindViewHolder(holder: AppselectionViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.onBind(currentList[position])
     }
 }

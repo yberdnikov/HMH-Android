@@ -2,6 +2,7 @@ package com.hmh.hamyeonham.challenge.appselection
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hmh.hamyeonham.common.view.viewBinding
@@ -24,7 +25,7 @@ class AppselectionActivity : AppCompatActivity() {
         val packageManager = packageManager
         val resolveInfoList = packageManager.queryIntentActivities(intent, 0)
         return resolveInfoList.map {
-            it.activityInfo.applicationInfo.loadLabel(packageManager).toString()
+            it.activityInfo.packageName
         }
     }
 
@@ -41,6 +42,8 @@ class AppselectionActivity : AppCompatActivity() {
     private fun collectAndSubmitApplist() {
         val usageStaticsAdapter = binding.rvAppselection.adapter as? AppselectionAdapter
         val appList = getInstalledApps()
+        for (i in appList)
+            Log.d("app name", i)
         usageStaticsAdapter?.submitList(appList)
     }
 }

@@ -13,11 +13,11 @@
 
         <TextView
             android:id="@+id/tv_mypage_title"
-            style="?textAppearanceTitleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="20dp"
             android:text="@string/mypage_title"
+            android:textAppearance="?textAppearanceTitleLarge"
             android:textColor="?white_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,11 +40,11 @@
 
     <TextView
         android:id="@+id/tv_user_name"
-        style="?textAppearanceHeadlineLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="여민서"
+        android:textAppearance="?textAppearanceHeadlineLarge"
         android:textColor="@color/white_text"
         app:layout_constraintBottom_toBottomOf="@id/iv_profile"
         app:layout_constraintStart_toEndOf="@id/iv_profile"
@@ -73,11 +73,11 @@
 
     <TextView
         android:id="@+id/tv_point_title"
-        style="?textAppearanceBodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
         android:text="@string/mypage_point_title"
+        android:textAppearance="?textAppearanceBodyLarge"
         android:textColor="?white_text"
         app:layout_constraintEnd_toEndOf="@id/v_collection_line"
         app:layout_constraintStart_toStartOf="@id/v_collections"
@@ -85,12 +85,12 @@
 
     <TextView
         android:id="@+id/tv_point"
-        style="?textAppearanceHeadlineMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="14dp"
         android:text="100P"
+        android:textAppearance="?textAppearanceHeadlineMedium"
         android:textColor="?white_text"
         app:layout_constraintBottom_toBottomOf="@id/v_collections"
         app:layout_constraintEnd_toEndOf="@id/tv_point_title"
@@ -99,10 +99,10 @@
 
     <TextView
         android:id="@+id/tv_badge_title"
-        style="?textAppearanceBodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/mypage_badge_collection"
+        android:textAppearance="?textAppearanceBodyLarge"
         android:textColor="?gray3"
         app:layout_constraintEnd_toEndOf="@id/v_collections"
         app:layout_constraintStart_toStartOf="@id/v_collection_line"
@@ -130,13 +130,13 @@
 
     <TextView
         android:id="@+id/tv_journey"
-        style="?textAppearanceTitleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="15dp"
         android:drawablePadding="15dp"
         android:text="@string/mypage_journey"
+        android:textAppearance="?textAppearanceTitleSmall"
         android:textColor="?gray5"
         app:drawableStartCompat="@drawable/ic_journey_24"
         app:layout_constraintBottom_toBottomOf="@id/v_journey"
@@ -174,13 +174,13 @@
 
     <TextView
         android:id="@+id/tv_store"
-        style="?textAppearanceTitleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:layout_marginBottom="21dp"
         android:drawablePadding="15dp"
         android:text="@string/mypage_store"
+        android:textAppearance="?textAppearanceTitleSmall"
         android:textColor="?gray5"
         app:drawableStartCompat="@drawable/ic_store_24"
         app:layout_constraintBottom_toBottomOf="@id/v_store"
@@ -208,12 +208,12 @@
 
     <TextView
         android:id="@+id/tv_info_title"
-        style="?textAppearanceTitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="12dp"
         android:text="@string/mypage_info"
+        android:textAppearance="?textAppearanceTitleMedium"
         android:textColor="?gray2"
         app:layout_constraintStart_toStartOf="@id/tv_store"
         app:layout_constraintTop_toBottomOf="@id/v_store_info_divider" />
@@ -230,12 +230,12 @@
 
     <TextView
         android:id="@+id/tv_termofuse"
-        style="?textAppearanceTitleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="15dp"
         android:text="@string/mypage_termofuse"
+        android:textAppearance="?textAppearanceTitleSmall"
         android:textColor="?white_text"
         app:layout_constraintBottom_toBottomOf="@id/v_termofuse"
         app:layout_constraintStart_toStartOf="@id/tv_info_title"
@@ -272,12 +272,12 @@
 
     <TextView
         android:id="@+id/tv_privacy"
-        style="?textAppearanceTitleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
         android:layout_marginBottom="22dp"
         android:text="@string/mypage_privacy"
+        android:textAppearance="?textAppearanceTitleSmall"
         android:textColor="?white_text"
         app:layout_constraintBottom_toBottomOf="@id/v_privacy"
         app:layout_constraintStart_toStartOf="@id/tv_info_title"
@@ -295,11 +295,11 @@
 
     <TextView
         android:id="@+id/tv_logout"
-        style="?textAppearanceBodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="19dp"
         android:text="로그아웃"
+        android:textAppearance="?textAppearanceBodyLarge"
         android:textColor="?gray3"
         app:layout_constraintBottom_toBottomOf="@id/v_divider4"
         app:layout_constraintEnd_toStartOf="@id/v_divider4"
@@ -319,11 +319,11 @@
 
     <TextView
         android:id="@+id/tv_withdrawal"
-        style="?textAppearanceBodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
         android:text="회원탈퇴"
+        android:textAppearance="?textAppearanceBodyLarge"
         android:textColor="?gray3"
         app:layout_constraintBottom_toBottomOf="@id/v_divider4"
         app:layout_constraintStart_toEndOf="@id/v_divider4"

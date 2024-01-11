@@ -7,16 +7,16 @@ import javax.inject.Inject
 
 class GetUsageStatsListUseCase @Inject constructor(
     private val usageStatsRepository: UsageStatsRepository,
-    private val usageGoalsRepository: UsageGoalsRepository,
+    private val usageGoalsRepository: UsageGoalsRepository
 ) {
 
     companion object {
         private const val TOTAL = "total"
     }
 
-    fun getUsageStatsAndGoals(
+    operator fun invoke(
         startTime: Long,
-        endTime: Long,
+        endTime: Long
     ): List<UsageStatAndGoal> {
         val usageForSelectedApps = getUsageStatsAndGoalsForSelectedApps(startTime, endTime)
         val totalUsage = getTotalUsage(usageForSelectedApps)
@@ -27,7 +27,7 @@ class GetUsageStatsListUseCase @Inject constructor(
 
     private fun getUsageStatsAndGoalsForSelectedApps(
         startTime: Long,
-        endTime: Long,
+        endTime: Long
     ): List<UsageStatAndGoal> {
         val appList = getSelectedPackageList()
         return usageStatsRepository.getUsageStatForPackages(startTime, endTime, appList)
@@ -35,13 +35,13 @@ class GetUsageStatsListUseCase @Inject constructor(
                 createUsageStatAndGoal(
                     it.packageName,
                     it.totalTimeInForeground,
-                    it.packageName,
+                    it.packageName
                 )
             }
     }
 
     private fun getTotalUsage(
-        usageStatAndGoalList: List<UsageStatAndGoal>,
+        usageStatAndGoalList: List<UsageStatAndGoal>
     ): Long {
         return usageStatAndGoalList.sumOf {
             it.totalTimeInForeground
@@ -55,7 +55,7 @@ class GetUsageStatsListUseCase @Inject constructor(
     private fun createUsageStatAndGoal(
         packageName: String,
         totalTimeInForeground: Long,
-        goalKey: String,
+        goalKey: String
     ): UsageStatAndGoal {
         val goalTime = usageGoalsRepository.getUsageGoalTime(goalKey)
         return UsageStatAndGoal(packageName, totalTimeInForeground, goalTime)

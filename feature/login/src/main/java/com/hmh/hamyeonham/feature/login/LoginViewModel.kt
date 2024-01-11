@@ -1,50 +1,65 @@
 package com.hmh.hamyeonham.feature.login
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
-class LoginViewModel : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor() : ViewModel() {
+    data class KakaoLoginState(
+        val isSuccessResult: Boolean = false,
+        val accessToken: String? = null,
+        val refreshToken: String? = null,
+        val kakaoNickname: String? = null,
+    )
 
-    private val _isSuccessKakaoLogin = MutableStateFlow(false)
-    val isSuccessKakaoLogin: StateFlow<Boolean> = _isSuccessKakaoLogin
+    private val _kakaoLoginState = MutableStateFlow(KakaoLoginState())
+    val kakaoLoginState = _kakaoLoginState.asStateFlow()
 
-    private val _accessToken = MutableStateFlow<String?>(null)
-    val accessToken: StateFlow<String?> = _accessToken
-
-    private val _refreshToken = MutableStateFlow<String?>(null)
-    val refreshToken: StateFlow<String?> = _refreshToken
-
-    private val _kakaoNickname = MutableStateFlow<String?>("")
-    val kakaoNickname: StateFlow<String?> = _kakaoNickname
+    private fun updateState(transform: KakaoLoginState.() -> KakaoLoginState) {
+        val currentState = kakaoLoginState.value
+        val newState = currentState.transform()
+        _kakaoLoginState.value = newState
+    }
 
     private var kakaoAccountCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error == null && token != null) {
-            _accessToken.value = token.accessToken
-            _refreshToken.value = token.refreshToken
-            _isSuccessKakaoLogin.value = true
-            Log.d(
-                "LoginViewModel",
-                "accessToken: ${_accessToken.value}, refreshToken: ${_refreshToken.value}",
-            )
+            updateState {
+                copy(
+                    isSuccessResult = true,
+                    accessToken = token.accessToken,
+                    refreshToken = token.refreshToken,
+                )
+            }
         }
     }
 
     private var kakaoAppCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) {
             if (!(error is ClientError && error.reason == ClientErrorCause.Cancelled)) {
-                _isSuccessKakaoLogin.value = false
+                updateState {
+                    copy(
+                        isSuccessResult = false,
+                        accessToken = "",
+                        refreshToken = "",
+                    )
+                }
             }
         } else if (token != null) {
-            _accessToken.value = token.accessToken
-            _refreshToken.value = token.refreshToken
-            _isSuccessKakaoLogin.value = true
+            updateState {
+                copy(
+                    isSuccessResult = true,
+                    accessToken = token.accessToken,
+                    refreshToken = token.refreshToken,
+                )
+            }
         }
     }
 
@@ -68,7 +83,11 @@ class LoginViewModel : ViewModel() {
                 // 닉네임 정보 얻기 실패 시
             } else if (user != null) {
                 val kakaoNickname = user.kakaoAccount?.profile?.nickname
-                _kakaoNickname.value = kakaoNickname
+                updateState {
+                    copy(
+                        kakaoNickname = kakaoNickname,
+                    )
+                }
             }
         }
     }

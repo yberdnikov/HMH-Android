@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import com.hmh.hamyeonham.common.view.setupScreentimeGoalRange
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectScreentimeBinding
-import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
+import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 
 class OnBoardingSelectScreenTimeFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingSelectScreentimeBinding::bind)
@@ -30,6 +30,6 @@ class OnBoardingSelectScreenTimeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.npOnboardingScreentimeGoal.setupScreentimeGoalRange(1, 6)
-        activityViewModel.activeActivityNextButton()
+        activityViewModel.changeStateNextButton(true)
     }
 }

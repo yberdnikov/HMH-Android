@@ -18,8 +18,8 @@ import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.R
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingRequestPermissionBinding
 import com.hmh.hamyeonham.feature.onboarding.model.OnBoardingPermissionsState
-import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingRequestPermissionViewModel
-import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
+import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingRequestPermissionViewModel
+import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -104,7 +104,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
 
     private fun updateNextButtonState(permissionsState: OnBoardingPermissionsState) {
         if (permissionsState.isAccessibilityEnabled && permissionsState.isUsageStatsEnabled && permissionsState.isOverlayEnabled) {
-            activityViewModel.activeActivityNextButton()
+            activityViewModel.changeStateNextButton(true)
         }
     }
 

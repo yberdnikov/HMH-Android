@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.feature.onboarding.viewModel
+package com.hmh.hamyeonham.feature.onboarding.viewmodel
 
 import android.app.usage.UsageStatsManager
 import android.content.Context

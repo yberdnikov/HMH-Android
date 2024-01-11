@@ -22,6 +22,7 @@ class SampleActivity : AppCompatActivity() {
         initSplashAnimation(splashScreen)
         setContentView(binding.root)
         startActivity(Intent(this, MainActivity::class.java))
+//        startActivity(Intent(this, StaticsActivity::class.java))
         finish()
     }
 
@@ -30,14 +31,16 @@ class SampleActivity : AppCompatActivity() {
             val splashScreenView = splashScreenViewProvider.view
             val fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out)
 
-            fadeOut.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationStart(animation: Animation) {}
-                override fun onAnimationEnd(animation: Animation) {
-                    splashScreenViewProvider.remove()
-                }
+            fadeOut.setAnimationListener(
+                object : Animation.AnimationListener {
+                    override fun onAnimationStart(animation: Animation) {}
+                    override fun onAnimationEnd(animation: Animation) {
+                        splashScreenViewProvider.remove()
+                    }
 
-                override fun onAnimationRepeat(animation: Animation) {}
-            })
+                    override fun onAnimationRepeat(animation: Animation) {}
+                },
+            )
             splashScreenView.startAnimation(fadeOut)
         }
     }

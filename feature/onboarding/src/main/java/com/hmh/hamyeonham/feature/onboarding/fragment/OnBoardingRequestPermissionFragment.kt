@@ -69,7 +69,11 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.permissionsState.onEach { permissionsState ->
-            updateNextButtonState(permissionsState)
+            permissionsState.run {
+                val isPermissionAllGranted =
+                    isAccessibilityEnabled && isUsageStatsEnabled && isOverlayEnabled
+                activityViewModel.changeStateNextButton(isPermissionAllGranted)
+            }
         }.launchIn(viewLifeCycleScope)
 
         clickRequireAccessibilityButton()

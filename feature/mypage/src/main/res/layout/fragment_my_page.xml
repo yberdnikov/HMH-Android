@@ -135,10 +135,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="15dp"
-        android:drawableStart="@drawable/ic_journey_24"
         android:drawablePadding="15dp"
         android:text="@string/mypage_journey"
         android:textColor="?gray5"
+        app:drawableStartCompat="@drawable/ic_journey_24"
         app:layout_constraintBottom_toBottomOf="@id/v_journey"
         app:layout_constraintStart_toStartOf="@id/v_collections"
         app:layout_constraintTop_toTopOf="@id/v_journey" />
@@ -154,7 +154,7 @@
         app:layout_constraintTop_toTopOf="@id/tv_journey" />
 
     <View
-        android:id="@+id/v_divider1"
+        android:id="@+id/v_journey_store_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?gray8"
@@ -166,10 +166,10 @@
         android:id="@+id/v_store"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:layout_constraintBottom_toTopOf="@id/v_divider2"
+        app:layout_constraintBottom_toTopOf="@id/v_store_info_divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/v_divider1" />
+        app:layout_constraintTop_toBottomOf="@id/v_journey_store_divider" />
 
 
     <TextView
@@ -179,10 +179,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:layout_marginBottom="21dp"
-        android:drawableStart="@drawable/ic_store_24"
         android:drawablePadding="15dp"
         android:text="@string/mypage_store"
         android:textColor="?gray5"
+        app:drawableStartCompat="@drawable/ic_store_24"
         app:layout_constraintBottom_toBottomOf="@id/v_store"
         app:layout_constraintStart_toStartOf="@id/tv_journey"
         app:layout_constraintTop_toTopOf="@id/v_store" />
@@ -198,7 +198,7 @@
         app:layout_constraintTop_toTopOf="@id/tv_store" />
 
     <View
-        android:id="@+id/v_divider2"
+        android:id="@+id/v_store_info_divider"
         android:layout_width="wrap_content"
         android:layout_height="10dp"
         android:background="?gray8"
@@ -216,7 +216,7 @@
         android:text="@string/mypage_info"
         android:textColor="?gray2"
         app:layout_constraintStart_toStartOf="@id/tv_store"
-        app:layout_constraintTop_toBottomOf="@id/v_divider2" />
+        app:layout_constraintTop_toBottomOf="@id/v_store_info_divider" />
 
     <View
         android:id="@+id/v_termofuse"
@@ -252,7 +252,7 @@
         app:layout_constraintTop_toTopOf="@id/tv_termofuse" />
 
     <View
-        android:id="@+id/v_divider3"
+        android:id="@+id/v_termofuse_privacy_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?gray8"

@@ -52,8 +52,25 @@ class OnBoardingSelectDataFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        fragmentType?.let { viewModel.initQuestionData(it) }
+        initFragmentType()
+    }
 
+    private fun initViews() {
+        initQuestionButton()
+        viewModel.onBoardingSelectDataState.onEach {
+            binding.apply {
+                val onBoardingQuestion = it.onBoardingQuestion
+                tvOnboardingSelectDataQuestion.text = onBoardingQuestion.title
+                tvOnboardingSelectDataDescription.text = onBoardingQuestion.description
+                btnOnboardingSelectData1.text = onBoardingQuestion.options.getOrNull(0).orEmpty()
+                btnOnboardingSelectData2.text = onBoardingQuestion.options.getOrNull(1).orEmpty()
+                btnOnboardingSelectData3.text = onBoardingQuestion.options.getOrNull(2).orEmpty()
+                btnOnboardingSelectData4.text = onBoardingQuestion.options.getOrNull(3).orEmpty()
+            }
+        }.launchIn(lifecycleScope)
+    }
+
+    private fun initQuestionButton() {
         val onboardingFragmentButtonList = listOf(
             binding.btnOnboardingSelectData1,
             binding.btnOnboardingSelectData2,
@@ -68,25 +85,13 @@ class OnBoardingSelectDataFragment : Fragment() {
         }
     }
 
-    private fun initViews() {
-        viewModel.onBoardingSelectDataState.onEach {
-            binding.apply {
-                val onBoardingQuestion = it.onBoardingQuestion
-                tvOnboardingSelectDataQuestion.text = onBoardingQuestion.title
-                tvOnboardingSelectDataDescription.text = onBoardingQuestion.description
-                btnOnboardingSelectData1.text = onBoardingQuestion.options.getOrNull(0).orEmpty()
-                btnOnboardingSelectData2.text = onBoardingQuestion.options.getOrNull(1).orEmpty()
-                btnOnboardingSelectData3.text = onBoardingQuestion.options.getOrNull(2).orEmpty()
-                btnOnboardingSelectData4.text = onBoardingQuestion.options.getOrNull(3).orEmpty()
+    private fun initFragmentType() {
+        fragmentType?.let {
+            viewModel.initQuestionData(it)
+            if (it == OnBoardingFragmentType.SELECT_DATA_PERIOD) {
+                binding.btnOnboardingSelectData3.isEnabled = false
+                binding.btnOnboardingSelectData4.isEnabled = false
             }
-        }.launchIn(lifecycleScope)
-    }
-
-    private fun String.toOnboardingFragmentType(): OnBoardingFragmentType {
-        return try {
-            OnBoardingFragmentType.valueOf(this)
-        } catch (e: Exception) {
-            OnBoardingFragmentType.SELECT_DATA_TIME
         }
     }
 
@@ -139,6 +144,14 @@ class OnBoardingSelectDataFragment : Fragment() {
             }
 
             else -> {}
+        }
+    }
+
+    private fun String.toOnboardingFragmentType(): OnBoardingFragmentType {
+        return try {
+            OnBoardingFragmentType.valueOf(this)
+        } catch (e: Exception) {
+            OnBoardingFragmentType.SELECT_DATA_TIME
         }
     }
 }

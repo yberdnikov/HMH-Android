@@ -31,34 +31,34 @@
 
     <TextView
         android:id="@+id/tv_appname"
-        style="?textAppearanceLabelLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
         android:layout_marginTop="2dp"
         android:text="Instagram"
+        android:textAppearance="?textAppearanceLabelLarge"
         android:textColor="?gray1"
         app:layout_constraintStart_toEndOf="@id/iv_appicon"
         app:layout_constraintTop_toTopOf="@id/iv_appicon" />
 
     <TextView
         android:id="@+id/tv_app_goal_time"
-        style="?textAppearanceBodySmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
         android:text="2시간 30분"
+        android:textAppearance="?textAppearanceBodySmall"
         android:textColor="?white_text"
         app:layout_constraintBottom_toBottomOf="@id/iv_appicon"
         app:layout_constraintStart_toStartOf="@id/tv_appname" />
 
     <TextView
         android:id="@+id/tv_app_time_left"
-        style="?textAppearanceTitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:text="1시간 남음"
+        android:textAppearance="?textAppearanceTitleMedium"
         android:textColor="?white_text"
         app:layout_constraintBottom_toBottomOf="@id/pb_app_usage"
         app:layout_constraintEnd_toEndOf="@id/pb_app_usage"

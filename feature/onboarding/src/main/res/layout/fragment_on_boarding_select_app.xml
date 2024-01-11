@@ -13,8 +13,8 @@
         android:layout_marginHorizontal="21dp"
         android:layout_marginTop="30dp"
         android:text="@string/onboarding_select_app_title"
-        android:textColor="#121212"
-        android:textSize="20sp"
+        android:textColor="?white_text"
+        style="?textAppearanceDisplaySmall"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,7 +24,8 @@
         android:layout_height="0dp"
         android:layout_marginStart="21dp"
         android:layout_marginTop="7dp"
-        android:textSize="13sp"
+        style="?textAppearanceBodyMedium"
+        android:textColor="?gray2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_onboarding_select_app_title"
         android:text="@string/onboarding_select_app_description" />

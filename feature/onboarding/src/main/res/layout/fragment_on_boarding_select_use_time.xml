@@ -14,8 +14,8 @@
         android:layout_marginHorizontal="21dp"
         android:layout_marginTop="30dp"
         android:text="@string/onboarding_use_time_goal_title"
-        android:textColor="#121212"
-        android:textSize="20sp"
+        android:textColor="?white_text"
+        style="@style/TextAppearance.Hmh.DisplaySmall"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +26,8 @@
         android:layout_marginStart="21dp"
         android:layout_marginTop="7dp"
         android:text="@string/onboarding_use_time_goal_description"
-        android:textSize="13sp"
+        android:textColor="?gray2"
+        style="@style/TextAppearance.Hmh.BodyMedium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_onboarding_use_time_goal_title" />
 
@@ -38,8 +39,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_onboarding_use_time_goal_description"
-        app:layout_constraintVertical_bias="0.3">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
 
         <NumberPicker
             android:id="@+id/np_onboarding_use_time_goal_hour"
@@ -58,7 +59,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="13dp"
             android:text="@string/all_hour"
-            android:textSize="20sp"
+            android:textColor="?gray2"
+            style="@style/TextAppearance.Hmh.HeadlineSmall"
             app:layout_constraintBottom_toBottomOf="@+id/np_onboarding_use_time_goal_hour"
             app:layout_constraintStart_toEndOf="@+id/np_onboarding_use_time_goal_hour"
             app:layout_constraintTop_toTopOf="@+id/np_onboarding_use_time_goal_hour" />
@@ -80,7 +82,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="13dp"
             android:text="@string/all_minute"
-            android:textSize="20sp"
+            android:textColor="?gray2"
+            style="@style/TextAppearance.Hmh.HeadlineSmall"
             app:layout_constraintBottom_toBottomOf="@+id/np_onboarding_use_time_goal_minute"
             app:layout_constraintStart_toEndOf="@+id/np_onboarding_use_time_goal_minute"
             app:layout_constraintTop_toTopOf="@+id/np_onboarding_use_time_goal_minute" />

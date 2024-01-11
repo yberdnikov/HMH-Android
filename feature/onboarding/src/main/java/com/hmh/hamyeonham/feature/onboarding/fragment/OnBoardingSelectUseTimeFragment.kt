@@ -27,7 +27,8 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.npOnboardingUseTimeGoalHour.setupScreentimeGoalRange(1, 6)
+        binding.npOnboardingUseTimeGoalHour.setupScreentimeGoalRange(0, 1)
         binding.npOnboardingUseTimeGoalMinute.setupScreentimeGoalRange(0, 59)
+        activityViewModel.activeActivityNextButton()
     }
 }

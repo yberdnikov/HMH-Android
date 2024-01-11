@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.hmh.hamyeonham.common.view.setupScreentimeGoalRange
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectScreentimeBinding
@@ -31,5 +30,6 @@ class OnBoardingSelectScreenTimeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.npOnboardingScreentimeGoal.setupScreentimeGoalRange(1, 6)
+        activityViewModel.activeActivityNextButton()
     }
 }

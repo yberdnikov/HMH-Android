@@ -2,6 +2,7 @@ package com.hmh.hamyeonham.feature.onboarding
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +47,7 @@ class OnBoardingActivity : AppCompatActivity() {
             val currentItem = viewPager.currentItem
             if (currentItem > 0) {
                 viewPager.currentItem = currentItem - 1
+                updateProgressBar(currentItem - 1, viewPager.adapter?.itemCount ?: 1)
             } else {
                 onBackPressedCallback.isEnabled = false
                 onBackPressedDispatcher.onBackPressed()
@@ -58,17 +60,21 @@ class OnBoardingActivity : AppCompatActivity() {
             val currentItem = viewPager.currentItem
             val lastItem = pagerAdapter.itemCount - 1
             when {
-                currentItem < lastItem -> viewPager.currentItem = currentItem + 1
+                currentItem < lastItem -> {
+                    viewPager.currentItem = currentItem + 1
+                    updateProgressBar(currentItem + 1, viewPager.adapter?.itemCount ?: 1)
+                }
                 currentItem == lastItem -> startOnBoardingDoneSignUpActivity()
             }
         }
     }
 
     private fun checkNextButtonEnable() {
-        viewModel.clickNextButtonEnable.flowWithLifecycle(lifecycle).onEach { clickNextButtonEnable ->
-            binding.btnOnboardingNext.isEnabled = clickNextButtonEnable
-            binding.btnOnboardingNext.isSelected = clickNextButtonEnable
-        }.launchIn(lifecycleScope)
+        viewModel.clickNextButtonEnable.flowWithLifecycle(lifecycle)
+            .onEach { clickNextButtonEnable ->
+                binding.btnOnboardingNext.isEnabled = clickNextButtonEnable
+                binding.btnOnboardingNext.isSelected = clickNextButtonEnable
+            }.launchIn(lifecycleScope)
     }
 
     private fun setBackPressedCallback() {
@@ -96,6 +102,13 @@ class OnBoardingActivity : AppCompatActivity() {
             isUserInputEnabled = false
         }
         return pagerAdapter
+    }
+
+    private fun updateProgressBar(currentItem: Int, totalItems: Int) {
+        val progress = (currentItem + 1).toFloat() / totalItems.toFloat()
+        val progressBarWidth = (progress * 100).toInt()
+        Log.d("progressBarWidth", progressBarWidth.toString())
+        binding.pbOnboarding.progress = progressBarWidth
     }
 
     override fun onDestroy() {

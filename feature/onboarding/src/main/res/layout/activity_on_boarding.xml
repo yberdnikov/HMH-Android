@@ -6,6 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".OnBoardingActivity">
 
+    <ImageView
+        android:id="@+id/iv_onboarding_back"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:paddingVertical="5dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="9dp"
+        android:src="@drawable/all_back_btn_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/pb_onboarding"
+        style="@style/Widget.Hmh.OnBoardingProgressIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="3dp"
+        android:progress="14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_onboarding_back" />
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_onboarding_container"
         android:layout_width="match_parent"
@@ -13,7 +38,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_onboarding_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_onboarding_back" />
+        app:layout_constraintTop_toBottomOf="@+id/pb_onboarding" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_onboarding_next"
@@ -24,23 +49,9 @@
         android:background="@drawable/onboarding_selector_btn_next"
         android:gravity="center"
         android:text="@string/all_next"
-        android:textColor="#DBDAE7"
+        android:textColor="?white_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/iv_onboarding_back"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:paddingVertical="5dp"
-        android:paddingEnd="9dp"
-        android:paddingStart="8dp"
-        android:src="@drawable/all_back_btn_medium"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -56,7 +56,28 @@ class OnBoardingSelectDataFragment : Fragment() {
             viewModel.initQuestionData(fragmentType)
         }
     }
+    override fun onResume() {
+        super.onResume()
 
+        val onboardingFragmentButtonList = listOf(
+            binding.btnOnboardingSelectData1,
+            binding.btnOnboardingSelectData2,
+            binding.btnOnboardingSelectData3,
+            binding.btnOnboardingSelectData4,
+        )
+
+        onboardingFragmentButtonList.forEachIndexed { index, button ->
+            button.setOnClickListener {
+                activityViewModel.onClickFragmentBtn(index)
+            }
+        }
+
+        activityViewModel.buttonInfoList.onEach { buttonInfoList ->
+            onboardingFragmentButtonList.forEachIndexed { i, button ->
+                button.isSelected = buttonInfoList[i].isClicked
+            }
+        }.launchIn(viewLifeCycleScope)
+    }
     private fun initViews() {
         viewModel.onBoardingSelectDataState.onEach {
             binding.apply {

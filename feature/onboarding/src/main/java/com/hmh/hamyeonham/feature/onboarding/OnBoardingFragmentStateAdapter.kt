@@ -7,6 +7,7 @@ import com.hmh.hamyeonham.feature.onboarding.fragment.OnBoardingRequestPermissio
 import com.hmh.hamyeonham.feature.onboarding.fragment.OnBoardingSelectAppFragment
 import com.hmh.hamyeonham.feature.onboarding.fragment.OnBoardingSelectDataFragment
 import com.hmh.hamyeonham.feature.onboarding.fragment.OnBoardingSelectScreenTimeFragment
+import com.hmh.hamyeonham.feature.onboarding.fragment.OnBoardingSelectUseTimeFragment
 
 enum class OnBoardingFragmentType {
     SELECT_DATA_TIME,
@@ -41,7 +42,7 @@ class OnBoardingFragmentStateAdapter(fragmentActivity: FragmentActivity) :
             OnBoardingFragmentType.SELECT_SCREEN_TIME_GOAL -> OnBoardingSelectScreenTimeFragment()
             OnBoardingFragmentType.REQUEST_PERMISSION -> OnBoardingRequestPermissionFragment()
             OnBoardingFragmentType.SELECT_APP -> OnBoardingSelectAppFragment()
-            OnBoardingFragmentType.SELECT_USE_TIME_GOAL -> OnBoardingSelectScreenTimeFragment()
+            OnBoardingFragmentType.SELECT_USE_TIME_GOAL -> OnBoardingSelectUseTimeFragment()
         }
     }
 

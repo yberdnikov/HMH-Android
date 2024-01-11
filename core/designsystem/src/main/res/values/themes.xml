@@ -86,4 +86,25 @@
         <item name="backgroundTint">@color/blue_purple_button</item>
     </style>
 
+    <style name="Widget.Hmh.ProgressIndicator" parent="Widget.Material3.LinearProgressIndicator">
+        <item name="trackColor">?gray7</item>
+        <item name="indicatorColor">?blue_purple_opacity_70</item>
+        <item name="trackThickness">71dp</item>
+        <item name="trackCornerRadius">6dp</item>
+    </style>
+
+    <style name="Widget.Hmh.TotalProgressIndicator" parent="Widget.Material3.LinearProgressIndicator">
+        <item name="trackColor">?gray3</item>
+        <item name="indicatorColor">?white_btn</item>
+        <item name="trackThickness">6dp</item>
+        <item name="trackCornerRadius">6dp</item>
+    </style>
+
+    <style name="Widget.Hmh.OnBoardingProgressIndicator" parent="Widget.Material3.LinearProgressIndicator">
+        <item name="trackColor">?gray2</item>
+        <item name="indicatorColor">?blue_purple_progress</item>
+        <item name="trackThickness">4dp</item>
+        <item name="trackCornerRadius">6dp</item>
+    </style>
+
 </resources>

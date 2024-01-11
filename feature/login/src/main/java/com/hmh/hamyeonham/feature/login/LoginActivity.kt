@@ -45,20 +45,18 @@ class LoginActivity : AppCompatActivity() {
         }.launchIn(lifecycleScope)
     }
 
+    data class LoginViewImageList(
+        val viewPagerImage: Int,
+    )
+
     private fun setLoginViewPager() {
-        val loginViewImageListLists = listOf(
-            LoginViewImageList(
+        val loginViewImageList = listOf(
                 R.drawable.login_sample_rectagle_viewpager,
-            ),
-            LoginViewImageList(
                 R.drawable.login_sample_rectagle_viewpager,
-            ),
-            LoginViewImageList(
                 R.drawable.login_sample_rectagle_viewpager,
-            ),
         )
 
-        loginViewPagerAdapter = LoginViewPagerAdapter(loginViewImageListLists)
+        loginViewPagerAdapter = LoginViewPagerAdapter(loginViewImageList)
         binding.run {
             vpLogin.adapter = loginViewPagerAdapter
             indicatorLoginDots.attachTo(binding.vpLogin)

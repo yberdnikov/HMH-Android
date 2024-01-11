@@ -4,7 +4,8 @@
     <application>
         <activity
             android:name="com.hmh.hamyeonham.challenge.appselection.AppselectionActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysVisible" />
     </application>
 
 </manifest>

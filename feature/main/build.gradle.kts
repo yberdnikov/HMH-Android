@@ -9,13 +9,16 @@ android {
 
 dependencies {
 
+    // Navigation
     //Feature
     implementation(projects.feature.challenge)
+    implementation(projects.feature.mypage)
 
     //Navigation
     implementation(libs.bundles.navigation)
 
     implementation(projects.core.common)
     implementation(projects.core.designsystem)
+
     implementation(projects.core.viewmodel.main)
 }

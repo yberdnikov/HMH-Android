@@ -6,8 +6,8 @@ import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
 import com.hmh.hamyeonham.usagestats.usecase.GetUsageStatsListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @HiltViewModel
 class StaticsViewModel @Inject constructor(
@@ -21,7 +21,8 @@ class StaticsViewModel @Inject constructor(
     }
 
     private fun getUsageStatsAndGoals(startTime: Long, endTime: Long) {
-        usageStatAndGoalList.value = getUsageStatsListUseCase.getUsageStatsAndGoals(startTime, endTime)
+        usageStatAndGoalList.value =
+            getUsageStatsListUseCase.getUsageStatsAndGoals(startTime, endTime)
         Log.d("usageStatAndGoalList.value", usageStatAndGoalList.value.toString())
         usageStatAndGoalList.value.forEach {
             Log.d("usage.packageName", it.packageName)

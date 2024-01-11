@@ -9,8 +9,8 @@ import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.statistics.databinding.ActivityStaticsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class StaticsActivity : AppCompatActivity() {

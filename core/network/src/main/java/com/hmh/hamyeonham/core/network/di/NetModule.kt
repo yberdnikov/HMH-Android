@@ -24,7 +24,7 @@ import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-private const val HMHBaseUrl = ""
+private const val HMHBaseUrl = BuildConfig.HMH_BASE_URL
 
 @Module
 @InstallIn(SingletonComponent::class)

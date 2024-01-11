@@ -9,7 +9,7 @@ import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.databinding.ActivitySampleBinding
-import com.hmh.hamyeonham.feature.main.MainActivity
+import com.hmh.hamyeonham.feature.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,8 +21,7 @@ class SampleActivity : AppCompatActivity() {
         val splashScreen = installSplashScreen()
         initSplashAnimation(splashScreen)
         setContentView(binding.root)
-        startActivity(Intent(this, MainActivity::class.java))
-//        startActivity(Intent(this, StaticsActivity::class.java))
+        startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
 
@@ -31,16 +30,14 @@ class SampleActivity : AppCompatActivity() {
             val splashScreenView = splashScreenViewProvider.view
             val fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out)
 
-            fadeOut.setAnimationListener(
-                object : Animation.AnimationListener {
-                    override fun onAnimationStart(animation: Animation) {}
-                    override fun onAnimationEnd(animation: Animation) {
-                        splashScreenViewProvider.remove()
-                    }
+            fadeOut.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation) {}
+                override fun onAnimationEnd(animation: Animation) {
+                    splashScreenViewProvider.remove()
+                }
 
-                    override fun onAnimationRepeat(animation: Animation) {}
-                },
-            )
+                override fun onAnimationRepeat(animation: Animation) {}
+            })
             splashScreenView.startAnimation(fadeOut)
         }
     }

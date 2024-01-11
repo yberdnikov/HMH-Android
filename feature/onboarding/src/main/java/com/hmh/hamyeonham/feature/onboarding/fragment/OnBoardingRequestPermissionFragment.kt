@@ -12,7 +12,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
 import com.hmh.hamyeonham.common.fragment.toast
+import com.hmh.hamyeonham.common.fragment.viewLifeCycle
 import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.R
@@ -67,17 +69,15 @@ class OnBoardingRequestPermissionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.permissionsState.onEach { permissionsState ->
-            permissionsState.run {
-                val isPermissionAllGranted =
-                    isAccessibilityEnabled && isUsageStatsEnabled && isOverlayEnabled
-                activityViewModel.changeStateNextButton(isPermissionAllGranted)
-            }
-        }.launchIn(viewLifeCycleScope)
-
+        collectPermissionState()
         clickRequireAccessibilityButton()
         viewModel.checkPermissions(requireContext())
+    }
+
+    private fun collectPermissionState() {
+        viewModel.permissionsState.flowWithLifecycle(viewLifeCycle).onEach { permissionsState ->
+            updateNextButtonState(permissionsState)
+        }.launchIn(viewLifeCycleScope)
     }
 
     private fun clickRequireAccessibilityButton() {
@@ -107,8 +107,10 @@ class OnBoardingRequestPermissionFragment : Fragment() {
     }
 
     private fun updateNextButtonState(permissionsState: OnBoardingPermissionsState) {
-        if (permissionsState.isAccessibilityEnabled && permissionsState.isUsageStatsEnabled && permissionsState.isOverlayEnabled) {
-            activityViewModel.changeStateNextButton(true)
+        permissionsState.run {
+            if (isAccessibilityEnabled && isUsageStatsEnabled && isOverlayEnabled) {
+                activityViewModel.changeStateNextButton(true)
+            }
         }
     }
 

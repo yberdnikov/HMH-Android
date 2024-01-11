@@ -76,6 +76,7 @@ class OnBoardingActivity : AppCompatActivity() {
             when (it) {
                 is OnBoardingEffect.ActiveNextButton -> {
                     binding.btnOnboardingNext.isEnabled = it.isActive
+                    binding.btnOnboardingNext.isSelected = it.isActive
                 }
             }
         }.launchIn(lifecycleScope)

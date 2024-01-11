@@ -20,7 +20,6 @@ dependencyResolutionManagement {
 rootProject.name = "HMH-Android"
 include(":app")
 
-include(":feature:statistics")
 include(":feature:login")
 include(":feature:challenge")
 include(":feature:onboarding")

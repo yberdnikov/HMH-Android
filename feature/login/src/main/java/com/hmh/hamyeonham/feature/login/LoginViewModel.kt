@@ -1,12 +1,90 @@
 package com.hmh.hamyeonham.feature.login
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.kakao.sdk.common.model.ClientError
+import com.kakao.sdk.common.model.ClientErrorCause
+import com.kakao.sdk.user.UserApiClient
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
-class LoginViewModel : ViewModel(){
+@HiltViewModel
+class LoginViewModel @Inject constructor() : ViewModel() {
+    data class KakaoLoginState(
+        val isSuccessResult: Boolean = false,
+        val accessToken: String? = null,
+        val refreshToken: String? = null,
+        val kakaoNickname: String? = null,
+    )
 
-    private val _kakaoLoginResult = MutableLiveData<Boolean>()
-    val kakaoLoginResult: LiveData<Boolean> get() = _kakaoLoginResult
+    private val _kakaoLoginState = MutableStateFlow(KakaoLoginState())
+    val kakaoLoginState = _kakaoLoginState.asStateFlow()
 
+    private fun updateState(transform: KakaoLoginState.() -> KakaoLoginState) {
+        val currentState = kakaoLoginState.value
+        val newState = currentState.transform()
+        _kakaoLoginState.value = newState
+    }
+
+    fun loginWithKakaoApp(context: Context) {
+        if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
+            UserApiClient.instance.loginWithKakaoTalk(context) { token, error ->
+                if (error != null) {
+                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
+                        return@loginWithKakaoTalk
+                    }
+                    loginWithKakaoAccount(context)
+                } else if (token != null) {
+                    updateState {
+                        copy(
+                            isSuccessResult = true,
+                            accessToken = token.accessToken,
+                            refreshToken = token.refreshToken,
+                        )
+                    }
+                }
+            }
+        } else {
+            loginWithKakaoAccount(context)
+        }
+    }
+
+    private fun loginWithKakaoAccount(context: Context) {
+        UserApiClient.instance.loginWithKakaoAccount(context) { token, error ->
+            if (error != null) {
+                updateState {
+                    copy(
+                        isSuccessResult = false,
+                        accessToken = "",
+                        refreshToken = "",
+                    )
+                }
+            } else if (token != null) {
+                updateState {
+                    copy(
+                        isSuccessResult = true,
+                        accessToken = token.accessToken,
+                        refreshToken = token.refreshToken,
+                    )
+                }
+            }
+        }
+    }
+
+    fun getKakaoUserNickname() {
+        UserApiClient.instance.me { user, error ->
+            if (error != null) {
+                // 닉네임 정보 얻기 실패 시
+            } else if (user != null) {
+                val kakaoNickname = user.kakaoAccount?.profile?.nickname
+                updateState {
+                    copy(
+                        kakaoNickname = kakaoNickname,
+                    )
+                }
+            }
+        }
+    }
 }

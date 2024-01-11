@@ -4,10 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.hmh.hamyeonham.feature.login.data.DummyImage
 import com.hmh.hamyeonham.feature.login.databinding.ItemLoginViewPagerBinding
 
-class LoginViewPagerAdapter(private val imageList: List<DummyImage>) :
+class LoginViewPagerAdapter(private val imageList: List<Int>) :
     RecyclerView.Adapter<LoginViewPagerAdapter.PagerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerViewHolder {
@@ -19,9 +18,9 @@ class LoginViewPagerAdapter(private val imageList: List<DummyImage>) :
     class PagerViewHolder(private val binding: ItemLoginViewPagerBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun onBindView(imageInfo: DummyImage) {
+        fun onBindView(imageInfo: Int) {
             binding.run {
-                ivLoginViewPagerItem.load(imageInfo.Image) {
+                ivLoginViewPagerItem.load(imageInfo) {
                     placeholder(R.drawable.login_sample_rectagle_viewpager)
                     error(R.drawable.login_sample_rectagle_viewpager)
                 }

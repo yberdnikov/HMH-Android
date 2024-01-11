@@ -7,16 +7,15 @@ import javax.inject.Inject
 
 class GetUsageStatsListUseCase @Inject constructor(
     private val usageStatsRepository: UsageStatsRepository,
-    private val usageGoalsRepository: UsageGoalsRepository,
+    private val usageGoalsRepository: UsageGoalsRepository
 ) {
-
     companion object {
         private const val TOTAL = "total"
     }
 
     fun getUsageStatsAndGoals(
         startTime: Long,
-        endTime: Long,
+        endTime: Long
     ): List<UsageStatAndGoal> {
         val totalUsage = getTotalUsage(startTime, endTime)
         val usageForSelectedApps = getUsageStatsAndGoalsForSelectedApps(startTime, endTime)
@@ -27,7 +26,7 @@ class GetUsageStatsListUseCase @Inject constructor(
 
     private fun getUsageStatsAndGoalsForSelectedApps(
         startTime: Long,
-        endTime: Long,
+        endTime: Long
     ): List<UsageStatAndGoal> {
         val appList = getSelectedPackageList()
         return usageStatsRepository.getUsageTimeForPackages(startTime, endTime, appList)
@@ -35,17 +34,18 @@ class GetUsageStatsListUseCase @Inject constructor(
                 createUsageStatAndGoal(
                     it.packageName,
                     it.totalTimeInForeground,
-                    it.packageName,
+                    it.packageName
                 )
             }
     }
 
     private fun getTotalUsage(
         startTime: Long,
-        endTime: Long,
-    ): Long = usageStatsRepository.getUsageStats(startTime, endTime).sumOf {
-        it.totalTimeInForeground
-    }
+        endTime: Long
+    ): Long =
+        usageStatsRepository.getUsageStats(startTime, endTime).sumOf {
+            it.totalTimeInForeground
+        }
 
     private fun getSelectedPackageList(): List<String> =
         usageGoalsRepository.getUsageGoals().map { it.packageName }.distinct()
@@ -53,7 +53,7 @@ class GetUsageStatsListUseCase @Inject constructor(
     private fun createUsageStatAndGoal(
         packageName: String,
         totalTimeInForeground: Long,
-        goalKey: String,
+        goalKey: String
     ): UsageStatAndGoal {
         val goalTime = usageGoalsRepository.getUsageGoalTime(goalKey)
         return UsageStatAndGoal(packageName, totalTimeInForeground, goalTime)

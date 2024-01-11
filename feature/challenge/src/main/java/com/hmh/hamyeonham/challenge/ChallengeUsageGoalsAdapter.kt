@@ -12,14 +12,11 @@ import com.hmh.hamyeonham.usagestats.model.UsageGoal
 
 class ChallengeUsageGoalsAdapter :
     ListAdapter<UsageGoal, ChallengeUsageGoalsAdapter.ChallengeUsageGoalsViewHolder>(
-        ItemDiffCallback(
-            onItemsTheSame = { oldItem, newItem ->
-                oldItem.packageName == newItem.packageName
-            },
-            onContentsTheSame = { oldItem, newItem ->
-                oldItem == newItem
-            }
-        )
+        ItemDiffCallback(onItemsTheSame = { oldItem, newItem ->
+            oldItem.packageName == newItem.packageName
+        }, onContentsTheSame = { oldItem, newItem ->
+            oldItem == newItem
+        })
     ) {
     class ChallengeUsageGoalsViewHolder(private val binding: ItemChallengeUsageGoalBinding) :
         RecyclerView.ViewHolder(binding.root) {

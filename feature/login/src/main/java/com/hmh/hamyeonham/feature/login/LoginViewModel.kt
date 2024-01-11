@@ -2,7 +2,6 @@ package com.hmh.hamyeonham.feature.login
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
@@ -29,29 +28,32 @@ class LoginViewModel @Inject constructor() : ViewModel() {
         _kakaoLoginState.value = newState
     }
 
-    private var kakaoAccountCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-        if (error == null && token != null) {
-            updateState {
-                copy(
-                    isSuccessResult = true,
-                    accessToken = token.accessToken,
-                    refreshToken = token.refreshToken,
-                )
+    fun loginWithKakaoApp(context: Context) {
+        if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
+            UserApiClient.instance.loginWithKakaoTalk(context) { token, error ->
+                if (error != null) {
+                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
+                        return@loginWithKakaoTalk
+                    }
+                    loginWithKakaoAccount(context)
+                } else if (token != null) {
+                    updateState {
+                        copy(
+                            isSuccessResult = true,
+                            accessToken = token.accessToken,
+                            refreshToken = token.refreshToken,
+                        )
+                    }
+                }
             }
-        } else if (token != null) {
-            updateState {
-                copy(
-                    isSuccessResult = false,
-                    accessToken = "",
-                    refreshToken = "",
-                )
-            }
+        } else {
+            loginWithKakaoAccount(context)
         }
     }
 
-    private var kakaoAppCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-        if (error != null) {
-            if (!(error is ClientError && error.reason == ClientErrorCause.Cancelled)) {
+    private fun loginWithKakaoAccount(context: Context) {
+        UserApiClient.instance.loginWithKakaoAccount(context) { token, error ->
+            if (error != null) {
                 updateState {
                     copy(
                         isSuccessResult = false,
@@ -59,29 +61,15 @@ class LoginViewModel @Inject constructor() : ViewModel() {
                         refreshToken = "",
                     )
                 }
+            } else if (token != null) {
+                updateState {
+                    copy(
+                        isSuccessResult = true,
+                        accessToken = token.accessToken,
+                        refreshToken = token.refreshToken,
+                    )
+                }
             }
-        } else if (token != null) {
-            updateState {
-                copy(
-                    isSuccessResult = true,
-                    accessToken = token.accessToken,
-                    refreshToken = token.refreshToken,
-                )
-            }
-        }
-    }
-
-    fun loginWithKakaoApp(context: Context) {
-        if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
-            UserApiClient.instance.loginWithKakaoTalk(
-                context = context,
-                callback = kakaoAppCallback,
-            )
-        } else {
-            UserApiClient.instance.loginWithKakaoAccount(
-                context = context,
-                callback = kakaoAccountCallback,
-            )
         }
     }
 

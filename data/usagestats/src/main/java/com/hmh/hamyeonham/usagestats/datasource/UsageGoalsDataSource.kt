@@ -10,7 +10,7 @@ class UsageGoalsDataSource @Inject constructor() {
             UsageGoalModel("com.kakao.talk", 10737116),
             UsageGoalModel("com.google.android.gms", 10607821),
             UsageGoalModel("com.google.android.youtube", 7409658),
-            UsageGoalModel("com.android.chrome", 9346527),
+            UsageGoalModel("com.android.chrome", 9346527)
         )
     }
 }

@@ -18,41 +18,39 @@ data class MainState(
 )
 
 @HiltViewModel
-class MainViewModel
-    @Inject
-    constructor(
-        private val getUsageGoalsUseCase: GetUsageGoalsUseCase,
-        private val getUserInfoUseCase: GetUserInfoUseCase,
-    ) : ViewModel() {
-        private val _mainState = MutableStateFlow(MainState())
-        val mainState = _mainState.asStateFlow()
+class MainViewModel @Inject constructor(
+    private val getUsageGoalsUseCase: GetUsageGoalsUseCase,
+    private val getUserInfoUseCase: GetUserInfoUseCase,
+) : ViewModel() {
+    private val _mainState = MutableStateFlow(MainState())
+    val mainState = _mainState.asStateFlow()
 
-        init {
-            setGoalTimeList(getUsageGoalsUseCase())
-            setUserInfo(getUserInfoUseCase())
-        }
+    init {
+        setGoalTimeList(getUsageGoalsUseCase())
+        setUserInfo(getUserInfoUseCase())
+    }
 
-        fun setChallengeStatus(challengeStatus: ChallengeStatus) {
-            updateState {
-                copy(challengeStatus = challengeStatus)
-            }
-        }
-
-        fun setGoalTimeList(usageGoal: List<UsageGoal>) {
-            updateState {
-                copy(usageGoals = usageGoal)
-            }
-        }
-
-        fun setUserInfo(userInfo: UserInfo) {
-            updateState {
-                copy(userInfo = userInfo)
-            }
-        }
-
-        fun updateState(transform: MainState.() -> MainState) {
-            val currentState = mainState.value
-            val newState = currentState.transform()
-            _mainState.value = newState
+    fun setChallengeStatus(challengeStatus: ChallengeStatus) {
+        updateState {
+            copy(challengeStatus = challengeStatus)
         }
     }
+
+    fun setGoalTimeList(usageGoal: List<UsageGoal>) {
+        updateState {
+            copy(usageGoals = usageGoal)
+        }
+    }
+
+    fun setUserInfo(userInfo: UserInfo) {
+        updateState {
+            copy(userInfo = userInfo)
+        }
+    }
+
+    fun updateState(transform: MainState.() -> MainState) {
+        val currentState = mainState.value
+        val newState = currentState.transform()
+        _mainState.value = newState
+    }
+}

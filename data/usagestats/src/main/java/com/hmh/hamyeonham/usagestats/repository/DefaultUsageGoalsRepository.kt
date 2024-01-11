@@ -5,7 +5,7 @@ import com.hmh.hamyeonham.usagestats.model.UsageGoal
 import javax.inject.Inject
 
 class DefaultUsageGoalsRepository @Inject constructor(
-    private val usageGoalsDataSource: UsageGoalsDataSource,
+    private val usageGoalsDataSource: UsageGoalsDataSource
 ) : UsageGoalsRepository {
     override fun getUsageGoals(): List<UsageGoal> {
         return usageGoalsDataSource.getUsageGoals().map {

@@ -14,8 +14,9 @@ object UserInfoModule {
     @Module
     @InstallIn(SingletonComponent::class)
     interface UserInfoBinder {
-        @Binds
-        @Singleton
-        fun provideUserInfoRepository(userInfoRepository: DefaultUserInfoRepository): UserInfoRepository
+        @Binds @Singleton
+        fun provideUserInfoRepository(
+            userInfoRepository: DefaultUserInfoRepository
+        ): UserInfoRepository
     }
 }

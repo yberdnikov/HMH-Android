@@ -16,7 +16,7 @@ class ChallengeUsageGoalsAdapter :
             oldItem.packageName == newItem.packageName
         }, onContentsTheSame = { oldItem, newItem ->
             oldItem == newItem
-        }),
+        })
     ) {
     class ChallengeUsageGoalsViewHolder(private val binding: ItemChallengeUsageGoalBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -34,14 +34,14 @@ class ChallengeUsageGoalsAdapter :
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int,
+        viewType: Int
     ): ChallengeUsageGoalsViewHolder {
         return ChallengeUsageGoalsViewHolder(
             ItemChallengeUsageGoalBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false,
-            ),
+                false
+            )
         )
     }
 

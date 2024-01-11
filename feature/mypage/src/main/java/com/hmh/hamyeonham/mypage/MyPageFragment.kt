@@ -30,14 +30,14 @@ class MyPageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View {
         return FragmentMyPageBinding.inflate(inflater, container, false).root
     }
 
     override fun onViewCreated(
         view: View,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
         collectMainState()
@@ -59,11 +59,11 @@ class MyPageFragment : Fragment() {
             SpannableStringBuilder(point.toString() + " " + getString(R.string.mypage_point_unit))
         builder.setSpan(
             ForegroundColorSpan(
-                getColor(requireContext(), com.hmh.hamyeonham.core.designsystem.R.color.gray2),
+                getColor(requireContext(), com.hmh.hamyeonham.core.designsystem.R.color.gray2)
             ),
             builder.length - 1,
             builder.length,
-            Spanned.SPAN_INCLUSIVE_EXCLUSIVE,
+            Spanned.SPAN_INCLUSIVE_EXCLUSIVE
         )
         return builder
     }

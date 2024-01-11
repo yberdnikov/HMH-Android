@@ -5,7 +5,7 @@ import com.hmh.hamyeonham.userinfo.model.UserInfo
 import javax.inject.Inject
 
 class DefaultUserInfoRepository @Inject constructor(
-    private val userInfoDataSource: UserInfoDataSource,
+    private val userInfoDataSource: UserInfoDataSource
 ) : UserInfoRepository {
     override fun getUserInfo(): UserInfo {
         val userInfoModel = userInfoDataSource.getUserInfoModel()

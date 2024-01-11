@@ -9,16 +9,17 @@ class GetUsageStatsListUseCase @Inject constructor(
     private val usageStatsRepository: UsageStatsRepository,
     private val usageGoalsRepository: UsageGoalsRepository
 ) {
+
     companion object {
         private const val TOTAL = "total"
     }
 
-    fun getUsageStatsAndGoals(
+    operator fun invoke(
         startTime: Long,
         endTime: Long
     ): List<UsageStatAndGoal> {
-        val totalUsage = getTotalUsage(startTime, endTime)
         val usageForSelectedApps = getUsageStatsAndGoalsForSelectedApps(startTime, endTime)
+        val totalUsage = getTotalUsage(usageForSelectedApps)
         val totalUsageStatAndGoal =
             UsageStatAndGoal(TOTAL, totalUsage, usageGoalsRepository.getUsageGoalTime(TOTAL))
         return listOf(totalUsageStatAndGoal) + usageForSelectedApps
@@ -29,7 +30,7 @@ class GetUsageStatsListUseCase @Inject constructor(
         endTime: Long
     ): List<UsageStatAndGoal> {
         val appList = getSelectedPackageList()
-        return usageStatsRepository.getUsageTimeForPackages(startTime, endTime, appList)
+        return usageStatsRepository.getUsageStatForPackages(startTime, endTime, appList)
             .map {
                 createUsageStatAndGoal(
                     it.packageName,
@@ -40,15 +41,16 @@ class GetUsageStatsListUseCase @Inject constructor(
     }
 
     private fun getTotalUsage(
-        startTime: Long,
-        endTime: Long
-    ): Long =
-        usageStatsRepository.getUsageStats(startTime, endTime).sumOf {
+        usageStatAndGoalList: List<UsageStatAndGoal>
+    ): Long {
+        return usageStatAndGoalList.sumOf {
             it.totalTimeInForeground
         }
+    }
 
     private fun getSelectedPackageList(): List<String> =
-        usageGoalsRepository.getUsageGoals().map { it.packageName }.distinct()
+        usageGoalsRepository.getUsageGoals().filter { it.packageName != TOTAL }
+            .map { it.packageName }.distinct()
 
     private fun createUsageStatAndGoal(
         packageName: String,

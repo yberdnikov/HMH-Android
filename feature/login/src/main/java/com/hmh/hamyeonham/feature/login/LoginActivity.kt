@@ -1,7 +1,6 @@
 package com.hmh.hamyeonham.feature.login
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.hmh.hamyeonham.common.context.toast
@@ -44,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             token != null -> {
-                moveToUserInfoActivity()
+                moveToMainActivity()
             }
         }
     }
@@ -80,7 +79,7 @@ class LoginActivity : AppCompatActivity() {
                     loginWithKakaoAccount()
                 } else if (token != null) {
                     toast("카카오 로그인 성공")
-                    moveToUserInfoActivity()
+                    moveToMainActivity()
                 }
             }
         } else {
@@ -92,8 +91,8 @@ class LoginActivity : AppCompatActivity() {
         UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
     }
 
-    private fun moveToUserInfoActivity() {
-        startActivity(navigationProvider.toStatics())
+    private fun moveToMainActivity() {
+        startActivity(navigationProvider.toMain())
         finish()
     }
 }

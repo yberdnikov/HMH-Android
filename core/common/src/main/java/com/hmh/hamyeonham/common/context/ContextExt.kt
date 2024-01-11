@@ -6,9 +6,13 @@ import android.content.pm.PackageManager
 import android.graphics.Point
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
@@ -27,26 +31,26 @@ fun Context.longToast(message: String) {
 
 fun Context.snackBar(
     anchorView: View,
-    message: () -> String,
+    message: () -> String
 ) {
     Snackbar.make(anchorView, message(), Snackbar.LENGTH_SHORT).show()
 }
 
 fun Context.stringOf(
-    @StringRes resId: Int,
+    @StringRes resId: Int
 ) = getString(resId)
 
 fun Context.colorOf(
-    @ColorRes resId: Int,
+    @ColorRes resId: Int
 ) = ContextCompat.getColor(this, resId)
 
 fun Context.drawableOf(
-    @DrawableRes resId: Int,
+    @DrawableRes resId: Int
 ) = ContextCompat.getDrawable(this, resId)
 
 fun Context.dialogWidthPercent(
     dialog: Dialog?,
-    percent: Double = 0.8,
+    percent: Double = 0.8
 ) {
     val deviceSize = getDeviceSize()
     dialog?.window?.run {
@@ -63,10 +67,9 @@ fun Context.getDeviceSize(): IntArray {
         val windowMetrics = windowManager.currentWindowMetrics
         val windowInsets = windowMetrics.windowInsets
 
-        val insets =
-            windowInsets.getInsetsIgnoringVisibility(
-                WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout(),
-            )
+        val insets = windowInsets.getInsetsIgnoringVisibility(
+            WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout()
+        )
         val insetsWidth = insets.right + insets.left
         val insetsHeight = insets.top + insets.bottom
 
@@ -83,20 +86,42 @@ fun Context.getDeviceSize(): IntArray {
     }
 }
 
-fun Context.getAppNameFromPackageName(packageName: String): String =
-    try {
-        val appInfo = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA)
-        packageManager.getApplicationLabel(appInfo).toString()
-    } catch (e: PackageManager.NameNotFoundException) {
-        "Unknown"
-    }
+fun Context.getAppNameFromPackageName(packageName: String): String = try {
+    val appInfo = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA)
+    packageManager.getApplicationLabel(appInfo).toString()
+} catch (e: PackageManager.NameNotFoundException) {
+    "Unknown"
+}
 
 fun Context.getAppIconFromPackageName(packageName: String): Drawable? {
     try {
         val appInfo = packageManager.getApplicationInfo(packageName, 0)
         return appInfo.loadIcon(packageManager)
     } catch (e: PackageManager.NameNotFoundException) {
-        e.printStackTrace()
+        return ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground)
     }
-    return ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground)
+}
+
+fun Context.colorSecondStrAndBindText(
+    firstStr: String,
+    secondStr: String,
+    tv: TextView,
+    color: Int
+) {
+    val mergedStr = firstStr + " " + secondStr
+    val builder = SpannableStringBuilder(
+        mergedStr
+    )
+    builder.setSpan(
+        ForegroundColorSpan(
+            ContextCompat.getColor(
+                this,
+                color
+            )
+        ),
+        mergedStr.length - secondStr.length,
+        mergedStr.length,
+        Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+    )
+    tv.text = builder
 }

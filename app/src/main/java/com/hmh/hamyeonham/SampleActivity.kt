@@ -22,6 +22,7 @@ class SampleActivity : AppCompatActivity() {
         initSplashAnimation(splashScreen)
         setContentView(binding.root)
         startActivity(Intent(this, MainActivity::class.java))
+//        startActivity(Intent(this, StaticsActivity::class.java))
         finish()
     }
 

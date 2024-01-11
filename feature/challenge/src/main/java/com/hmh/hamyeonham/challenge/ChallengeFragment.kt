@@ -1,8 +1,6 @@
 package com.hmh.hamyeonham.challenge
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,7 +62,6 @@ class ChallengeFragment : Fragment() {
     private fun initChallengeGoalsRecyclerView() {
         binding.rvAppUsageGoals.run {
             adapter = ChallengeUsageGoalsAdapter(onAppListAddClicked = {
-
             })
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(VerticalSpaceItemDecoration(9.dp))

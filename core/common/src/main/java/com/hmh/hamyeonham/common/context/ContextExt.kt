@@ -27,26 +27,26 @@ fun Context.longToast(message: String) {
 
 fun Context.snackBar(
     anchorView: View,
-    message: () -> String,
+    message: () -> String
 ) {
     Snackbar.make(anchorView, message(), Snackbar.LENGTH_SHORT).show()
 }
 
 fun Context.stringOf(
-    @StringRes resId: Int,
+    @StringRes resId: Int
 ) = getString(resId)
 
 fun Context.colorOf(
-    @ColorRes resId: Int,
+    @ColorRes resId: Int
 ) = ContextCompat.getColor(this, resId)
 
 fun Context.drawableOf(
-    @DrawableRes resId: Int,
+    @DrawableRes resId: Int
 ) = ContextCompat.getDrawable(this, resId)
 
 fun Context.dialogWidthPercent(
     dialog: Dialog?,
-    percent: Double = 0.8,
+    percent: Double = 0.8
 ) {
     val deviceSize = getDeviceSize()
     dialog?.window?.run {
@@ -65,7 +65,7 @@ fun Context.getDeviceSize(): IntArray {
 
         val insets =
             windowInsets.getInsetsIgnoringVisibility(
-                WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout(),
+                WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout()
             )
         val insetsWidth = insets.right + insets.left
         val insetsHeight = insets.top + insets.bottom
@@ -99,4 +99,15 @@ fun Context.getAppIconFromPackageName(packageName: String): Drawable? {
         e.printStackTrace()
     }
     return ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground)
+}
+
+fun Context.getInstalledAppNamesAndIcons(): List<Pair<String, Drawable?>> {
+    val appInfos =
+        packageManager.getInstalledApplications(PackageManager.GET_META_DATA).map {
+            Pair(
+                getAppNameFromPackageName(it.packageName),
+                getAppIconFromPackageName(it.packageName)
+            )
+        }
+    return appInfos
 }

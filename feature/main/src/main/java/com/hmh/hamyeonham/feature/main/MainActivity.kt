@@ -1,9 +1,11 @@
 package com.hmh.hamyeonham.feature.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.hmh.hamyeonham.common.context.getInstalledAppNamesAndIcons
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.main.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,5 +22,9 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(binding.fcvMain.id) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bnvMain.setupWithNavController(navController)
+        val appInfos = getInstalledAppNamesAndIcons()
+        for (i in appInfos) {
+            Log.d("appName", i.first)
+        }
     }
 }

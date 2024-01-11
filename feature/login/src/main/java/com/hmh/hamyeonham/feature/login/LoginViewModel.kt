@@ -38,6 +38,14 @@ class LoginViewModel @Inject constructor() : ViewModel() {
                     refreshToken = token.refreshToken,
                 )
             }
+        } else if (token != null) {
+            updateState {
+                copy(
+                    isSuccessResult = false,
+                    accessToken = "",
+                    refreshToken = "",
+                )
+            }
         }
     }
 

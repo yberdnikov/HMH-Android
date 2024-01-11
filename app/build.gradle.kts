@@ -58,7 +58,6 @@ android {
 dependencies {
 
     // Feature
-    implementation(projects.feature.statistics)
     implementation(projects.feature.login)
     implementation(projects.feature.onboarding)
     implementation(projects.feature.main)

@@ -1,15 +1,19 @@
 package com.hmh.hamyeonham.challenge
 
+import android.content.Intent
+import android.content.pm.ResolveInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hmh.hamyeonham.challenge.calendar.ChallengeCalendarAdapter
+import com.hmh.hamyeonham.challenge.goals.ChallengeUsageGoalsAdapter
 import com.hmh.hamyeonham.common.fragment.viewLifeCycle
 import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.VerticalSpaceItemDecoration
@@ -17,6 +21,7 @@ import com.hmh.hamyeonham.common.view.dp
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.core.MainViewModel
 import com.hmh.hamyeonham.feature.challenge.databinding.FragmentChallengeBinding
+import com.hmh.hamyeonham.usagestats.model.UsageGoal
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -61,7 +66,7 @@ class ChallengeFragment : Fragment() {
 
     private fun initChallengeGoalsRecyclerView() {
         binding.rvAppUsageGoals.run {
-            adapter = ChallengeUsageGoalsAdapter()
+            adapter = ChallengeUsageGoalsAdapter(onAppListAddClicked = {})
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(VerticalSpaceItemDecoration(9.dp))
         }

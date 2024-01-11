@@ -22,7 +22,7 @@ class MainViewModel @Inject constructor(
     val mainState = _mainState.asStateFlow()
 
     init {
-        setGoalTimeList(getUsageGoalsUseCase())
+        setUsageGoals(getUsageGoalsUseCase())
     }
 
     fun setChallengeStatus(challengeStatus: ChallengeStatus) {
@@ -31,9 +31,15 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun setGoalTimeList(usageGoal: List<UsageGoal>) {
+    fun setUsageGoals(usageGoal: List<UsageGoal>) {
         updateState {
             copy(usageGoals = usageGoal)
+        }
+    }
+
+    fun addUsageGoals(usageGoal: UsageGoal) {
+        updateState {
+            copy(usageGoals = usageGoals + usageGoal)
         }
     }
 

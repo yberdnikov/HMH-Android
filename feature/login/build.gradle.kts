@@ -20,4 +20,6 @@ dependencies {
 
     // dot indicator
     implementation(libs.dot.indicator)
+    implementation(projects.core.designsystem)
+
 }

@@ -4,96 +4,63 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.hmh.hamyeonham.common.context.toast
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.navigation.NavigationProvider
-import com.hmh.hamyeonham.feature.login.data.DummyImage
+import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.login.databinding.ActivityLoginBinding
-import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.model.ClientError
-import com.kakao.sdk.common.model.ClientErrorCause
-import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityLoginBinding
-
-    private val loginViewModel: LoginViewModel by viewModels()
+    private val binding by viewBinding(ActivityLoginBinding::inflate)
+    private val viewModel by viewModels<LoginViewModel>()
     private lateinit var loginViewPagerAdapter: LoginViewPagerAdapter
 
     @Inject
     lateinit var navigationProvider: NavigationProvider
 
-    // 삭제 예정
-    private val dummyImageList = listOf(
-        DummyImage(
-            Image = R.drawable.login_sample_rectagle_viewpager,
-        ),
-        DummyImage(
-            Image = R.drawable.login_sample_rectagle_viewpager,
-        ),
-        DummyImage(
-            Image = R.drawable.login_sample_rectagle_viewpager,
-        ),
-    )
-
-    private val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-        when {
-            error != null -> {
-            }
-
-            token != null -> {
-                moveToUserInfoActivity()
-            }
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityLoginBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.btnLogin.setOnClickListener {
-            loginWithKakaoApp()
+        binding.ivKakaoLogin.setOnClickListener {
+            viewModel.loginWithKakaoApp(this)
         }
         setLoginViewPager()
+        handleKakaoLoginSuccess()
+    }
+
+    private fun handleKakaoLoginSuccess() {
+        viewModel.kakaoLoginState.flowWithLifecycle(lifecycle).onEach { state ->
+            if (state.isSuccessResult) {
+                viewModel.getKakaoUserNickname()
+                // 닉네임 출력
+                Log.d("LoginActivity", "닉네임: ${state.kakaoNickname}")
+                moveToOnBoardingActivity()
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun setLoginViewPager() {
-        loginViewPagerAdapter = LoginViewPagerAdapter(dummyImageList)
+        val loginViewImageList = listOf(
+            R.drawable.login_sample_rectagle_viewpager,
+            R.drawable.login_sample_rectagle_viewpager,
+            R.drawable.login_sample_rectagle_viewpager,
+        )
+
+        loginViewPagerAdapter = LoginViewPagerAdapter(loginViewImageList)
         binding.run {
             vpLogin.adapter = loginViewPagerAdapter
             indicatorLoginDots.attachTo(binding.vpLogin)
         }
     }
 
-    private fun loginWithKakaoApp() {
-        if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
-            UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
-                if (error != null) {
-                    toast("카카오 로그인 실패")
-                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
-                        toast("다시 로그인 해주세요.")
-                        return@loginWithKakaoTalk
-                    }
-                    loginWithKakaoAccount()
-                } else if (token != null) {
-                    toast("카카오 로그인 성공")
-                    moveToUserInfoActivity()
-                }
-            }
-        } else {
-            loginWithKakaoAccount()
-        }
-    }
-
-    private fun loginWithKakaoAccount() {
-        UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
-    }
-
-    private fun moveToUserInfoActivity() {
-        startActivity(navigationProvider.toStatics())
+    private fun moveToOnBoardingActivity() {
+        startActivity(navigationProvider.toOnBoarding())
         finish()
     }
 }

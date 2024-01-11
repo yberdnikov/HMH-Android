@@ -20,7 +20,6 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.hmh.hamyeonham.common.R
-import kotlinx.coroutines.flow.merge
 
 fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -99,9 +98,8 @@ fun Context.getAppIconFromPackageName(packageName: String): Drawable? {
         val appInfo = packageManager.getApplicationInfo(packageName, 0)
         return appInfo.loadIcon(packageManager)
     } catch (e: PackageManager.NameNotFoundException) {
-        e.printStackTrace()
+        return ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground)
     }
-    return ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground)
 }
 
 fun Context.colorSecondStrAndBindText(

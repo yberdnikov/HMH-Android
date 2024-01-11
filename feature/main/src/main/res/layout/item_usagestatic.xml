@@ -36,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
         android:layout_marginTop="2dp"
+        android:text="Instagram"
         android:textColor="?gray1"
         app:layout_constraintStart_toEndOf="@id/iv_appicon"
         app:layout_constraintTop_toTopOf="@id/iv_appicon" />
@@ -46,6 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
+        android:text="2시간 30분"
         android:textColor="?white_text"
         app:layout_constraintBottom_toBottomOf="@id/iv_appicon"
         app:layout_constraintStart_toStartOf="@id/tv_appname" />
@@ -56,6 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
+        android:text="1시간 남음"
         android:textColor="?white_text"
         app:layout_constraintBottom_toBottomOf="@id/pb_app_usage"
         app:layout_constraintEnd_toEndOf="@id/pb_app_usage"

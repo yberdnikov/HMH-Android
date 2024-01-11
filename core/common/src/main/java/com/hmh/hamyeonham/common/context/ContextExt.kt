@@ -20,6 +20,7 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.hmh.hamyeonham.common.R
+import kotlinx.coroutines.flow.merge
 
 fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -31,26 +32,26 @@ fun Context.longToast(message: String) {
 
 fun Context.snackBar(
     anchorView: View,
-    message: () -> String,
+    message: () -> String
 ) {
     Snackbar.make(anchorView, message(), Snackbar.LENGTH_SHORT).show()
 }
 
 fun Context.stringOf(
-    @StringRes resId: Int,
+    @StringRes resId: Int
 ) = getString(resId)
 
 fun Context.colorOf(
-    @ColorRes resId: Int,
+    @ColorRes resId: Int
 ) = ContextCompat.getColor(this, resId)
 
 fun Context.drawableOf(
-    @DrawableRes resId: Int,
+    @DrawableRes resId: Int
 ) = ContextCompat.getDrawable(this, resId)
 
 fun Context.dialogWidthPercent(
     dialog: Dialog?,
-    percent: Double = 0.8,
+    percent: Double = 0.8
 ) {
     val deviceSize = getDeviceSize()
     dialog?.window?.run {
@@ -68,7 +69,7 @@ fun Context.getDeviceSize(): IntArray {
         val windowInsets = windowMetrics.windowInsets
 
         val insets = windowInsets.getInsetsIgnoringVisibility(
-            WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout(),
+            WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout()
         )
         val insetsWidth = insets.right + insets.left
         val insetsHeight = insets.top + insets.bottom
@@ -103,20 +104,26 @@ fun Context.getAppIconFromPackageName(packageName: String): Drawable? {
     return ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground)
 }
 
-fun Context.concatDifferentColored남음AndBindText(str: String, tv: TextView, color: Int) {
+fun Context.colorSecondStrAndBindText(
+    firstStr: String,
+    secondStr: String,
+    tv: TextView,
+    color: Int
+) {
+    val mergedStr = firstStr + " " + secondStr
     val builder = SpannableStringBuilder(
-        str,
+        mergedStr
     )
     builder.setSpan(
         ForegroundColorSpan(
             ContextCompat.getColor(
                 this,
-                color,
-            ),
+                color
+            )
         ),
-        builder.length - 2,
-        builder.length,
-        Spanned.SPAN_INCLUSIVE_EXCLUSIVE,
+        mergedStr.length - secondStr.length,
+        mergedStr.length,
+        Spanned.SPAN_INCLUSIVE_EXCLUSIVE
     )
     tv.text = builder
 }

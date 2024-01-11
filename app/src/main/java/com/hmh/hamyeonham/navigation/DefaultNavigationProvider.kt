@@ -18,8 +18,4 @@ class DefaultNavigationProvider @Inject constructor(
     override fun toLogin(): Intent {
         return Intent(context, LoginActivity::class.java)
     }
-
-    override fun toStatics(): Intent {
-        return Intent(context, StaticsActivity::class.java)
-    }
 }

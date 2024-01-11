@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hmh.hamyeonham.common.context.getAppIconFromPackageName
 import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
 import com.hmh.hamyeonham.common.view.ItemDiffCallback
-import com.hmh.hamyeonham.feature.challenge.databinding.ItemChallengeUsageGoalBinding
+import com.hmh.hamyeonham.feature.challenge.databinding.ItemUsageGoalBinding
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
 
 class ChallengeUsageGoalsAdapter :
@@ -18,7 +18,7 @@ class ChallengeUsageGoalsAdapter :
             oldItem == newItem
         })
     ) {
-    class ChallengeUsageGoalsViewHolder(private val binding: ItemChallengeUsageGoalBinding) :
+    class ChallengeUsageGoalsViewHolder(private val binding: ItemUsageGoalBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: UsageGoal) {
             binding.run {
@@ -37,7 +37,7 @@ class ChallengeUsageGoalsAdapter :
         viewType: Int
     ): ChallengeUsageGoalsViewHolder {
         return ChallengeUsageGoalsViewHolder(
-            ItemChallengeUsageGoalBinding.inflate(
+            ItemUsageGoalBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

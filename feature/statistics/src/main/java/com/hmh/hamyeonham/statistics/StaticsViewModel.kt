@@ -21,7 +21,8 @@ class StaticsViewModel @Inject constructor(
     }
 
     private fun getUsageStatsAndGoals(startTime: Long, endTime: Long) {
-        usageStatAndGoalList.value = getUsageStatsListUseCase.invoke(startTime, endTime)
+        usageStatAndGoalList.value =
+            getUsageStatsListUseCase.getUsageStatsAndGoals(startTime, endTime)
         Log.d("usageStatAndGoalList.value", usageStatAndGoalList.value.toString())
         usageStatAndGoalList.value.forEach {
             Log.d("usage.packageName", it.packageName)

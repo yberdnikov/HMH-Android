@@ -9,7 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.login.databinding.ActivityLoginBinding
-import com.hmh.hamyeonham.feature.login.model.LoginViewImageList
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -28,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.ivLoginBackground.setOnClickListener {
+        binding.ivKakaoLogin.setOnClickListener {
             viewModel.loginWithKakaoApp(this)
         }
         setLoginViewPager()
@@ -45,15 +44,11 @@ class LoginActivity : AppCompatActivity() {
         }.launchIn(lifecycleScope)
     }
 
-    data class LoginViewImageList(
-        val viewPagerImage: Int,
-    )
-
     private fun setLoginViewPager() {
         val loginViewImageList = listOf(
-                R.drawable.login_sample_rectagle_viewpager,
-                R.drawable.login_sample_rectagle_viewpager,
-                R.drawable.login_sample_rectagle_viewpager,
+            R.drawable.login_sample_rectagle_viewpager,
+            R.drawable.login_sample_rectagle_viewpager,
+            R.drawable.login_sample_rectagle_viewpager,
         )
 
         loginViewPagerAdapter = LoginViewPagerAdapter(loginViewImageList)

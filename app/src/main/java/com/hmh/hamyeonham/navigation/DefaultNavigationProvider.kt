@@ -5,7 +5,6 @@ import android.content.Intent
 import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.feature.login.LoginActivity
 import com.hmh.hamyeonham.feature.onboarding.OnBoardingActivity
-import com.hmh.hamyeonham.statistics.StaticsActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 

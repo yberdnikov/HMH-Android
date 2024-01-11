@@ -30,7 +30,7 @@ class ChallengeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View {
         return FragmentChallengeBinding.inflate(inflater, container, false).root
     }
@@ -49,7 +49,6 @@ class ChallengeFragment : Fragment() {
             challengeAdapter?.submitList(it.challengeStatus.isSuccessList)
             challengeGoalsAdapter?.submitList(it.usageGoals)
         }.launchIn(viewLifeCycleScope)
-
     }
 
     private fun initChallengeRecyclerView() {

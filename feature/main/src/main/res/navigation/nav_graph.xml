@@ -13,6 +13,6 @@
         android:label="Home Fragment" />
     <fragment
         android:id="@+id/my_page_dest"
-        android:name="com.hmh.hamyeonham.feature.main.mypage.MyPageFragment"
+        android:name="com.hmh.hamyeonham.mypage.MyPageFragment"
         android:label="MyPage Fragment" />
 </navigation>

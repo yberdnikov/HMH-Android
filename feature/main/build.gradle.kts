@@ -11,6 +11,7 @@ dependencies {
 
     // Feature
     implementation(projects.feature.challenge)
+    implementation(projects.feature.mypage)
 
     // Navigation
     implementation(libs.bundles.navigation)

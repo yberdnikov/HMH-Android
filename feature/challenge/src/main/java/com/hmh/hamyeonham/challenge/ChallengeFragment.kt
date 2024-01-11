@@ -3,6 +3,7 @@ package com.hmh.hamyeonham.challenge
 import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,7 +67,16 @@ class ChallengeFragment : Fragment() {
 
     private fun initChallengeGoalsRecyclerView() {
         binding.rvAppUsageGoals.run {
-            adapter = ChallengeUsageGoalsAdapter(onAppListAddClicked = {})
+            adapter = ChallengeUsageGoalsAdapter(onAppListAddClicked = {
+                val intent = Intent(Intent.ACTION_MAIN).apply {
+                    addCategory(Intent.CATEGORY_LAUNCHER)
+                }
+                val packageManage = requireContext().packageManager
+                val resolveInfoList = packageManage.queryIntentActivities(intent, 0)
+                val appList = resolveInfoList.forEach {
+                    Log.d("hamtest", "appList: $it")
+                }
+            })
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(VerticalSpaceItemDecoration(9.dp))
         }

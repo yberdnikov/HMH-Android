@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.core.network.datastore
+package com.hmh.hamyeonham.core.network.auth.datastore
 
 interface HMHNetworkPreference {
     var accessToken: String

@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.core.network.auth.api.RefreshApi
-import com.hmh.hamyeonham.core.network.datastore.HMHNetworkPreference
+import com.hmh.hamyeonham.core.network.auth.datastore.HMHNetworkPreference
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
@@ -38,6 +38,7 @@ class HMHAuthenticator @Inject constructor(
             }.onFailure {
                 Log.e("Authenticator", it.toString())
                 runBlocking {
+                    //TODO 어떻게 처리할지 고민해보기
 //                    UserApiClient.instance.logout { error ->
 //                        Log.e("Authenticator", error.toString())
 //                        dataStore.clear()

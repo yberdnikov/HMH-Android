@@ -1,6 +1,6 @@
 package com.hmh.hamyeonham.core.network.auth.interceptor
 
-import com.hmh.hamyeonham.core.network.datastore.HMHNetworkPreference
+import com.hmh.hamyeonham.core.network.auth.datastore.HMHNetworkPreference
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject

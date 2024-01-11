@@ -1,8 +1,7 @@
-package com.hmh.hamyeonham.core.network.auth.authenticator.datastore
+package com.hmh.hamyeonham.core.network.auth.datastore
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import com.hmh.hamyeonham.core.network.datastore.HMHNetworkPreference
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -12,7 +12,8 @@ import com.hmh.hamyeonham.feature.challenge.databinding.ItemAppBinding
 class AppselectionViewHolder(
     private val binding: ItemAppBinding,
     private val context: Context,
-    private val onAppCheckboxClicked: (Int) -> Unit
+    private val onAppCheckboxClicked: (Int) -> Unit,
+    private val onAppCheckboxUnClicked: (Int) -> Unit
 ) :
     ViewHolder(binding.root) {
     fun onBind(packageName: String) {
@@ -28,14 +29,15 @@ class AppselectionViewHolder(
 
     private fun setCheckBoxButtonListener() {
         binding.cbApp.setOnClickListener {
-            if (binding.cbApp.isChecked) {
-                setColor(com.hmh.hamyeonham.core.designsystem.R.color.blue_purple_text)
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                if (binding.cbApp.isChecked) {
+                    setColor(com.hmh.hamyeonham.core.designsystem.R.color.blue_purple_text)
                     onAppCheckboxClicked(position)
+                } else {
+                    setColor(com.hmh.hamyeonham.core.designsystem.R.color.white_text)
+                    onAppCheckboxUnClicked(position)
                 }
-            } else {
-                setColor(com.hmh.hamyeonham.core.designsystem.R.color.white_text)
             }
         }
     }

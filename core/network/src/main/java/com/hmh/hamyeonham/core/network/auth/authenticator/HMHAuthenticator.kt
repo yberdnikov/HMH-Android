@@ -33,8 +33,9 @@ class HMHAuthenticator @Inject constructor(
                     api.refreshToken("Bearer $refreshToken")
                 }
             }.onSuccess {
-                dataStore.refreshToken = it.refreshToken
-                dataStore.accessToken = it.accessToken
+                val data = it.data
+                dataStore.refreshToken = data.refreshToken.orEmpty()
+                dataStore.accessToken = data.accessToken.orEmpty()
             }.onFailure {
                 Log.e("Authenticator", it.toString())
                 runBlocking {
@@ -48,7 +49,7 @@ class HMHAuthenticator @Inject constructor(
             }.getOrThrow()
 
             return response.request.newBuilder()
-                .header("Authorization", "Bearer ${newTokens.accessToken}")
+                .header("Authorization", "Bearer ${newTokens.data.accessToken}")
                 .build()
         }
         return null

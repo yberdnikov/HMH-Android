@@ -17,7 +17,7 @@ import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 class OnBoardingSelectUseTimeFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingSelectUseTimeBinding::bind)
     private val activityViewModel by activityViewModels<OnBoardingViewModel>()
-    private var useTotalTime: Long = 0
+    private var useTotalTime: Long = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +32,11 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
 
         setNumberPicker()
         handleNumberPickerValue()
+        if (useTotalTime != 0L) {
+            activityViewModel.changeStateNextButton(true)
+        } else {
+            activityViewModel.changeStateNextButton(false)
+        }
     }
 
     private fun handleNumberPickerValue() {
@@ -52,9 +57,7 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
             npOnboardingUseTimeGoalHour.descendantFocusability =
                 NumberPicker.FOCUS_BLOCK_DESCENDANTS
         }
-        activityViewModel.changeStateNextButton(true)
     }
-
 
     private fun updateViewModel() {
         activityViewModel.updateUserResponses {

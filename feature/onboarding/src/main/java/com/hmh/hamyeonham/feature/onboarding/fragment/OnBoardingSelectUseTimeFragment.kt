@@ -29,10 +29,8 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setNumberPicker()
         handleNumberPickerValue()
-        // activityViewModel.changeStateNextButton(false)
     }
 
     private fun handleNumberPickerValue() {

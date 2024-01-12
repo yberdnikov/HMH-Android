@@ -7,52 +7,40 @@
     tools:context=".OnBoardingDoneSingUpActivity">
 
     <ImageView
-        android:id="@+id/iv_onboarding_done_back"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:paddingVertical="5dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="9dp"
-        android:src="@drawable/all_back_btn_medium"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
         android:id="@+id/iv_onboarding_done_sing_up_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="100dp"
         android:background="#BBC6FF"
         android:contentDescription="@string/onboarding_done_sing_up_image"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/tv_onboarding_done_sing_up_title"
+        style="?textAppearanceDisplaySmall"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="30dp"
         android:gravity="center"
         android:text="@string/onboarding_done_sing_up_title"
         android:textColor="?white_text"
-        style="?textAppearanceDisplaySmall"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_onboarding_done_sing_up_image" />
 
 
     <TextView
-        style="?textAppearanceBodyMedium"
-        android:textColor="?gray1"
         android:id="@+id/tv_onboarding_done_sing_up_description"
+        style="?textAppearanceBodyMedium"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/onboarding_done_sing_up_description"
+        android:textColor="?gray1"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

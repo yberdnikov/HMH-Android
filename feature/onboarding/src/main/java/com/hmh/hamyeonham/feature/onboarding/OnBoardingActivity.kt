@@ -10,7 +10,6 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
-import com.hmh.hamyeonham.feature.onboarding.model.OnboardingAnswer
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingEffect
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,6 +54,7 @@ class OnBoardingActivity : AppCompatActivity() {
             val currentItem = this.currentItem
             if (currentItem > 0) {
                 this.currentItem = currentItem - 1
+                updateProgressBar(currentItem - 1, adapter?.itemCount ?: 1)
             } else {
                 onBackPressedCallback.isEnabled = false
                 onBackPressedDispatcher.onBackPressed()
@@ -67,7 +67,10 @@ class OnBoardingActivity : AppCompatActivity() {
             val currentItem = viewPager.currentItem
             val lastItem = pagerAdapter.itemCount - 1
             when {
-                currentItem < lastItem -> viewPager.currentItem = currentItem + 1
+                currentItem < lastItem -> {
+                    viewPager.currentItem = currentItem + 1
+                    updateProgressBar(currentItem + 1, viewPager.adapter?.itemCount ?: 1)
+                }
                 currentItem == lastItem -> startOnBoardingDoneSignUpActivity()
             }
         }
@@ -109,6 +112,13 @@ class OnBoardingActivity : AppCompatActivity() {
             isUserInputEnabled = false
         }
         return pagerAdapter
+    }
+
+    private fun updateProgressBar(currentItem: Int, totalItems: Int) {
+        val progress = (currentItem + 1).toFloat() / totalItems.toFloat()
+        val progressBarWidth = (progress * 100).toInt()
+        Log.d("progressBarWidth", progressBarWidth.toString())
+        binding.pbOnboarding.progress = progressBarWidth
     }
 
     override fun onDestroy() {

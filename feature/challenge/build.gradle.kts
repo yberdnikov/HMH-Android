@@ -1,6 +1,6 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-   hmh("feature")
+    hmh("feature")
 }
 
 android {
@@ -8,7 +8,6 @@ android {
 }
 
 dependencies {
-
     implementation(projects.domain.usagestats)
     implementation(projects.domain.challenge)
 

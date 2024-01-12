@@ -28,18 +28,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:cursorVisible="true"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="22dp"
-        android:textCursorDrawable="@drawable/drawable_cursor_color"
-        android:paddingStart="17dp"
-        android:drawablePadding="7dp"
-        android:drawableStart="@drawable/ic_search_24"
-        android:autofillHints="@string/appselection_searchbar"
+        android:textColorHint="?gray2"
         android:background="@drawable/allselection_searchview_background"
+        android:cursorVisible="true"
+        android:drawableStart="@drawable/ic_search_24"
+        android:drawablePadding="7dp"
+        android:hint="@string/appselection_searchbar"
+        android:paddingStart="17dp"
+        android:textAppearance="?textAppearanceTitleSmall"
+        android:textColor="?gray2"
+        android:textCursorDrawable="@drawable/drawable_cursor_color"
         app:layout_constraintBottom_toTopOf="@id/rv_appselection"
-        app:layout_constraintTop_toBottomOf="@id/cl_top_appbar"
-        />
+        app:layout_constraintTop_toBottomOf="@id/cl_top_appbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_appselection"

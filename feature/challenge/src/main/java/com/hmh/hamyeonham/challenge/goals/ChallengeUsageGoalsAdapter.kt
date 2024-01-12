@@ -17,7 +17,8 @@ class ChallengeUsageGoalsAdapter(
         },
         onContentsTheSame = { oldItem, newItem ->
             oldItem == newItem
-        })
+        }
+    )
 ) {
 
     override fun getItemViewType(position: Int): Int {
@@ -45,7 +46,7 @@ class ChallengeUsageGoalsAdapter(
                 ItemGoalAddBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
-                    false,
+                    false
                 ),
                 onAppListAddClicked = onAppListAddClicked
             )

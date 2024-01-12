@@ -62,6 +62,7 @@ class ChallengeFragment : Fragment() {
     private fun initChallengeGoalsRecyclerView() {
         binding.rvAppUsageGoals.run {
             adapter = ChallengeUsageGoalsAdapter(onAppListAddClicked = {
+                // intent실행해서 받아오기
             })
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(VerticalSpaceItemDecoration(9.dp))

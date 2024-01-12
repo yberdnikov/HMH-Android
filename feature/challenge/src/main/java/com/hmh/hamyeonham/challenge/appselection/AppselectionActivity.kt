@@ -10,6 +10,7 @@ import com.hmh.hamyeonham.feature.challenge.databinding.ActivityAppselectionBind
 
 class AppselectionActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivityAppselectionBinding::inflate)
+    private val appList = getInstalledApps()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,6 @@ class AppselectionActivity : AppCompatActivity() {
 
     private fun collectAndSubmitApplist() {
         val usageStaticsAdapter = binding.rvAppselection.adapter as? AppselectionAdapter
-        val appList = getInstalledApps()
         for (i in appList)
             Log.d("app name", i)
         usageStaticsAdapter?.submitList(appList)

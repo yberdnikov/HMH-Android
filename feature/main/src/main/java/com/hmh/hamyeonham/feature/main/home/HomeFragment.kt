@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
     private fun collectUsageStatsList() {
         val usageStaticsAdapter = binding.rvStatics.adapter as? UsageStaticsAdapter
         activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach {
-            usageStaticsAdapter?.submitList(it.usgeStatsList)
+            usageStaticsAdapter?.submitList(it.usageStatsList)
         }.launchIn(viewLifeCycleScope)
     }
 }

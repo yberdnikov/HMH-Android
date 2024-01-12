@@ -1,6 +1,6 @@
 package com.hmh.hamyeonham.usagestats.di
 
-import com.hmh.hamyeonham.usagestats.datasource.UsageGoalsDataSource
+import com.hmh.hamyeonham.usagestats.datasource.UsageGoalsRemoteDataSource
 import com.hmh.hamyeonham.usagestats.repository.DefaultUsageGoalsRepository
 import com.hmh.hamyeonham.usagestats.repository.UsageGoalsRepository
 import dagger.Binds
@@ -15,8 +15,8 @@ import javax.inject.Singleton
 object UsageGoalsModule {
     @Provides
     @Singleton
-    fun provideUsageGoalsDataSource(): UsageGoalsDataSource {
-        return UsageGoalsDataSource()
+    fun provideUsageGoalsDataSource(): UsageGoalsRemoteDataSource {
+        return UsageGoalsRemoteDataSource()
     }
 
     @Module

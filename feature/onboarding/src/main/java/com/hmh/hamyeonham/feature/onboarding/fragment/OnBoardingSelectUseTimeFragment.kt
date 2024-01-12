@@ -29,29 +29,40 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.npOnboardingUseTimeGoalHour.setupScreentimeGoalRange(1, 6)
+        binding.npOnboardingUseTimeGoalHour.setupScreentimeGoalRange(0, 1)
         binding.npOnboardingUseTimeGoalMinute.setupScreentimeGoalRange(0, 59)
-
         binding.npOnboardingUseTimeGoalHour.descendantFocusability =
             NumberPicker.FOCUS_BLOCK_DESCENDANTS
+
+        activityViewModel.changeStateNextButton(true)
 
         val useGoalHour = binding.npOnboardingUseTimeGoalHour.value
         val useGoalMinute = binding.npOnboardingUseTimeGoalMinute.value
         val useTotalTime = (useGoalHour * 60 + useGoalMinute).timeToMs()
-
-        Log.d("OnBoardingSelectUseTimeFragment", "useTotalTime: $useTotalTime.toString()")
-
-        activityViewModel.changeStateNextButton(true)
-
-        activityViewModel.updateUserResponses {
-            copy(
-                apps = listOf(
-                    OnboardingAnswer.App(
-                        appCode = "",
-                        goalTime = useTotalTime,
+        Log.d("NP", "useTotalTime: $useTotalTime")
+        binding.npOnboardingUseTimeGoalHour.setOnValueChangedListener { _, _, _ ->
+            activityViewModel.updateUserResponses {
+                copy(
+                    apps = listOf(
+                        OnboardingAnswer.App(
+                            appCode = "",
+                            goalTime = useTotalTime,
+                        ),
                     ),
-                ),
-            )
+                )
+            }
+        }
+        binding.npOnboardingUseTimeGoalMinute.setOnValueChangedListener { _, _, _ ->
+            activityViewModel.updateUserResponses {
+                copy(
+                    apps = listOf(
+                        OnboardingAnswer.App(
+                            appCode = "",
+                            goalTime = useTotalTime,
+                        ),
+                    ),
+                )
+            }
         }
     }
 }

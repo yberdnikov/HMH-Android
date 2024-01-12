@@ -1,6 +1,7 @@
 package com.hmh.hamyeonham.feature.onboarding.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,8 +38,12 @@ class OnBoardingSelectScreenTimeFragment : Fragment() {
             NumberPicker.FOCUS_BLOCK_DESCENDANTS
 
         val screenTimeGoalTime = binding.npOnboardingScreentimeGoal.value
-        activityViewModel.updateUserResponses {
-            copy(goalTime = screenTimeGoalTime)
+
+        binding.npOnboardingScreentimeGoal.setOnValueChangedListener { _, _, _ ->
+            Log.d("NP", "useTotalTime: $screenTimeGoalTime")
+            activityViewModel.updateUserResponses {
+                copy(goalTime = screenTimeGoalTime)
+            }
         }
     }
 }

@@ -53,6 +53,7 @@ class AppAddActivity : AppCompatActivity() {
                         SELECTED_APPS,
                         viewModel.appAddState.value.selectedApp.toTypedArray()
                     )
+                    putExtra("goal_time", viewModel.appAddState.value.goalTime)
                 }
                 setResult(RESULT_OK, intent)
                 finish()

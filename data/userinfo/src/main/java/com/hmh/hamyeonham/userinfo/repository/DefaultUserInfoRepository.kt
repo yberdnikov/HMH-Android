@@ -1,14 +1,16 @@
 package com.hmh.hamyeonham.userinfo.repository
 
-import com.hmh.hamyeonham.core.network.mypage.datasource.UserInfoDataSource
+import com.hmh.hamyeonham.core.network.mypage.datasource.MypageService
+import com.hmh.hamyeonham.login.mapper.toUserInfo
 import com.hmh.hamyeonham.userinfo.model.UserInfo
 import javax.inject.Inject
 
 class DefaultUserInfoRepository @Inject constructor(
-    private val userInfoDataSource: com.hmh.hamyeonham.core.network.mypage.datasource.UserInfoDataSource
+    private val myPageService: MypageService
 ) : UserInfoRepository {
-    override fun getUserInfo(): UserInfo {
-        val userInfoModel = userInfoDataSource.getUserInfoModel()
-        return UserInfo(userInfoModel.name, userInfoModel.point)
+    override suspend fun getUserInfo(): Result<UserInfo> {
+        return runCatching {
+            myPageService.getUserInfo().data.toUserInfo()
+        }
     }
 }

@@ -1,9 +1,11 @@
-package com.hmh.hamyeonham.userinfo.mapper
+package com.hmh.hamyeonham.login.mapper
 
-internal fun UserInfoResponse.getUser(): Login {
-    return Login(
-        userId = userId ?: -1,
-        accessToken = token?.accessToken.orEmpty(),
-        refreshToken = token?.refreshToken.orEmpty(),
+import com.hmh.hamyeonham.core.network.mypage.datasource.model.UserInfoResponse
+import com.hmh.hamyeonham.userinfo.model.UserInfo
+
+internal fun UserInfoResponse.toUserInfo(): UserInfo {
+    return UserInfo(
+        name = name,
+        point = point
     )
 }

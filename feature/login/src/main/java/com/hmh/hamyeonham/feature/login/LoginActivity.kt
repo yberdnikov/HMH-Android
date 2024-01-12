@@ -9,6 +9,7 @@ import com.hmh.hamyeonham.common.context.toast
 import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.login.databinding.ActivityLoginBinding
+import com.hmh.hamyeonham.feature.onboarding.OnBoardingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -38,6 +39,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.kakaoLoginEvent.flowWithLifecycle(lifecycle).onEach { state ->
             when (state) {
                 is LoginEffect.LoginSuccess -> moveToMainActivity()
+
                 is LoginEffect.LoginFail -> toast(getString(R.string.fail_kakao_login))
                 is LoginEffect.RequireSignUp -> moveToOnBoardingActivity()
             }
@@ -61,6 +63,15 @@ class LoginActivity : AppCompatActivity() {
 
     private fun moveToOnBoardingActivity() {
         startActivity(navigationProvider.toOnBoarding())
+        finish()
+    }
+
+    private fun moveToOnBoardingActivity(accessToken: String? = null) {
+        val intent = navigationProvider.toOnBoarding()
+        accessToken?.let {
+            intent.putExtra(OnBoardingActivity.EXTRA_ACCESS_TOKEN, it)
+        }
+        startActivity(intent)
         finish()
     }
 

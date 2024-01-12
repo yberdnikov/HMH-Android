@@ -11,12 +11,16 @@ import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
 import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
+import com.hmh.hamyeonham.feature.onboarding.viewModel.SignUpEffect
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class OnBoardingActivity : AppCompatActivity() {
+    companion object {
+        const val EXTRA_ACCESS_TOKEN = "extra_access_token"
+    }
 
     private val binding by viewBinding(ActivityOnBoardingBinding::inflate)
     private val viewModel by viewModels<OnBoardingViewModel>()
@@ -28,6 +32,20 @@ class OnBoardingActivity : AppCompatActivity() {
         initViewPager()
         checkNextButtonEnable()
         setBackPressedCallback()
+
+        val accessToken = intent.getStringExtra(EXTRA_ACCESS_TOKEN)
+        viewModel.setAccessToken(accessToken.orEmpty())
+        viewModel.signUpWithUserInfo()
+        viewModel.signUpEvent.flowWithLifecycle(lifecycle)
+            .onEach { signUpEvent ->
+                when (signUpEvent) {
+                    is SignUpEffect.SignUpSuccess -> startOnBoardingDoneSignUpActivity()
+                    is SignUpEffect.SignUpFail -> Log.e(
+                        "OnBoardingActivity",
+                        "signUpEvent: $signUpEvent",
+                    )
+                }
+            }.launchIn(lifecycleScope)
     }
 
     private fun initViewPager() {
@@ -64,6 +82,7 @@ class OnBoardingActivity : AppCompatActivity() {
                     viewPager.currentItem = currentItem + 1
                     updateProgressBar(currentItem + 1, viewPager.adapter?.itemCount ?: 1)
                 }
+
                 currentItem == lastItem -> startOnBoardingDoneSignUpActivity()
             }
         }

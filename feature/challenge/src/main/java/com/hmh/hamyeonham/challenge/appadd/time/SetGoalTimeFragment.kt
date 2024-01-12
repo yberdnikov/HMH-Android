@@ -1,7 +1,6 @@
 package com.hmh.hamyeonham.challenge.appadd.time
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +15,7 @@ import com.hmh.hamyeonham.feature.challenge.databinding.FragmentSetGoalTimeBindi
 class SetGoalTimeFragment : Fragment() {
     private val binding by viewBinding(FragmentSetGoalTimeBinding::bind)
     private val activityViewModel by activityViewModels<AppAddViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,11 +26,31 @@ class SetGoalTimeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.npOnboardingScreentimeGoal.setupScreentimeGoalRange(1, 6)
-        binding.npOnboardingScreentimeGoal.descendantFocusability =
-            NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        binding.npOnboardingScreentimeGoal.setOnValueChangedListener { _, _, newTime ->
-            Log.d("NP", "useTotalTime: $newTime")
+        setNumberPicker()
+        setNumberPickerListener()
+    }
+
+    private fun setNumberPickerListener() {
+        binding.npUseTimeGoalHour.setOnValueChangedListener { _, _, newTime ->
+            val currentGoalTime = activityViewModel.appAddState.value.goalTime
+            activityViewModel.updateState {
+                copy(goalTime = currentGoalTime + (newTime * 60 * 60 * 1000).toLong())
+            }
+        }
+        binding.npUseTimeGoalMinute.setOnValueChangedListener { _, _, newTime ->
+            val currentGoalTime = activityViewModel.appAddState.value.goalTime
+            activityViewModel.updateState {
+                copy(goalTime = currentGoalTime + (newTime * 60 * 1000).toLong())
+            }
+        }
+    }
+
+    private fun setNumberPicker() {
+        binding.run {
+            npUseTimeGoalHour.setupScreentimeGoalRange(0, 1)
+            npUseTimeGoalMinute.setupScreentimeGoalRange(0, 59)
+            npUseTimeGoalHour.descendantFocusability =
+                NumberPicker.FOCUS_BLOCK_DESCENDANTS
         }
     }
 }

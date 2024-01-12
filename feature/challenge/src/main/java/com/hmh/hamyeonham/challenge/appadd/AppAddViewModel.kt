@@ -23,6 +23,8 @@ class AppAddViewModel : ViewModel() {
     val appAddEffect = _appAddEffect.asSharedFlow()
 
     fun updateState(transform: AppAddState.() -> AppAddState) {
-        _appAddState.value = _appAddState.value.transform()
+        val currentState = appAddState.value
+        val newState = currentState.transform()
+        _appAddState.value = newState
     }
 }

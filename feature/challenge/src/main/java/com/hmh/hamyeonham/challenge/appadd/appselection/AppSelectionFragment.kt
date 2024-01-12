@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hmh.hamyeonham.challenge.appadd.AppAddActivity
 import com.hmh.hamyeonham.challenge.appadd.AppAddViewModel
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.challenge.databinding.FrargmentAppSelectionBinding
@@ -53,15 +51,13 @@ class AppSelectionFragment : Fragment() {
 
     private fun onAppCheckboxClicked(packageName: String) {
         activityViewModel.updateState {
-            selectedApp + packageName
-            this
+            copy(selectedApp = selectedApp + packageName)
         }
     }
 
     private fun onAppCheckboxUnClicked(packageName: String) {
         activityViewModel.updateState {
-            selectedApp - packageName
-            this
+            copy(selectedApp = selectedApp - packageName)
         }
     }
 

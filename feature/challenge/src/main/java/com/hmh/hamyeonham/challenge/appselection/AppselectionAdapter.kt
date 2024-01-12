@@ -18,7 +18,11 @@ class AppselectionAdapter(private val onAppCheckboxClicked: (Int) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppselectionViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemAppBinding.inflate(inflater, parent, false)
-        return AppselectionViewHolder(binding, parent.context, onAppCheckboxClicked)
+        return AppselectionViewHolder(
+            binding,
+            parent.context,
+            onAppCheckboxClicked = onAppCheckboxClicked
+        )
     }
 
     override fun onBindViewHolder(holder: AppselectionViewHolder, position: Int) {

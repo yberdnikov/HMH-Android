@@ -10,7 +10,9 @@ import com.hmh.hamyeonham.feature.challenge.databinding.ActivityAppselectionBind
 
 class AppselectionActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivityAppselectionBinding::inflate)
-    private val appList = getInstalledApps()
+    private val appList: List<String> by lazy {
+        getInstalledApps()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +25,6 @@ class AppselectionActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_MAIN).apply {
             addCategory(Intent.CATEGORY_LAUNCHER)
         }
-        val packageManager = packageManager
         val resolveInfoList = packageManager.queryIntentActivities(intent, 0)
         return resolveInfoList.map {
             it.activityInfo.packageName
@@ -32,15 +33,22 @@ class AppselectionActivity : AppCompatActivity() {
 
     private fun initAppSelectionRecyclerAdapter() {
         binding.rvAppselection.run {
-            adapter = AppselectionAdapter()
+            adapter = AppselectionAdapter(
+                onAppCheckboxClicked = {
+                    binding.btAppselection.apply {
+                        isEnabled = true
+                        isSelected = true
+                    }
+                }
+            )
             layoutManager = LinearLayoutManager(this@AppselectionActivity)
             val usageStaticsAdapter = binding.rvAppselection.adapter as? AppselectionAdapter
-            val appList = getInstalledApps()
             usageStaticsAdapter?.submitList(appList)
         }
     }
 
     private fun collectAndSubmitApplist() {
+//        val appList = getInstalledApps()
         val usageStaticsAdapter = binding.rvAppselection.adapter as? AppselectionAdapter
         for (i in appList)
             Log.d("app name", i)

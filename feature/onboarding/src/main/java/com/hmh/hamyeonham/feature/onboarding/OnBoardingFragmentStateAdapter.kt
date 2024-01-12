@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.hmh.hamyeonham.feature.onboarding.fragment.OnBoardingRequestPermissionFragment
 import com.hmh.hamyeonham.feature.onboarding.fragment.OnBoardingSelectAppFragment
 import com.hmh.hamyeonham.feature.onboarding.fragment.OnBoardingSelectDataFragment
-import com.hmh.hamyeonham.core.ui.time.OnBoardingSelectScreenTimeFragment
+import com.hmh.hamyeonham.feature.onboarding.fragment.OnBoardingSelectScreenTimeFragment
 import com.hmh.hamyeonham.feature.onboarding.fragment.OnBoardingSelectUseTimeFragment
 
 enum class OnBoardingFragmentType {
@@ -39,7 +39,7 @@ class OnBoardingFragmentStateAdapter(fragmentActivity: FragmentActivity) :
                 fragmentType,
             )
 
-            OnBoardingFragmentType.SELECT_SCREEN_TIME_GOAL -> com.hmh.hamyeonham.core.ui.time.OnBoardingSelectScreenTimeFragment()
+            OnBoardingFragmentType.SELECT_SCREEN_TIME_GOAL -> OnBoardingSelectScreenTimeFragment()
             OnBoardingFragmentType.REQUEST_PERMISSION -> OnBoardingRequestPermissionFragment()
             OnBoardingFragmentType.SELECT_APP -> OnBoardingSelectAppFragment()
             OnBoardingFragmentType.SELECT_USE_TIME_GOAL -> OnBoardingSelectUseTimeFragment()

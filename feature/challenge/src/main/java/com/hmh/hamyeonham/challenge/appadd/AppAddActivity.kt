@@ -3,6 +3,7 @@ package com.hmh.hamyeonham.challenge.appadd
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.hmh.hamyeonham.challenge.appadd.appselection.AppSelectionViewModel
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.challenge.databinding.ActivityAppAddBinding
 
@@ -21,6 +22,6 @@ class AppAddActivity : AppCompatActivity() {
     }
 
     private fun initViewPager() {
-
+        binding.vpAppAdd.adapter = AppAddViewPagerAdapter(this)
     }
 }

@@ -1,6 +1,5 @@
 package com.hmh.hamyeonham.feature.onboarding.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hmh.hamyeonham.feature.onboarding.model.OnboardingAnswer
@@ -50,7 +49,6 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
         val currentState = userResponses.value
         val newState = currentState.transform()
         _userResponses.value = newState
-        Log.d("TAG", "${_userResponses.value}")
     }
 
     private fun initializeButtonInfoList(): List<OnboardingPageInfo> {

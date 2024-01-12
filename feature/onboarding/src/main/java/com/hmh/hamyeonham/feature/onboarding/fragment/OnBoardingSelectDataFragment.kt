@@ -95,9 +95,9 @@ class OnBoardingSelectDataFragment : Fragment() {
                 binding.run {
                     btnOnboardingSelectData3.isEnabled = false
                     btnOnboardingSelectData4.isEnabled = false
-                    btnOnboardingSelectData1.background =
+                    btnOnboardingSelectData3.background =
                         drawableOf(R.drawable.onboarding_select_data_disable)
-                    btnOnboardingSelectData2.background =
+                    btnOnboardingSelectData4.background =
                         drawableOf(R.drawable.onboarding_select_data_disable)
                     btnOnboardingSelectData3.setTextColor(colorOf(com.hmh.hamyeonham.core.designsystem.R.color.gray5))
                     btnOnboardingSelectData4.setTextColor(colorOf(com.hmh.hamyeonham.core.designsystem.R.color.gray5))

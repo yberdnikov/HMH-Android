@@ -9,10 +9,9 @@ plugins {
     alias(libs.plugins.crashlytics)
 }
 
-val properties =
-    Properties().apply {
-        load(rootProject.file("local.properties").inputStream())
-    }
+val properties = Properties().apply {
+    load(rootProject.file("local.properties").inputStream())
+}
 
 android {
     namespace = "com.hmh.hamyeonham"
@@ -66,10 +65,12 @@ dependencies {
     // Domain
     implementation(projects.domain.usagestats)
     implementation(projects.domain.userinfo)
+    implementation(projects.domain.login)
 
     // Data
     implementation(projects.data.usagestats)
     implementation(projects.data.userinfo)
+    implementation(projects.data.login)
 
     // Core
     implementation(projects.core.common)

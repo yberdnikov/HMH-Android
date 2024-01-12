@@ -29,10 +29,12 @@ include(":feature:mypage")
 include(":data:usagestats")
 include(":data:onboarding")
 include(":data:userinfo")
+include(":data:login")
 
 include(":domain:userinfo")
 include(":domain:usagestats")
 include(":domain:challenge")
+include(":domain:login")
 
 include(":core:common")
 include(":core:database")

@@ -19,12 +19,7 @@ class AppselectionViewHolder(
     fun onBind(packageName: String) {
         binding.tvAppname.text = context.getAppNameFromPackageName(packageName)
         binding.ivAppicon.setImageDrawable(context.getAppIconFromPackageName(packageName))
-        initCheckBoxColor()
         setCheckBoxButtonListener()
-    }
-
-    private fun initCheckBoxColor() {
-        setColor(com.hmh.hamyeonham.core.designsystem.R.color.white_text)
     }
 
     private fun setCheckBoxButtonListener() {
@@ -32,23 +27,11 @@ class AppselectionViewHolder(
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 if (binding.cbApp.isChecked) {
-                    setColor(com.hmh.hamyeonham.core.designsystem.R.color.blue_purple_text)
                     onAppCheckboxClicked(position)
                 } else {
-                    setColor(com.hmh.hamyeonham.core.designsystem.R.color.white_text)
                     onAppCheckboxUnClicked(position)
                 }
             }
         }
-    }
-
-    private fun setColor(color: Int) {
-        val colorStateList = ColorStateList.valueOf(
-            getColor(
-                context,
-                color
-            )
-        )
-        binding.cbApp.buttonTintList = colorStateList
     }
 }

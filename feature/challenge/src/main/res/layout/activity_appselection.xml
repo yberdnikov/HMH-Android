@@ -31,7 +31,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="22dp"
         android:textColorHint="?gray2"
-        android:background="@drawable/allselection_searchview_background"
+        android:background="@drawable/searchview_background"
         android:cursorVisible="true"
         android:drawableStart="@drawable/ic_search_24"
         android:drawablePadding="7dp"

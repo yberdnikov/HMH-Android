@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Data(
+data class ChallengeResponse(
     @SerialName("apps")
     val apps: List<UsageGoalResponse.AppGoal>,
     @SerialName("goalTime")

@@ -1,7 +1,6 @@
 package com.hmh.hamyeonham.feature.lock
 
 import android.accessibilityservice.AccessibilityService
-import android.content.Intent
 import android.view.accessibility.AccessibilityEvent
 import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.usagestats.usecase.GetUsageGoalsUseCase
@@ -29,11 +28,8 @@ class LockAccessibilityService @Inject constructor(
         )
         getUsageGoalsUseCase().firstOrNull { it.packageName == packageName }?.let { myGoal ->
             if (usageStats > myGoal.goalTime) {
-                Intent(this, LockActivity::class.java).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                }.let(::startActivity)
+                val intent = LockActivity.getIntent(this, packageName)
+                startActivity(intent)
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.challenge.appadd
+package com.hmh.hamyeonham.challenge.appadd.appselection
 
 import androidx.lifecycle.ViewModel
 

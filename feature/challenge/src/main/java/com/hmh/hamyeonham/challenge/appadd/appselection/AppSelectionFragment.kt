@@ -10,8 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hmh.hamyeonham.challenge.appadd.AppAddActivity
-import com.hmh.hamyeonham.challenge.appadd.AppSelectionAdapter
-import com.hmh.hamyeonham.challenge.appadd.AppSelectionViewModel
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.challenge.databinding.FrargmentAppSelectionBinding
 

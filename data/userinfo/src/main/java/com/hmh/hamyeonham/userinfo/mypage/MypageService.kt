@@ -1,7 +1,7 @@
-package com.hmh.hamyeonham.core.network.mypage
+package com.hmh.hamyeonham.userinfo.mypage
 
 import com.hmh.hamyeonham.core.network.model.BaseResponse
-import com.hmh.hamyeonham.core.network.mypage.model.UserInfoResponse
+import com.hmh.hamyeonham.userinfo.mypage.model.UserInfoResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
 

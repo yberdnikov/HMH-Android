@@ -39,7 +39,7 @@ class HMHAuthenticator @Inject constructor(
             }.onFailure {
                 Log.e("Authenticator", it.toString())
                 runBlocking {
-                    //TODO 어떻게 처리할지 고민해보기
+                    // TODO 어떻게 처리할지 고민해보기
 //                    UserApiClient.instance.logout { error ->
 //                        Log.e("Authenticator", error.toString())
 //                        dataStore.clear()

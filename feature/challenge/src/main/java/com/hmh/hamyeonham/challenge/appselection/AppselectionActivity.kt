@@ -2,7 +2,7 @@ package com.hmh.hamyeonham.challenge.appselection
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hmh.hamyeonham.common.view.viewBinding
@@ -13,12 +13,14 @@ class AppselectionActivity : AppCompatActivity() {
     private val appList: List<String> by lazy {
         getInstalledApps()
     }
+    private val appSelectionViewModel by viewModels<AppselectionViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initAppSelectionRecyclerAdapter()
         collectAndSubmitApplist()
+        initAppSelectionButtonListener()
     }
 
     private fun getInstalledApps(): List<String> {
@@ -35,10 +37,10 @@ class AppselectionActivity : AppCompatActivity() {
         binding.rvAppselection.run {
             adapter = AppselectionAdapter(
                 onAppCheckboxClicked = {
-                    binding.btAppselection.apply {
-                        isEnabled = true
-                        isSelected = true
-                    }
+                    onAppCheckboxClicked(it)
+                },
+                onAppCheckboxUnClicked = {
+                    onAppCheckboxUnClicked(it)
                 }
             )
             layoutManager = LinearLayoutManager(this@AppselectionActivity)
@@ -48,10 +50,35 @@ class AppselectionActivity : AppCompatActivity() {
     }
 
     private fun collectAndSubmitApplist() {
-//        val appList = getInstalledApps()
         val usageStaticsAdapter = binding.rvAppselection.adapter as? AppselectionAdapter
-        for (i in appList)
-            Log.d("app name", i)
         usageStaticsAdapter?.submitList(appList)
+    }
+
+    private fun initAppSelectionButtonListener() {
+        binding.btAppselection.setOnClickListener {
+            val intent = Intent(this, AppselectionActivity::class.java)
+            intent.putExtra("selectedApps", appSelectionViewModel.selectedApp.toTypedArray())
+            setResult(RESULT_OK, intent)
+            finish()
+        }
+    }
+
+    private fun onAppCheckboxClicked(position: Int) {
+        enableSelectButton(true)
+        appSelectionViewModel.selectedApp.add(appList[position])
+    }
+
+    private fun onAppCheckboxUnClicked(position: Int) {
+        if (appSelectionViewModel.nonSelected()) {
+            enableSelectButton(false)
+        }
+        appSelectionViewModel.selectedApp.remove(appList[position])
+    }
+
+    private fun enableSelectButton(appSelectButtonEnable: Boolean) {
+        binding.btAppselection.apply {
+            isEnabled = appSelectButtonEnable
+            isSelected = appSelectButtonEnable
+        }
     }
 }

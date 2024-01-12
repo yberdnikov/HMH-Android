@@ -23,7 +23,6 @@ class AppselectionAdapter(
         val binding = ItemAppBinding.inflate(inflater, parent, false)
         return AppselectionViewHolder(
             binding,
-            parent.context,
             onAppCheckboxClicked = onAppCheckboxClicked,
             onAppCheckboxUnClicked = onAppCheckboxUnClicked
         )

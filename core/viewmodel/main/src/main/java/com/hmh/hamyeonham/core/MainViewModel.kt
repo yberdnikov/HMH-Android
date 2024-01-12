@@ -10,14 +10,14 @@ import com.hmh.hamyeonham.usagestats.usecase.GetUsageStatsListUseCase
 import com.hmh.hamyeonham.userinfo.model.UserInfo
 import com.hmh.hamyeonham.userinfo.usecase.GetUserInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
 data class MainState(
     val challengeStatus: ChallengeStatus = ChallengeStatus(),
     val usageGoals: List<UsageGoal> = emptyList(),
-    val usgeStatsList: List<UsageStatAndGoal> = emptyList(),
+    val usageStatsList: List<UsageStatAndGoal> = emptyList(),
     val userInfo: UserInfo = UserInfo(),
 )
 
@@ -31,7 +31,7 @@ class MainViewModel @Inject constructor(
     val mainState = _mainState.asStateFlow()
 
     init {
-        setGoalTimeList(getUsageGoalsUseCase())
+        setUsageGoals(getUsageGoalsUseCase())
         setUsageStatsList()
         setUserInfo(getUserInfoUseCase())
     }
@@ -42,7 +42,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun setGoalTimeList(usageGoal: List<UsageGoal>) {
+    fun setUsageGoals(usageGoal: List<UsageGoal>) {
         updateState {
             copy(usageGoals = usageGoal)
         }
@@ -54,6 +54,12 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun addUsageGoals(usageGoal: UsageGoal) {
+        updateState {
+            copy(usageGoals = usageGoals + usageGoal)
+        }
+    }
+
     fun updateState(transform: MainState.() -> MainState) {
         val currentState = mainState.value
         val newState = currentState.transform()
@@ -62,9 +68,8 @@ class MainViewModel @Inject constructor(
 
     private fun setUsageStatsList() {
         val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
-        val usageStatsList = usageStatsListUsecase(startTime, endTime)
         updateState {
-            copy(usgeStatsList = usageStatsListUsecase(startTime, endTime))
+            copy(usageStatsList = usageStatsListUsecase(startTime, endTime))
         }
     }
 }

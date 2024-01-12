@@ -9,4 +9,8 @@ data class UserInfoResponse(
     val name: String = "",
     @SerialName("point")
     val point: Int = 0
-)
+) {
+    fun toUserInfo(): UserInfo {
+        return UserInfo("name", point)
+    }
+}

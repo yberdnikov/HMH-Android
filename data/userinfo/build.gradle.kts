@@ -9,4 +9,6 @@ android {
 
 dependencies {
     implementation(projects.domain.userinfo)
+    implementation(projects.core.network)
+    implementation(libs.bundles.retrofit)
 }

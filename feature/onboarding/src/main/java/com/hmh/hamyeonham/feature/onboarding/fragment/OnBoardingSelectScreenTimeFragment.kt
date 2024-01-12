@@ -37,12 +37,11 @@ class OnBoardingSelectScreenTimeFragment : Fragment() {
         binding.npOnboardingScreentimeGoal.descendantFocusability =
             NumberPicker.FOCUS_BLOCK_DESCENDANTS
 
-        val screenTimeGoalTime = binding.npOnboardingScreentimeGoal.value
 
-        binding.npOnboardingScreentimeGoal.setOnValueChangedListener { _, _, _ ->
-            Log.d("NP", "useTotalTime: $screenTimeGoalTime")
+        binding.npOnboardingScreentimeGoal.setOnValueChangedListener { _, _, newTime ->
+            Log.d("NP", "useTotalTime: $newTime")
             activityViewModel.updateUserResponses {
-                copy(goalTime = screenTimeGoalTime)
+                copy(goalTime = newTime)
             }
         }
     }

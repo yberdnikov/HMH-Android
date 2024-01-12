@@ -1,7 +1,6 @@
 package com.hmh.hamyeonham.feature.onboarding.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +17,8 @@ import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 class OnBoardingSelectUseTimeFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingSelectUseTimeBinding::bind)
     private val activityViewModel by activityViewModels<OnBoardingViewModel>()
+    private var useTotalTime: Long = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,40 +30,42 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.npOnboardingUseTimeGoalHour.setupScreentimeGoalRange(0, 1)
-        binding.npOnboardingUseTimeGoalMinute.setupScreentimeGoalRange(0, 59)
-        binding.npOnboardingUseTimeGoalHour.descendantFocusability =
-            NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        setNumberPicker()
+        handleNumberPickerValue()
+    }
 
-        activityViewModel.changeStateNextButton(true)
-
-        val useGoalHour = binding.npOnboardingUseTimeGoalHour.value
-        val useGoalMinute = binding.npOnboardingUseTimeGoalMinute.value
-        val useTotalTime = (useGoalHour * 60 + useGoalMinute).timeToMs()
-        Log.d("NP", "useTotalTime: $useTotalTime")
-        binding.npOnboardingUseTimeGoalHour.setOnValueChangedListener { _, _, _ ->
-            activityViewModel.updateUserResponses {
-                copy(
-                    apps = listOf(
-                        OnboardingAnswer.App(
-                            appCode = "",
-                            goalTime = useTotalTime,
-                        ),
-                    ),
-                )
-            }
+    private fun handleNumberPickerValue() {
+        binding.npOnboardingUseTimeGoalHour.setOnValueChangedListener { _, _, newTime ->
+            useTotalTime = (newTime * 60 + binding.npOnboardingUseTimeGoalMinute.value).timeToMs()
+            updateViewModel()
         }
-        binding.npOnboardingUseTimeGoalMinute.setOnValueChangedListener { _, _, _ ->
-            activityViewModel.updateUserResponses {
-                copy(
-                    apps = listOf(
-                        OnboardingAnswer.App(
-                            appCode = "",
-                            goalTime = useTotalTime,
-                        ),
+        binding.npOnboardingUseTimeGoalMinute.setOnValueChangedListener { _, _, newTime ->
+            useTotalTime = (binding.npOnboardingUseTimeGoalHour.value * 60 + newTime).timeToMs()
+            updateViewModel()
+        }
+    }
+
+    private fun setNumberPicker() {
+        binding.run {
+            npOnboardingUseTimeGoalHour.setupScreentimeGoalRange(0, 1)
+            npOnboardingUseTimeGoalMinute.setupScreentimeGoalRange(0, 59)
+            npOnboardingUseTimeGoalHour.descendantFocusability =
+                NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        }
+        activityViewModel.changeStateNextButton(true)
+    }
+
+
+    private fun updateViewModel() {
+        activityViewModel.updateUserResponses {
+            copy(
+                apps = listOf(
+                    OnboardingAnswer.App(
+                        appCode = "",
+                        goalTime = useTotalTime,
                     ),
-                )
-            }
+                ),
+            )
         }
     }
 }

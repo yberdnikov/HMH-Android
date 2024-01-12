@@ -7,4 +7,6 @@ interface NavigationProvider {
     fun toLogin(): Intent
     fun toUserInfo(): Intent
     fun toStatics(): Intent
+
+    fun toMain(): Intent
 }

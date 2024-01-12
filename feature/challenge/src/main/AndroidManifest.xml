@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name="com.hmh.hamyeonham.challenge.appselection.AppAddActivity"
+            android:name="com.hmh.hamyeonham.challenge.appadd.AppAddActivity"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysVisible" />
     </application>

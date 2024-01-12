@@ -3,7 +3,7 @@ package com.hmh.hamyeonham.core.network.auth.authenticator
 import android.content.Context
 import android.util.Log
 import com.hmh.hamyeonham.common.navigation.NavigationProvider
-import com.hmh.hamyeonham.core.network.auth.api.RefreshApi
+import com.hmh.hamyeonham.core.network.auth.api.RefreshService
 import com.hmh.hamyeonham.core.network.auth.datastore.HMHNetworkPreference
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.runBlocking
@@ -17,7 +17,7 @@ import javax.inject.Singleton
 @Singleton
 class HMHAuthenticator @Inject constructor(
     private val dataStore: HMHNetworkPreference,
-    private val api: RefreshApi,
+    private val api: RefreshService,
     @ApplicationContext private val context: Context,
     private val navigationProvider: NavigationProvider
 ) : Authenticator {
@@ -33,8 +33,9 @@ class HMHAuthenticator @Inject constructor(
                     api.refreshToken("Bearer $refreshToken")
                 }
             }.onSuccess {
-                dataStore.refreshToken = it.refreshToken
-                dataStore.accessToken = it.accessToken
+                val data = it.data
+                dataStore.refreshToken = data.refreshToken.orEmpty()
+                dataStore.accessToken = data.accessToken.orEmpty()
             }.onFailure {
                 Log.e("Authenticator", it.toString())
                 runBlocking {
@@ -48,7 +49,7 @@ class HMHAuthenticator @Inject constructor(
             }.getOrThrow()
 
             return response.request.newBuilder()
-                .header("Authorization", "Bearer ${newTokens.accessToken}")
+                .header("Authorization", "Bearer ${newTokens.data.accessToken}")
                 .build()
         }
         return null

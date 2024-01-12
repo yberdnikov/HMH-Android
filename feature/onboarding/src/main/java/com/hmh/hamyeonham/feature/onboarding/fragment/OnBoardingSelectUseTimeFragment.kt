@@ -32,19 +32,17 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
 
         setNumberPicker()
         handleNumberPickerValue()
-        if (useTotalTime != 0L) {
-            activityViewModel.changeStateNextButton(true)
-        } else {
-            activityViewModel.changeStateNextButton(false)
-        }
+        // activityViewModel.changeStateNextButton(false)
     }
 
     private fun handleNumberPickerValue() {
         binding.npOnboardingUseTimeGoalHour.setOnValueChangedListener { _, _, newTime ->
+            activityViewModel.changeStateNextButton(true)
             useTotalTime = (newTime * 60 + binding.npOnboardingUseTimeGoalMinute.value).timeToMs()
             updateViewModel()
         }
         binding.npOnboardingUseTimeGoalMinute.setOnValueChangedListener { _, _, newTime ->
+            activityViewModel.changeStateNextButton(true)
             useTotalTime = (binding.npOnboardingUseTimeGoalHour.value * 60 + newTime).timeToMs()
             updateViewModel()
         }

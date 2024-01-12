@@ -36,7 +36,7 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
 
     init {
         _onBoardingState.value = onBoardingState.value.copy(
-            pageInfo = initializeButtonInfoList()
+            pageInfo = initializeButtonInfoList(),
         )
     }
 
@@ -51,7 +51,6 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
         val newState = currentState.transform()
         _userResponses.value = newState
         Log.d("TAG", "${_userResponses.value}")
-
     }
 
     private fun initializeButtonInfoList(): List<OnboardingPageInfo> {

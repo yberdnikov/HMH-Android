@@ -14,7 +14,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hmh.hamyeonham.challenge.appselection.AppselectionActivity
+import com.hmh.hamyeonham.challenge.appselection.AppAddActivity
 import com.hmh.hamyeonham.challenge.calendar.ChallengeCalendarAdapter
 import com.hmh.hamyeonham.challenge.goals.ChallengeUsageGoalsAdapter
 import com.hmh.hamyeonham.common.fragment.viewLifeCycle
@@ -82,7 +82,7 @@ class ChallengeFragment : Fragment() {
     private fun initChallengeGoalsRecyclerView() {
         binding.rvAppUsageGoals.run {
             adapter = ChallengeUsageGoalsAdapter(onAppListAddClicked = {
-                val intent = Intent(requireContext(), AppselectionActivity::class.java)
+                val intent = Intent(requireContext(), AppAddActivity::class.java)
                 appselectionResultLauncher.launch(intent)
             })
             layoutManager = LinearLayoutManager(requireContext())

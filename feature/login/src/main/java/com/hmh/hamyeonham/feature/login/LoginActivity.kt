@@ -1,11 +1,11 @@
 package com.hmh.hamyeonham.feature.login
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import com.hmh.hamyeonham.common.context.toast
 import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.login.databinding.ActivityLoginBinding
@@ -35,13 +35,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun handleKakaoLoginSuccess() {
-        viewModel.kakaoLoginState.flowWithLifecycle(lifecycle).onEach { state ->
-            if (state.isSuccessResult) {
-                viewModel.getKakaoUserNickname()
-                // 닉네임 출력
-                Log.d("LoginActivity", "닉네임: ${state.kakaoNickname}")
-                moveToOnBoardingActivity()
+        viewModel.kakaoLoginEvent.flowWithLifecycle(lifecycle).onEach { state ->
+            when (state) {
+                is LoginEffect.LoginSuccess -> moveToOnBoardingActivity()
+                is LoginEffect.LoginFail -> toast("로그인에 실패했습니다.")
             }
+            moveToOnBoardingActivity()
         }.launchIn(lifecycleScope)
     }
 

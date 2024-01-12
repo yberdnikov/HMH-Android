@@ -18,7 +18,7 @@ sealed interface LoginEffect {
     data object LoginSuccess : LoginEffect
     data object LoginFail : LoginEffect
 }
-z
+
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginRepository: LoginRepository

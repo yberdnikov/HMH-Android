@@ -19,8 +19,8 @@ class AppselectionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initAppSelectionRecyclerAdapter()
-        collectAndSubmitApplist()
         initAppSelectionButtonListener()
+        collectAndSubmitApplist()
     }
 
     private fun getInstalledApps(): List<String> {
@@ -64,15 +64,15 @@ class AppselectionActivity : AppCompatActivity() {
     }
 
     private fun onAppCheckboxClicked(position: Int) {
-        enableSelectButton(true)
         appSelectionViewModel.selectedApp.add(appList[position])
+        enableSelectButton(true)
     }
 
     private fun onAppCheckboxUnClicked(position: Int) {
+        appSelectionViewModel.selectedApp.remove(appList[position])
         if (appSelectionViewModel.nonSelected()) {
             enableSelectButton(false)
         }
-        appSelectionViewModel.selectedApp.remove(appList[position])
     }
 
     private fun enableSelectButton(appSelectButtonEnable: Boolean) {

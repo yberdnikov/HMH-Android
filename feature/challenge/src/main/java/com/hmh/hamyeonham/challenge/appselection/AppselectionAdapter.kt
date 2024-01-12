@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.hmh.hamyeonham.common.view.ItemDiffCallback
 import com.hmh.hamyeonham.feature.challenge.databinding.ItemAppBinding
 
-class AppselectionAdapter :
+class AppselectionAdapter(private val onAppCheckboxClicked: (Int) -> Unit) :
     ListAdapter<String, AppselectionViewHolder>(
         ItemDiffCallback(onItemsTheSame = { oldItem, newItem ->
             oldItem == newItem
@@ -18,7 +18,7 @@ class AppselectionAdapter :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppselectionViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemAppBinding.inflate(inflater, parent, false)
-        return AppselectionViewHolder(binding, parent.context)
+        return AppselectionViewHolder(binding, parent.context, onAppCheckboxClicked)
     }
 
     override fun onBindViewHolder(holder: AppselectionViewHolder, position: Int) {

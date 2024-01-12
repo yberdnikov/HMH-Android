@@ -60,6 +60,7 @@
         android:layout_marginBottom="22dp"
         android:background="@drawable/selector_appselection_btn"
         android:paddingVertical="14dp"
+        android:enabled="false"
         android:text="@string/appselection_done"
         android:textAppearance="?textAppearanceTitleMedium"
         app:layout_constraintBottom_toBottomOf="parent"

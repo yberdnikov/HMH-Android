@@ -9,6 +9,10 @@ import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.challenge.databinding.ActivityAppselectionBinding
 
 class AppselectionActivity : AppCompatActivity() {
+    companion object {
+        const val SELECTED_APPS = "selected_apps"
+    }
+
     private val binding by viewBinding(ActivityAppselectionBinding::inflate)
     private val appList: List<String> by lazy {
         getInstalledApps()
@@ -20,7 +24,7 @@ class AppselectionActivity : AppCompatActivity() {
         setContentView(binding.root)
         initAppSelectionRecyclerAdapter()
         initAppSelectionButtonListener()
-        collectAndSubmitApplist()
+        submitApplist()
     }
 
     private fun getInstalledApps(): List<String> {
@@ -49,16 +53,15 @@ class AppselectionActivity : AppCompatActivity() {
         }
     }
 
-    private fun collectAndSubmitApplist() {
+    private fun submitApplist() {
         val usageStaticsAdapter = binding.rvAppselection.adapter as? AppselectionAdapter
         usageStaticsAdapter?.submitList(appList)
     }
 
     private fun initAppSelectionButtonListener() {
-        enableSelectButton(false)
         binding.btAppselection.setOnClickListener {
             val intent = Intent(this, AppselectionActivity::class.java)
-            intent.putExtra("selectedApps", appSelectionViewModel.selectedApp.toTypedArray())
+            intent.putExtra(SELECTED_APPS, appSelectionViewModel.selectedApp.toTypedArray())
             setResult(RESULT_OK, intent)
             finish()
         }

@@ -24,7 +24,7 @@ data class MainState(
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getUsageGoalsUseCase: GetUsageGoalsUseCase,
-    private val usageStatsListUsecase: GetUsageStatsListUseCase,
+    private val getUsageStatsListUsecase: GetUsageStatsListUseCase,
     private val getUserInfoUseCase: GetUserInfoUseCase,
 ) : ViewModel() {
     private val _mainState = MutableStateFlow(MainState())
@@ -69,7 +69,7 @@ class MainViewModel @Inject constructor(
     private fun setUsageStatsList() {
         val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
         updateState {
-            copy(usageStatsList = usageStatsListUsecase(startTime, endTime))
+            copy(usageStatsList = getUsageStatsListUsecase(startTime, endTime))
         }
     }
 }

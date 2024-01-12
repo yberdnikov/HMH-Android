@@ -32,7 +32,7 @@ import kotlinx.coroutines.flow.onEach
 class ChallengeFragment : Fragment() {
     private val binding by viewBinding(FragmentChallengeBinding::bind)
     private val activityViewModel by activityViewModels<MainViewModel>()
-    private lateinit var appselectionResultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var appSelectionResultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,7 +67,7 @@ class ChallengeFragment : Fragment() {
     }
 
     private fun initResultLauncher() {
-        appselectionResultLauncher =
+        appSelectionResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     val selectedApps = result.data?.getStringArrayExtra("selectedApps")
@@ -83,7 +83,7 @@ class ChallengeFragment : Fragment() {
         binding.rvAppUsageGoals.run {
             adapter = ChallengeUsageGoalsAdapter(onAppListAddClicked = {
                 val intent = Intent(requireContext(), AppAddActivity::class.java)
-                appselectionResultLauncher.launch(intent)
+                appSelectionResultLauncher.launch(intent)
             })
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(VerticalSpaceItemDecoration(9.dp))

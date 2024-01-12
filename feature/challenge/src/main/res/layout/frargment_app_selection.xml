@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/et_searchbar"
@@ -11,7 +11,6 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="22dp"
-        android:textColorHint="?gray2"
         android:background="@drawable/searchview_background"
         android:cursorVisible="true"
         android:drawableStart="@drawable/ic_search_24"
@@ -20,31 +19,19 @@
         android:paddingStart="17dp"
         android:textAppearance="?textAppearanceTitleSmall"
         android:textColor="?gray2"
+        android:textColorHint="?gray2"
         android:textCursorDrawable="@drawable/drawable_cursor_color"
-        app:layout_constraintBottom_toTopOf="@id/rv_appselection"
-        app:layout_constraintTop_toBottomOf="@id/cl_top_appbar" />
+        app:layout_constraintBottom_toTopOf="@id/rv_app_selection"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_appselection"
+        android:id="@+id/rv_app_selection"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bt_appselection"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_searchbar" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/bt_appselection"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="22dp"
-        android:background="@drawable/selector_appselection_btn"
-        android:paddingVertical="14dp"
-        android:enabled="false"
-        android:text="@string/appselection_done"
-        android:textAppearance="?textAppearanceTitleMedium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_appselection" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,13 +13,15 @@ dependencies {
     implementation(projects.feature.challenge)
     implementation(projects.feature.mypage)
 
-    // Navigation
-    implementation(libs.bundles.navigation)
-
+    // Core
     implementation(projects.core.common)
     implementation(projects.core.designsystem)
     implementation(projects.core.viewmodel.main)
 
-    // domain
+    // Domain
     implementation(projects.domain.usagestats)
+
+    implementation(libs.bundles.navigation)
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.hilt.work)
 }

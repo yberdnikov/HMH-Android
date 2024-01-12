@@ -26,12 +26,14 @@ compose-bom = "2023.10.01"
 desugarJdk = "2.0.4"
 dagger-hilt = "2.48.1"
 dagger-hilt-navigation-compose = "1.0.0"
+hilt-work = "1.0.0"
 flexbox = "3.0.0"
 fragment-ktx = "1.6.2"
 activity-compose = "1.7.2"
 exifInterface = "1.3.6"
 zxing-core = "3.3.0"
 zxing-android-embedded = "4.3.0"
+workermanager = "2.7.0"
 
 # material + google
 material = "1.10.0"
@@ -80,6 +82,7 @@ dot-indicator = "5.0"
 kakao = "2.17.0"
 splash-screen = "1.0.1"
 javax-inject = "1"
+work-runtime-ktx = "2.9.0"
 
 
 [libraries]
@@ -125,6 +128,7 @@ activity-compose = { group = "androidx.activity", name = "activity-compose", ver
 lifecycle-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 splash-screen = { module = "androidx.core:core-splashscreen", version.ref = "splash-screen" }
+workermanager = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workermanager" }
 
 # dagger-hilt
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger-hilt" }
@@ -132,6 +136,7 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dag
 hilt-plugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "dagger-hilt" }
 hilt-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "dagger-hilt" }
 hilt-testing-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger-hilt" }
+hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hilt-work" }
 
 # google
 google-services = { module = "com.google.gms:google-services", version.ref = "google-services" }
@@ -197,6 +202,7 @@ sentry = { module = "io.sentry:sentry", version.ref = "sentry-android" }
 
 zxing-core = { module = "com.google.zxing:core", version = "zxing-core" }
 zxing-android-embedded = { module = "com.journeyapps:zxing-android-embedded", version.ref = "zxing-android-embedded" }
+androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work-runtime-ktx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

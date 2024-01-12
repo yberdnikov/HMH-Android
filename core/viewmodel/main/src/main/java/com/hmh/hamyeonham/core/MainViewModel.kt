@@ -62,7 +62,6 @@ class MainViewModel @Inject constructor(
 
     private fun setUsageStatsList() {
         val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
-        val usageStatsList = usageStatsListUsecase(startTime, endTime)
         updateState {
             copy(usgeStatsList = usageStatsListUsecase(startTime, endTime))
         }

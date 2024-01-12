@@ -1,6 +1,11 @@
 package com.hmh.hamyeonham.feature.lock
 
+import android.app.ActivityManager
+import android.content.Context
+import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -16,9 +21,12 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -26,6 +34,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.graphics.drawable.toBitmap
+import coil.compose.AsyncImage
+import coil.compose.ImagePainter
+import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
 import com.hmh.hamyeonham.feature.lock.ui.theme.Blackground
 import com.hmh.hamyeonham.feature.lock.ui.theme.HMHAndroidTheme
 import com.hmh.hamyeonham.feature.lock.ui.theme.HmhTypography
@@ -34,9 +46,22 @@ import com.hmh.hamyeonham.feature.lock.ui.theme.WhiteText
 class LockActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val packageName = intent.getStringExtra(PACKAGE_NAME).orEmpty()
         setContent {
             HMHAndroidTheme {
-                LockScreen()
+                LockScreen(packageName)
+            }
+        }
+    }
+
+    companion object {
+        private const val PACKAGE_NAME = "PACKAGE_NAME"
+        fun getIntent(context: Context, packageName: String): Intent {
+            return Intent(context, LockActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                putExtra(PACKAGE_NAME, packageName)
             }
         }
     }
@@ -44,22 +69,26 @@ class LockActivity : ComponentActivity() {
 
 
 @Composable
-fun LockScreen() {
+fun LockScreen(packageName: String) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Blackground)
     ) {
-        val appName = "앱 이름"
+        val context = LocalContext.current
+        val appName = context.getAppNameFromPackageName(packageName)
+        val appIcon = context.packageManager.getApplicationIcon(packageName)
+
+
         Column(
             modifier = Modifier
                 .align(Alignment.Center)
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Image(
-                painter = painterResource(id = com.hmh.hamyeonham.core.designsystem.R.drawable.ic_launcher_background),
-                contentDescription = "Centered Image"
+            AsyncImage(
+                model = appIcon,
+                contentDescription = "App Image"
             )
             Spacer(modifier = Modifier.height(44.dp))
             Text(
@@ -74,7 +103,7 @@ fun LockScreen() {
             )
             Spacer(modifier = Modifier.height(5.dp))
             Text(
-                stringResource(R.string.use_it_anymore, appName, appName),
+                stringResource(R.string.use_it_anymore, appName),
                 style = TextStyle(
                     fontSize = 14.sp,
                     lineHeight = 21.sp,
@@ -93,7 +122,10 @@ fun LockScreen() {
             Button(
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF3D17D3)),
                 onClick = {
-                    // TODO : 닫기
+                    killAppByPackageName(
+                        context = context,
+                        packageName = packageName
+                    )
                 },
             ) {
                 Text(
@@ -113,10 +145,19 @@ fun LockScreen() {
     }
 }
 
+fun killAppByPackageName(context: Context, packageName: String) {
+    val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager
+    try {
+        activityManager?.killBackgroundProcesses(packageName)
+    } catch (e: Exception) {
+        Log.e("LockActivity", "killAppByPackageName error : $e")
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     HMHAndroidTheme {
-        LockScreen()
+        LockScreen("HHM")
     }
 }

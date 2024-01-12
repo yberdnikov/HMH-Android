@@ -59,3 +59,8 @@ fun convertTimeToString(time: Long): String {
         if (minutes > 0 || hours == 0L) append(" $minutes 분")
     }.trim()
 }
+
+// 분을 ms로 바꾸는 함수
+fun Int.timeToMs(): Long {
+    return this * 60 * 1000L
+}

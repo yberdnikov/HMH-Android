@@ -9,6 +9,6 @@ data class OnboardingAnswer(
 ) {
     data class App(
         val appCode: String = "",
-        val goalTime: Int = -1,
+        val goalTime: Long = -1,
     )
 }

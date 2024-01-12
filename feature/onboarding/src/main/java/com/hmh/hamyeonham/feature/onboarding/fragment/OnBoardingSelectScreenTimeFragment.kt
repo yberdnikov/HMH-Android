@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.NumberPicker
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.hmh.hamyeonham.common.view.setupScreentimeGoalRange
@@ -31,5 +32,13 @@ class OnBoardingSelectScreenTimeFragment : Fragment() {
 
         binding.npOnboardingScreentimeGoal.setupScreentimeGoalRange(1, 6)
         activityViewModel.changeStateNextButton(true)
+
+        binding.npOnboardingScreentimeGoal.descendantFocusability =
+            NumberPicker.FOCUS_BLOCK_DESCENDANTS
+
+        val screenTimeGoalTime = binding.npOnboardingScreentimeGoal.value
+        activityViewModel.updateUserResponses {
+            copy(goalTime = screenTimeGoalTime)
+        }
     }
 }

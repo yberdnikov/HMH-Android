@@ -1,7 +1,7 @@
 package com.hmh.hamyeonham.core.network.di
 
 import com.hmh.hamyeonham.common.qualifier.Unsecured
-import com.hmh.hamyeonham.core.network.login.SocialLoginService
+import com.hmh.hamyeonham.core.network.login.LoginService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,5 +15,5 @@ import javax.inject.Singleton
 object LoginModule {
     @Provides
     @Singleton
-    fun provideLoginApi(@Unsecured retrofit: Retrofit): SocialLoginService = retrofit.create()
+    fun provideLoginApi(@Unsecured retrofit: Retrofit): LoginService = retrofit.create()
 }

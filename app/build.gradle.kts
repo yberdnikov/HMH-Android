@@ -66,10 +66,12 @@ dependencies {
     // Domain
     implementation(projects.domain.usagestats)
     implementation(projects.domain.userinfo)
+    implementation(projects.domain.login)
 
     // Data
     implementation(projects.data.usagestats)
     implementation(projects.data.userinfo)
+    implementation(projects.data.login)
 
     // Core
     implementation(projects.core.common)

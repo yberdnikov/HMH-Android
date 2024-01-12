@@ -8,7 +8,7 @@ data class UsageGoalResponse(
     @SerialName("status")
     val accessToken: String,
     @SerialName("goalTime")
-    val goalTime: Int,
+    val goalTime: Long,
     @SerialName("apps")
     val apps: List<AppGoal>
 ) {
@@ -17,6 +17,6 @@ data class UsageGoalResponse(
         @SerialName("appCode")
         val appCode: String,
         @SerialName("appGoalTime")
-        val appGoalTime: Int
+        val appGoalTime: Long
     )
 }

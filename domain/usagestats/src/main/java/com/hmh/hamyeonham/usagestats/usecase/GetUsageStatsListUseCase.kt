@@ -14,7 +14,7 @@ class GetUsageStatsListUseCase @Inject constructor(
         private const val TOTAL = "total"
     }
 
-    operator fun invoke(
+    suspend operator fun invoke(
         startTime: Long,
         endTime: Long
     ): List<UsageStatAndGoal> {
@@ -25,7 +25,7 @@ class GetUsageStatsListUseCase @Inject constructor(
         return listOf(totalUsageStatAndGoal) + usageForSelectedApps
     }
 
-    private fun getUsageStatsAndGoalsForSelectedApps(
+    private suspend fun getUsageStatsAndGoalsForSelectedApps(
         startTime: Long,
         endTime: Long
     ): List<UsageStatAndGoal> {
@@ -48,11 +48,11 @@ class GetUsageStatsListUseCase @Inject constructor(
         }
     }
 
-    private fun getSelectedPackageList(): List<String> =
+    private suspend fun getSelectedPackageList(): List<String> =
         usageGoalsRepository.getUsageGoals().filter { it.packageName != TOTAL }
             .map { it.packageName }.distinct()
 
-    private fun createUsageStatAndGoal(
+    private suspend fun createUsageStatAndGoal(
         packageName: String,
         totalTimeInForeground: Long,
         goalKey: String

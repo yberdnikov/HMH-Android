@@ -5,9 +5,9 @@ import com.hmh.hamyeonham.usagestats.repository.UsageGoalsRepository
 import javax.inject.Inject
 
 class GetUsageGoalsUseCase @Inject constructor(
-    private val getUsageGoalsUseCase: UsageGoalsRepository,
+    private val usageGoalsRepository: UsageGoalsRepository
 ) {
-    operator fun invoke(): List<UsageGoal> {
-        return getUsageGoalsUseCase.getUsageGoals()
+    suspend operator fun invoke(): List<UsageGoal> {
+        return usageGoalsRepository.getUsageGoals()
     }
 }

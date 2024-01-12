@@ -37,8 +37,9 @@ class LoginActivity : AppCompatActivity() {
     private fun handleKakaoLoginSuccess() {
         viewModel.kakaoLoginEvent.flowWithLifecycle(lifecycle).onEach { state ->
             when (state) {
-                is LoginEffect.LoginSuccess -> moveToOnBoardingActivity()
-                is LoginEffect.LoginFail -> toast("로그인에 실패했습니다.")
+                is LoginEffect.LoginSuccess -> moveToMainActivity()
+                is LoginEffect.LoginFail -> toast(getString(R.string.fail_kakao_login))
+                is LoginEffect.RequireSignUp -> moveToOnBoardingActivity()
             }
             moveToOnBoardingActivity()
         }.launchIn(lifecycleScope)
@@ -59,6 +60,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun moveToOnBoardingActivity() {
+        startActivity(navigationProvider.toOnBoarding())
+        finish()
+    }
+
+    private fun moveToMainActivity() {
         startActivity(navigationProvider.toOnBoarding())
         finish()
     }

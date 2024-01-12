@@ -12,16 +12,18 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import javax.inject.Inject
 
 sealed interface LoginEffect {
     data object LoginSuccess : LoginEffect
     data object LoginFail : LoginEffect
+    data object RequireSignUp : LoginEffect
 }
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val loginRepository: LoginRepository
+    private val loginRepository: LoginRepository,
 ) : ViewModel() {
 
     private val _kakaoLoginEvent = MutableSharedFlow<LoginEffect>()
@@ -60,7 +62,11 @@ class LoginViewModel @Inject constructor(
                     loginRepository.login(token.accessToken).onSuccess {
                         _kakaoLoginEvent.emit(LoginEffect.LoginSuccess)
                     }.onFailure {
-                        _kakaoLoginEvent.emit(LoginEffect.LoginFail)
+                        if (it is HttpException && it.code() == 403) {
+                            _kakaoLoginEvent.emit(LoginEffect.RequireSignUp)
+                        } else {
+                            _kakaoLoginEvent.emit(LoginEffect.LoginFail)
+                        }
                     }
                 }
             }

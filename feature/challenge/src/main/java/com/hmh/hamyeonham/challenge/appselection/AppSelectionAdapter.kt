@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.ListAdapter
 import com.hmh.hamyeonham.common.view.ItemDiffCallback
 import com.hmh.hamyeonham.feature.challenge.databinding.ItemAppBinding
 
-class AppselectionAdapter(
-    private val onAppCheckboxClicked: (Int) -> Unit,
-    private val onAppCheckboxUnClicked: (Int) -> Unit
+class AppSelectionAdapter(
+    private val onAppCheckboxClicked: (String) -> Unit,
+    private val onAppCheckboxUnClicked: (String) -> Unit
 ) :
-    ListAdapter<String, AppselectionViewHolder>(
+    ListAdapter<String, AppSelectionViewHolder>(
         ItemDiffCallback(onItemsTheSame = { oldItem, newItem ->
             oldItem == newItem
         }, onContentsTheSame = { oldItem, newItem ->
@@ -18,17 +18,17 @@ class AppselectionAdapter(
         })
     ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppselectionViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppSelectionViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemAppBinding.inflate(inflater, parent, false)
-        return AppselectionViewHolder(
+        return AppSelectionViewHolder(
             binding,
             onAppCheckboxClicked = onAppCheckboxClicked,
             onAppCheckboxUnClicked = onAppCheckboxUnClicked
         )
     }
 
-    override fun onBindViewHolder(holder: AppselectionViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AppSelectionViewHolder, position: Int) {
         holder.onBind(currentList[position])
     }
 }

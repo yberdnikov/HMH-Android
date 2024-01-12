@@ -6,25 +6,27 @@ import com.hmh.hamyeonham.common.context.getAppIconFromPackageName
 import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
 import com.hmh.hamyeonham.feature.challenge.databinding.ItemAppBinding
 
-class AppselectionViewHolder(
+class AppSelectionViewHolder(
     private val binding: ItemAppBinding,
-    private val onAppCheckboxClicked: (Int) -> Unit,
-    private val onAppCheckboxUnClicked: (Int) -> Unit
+    private val onAppCheckboxClicked: (String) -> Unit,
+    private val onAppCheckboxUnClicked: (String) -> Unit
 ) : ViewHolder(binding.root) {
-    private val context = binding.root.context
     fun onBind(packageName: String) {
-        binding.tvAppname.text = context.getAppNameFromPackageName(packageName)
-        binding.ivAppicon.setImageDrawable(context.getAppIconFromPackageName(packageName))
-        setCheckBoxButtonListener()
+        binding.run {
+            val context = binding.root.context
+            tvAppname.text = context.getAppNameFromPackageName(packageName)
+            ivAppicon.setImageDrawable(context.getAppIconFromPackageName(packageName))
+        }
+        setCheckBoxButtonListener(packageName)
     }
 
-    private fun setCheckBoxButtonListener() {
+    private fun setCheckBoxButtonListener(packageName: String) {
         binding.cbApp.setOnClickListener {
             if (adapterPosition != RecyclerView.NO_POSITION) {
                 if (binding.cbApp.isChecked) {
-                    onAppCheckboxClicked(position)
+                    onAppCheckboxClicked(packageName)
                 } else {
-                    onAppCheckboxUnClicked(position)
+                    onAppCheckboxUnClicked(packageName)
                 }
             }
         }

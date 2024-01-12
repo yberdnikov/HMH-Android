@@ -1,7 +1,7 @@
 package com.hmh.hamyeonham.core.network.di
 
 import com.hmh.hamyeonham.common.qualifier.Unsecured
-import com.hmh.hamyeonham.core.network.auth.api.RefreshApi
+import com.hmh.hamyeonham.core.network.auth.api.RefreshService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,5 +15,5 @@ import javax.inject.Singleton
 object RefreshModule {
     @Provides
     @Singleton
-    fun provideRefreshApi(@Unsecured retrofit: Retrofit): RefreshApi = retrofit.create()
+    fun provideRefreshApi(@Unsecured retrofit: Retrofit): RefreshService = retrofit.create()
 }

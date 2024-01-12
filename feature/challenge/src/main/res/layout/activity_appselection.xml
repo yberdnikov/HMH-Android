@@ -58,7 +58,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="22dp"
-        android:background="@drawable/appselection_selector_btn_next"
+        android:background="@drawable/selector_appselection_btn"
         android:paddingVertical="14dp"
         android:text="@string/appselection_done"
         android:textAppearance="?textAppearanceTitleMedium"

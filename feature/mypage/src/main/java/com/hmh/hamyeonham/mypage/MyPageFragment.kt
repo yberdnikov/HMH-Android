@@ -45,6 +45,7 @@ class MyPageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         collectMainState()
         initPrivacyButton()
+        initTermOfUseButton()
     }
 
     private fun collectMainState() {
@@ -74,8 +75,16 @@ class MyPageFragment : Fragment() {
 
     private fun initPrivacyButton() {
         binding.vPrivacy.setOnClickListener {
-            val privacyRuleUrl = BuildConfig.HMH_PRIVACY_RULE_URL
+            val privacyRuleUrl = "https://www.notion.so/hmhteam/4219063a635e4eec8d8b9719c6c2a6fa"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(privacyRuleUrl))
+            startActivity(intent)
+        }
+    }
+
+    private fun initTermOfUseButton() {
+        binding.vTermofuse.setOnClickListener {
+            val termOfUseUrl = "https://www.notion.so/hmhteam/33acb29be57245f394eb93ddb2e3b8cc"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(termOfUseUrl))
             startActivity(intent)
         }
     }

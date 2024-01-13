@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.feature.onboarding.viewModel
+package com.hmh.hamyeonham.feature.onboarding.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.hmh.hamyeonham.feature.onboarding.OnBoardingFragmentType
@@ -19,7 +19,6 @@ class OnBoardingSelectDataViewModel @Inject constructor() : ViewModel() {
 
     fun initQuestionData(fragmentType: OnBoardingFragmentType) {
         val onBoardingQuestionTime = OnBoardingQuestion(
-
             "하루 평균 휴대폰을\n얼마나 사용하나요?",
             "",
             listOf("1-4시간", "4-8시간", "8-12시간", "12시간 이상"),

@@ -5,4 +5,5 @@ import android.content.Intent
 interface NavigationProvider {
     fun toOnBoarding(): Intent
     fun toLogin(): Intent
+    fun toMain(): Intent
 }

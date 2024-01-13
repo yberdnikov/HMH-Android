@@ -12,6 +12,8 @@ import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
 import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
 import com.hmh.hamyeonham.feature.onboarding.viewModel.SignUpEffect
+import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingEffect
+import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -29,7 +31,7 @@ class OnBoardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        initViewPager()
+        initViews()
         checkNextButtonEnable()
         setBackPressedCallback()
 
@@ -48,24 +50,30 @@ class OnBoardingActivity : AppCompatActivity() {
             }.launchIn(lifecycleScope)
     }
 
-    private fun initViewPager() {
-        val pagerAdapter = setOnboardingPageAdapter()
-        binding.btnOnboardingNext.setOnClickListener {
-            viewModel.initializeButtonStates()
-            navigateToNextOnboardingStep(pagerAdapter)
-        }
+    private fun initViews() {
+        initBackButton()
+        initViewPager()
+    }
+
+    private fun initBackButton() {
         binding.ivOnboardingBack.setOnClickListener {
-            viewModel.initializeButtonStates()
             navigateToPreviousOnboardingStep()
         }
     }
 
+    private fun initViewPager() {
+        val pagerAdapter = setOnboardingPageAdapter()
+        binding.btnOnboardingNext.setOnClickListener {
+            navigateToNextOnboardingStep(pagerAdapter)
+        }
+    }
+
     private fun navigateToPreviousOnboardingStep() {
-        binding.vpOnboardingContainer.let { viewPager ->
-            val currentItem = viewPager.currentItem
+        binding.vpOnboardingContainer.run {
+            val currentItem = this.currentItem
             if (currentItem > 0) {
-                viewPager.currentItem = currentItem - 1
-                updateProgressBar(currentItem - 1, viewPager.adapter?.itemCount ?: 1)
+                this.currentItem = currentItem - 1
+                updateProgressBar(currentItem - 1, adapter?.itemCount ?: 1)
             } else {
                 onBackPressedCallback.isEnabled = false
                 onBackPressedDispatcher.onBackPressed()
@@ -89,11 +97,14 @@ class OnBoardingActivity : AppCompatActivity() {
     }
 
     private fun checkNextButtonEnable() {
-        viewModel.clickNextButtonEnable.flowWithLifecycle(lifecycle)
-            .onEach { clickNextButtonEnable ->
-                binding.btnOnboardingNext.isEnabled = clickNextButtonEnable
-                binding.btnOnboardingNext.isSelected = clickNextButtonEnable
-            }.launchIn(lifecycleScope)
+        viewModel.onboardEffect.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is OnBoardingEffect.ActiveNextButton -> {
+                    binding.btnOnboardingNext.isEnabled = it.isActive
+                    binding.btnOnboardingNext.isSelected = it.isActive
+                }
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun setBackPressedCallback() {

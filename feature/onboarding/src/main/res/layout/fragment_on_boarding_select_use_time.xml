@@ -15,8 +15,9 @@
         android:layout_marginTop="30dp"
         android:text="@string/onboarding_use_time_goal_title"
         android:textColor="?white_text"
-        style="@style/TextAppearance.Hmh.DisplaySmall"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
+        android:textSize="21sp"
+        android:lineSpacingExtra="6sp"        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

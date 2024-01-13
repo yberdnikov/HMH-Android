@@ -10,5 +10,8 @@ android {
 dependencies {
     implementation(projects.core.common)
     implementation(projects.core.designsystem)
-    implementation(project(":domain:login"))
+
+    implementation(projects.domain.login)
+
+    implementation(projects.feature.main)
 }

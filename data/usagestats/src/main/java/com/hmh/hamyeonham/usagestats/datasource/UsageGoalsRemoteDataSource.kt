@@ -3,7 +3,7 @@ package com.hmh.hamyeonham.usagestats.datasource
 import com.hmh.hamyeonham.usagestats.model.UsageGoalModel
 import javax.inject.Inject
 
-class UsageGoalsDataSource @Inject constructor() {
+class UsageGoalsRemoteDataSource @Inject constructor() {
     var usageGoalList = listOf(
         UsageGoalModel("total", 20000000),
         UsageGoalModel("com.kakao.talk", 3000000),

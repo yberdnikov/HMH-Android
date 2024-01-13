@@ -1,5 +1,7 @@
 package com.hmh.hamyeonham.mypage
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.text.Spanned
@@ -11,6 +13,7 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
+import com.hmh.hamyeonham.common.BuildConfig
 import com.hmh.hamyeonham.common.fragment.viewLifeCycle
 import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
@@ -41,6 +44,7 @@ class MyPageFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         collectMainState()
+        initPrivacyButton()
     }
 
     private fun collectMainState() {
@@ -66,5 +70,13 @@ class MyPageFragment : Fragment() {
             Spanned.SPAN_INCLUSIVE_EXCLUSIVE
         )
         return builder
+    }
+
+    private fun initPrivacyButton() {
+        binding.vPrivacy.setOnClickListener {
+            val privacyRuleUrl = BuildConfig.HMH_PRIVACY_RULE_URL
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(privacyRuleUrl))
+            startActivity(intent)
+        }
     }
 }

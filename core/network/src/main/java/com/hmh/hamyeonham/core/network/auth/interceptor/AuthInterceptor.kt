@@ -1,10 +1,9 @@
 package com.hmh.hamyeonham.core.network.auth.interceptor
 
 import com.hmh.hamyeonham.core.network.auth.datastore.HMHNetworkPreference
-import okhttp3.Headers
+import javax.inject.Inject
 import okhttp3.Interceptor
 import okhttp3.Response
-import javax.inject.Inject
 
 class AuthInterceptor @Inject constructor(
     private val dataStore: HMHNetworkPreference

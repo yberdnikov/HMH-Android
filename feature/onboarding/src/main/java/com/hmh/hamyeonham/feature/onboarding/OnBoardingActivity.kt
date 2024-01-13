@@ -97,6 +97,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
                 is OnBoardingEffect.SignUpSuccess -> startOnBoardingDoneSignUpActivity()
                 is OnBoardingEffect.SignUpFail -> Log.e("OnBoardingActivity", "signUpEvent: $it")
+                else -> Unit
             }
         }.launchIn(lifecycleScope)
     }

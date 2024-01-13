@@ -17,7 +17,7 @@ import javax.inject.Inject
 sealed interface LoginEffect {
     data object LoginSuccess : LoginEffect
     data object LoginFail : LoginEffect
-    data object RequireSignUp : LoginEffect
+    data class RequireSignUp(val token: String) : LoginEffect
 }
 
 @HiltViewModel
@@ -42,7 +42,7 @@ class LoginViewModel @Inject constructor(
                             _kakaoLoginEvent.emit(LoginEffect.LoginSuccess)
                         }.onFailure {
                             if (it is HttpException && it.code() == 403) {
-                                _kakaoLoginEvent.emit(LoginEffect.RequireSignUp)
+                                _kakaoLoginEvent.emit(LoginEffect.RequireSignUp(token.accessToken))
                             } else {
                                 _kakaoLoginEvent.emit(LoginEffect.LoginFail)
                             }
@@ -65,7 +65,7 @@ class LoginViewModel @Inject constructor(
                         _kakaoLoginEvent.emit(LoginEffect.LoginSuccess)
                     }.onFailure {
                         if (it is HttpException && it.code() == 403) {
-                            _kakaoLoginEvent.emit(LoginEffect.RequireSignUp)
+                            _kakaoLoginEvent.emit(LoginEffect.RequireSignUp(token.accessToken))
                         } else {
                             _kakaoLoginEvent.emit(LoginEffect.LoginFail)
                         }

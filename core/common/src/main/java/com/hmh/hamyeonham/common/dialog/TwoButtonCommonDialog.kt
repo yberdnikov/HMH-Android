@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.hmh.hamyeonham.common.context.dialogWidthPercent
 import com.hmh.hamyeonham.common.databinding.DialogCommonTwoButtonBinding
 import com.hmh.hamyeonham.common.view.setOnSingleClickListener
@@ -51,14 +52,13 @@ class TwoButtonCommonDialog : DialogFragment() {
 
     private fun initViews() {
         val title = arguments?.getString(TITLE, "")
-        val description = arguments?.getString(DESCRIPTION, "")
+        val description = arguments?.getString(DESCRIPTION)
         val confirmButtonText = arguments?.getString(CONFIRM_BUTTON_TEXT, "")
         val dismissButtonText = arguments?.getString(DISMISS_BUTTON_TEXT, "")
 
         with(binding) {
             tvDialogTitle.text = title
             tvDialogDescription.text = description
-
             tvConfirmButton.text = confirmButtonText
             tvDismissButton.text = dismissButtonText
         }
@@ -75,6 +75,11 @@ class TwoButtonCommonDialog : DialogFragment() {
         }
     }
 
+    fun showAllowingStateLoss(fm: FragmentManager, tag: String = "") {
+        fm.beginTransaction().add(this, tag)
+            .commitAllowingStateLoss()
+    }
+
     companion object {
         const val TAG = "TwoButtonCommonDialog"
 
@@ -86,7 +91,7 @@ class TwoButtonCommonDialog : DialogFragment() {
 
         fun newInstance(
             title: String,
-            description: String,
+            description: String? = null,
             confirmButtonText: String,
             dismissButtonText: String
         ): TwoButtonCommonDialog {

@@ -24,49 +24,32 @@ data class SignUpRequest(
     @Serializable
     data class Challenge(
         @SerialName("apps")
-        val apps: Apps,
+        val app: List<App>,
         @SerialName("goalTime")
         val goalTime: Long,
         @SerialName("period")
         val period: Int,
     ) {
         @Serializable
-        data class Apps(
+        data class App(
             @SerialName("appCode")
-            val apps: String,
+            val appCode: String,
             @SerialName("goalTime")
             val goalTime: Long,
         )
     }
 }
 
-
-fun SignUpRequest.toSignUpRequestDomain(): SignRequestDomain {
-    return SignRequestDomain(
-        challenge = SignRequestDomain.Challenge(
-            apps = SignRequestDomain.Challenge.Apps(
-                apps = challenge.apps.apps,
-                goalTime = challenge.apps.goalTime,
-            ),
-            goalTime = challenge.goalTime,
-            period = challenge.period,
-        ),
-        onboarding = SignRequestDomain.Onboarding(
-            averageUseTime = onboarding.averageUseTime,
-            problem = onboarding.problem,
-        ),
-        socialPlatform = socialPlatform,
-    )
-}
-
 fun SignRequestDomain.toSignUpRequest(): SignUpRequest {
     return SignUpRequest(
         challenge = SignUpRequest.Challenge(
-            apps = SignUpRequest.Challenge.Apps(
-                apps = challenge.apps.apps,
-                goalTime = challenge.apps.goalTime,
-            ),
-            goalTime = challenge.goalTime,
+            app = challenge.app.map { app ->
+                SignUpRequest.Challenge.App(
+                    appCode = app.appCode,
+                    goalTime = app.goalTime,
+                )
+            },
+            goalTime = challenge.goalTime.toLong(),
             period = challenge.period,
         ),
         onboarding = SignUpRequest.Onboarding(

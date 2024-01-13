@@ -18,10 +18,12 @@ data class OnboardingAnswer(
 fun OnboardingAnswer.toSignUpRequest(): SignRequestDomain {
     return SignRequestDomain(
         challenge = SignRequestDomain.Challenge(
-            apps = SignRequestDomain.Challenge.Apps(
-                apps = apps.joinToString(",") { it.appCode },
-                goalTime = apps.sumOf { it.goalTime },
-            ),
+            app = apps.map { app ->
+                SignRequestDomain.Challenge.App(
+                    appCode = app.appCode,
+                    goalTime = app.goalTime,
+                )
+            },
             goalTime = goalTime.toLong(),
             period = period,
         ),

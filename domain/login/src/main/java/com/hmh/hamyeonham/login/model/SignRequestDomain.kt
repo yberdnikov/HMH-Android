@@ -11,12 +11,12 @@ data class SignRequestDomain(
     )
 
     data class Challenge(
-        val apps: Apps,
+        val app: List<App>,
         val goalTime: Long,
         val period: Int,
     ) {
-        data class Apps(
-            val apps: String,
+        data class App(
+            val appCode: String,
             val goalTime: Long,
         )
     }

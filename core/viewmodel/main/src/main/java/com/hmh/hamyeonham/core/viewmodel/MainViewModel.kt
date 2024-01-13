@@ -1,5 +1,6 @@
 package com.hmh.hamyeonham.core.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hmh.hamyeonham.challenge.model.ChallengeStatus
@@ -43,6 +44,7 @@ class MainViewModel @Inject constructor(
             userInfoRepository.getUserInfo().onSuccess {
                 setUserInfo(it)
             }.onFailure {
+                Log.e("error", it.toString())
             }
         }
     }

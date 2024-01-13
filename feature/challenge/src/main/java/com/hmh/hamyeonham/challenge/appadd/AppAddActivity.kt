@@ -51,7 +51,7 @@ class AppAddActivity : AppCompatActivity() {
             }
 
             1 -> {
-                val intent = Intent(this@AppAddActivity, AppAddActivity::class.java).apply {
+                val intent = Intent().apply {
                     val selectedApps = viewModel.state.value.selectedApp
                     putExtra(SELECTED_APPS, selectedApps.toTypedArray())
                     putExtra(GOAL_TIME, viewModel.state.value.goalTime)

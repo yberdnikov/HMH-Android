@@ -16,15 +16,15 @@ data class AppAddState(
 )
 
 class AppAddViewModel : ViewModel() {
-    private val _appAddState = MutableStateFlow(AppAddState())
-    val appAddState = _appAddState.asStateFlow()
+    private val _state = MutableStateFlow(AppAddState())
+    val state = _state.asStateFlow()
 
-    private val _appAddEffect = MutableSharedFlow<AppAddEffect>()
-    val appAddEffect = _appAddEffect.asSharedFlow()
+    private val _effect = MutableSharedFlow<AppAddEffect>()
+    val effect = _effect.asSharedFlow()
 
     fun updateState(transform: AppAddState.() -> AppAddState) {
-        val currentState = appAddState.value
+        val currentState = state.value
         val newState = currentState.transform()
-        _appAddState.value = newState
+        _state.value = newState
     }
 }

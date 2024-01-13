@@ -36,12 +36,8 @@ class AppSelectionFragment : Fragment() {
     private fun initAppSelectionRecyclerAdapter() {
         binding.rvAppSelection.run {
             adapter = AppSelectionAdapter(
-                onAppCheckboxClicked = {
-                    onAppCheckboxClicked(it)
-                },
-                onAppCheckboxUnClicked = {
-                    onAppCheckboxUnClicked(it)
-                }
+                onAppCheckboxClicked = ::onAppCheckboxClicked,
+                onAppCheckboxUnClicked = ::onAppCheckboxUnClicked
             )
             layoutManager = LinearLayoutManager(requireContext())
             val usageStaticsAdapter = binding.rvAppSelection.adapter as? AppSelectionAdapter

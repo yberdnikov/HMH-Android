@@ -28,7 +28,7 @@ class AppAddActivity : AppCompatActivity() {
     }
 
     private fun collectState() {
-        viewModel.appAddState.flowWithLifecycle(lifecycle).onEach {
+        viewModel.state.flowWithLifecycle(lifecycle).onEach {
             binding.btAppSelection.isEnabled = it.selectedApp.isNotEmpty()
         }.launchIn(lifecycleScope)
     }
@@ -51,9 +51,9 @@ class AppAddActivity : AppCompatActivity() {
                 val intent = Intent(this@AppAddActivity, AppAddActivity::class.java).apply {
                     putExtra(
                         SELECTED_APPS,
-                        viewModel.appAddState.value.selectedApp.toTypedArray()
+                        viewModel.state.value.selectedApp.toTypedArray()
                     )
-                    putExtra("goal_time", viewModel.appAddState.value.goalTime)
+                    putExtra("goal_time", viewModel.state.value.goalTime)
                 }
                 setResult(RESULT_OK, intent)
                 finish()

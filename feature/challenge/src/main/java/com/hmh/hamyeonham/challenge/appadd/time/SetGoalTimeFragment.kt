@@ -32,13 +32,13 @@ class SetGoalTimeFragment : Fragment() {
 
     private fun setNumberPickerListener() {
         binding.npUseTimeGoalHour.setOnValueChangedListener { _, _, newTime ->
-            val currentGoalTime = activityViewModel.appAddState.value.goalTime
+            val currentGoalTime = activityViewModel.state.value.goalTime
             activityViewModel.updateState {
                 copy(goalTime = currentGoalTime + (newTime * 60 * 60 * 1000).toLong())
             }
         }
         binding.npUseTimeGoalMinute.setOnValueChangedListener { _, _, newTime ->
-            val currentGoalTime = activityViewModel.appAddState.value.goalTime
+            val currentGoalTime = activityViewModel.state.value.goalTime
             activityViewModel.updateState {
                 copy(goalTime = currentGoalTime + (newTime * 60 * 1000).toLong())
             }

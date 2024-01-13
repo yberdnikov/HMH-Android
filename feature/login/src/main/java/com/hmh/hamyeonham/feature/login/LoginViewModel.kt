@@ -3,13 +3,16 @@ package com.hmh.hamyeonham.feature.login
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hmh.hamyeonham.core.network.auth.datastore.HMHNetworkPreference
 import com.hmh.hamyeonham.login.repository.LoginRepository
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import javax.inject.Inject
@@ -20,13 +23,28 @@ sealed interface LoginEffect {
     data class RequireSignUp(val token: String) : LoginEffect
 }
 
+data class LoginState(
+    val autoLogin: Boolean = false,
+)
+
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginRepository: LoginRepository,
+    private val hmhNetworkPreference: HMHNetworkPreference,
 ) : ViewModel() {
 
     private val _kakaoLoginEvent = MutableSharedFlow<LoginEffect>()
     val kakaoLoginEvent = _kakaoLoginEvent.asSharedFlow()
+
+    private val _loginState = MutableStateFlow(LoginState())
+    val loginState = _loginState.asStateFlow()
+
+    init {
+        val currentState = loginState.value
+        _loginState.value = currentState.copy(
+            autoLogin = hmhNetworkPreference.autoLoginConfigured,
+        )
+    }
 
     fun loginWithKakaoApp(context: Context) {
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
@@ -40,6 +58,10 @@ class LoginViewModel @Inject constructor(
                     viewModelScope.launch {
                         loginRepository.login(token.accessToken).onSuccess {
                             _kakaoLoginEvent.emit(LoginEffect.LoginSuccess)
+                            hmhNetworkPreference.accessToken = token.accessToken
+                            hmhNetworkPreference.refreshToken = token.refreshToken
+                            hmhNetworkPreference.userId = it.userId
+                            hmhNetworkPreference.autoLoginConfigured = true
                         }.onFailure {
                             if (it is HttpException && it.code() == 403) {
                                 _kakaoLoginEvent.emit(LoginEffect.RequireSignUp(token.accessToken))
@@ -63,6 +85,10 @@ class LoginViewModel @Inject constructor(
                 viewModelScope.launch {
                     loginRepository.login(token.accessToken).onSuccess {
                         _kakaoLoginEvent.emit(LoginEffect.LoginSuccess)
+                        hmhNetworkPreference.accessToken = token.accessToken
+                        hmhNetworkPreference.refreshToken = token.refreshToken
+                        hmhNetworkPreference.userId = it.userId
+                        hmhNetworkPreference.autoLoginConfigured = true
                     }.onFailure {
                         if (it is HttpException && it.code() == 403) {
                             _kakaoLoginEvent.emit(LoginEffect.RequireSignUp(token.accessToken))

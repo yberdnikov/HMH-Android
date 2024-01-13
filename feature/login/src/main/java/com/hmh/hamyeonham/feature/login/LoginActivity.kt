@@ -33,15 +33,26 @@ class LoginActivity : AppCompatActivity() {
         }
         setLoginViewPager()
         handleKakaoLoginSuccess()
+        handleAutoLoginSuccess()
+    }
+
+    private fun handleAutoLoginSuccess() {
+        viewModel.loginState.flowWithLifecycle(lifecycle).onEach { state ->
+            if (state.autoLogin) {
+                moveToMainActivity()
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun handleKakaoLoginSuccess() {
         viewModel.kakaoLoginEvent.flowWithLifecycle(lifecycle).onEach { state ->
+
             when (state) {
                 is LoginEffect.LoginSuccess -> moveToMainActivity()
 
                 is LoginEffect.LoginFail -> toast(getString(R.string.fail_kakao_login))
                 is LoginEffect.RequireSignUp -> moveToOnBoardingActivity(state.token)
+                else -> Unit
             }
         }.launchIn(lifecycleScope)
     }

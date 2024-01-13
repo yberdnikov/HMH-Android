@@ -2,6 +2,7 @@ package com.hmh.hamyeonham.feature.onboarding.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hmh.hamyeonham.core.network.auth.datastore.HMHNetworkPreference
 import com.hmh.hamyeonham.feature.onboarding.model.OnboardingAnswer
 import com.hmh.hamyeonham.feature.onboarding.model.OnboardingPageInfo
 import com.hmh.hamyeonham.feature.onboarding.model.toSignUpRequest
@@ -28,7 +29,8 @@ data class OnBoardingState(
 
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
-    private val signUpRepository: SignUpRepository
+    private val signUpRepository: SignUpRepository,
+    private val hmhNetworkPreference: HMHNetworkPreference,
 ) : ViewModel() {
     private val _onBoardingState = MutableStateFlow(OnBoardingState())
     val onBoardingState = _onBoardingState.asStateFlow()
@@ -72,7 +74,14 @@ class OnBoardingViewModel @Inject constructor(
             val request = onBoardingState.value.onBoardingAnswer
             runCatching {
                 signUpRepository.signUp(token, request.toSignUpRequest())
-            }.onSuccess {
+            }.onSuccess { result ->
+                val signUpUser = result.getOrNull()
+                signUpUser?.let {
+                    hmhNetworkPreference.accessToken = it.accessToken
+                    hmhNetworkPreference.refreshToken = it.refreshToken
+                    hmhNetworkPreference.userId = it.userId
+                    hmhNetworkPreference.autoLoginConfigured = true
+                }
                 setEffect(OnBoardingEffect.SignUpSuccess)
             }.onFailure {
                 setEffect(OnBoardingEffect.SignUpFail)

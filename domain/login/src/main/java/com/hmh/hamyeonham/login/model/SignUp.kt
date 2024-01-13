@@ -2,7 +2,6 @@ package com.hmh.hamyeonham.login.model
 
 data class SignUp(
     val challenge: Challenge,
-    val name: String,
     val onboarding: Onboarding,
     val socialPlatform: String,
 )

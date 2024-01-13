@@ -2,22 +2,22 @@ package com.hmh.hamyeonham.feature.onboarding.model
 
 data class OnboardingInformation(
     val usuallyUseTime: String = "",
-    val problems: List<Problem> = emptyList(),
-    val challenge: List<Challenge> = emptyList(),
-    val apps: List<App> = emptyList(),
+    val onboarding: Onboarding = Onboarding(),
+    val challenge: Challenge = Challenge(),
 ) {
-    data class Problem(
-        val description1: String = "",
-        val description2: String = "",
+    data class Onboarding(
+        val averageUseTime: String = "",
+        val problem: List<String> = listOf(),
     )
 
     data class Challenge(
         val period: Int = -1,
-        val goalTime: Int = -1,
+        val goalTime: Long = -1,
+        val apps: Apps = Apps(),
     )
 
-    data class App(
+    data class Apps(
         val appCode: String = "",
-        val goalTime: Int = -1,
+        val goalTime: Long = -1,
     )
 }

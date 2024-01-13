@@ -1,8 +1,8 @@
 package com.hmh.hamyeonham.login.repository
 
-import com.hmh.hamyeonham.login.model.Login
-import com.hmh.hamyeonham.login.model.SignUp
+import com.hmh.hamyeonham.login.model.SignRequestDomain
+import com.hmh.hamyeonham.login.model.SignUpResponseDomain
 
 interface SignUpRepository {
-    suspend fun signUp(accessToken: String, signUpRequest: SignUp): Result<Login>
+    suspend fun signUp(accessToken: String, signUpRequest: SignRequestDomain): Result<SignUpResponseDomain>
 }

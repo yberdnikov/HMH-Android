@@ -24,14 +24,12 @@ internal fun Project.configureAndroidCommonPlugin() {
         defaultConfig {
             val kakaoApiKey = properties["kakaoApiKey"] as? String ?: ""
             val hmhBaseUrl = properties["hmhBaseUrl"] as? String ?: ""
-            val superToken = properties["superToken"] as? String ?: ""
 
             manifestPlaceholders["kakaoApiKey"] = properties["kakaoApiKey"] as String
             manifestPlaceholders["hmhBaseUrl"] = properties["hmhBaseUrl"] as String
 
             buildConfigField("String", "KAKAO_API_KEY", "\"${kakaoApiKey}\"")
             buildConfigField("String", "HMH_BASE_URL", "\"${hmhBaseUrl}\"")
-            buildConfigField("String", "HMH_SUPER_TOKEN", "\"${superToken}\"")
         }
         buildFeatures.apply {
             viewBinding = true

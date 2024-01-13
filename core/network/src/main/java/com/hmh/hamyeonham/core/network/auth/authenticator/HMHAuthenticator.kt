@@ -6,6 +6,8 @@ import android.util.Log
 import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.core.network.auth.api.RefreshService
 import com.hmh.hamyeonham.core.network.auth.datastore.HMHNetworkPreference
+import com.jakewharton.processphoenix.ProcessPhoenix
+import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
@@ -44,10 +46,10 @@ class HMHAuthenticator @Inject constructor(
                     val intent = navigationProvider.toLogin()
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     context.startActivity(intent)
-//                    UserApiClient.instance.logout { error ->
-//                        Log.e("Authenticator", error.toString())
-//                        ProcessPhoenix.triggerRebirth(context, navigationProvider.toOnboarding())
-//                    }
+                    UserApiClient.instance.logout { error ->
+                        Log.e("Authenticator", error.toString())
+                        ProcessPhoenix.triggerRebirth(context, navigationProvider.toLogin())
+                    }
                 }
             }.getOrThrow()
 

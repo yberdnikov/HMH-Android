@@ -1,6 +1,7 @@
 package com.hmh.hamyeonham.core.network.auth.authenticator
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.core.network.auth.api.RefreshService
@@ -39,10 +40,12 @@ class HMHAuthenticator @Inject constructor(
             }.onFailure {
                 Log.e("Authenticator", it.toString())
                 runBlocking {
-                    //TODO 어떻게 처리할지 고민해보기
+                    dataStore.clear()
+                    val intent = navigationProvider.toLogin()
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    context.startActivity(intent)
 //                    UserApiClient.instance.logout { error ->
 //                        Log.e("Authenticator", error.toString())
-//                        dataStore.clear()
 //                        ProcessPhoenix.triggerRebirth(context, navigationProvider.toOnboarding())
 //                    }
                 }

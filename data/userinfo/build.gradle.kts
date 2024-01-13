@@ -11,4 +11,5 @@ dependencies {
     implementation(projects.domain.userinfo)
     implementation(projects.core.network)
     implementation(projects.core.common)
+    implementation(project(":core:network"))
 }

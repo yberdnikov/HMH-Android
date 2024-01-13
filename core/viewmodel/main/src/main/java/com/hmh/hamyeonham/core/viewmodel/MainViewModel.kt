@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.core
+package com.hmh.hamyeonham.core.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

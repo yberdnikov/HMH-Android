@@ -14,7 +14,7 @@ import androidx.lifecycle.flowWithLifecycle
 import com.hmh.hamyeonham.common.fragment.viewLifeCycle
 import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
-import com.hmh.hamyeonham.core.MainViewModel
+import com.hmh.hamyeonham.core.viewmodel.MainViewModel
 import com.hmh.hamyeonham.feature.mypage.R
 import com.hmh.hamyeonham.feature.mypage.databinding.FragmentMyPageBinding
 import com.hmh.hamyeonham.userinfo.model.UserInfo

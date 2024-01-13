@@ -56,8 +56,8 @@
         android:background="@drawable/all_next_btn_able"
         android:gravity="center"
         android:text="@string/all_okay"
-        android:textColor="?white_text"
         android:textAppearance="@style/TextAppearance.Hmh.TitleMedium"
+        android:textColor="?white_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

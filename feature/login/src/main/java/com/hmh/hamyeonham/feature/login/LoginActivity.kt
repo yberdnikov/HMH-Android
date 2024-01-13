@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun moveToMainActivity() {
-        startActivity(navigationProvider.toOnBoarding())
+        startActivity(navigationProvider.toMain())
         finish()
     }
 }

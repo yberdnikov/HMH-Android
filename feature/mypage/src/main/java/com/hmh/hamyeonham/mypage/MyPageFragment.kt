@@ -62,6 +62,20 @@ class MyPageFragment : Fragment() {
                 }
             }.showAllowingStateLoss(childFragmentManager)
         }
+
+        binding.tvWithdrawal.setOnClickListener {
+            TwoButtonCommonDialog.newInstance(
+                title = getString(R.string.withdrawal_title),
+                description = getString(R.string.withdrawal_description),
+                confirmButtonText = getString(com.hmh.hamyeonham.core.designsystem.R.string.all_okay),
+                dismissButtonText = getString(com.hmh.hamyeonham.core.designsystem.R.string.all_cancel),
+            ).apply {
+                setConfirmButtonClickListener {
+                }
+                setDismissButtonClickListener {
+                }
+            }.showAllowingStateLoss(childFragmentManager)
+        }
     }
 
     private fun collectMainState() {

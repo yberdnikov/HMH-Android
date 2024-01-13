@@ -24,12 +24,21 @@ class GetUsageStatsListUseCase @Inject constructor(
             getUsageStatsAndGoalsForSelectedPackages(
                 startTime,
                 endTime,
-                usageGoalsForSelectedPackages,
+                usageGoalsForSelectedPackages.filter { it.packageName != TOTAL },
             )
-//        val totalUsage = getTotalUsage(usageForSelectedApps)
-//        val totalUsageStatAndGoal =
-//            UsageStatAndGoal(TOTAL, totalUsage, usageGoalsRepository.getUsageGoalTime(TOTAL))
-        return usageForSelectedApps
+        val totalUsage = getTotalUsage(usageForSelectedApps)
+        val totalUsageStatAndGoal =
+            UsageStatAndGoal(TOTAL, totalUsage, getTotalUsageGoal(usageGoalsForSelectedPackages))
+        return listOf(totalUsageStatAndGoal) + usageForSelectedApps
+    }
+
+    private fun getTotalUsageGoal(usageGoalsForSelectedPackages: List<UsageGoal>): Long {
+        usageGoalsForSelectedPackages.forEach {
+            if (it.packageName == TOTAL) {
+                return it.goalTime
+            }
+        }
+        return 0
     }
 
     private suspend fun getUsageStatsAndGoalsForSelectedPackages(

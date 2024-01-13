@@ -91,7 +91,7 @@ class MyPageFragment : Fragment() {
 
     private fun initPrivacyButton() {
         binding.vPrivacy.setOnClickListener {
-            val privacyRuleUrl = "https://www.notion.so/hmhteam/4219063a635e4eec8d8b9719c6c2a6fa"
+            val privacyRuleUrl = getString(R.string.privacy_url)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(privacyRuleUrl))
             startActivity(intent)
         }
@@ -99,7 +99,7 @@ class MyPageFragment : Fragment() {
 
     private fun initTermOfUseButton() {
         binding.vTermofuse.setOnClickListener {
-            val termOfUseUrl = "https://www.notion.so/hmhteam/33acb29be57245f394eb93ddb2e3b8cc"
+            val termOfUseUrl =getString(R.string.term_of_use_url)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(termOfUseUrl))
             startActivity(intent)
         }

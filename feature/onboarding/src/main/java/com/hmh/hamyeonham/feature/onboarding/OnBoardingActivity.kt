@@ -10,8 +10,6 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
-import com.hmh.hamyeonham.feature.onboarding.viewModel.OnBoardingViewModel
-import com.hmh.hamyeonham.feature.onboarding.viewModel.SignUpEffect
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingEffect
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,18 +34,9 @@ class OnBoardingActivity : AppCompatActivity() {
         setBackPressedCallback()
 
         val accessToken = intent.getStringExtra(EXTRA_ACCESS_TOKEN)
-        viewModel.setAccessToken(accessToken.orEmpty())
-        viewModel.signUpWithUserInfo()
-        viewModel.signUpEvent.flowWithLifecycle(lifecycle)
-            .onEach { signUpEvent ->
-                when (signUpEvent) {
-                    is SignUpEffect.SignUpSuccess -> startOnBoardingDoneSignUpActivity()
-                    is SignUpEffect.SignUpFail -> Log.e(
-                        "OnBoardingActivity",
-                        "signUpEvent: $signUpEvent",
-                    )
-                }
-            }.launchIn(lifecycleScope)
+        viewModel.updateState {
+            copy(accessToken = accessToken.orEmpty())
+        }
     }
 
     private fun initViews() {
@@ -91,7 +80,9 @@ class OnBoardingActivity : AppCompatActivity() {
                     updateProgressBar(currentItem + 1, viewPager.adapter?.itemCount ?: 1)
                 }
 
-                currentItem == lastItem -> startOnBoardingDoneSignUpActivity()
+                currentItem == lastItem -> {
+                    viewModel.signUp()
+                }
             }
         }
     }
@@ -103,6 +94,9 @@ class OnBoardingActivity : AppCompatActivity() {
                     binding.btnOnboardingNext.isEnabled = it.isActive
                     binding.btnOnboardingNext.isSelected = it.isActive
                 }
+
+                is OnBoardingEffect.SignUpSuccess -> startOnBoardingDoneSignUpActivity()
+                is OnBoardingEffect.SignUpFail -> Log.e("OnBoardingActivity", "signUpEvent: $it")
             }
         }.launchIn(lifecycleScope)
     }

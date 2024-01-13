@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.context.toast
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.login.databinding.ActivityLoginBinding
@@ -61,11 +59,6 @@ class LoginActivity : AppCompatActivity() {
             vpLogin.adapter = loginViewPagerAdapter
             indicatorLoginDots.attachTo(binding.vpLogin)
         }
-    }
-
-    private fun moveToOnBoardingActivity() {
-        startActivity(navigationProvider.toOnBoarding())
-        finish()
     }
 
     private fun moveToOnBoardingActivity(accessToken: String? = null) {

@@ -72,15 +72,13 @@ class ChallengeFragment : Fragment() {
                 if (result.resultCode == Activity.RESULT_OK) {
                     val apps = result.data?.getStringArrayExtra(AppAddActivity.SELECTED_APPS)
                     val goalTime = result.data?.getLongExtra(AppAddActivity.GOAL_TIME, 0)
-                    val goals = apps?.map { packageName ->
+                    val usageGoals = apps?.map { packageName ->
                         UsageGoal(
                             packageName = packageName,
                             goalTime = goalTime ?: 0
                         )
                     }.orEmpty()
-                    activityViewModel.updateState {
-                        copy(usageGoals = goals)
-                    }
+                    activityViewModel.addUsageGoals(usageGoals)
                 }
             }
     }

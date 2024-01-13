@@ -1,6 +1,7 @@
 package com.hmh.hamyeonham.core
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.hmh.hamyeonham.challenge.model.ChallengeStatus
 import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
@@ -12,6 +13,7 @@ import com.hmh.hamyeonham.userinfo.usecase.GetUserInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class MainState(
@@ -24,27 +26,30 @@ data class MainState(
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getUsageGoalsUseCase: GetUsageGoalsUseCase,
-    private val getUsageStatsListUsecase: GetUsageStatsListUseCase,
+    private val getUsageStatsListUseCase: GetUsageStatsListUseCase,
     private val getUserInfoUseCase: GetUserInfoUseCase,
 ) : ViewModel() {
     private val _mainState = MutableStateFlow(MainState())
     val mainState = _mainState.asStateFlow()
 
     init {
-        setUsageGoals(getUsageGoalsUseCase())
-        setUsageStatsList()
+        viewModelScope.launch {
+            val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
+            setUsageGaols(getUsageGoalsUseCase())
+            setUsageStatsList(getUsageStatsListUseCase(startTime, endTime))
+        }
         setUserInfo(getUserInfoUseCase())
+    }
+
+    private fun setUsageGaols(usageGoals: List<UsageGoal>) {
+        updateState {
+            copy(usageGoals = usageGoals)
+        }
     }
 
     fun setChallengeStatus(challengeStatus: ChallengeStatus) {
         updateState {
             copy(challengeStatus = challengeStatus)
-        }
-    }
-
-    fun setUsageGoals(usageGoal: List<UsageGoal>) {
-        updateState {
-            copy(usageGoals = usageGoal)
         }
     }
 
@@ -60,16 +65,17 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun updateState(transform: MainState.() -> MainState) {
-        val currentState = mainState.value
-        val newState = currentState.transform()
-        _mainState.value = newState
+    fun updateState(transform: suspend MainState.() -> MainState) {
+        viewModelScope.launch {
+            val currentState = mainState.value
+            val newState = currentState.transform()
+            _mainState.value = newState
+        }
     }
 
-    private fun setUsageStatsList() {
-        val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
+    private fun setUsageStatsList(usageStatsList: List<UsageStatAndGoal>) {
         updateState {
-            copy(usageStatsList = getUsageStatsListUsecase(startTime, endTime))
+            copy(usageStatsList = usageStatsList)
         }
     }
 }

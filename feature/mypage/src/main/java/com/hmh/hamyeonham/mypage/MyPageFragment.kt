@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
+import com.hmh.hamyeonham.common.dialog.TwoButtonCommonDialog
 import com.hmh.hamyeonham.common.fragment.viewLifeCycle
 import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
@@ -40,7 +41,25 @@ class MyPageFragment : Fragment() {
         savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
+        initViews()
         collectMainState()
+    }
+
+    private fun initViews() {
+        binding.tvLogout.setOnClickListener {
+            TwoButtonCommonDialog.newInstance(
+                title = getString(R.string.logout_description),
+                confirmButtonText = getString(com.hmh.hamyeonham.core.designsystem.R.string.all_okay),
+                dismissButtonText = getString(com.hmh.hamyeonham.core.designsystem.R.string.all_cancel)
+            ).apply {
+                setConfirmButtonClickListener {
+
+                }
+                setDismissButtonClickListener {
+
+                }
+            }.showAllowingStateLoss(childFragmentManager)
+        }
     }
 
     private fun collectMainState() {

@@ -1,6 +1,7 @@
 package com.hmh.hamyeonham.login
 
 import com.hmh.hamyeonham.core.network.service.SignUpService
+import com.hmh.hamyeonham.core.network.signup.model.toSignUpRequest
 import com.hmh.hamyeonham.login.model.SignRequestDomain
 import com.hmh.hamyeonham.login.model.SignUpUser
 import com.hmh.hamyeonham.login.repository.SignUpRepository
@@ -16,7 +17,11 @@ class DefaultSignUpRepository @Inject constructor(
     ): Result<SignUpUser> {
         return runCatching {
             val bearerToken = "Bearer $accessToken"
-            signUpService.signUp(bearerToken, "Android", signUpRequest).data.toSignUpUser()
+            signUpService.signUp(
+                bearerToken,
+                "Android",
+                signUpRequest.toSignUpRequest()
+            ).data.toSignUpUser()
         }
     }
 }

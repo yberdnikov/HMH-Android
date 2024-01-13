@@ -1,6 +1,7 @@
 package com.hmh.hamyeonham.core.network.service
 
 import com.hmh.hamyeonham.core.network.model.BaseResponse
+import com.hmh.hamyeonham.core.network.signup.model.SignUpRequest
 import com.hmh.hamyeonham.core.network.signup.model.SignUpResponse
 import com.hmh.hamyeonham.login.model.SignRequestDomain
 import retrofit2.http.Body
@@ -12,6 +13,6 @@ interface SignUpService {
     suspend fun signUp(
         @Header("Authorization") accessToken: String,
         @Header("OS") OS: String,
-        @Body request: SignRequestDomain,
+        @Body request: SignUpRequest,
     ): BaseResponse<SignUpResponse>
 }

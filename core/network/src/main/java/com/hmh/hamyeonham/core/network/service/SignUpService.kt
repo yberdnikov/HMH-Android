@@ -1,7 +1,7 @@
-package com.hmh.hamyeonham.core.network.SignUp
+package com.hmh.hamyeonham.core.network.service
 
-import com.hmh.hamyeonham.core.network.SignUp.model.SignUpResponse
 import com.hmh.hamyeonham.core.network.model.BaseResponse
+import com.hmh.hamyeonham.core.network.signup.model.SignUpResponse
 import com.hmh.hamyeonham.login.model.SignRequestDomain
 import retrofit2.http.Body
 import retrofit2.http.Header

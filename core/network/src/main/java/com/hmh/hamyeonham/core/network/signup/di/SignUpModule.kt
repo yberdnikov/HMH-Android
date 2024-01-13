@@ -1,6 +1,7 @@
-package com.hmh.hamyeonham.core.network.di
+package com.hmh.hamyeonham.core.network.signup.di
 
 import com.hmh.hamyeonham.common.qualifier.Secured
+import com.hmh.hamyeonham.core.network.service.SignUpService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,5 +15,5 @@ import javax.inject.Singleton
 object SignUpModule {
     @Provides
     @Singleton
-    fun signUpApi(@Secured retrofit: Retrofit): SignUpModule = retrofit.create()
+    fun provideSignUpApi(@Secured retrofit: Retrofit): SignUpService = retrofit.create()
 }

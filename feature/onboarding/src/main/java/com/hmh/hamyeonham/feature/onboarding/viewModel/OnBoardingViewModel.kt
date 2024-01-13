@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.hmh.hamyeonham.feature.onboarding.model.OnboardingBtnInfo
 import com.hmh.hamyeonham.feature.onboarding.model.OnboardingInformation
 import com.hmh.hamyeonham.login.model.SignRequestDomain
+import com.hmh.hamyeonham.login.model.SignUpUser
 import com.hmh.hamyeonham.login.repository.SignUpRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -26,7 +27,7 @@ class OnBoardingViewModel @Inject constructor(
 ) : ViewModel() {
     private lateinit var accessToken: String
     private val _buttonInfoList =
-        MutableStateFlow<List<OnboardingBtnInfo>>(initializeButtonInfoList())
+        MutableStateFlow(initializeButtonInfoList())
 
     private val _signUpEvent = MutableSharedFlow<SignUpEffect>()
     val signUpEvent = _signUpEvent.asSharedFlow()
@@ -79,35 +80,8 @@ class OnBoardingViewModel @Inject constructor(
         viewModelScope.launch {
             val selectedButton = _buttonInfoList.value.find { it.isClicked }
             if (selectedButton != null) {
-                val onboardingInformation = OnboardingInformation(
-                    usuallyUseTime = selectedButton.text,
-                    onboarding = OnboardingInformation.Onboarding(
-                        averageUseTime = selectedButton.text,
-                        problem = listOf(),
-                    ),
-                    challenge = OnboardingInformation.Challenge(
-                        period = -1,
-                        goalTime = -1,
-                        apps = OnboardingInformation.Apps(
-                            appCode = "",
-                            goalTime = -1,
-                        ),
-                    ),
-                )
                 val request = SignRequestDomain(
-                    usuallyUseTime = onboardingInformation.usuallyUseTime,
-                    onboarding = onboardingInformation.Onboarding(
-                        averageUseTime = onboardingInformation.onboarding.averageUseTime,
-                        problem = onboardingInformation.onboarding.problem,
-                    ),
-                    challenge = SignRequestDomain.Challenge(
-                        period = onboardingInformation.challenge.period,
-                        goalTime = onboardingInformation.challenge.goalTime,
-                        apps = SignRequestDomain.Apps(
-                            appCode = onboardingInformation.challenge.apps.appCode,
-                            goalTime = onboardingInformation.challenge.apps.goalTime,
-                        ),
-                    ),
+
                 )
                 val result = signUpRepository.signUp(accessToken, request)
                 Log.d("UserInformation result", "signUpWithUserInfo: $result")

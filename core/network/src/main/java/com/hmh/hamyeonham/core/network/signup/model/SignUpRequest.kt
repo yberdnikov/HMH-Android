@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.core.network.SignUp.model
+package com.hmh.hamyeonham.core.network.signup.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -7,8 +7,6 @@ import kotlinx.serialization.Serializable
 data class SignUpRequest(
     @SerialName("challenge")
     val challenge: Challenge,
-    @SerialName("name")
-    val name: String,
     @SerialName("onboarding")
     val onboarding: Onboarding,
     @SerialName("socialPlatform")

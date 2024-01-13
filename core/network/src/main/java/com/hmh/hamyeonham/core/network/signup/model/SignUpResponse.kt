@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.core.network.SignUp.model
+package com.hmh.hamyeonham.core.network.signup.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

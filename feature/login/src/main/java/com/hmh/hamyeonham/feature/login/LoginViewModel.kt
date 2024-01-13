@@ -1,7 +1,6 @@
 package com.hmh.hamyeonham.feature.login
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hmh.hamyeonham.login.repository.LoginRepository
@@ -42,8 +41,11 @@ class LoginViewModel @Inject constructor(
                         loginRepository.login(token.accessToken).onSuccess {
                             _kakaoLoginEvent.emit(LoginEffect.LoginSuccess)
                         }.onFailure {
-                            Log.e("LoginViewModel", "loginWithKakaoApp: $it")
-                            _kakaoLoginEvent.emit(LoginEffect.LoginFail)
+                            if (it is HttpException && it.code() == 403) {
+                                _kakaoLoginEvent.emit(LoginEffect.RequireSignUp)
+                            } else {
+                                _kakaoLoginEvent.emit(LoginEffect.LoginFail)
+                            }
                         }
                     }
                 }

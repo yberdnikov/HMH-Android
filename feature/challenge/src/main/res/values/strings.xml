@@ -6,4 +6,11 @@
     <string name="delete">삭제</string>
     <string name="appselection_searchbar">잠금 추가할 앱을 검색해 주세요</string>
     <string name="appselection_done">선택 완료</string>
+
+    <string name="select_data_question">챌린지 기간을 선택해 주세요</string>
+    <string name="select_data_description">원하는 목표에 맞게 기간을 선택해 주세요</string>
+    <string name="challenge_duration_days">%d일</string>
+
+    <string name="screentime_goal_title">하루 목표 사용 시간을\n설정해 주세요</string>
+    <string name="screentime_goal_description">목표 사용 시간은 최대 6시간까지\n설정할 수 있어요</string>
 </resources>

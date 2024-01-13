@@ -2,4 +2,6 @@
 <resources>
     <string name="all_okay">확인</string>
     <string name="all_cancel">취소</string>
+    <string name="all_hour">시간</string>
+    <string name="all_minute">분</string>
 </resources>

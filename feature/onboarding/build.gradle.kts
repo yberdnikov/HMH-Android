@@ -14,5 +14,5 @@ dependencies {
     implementation(projects.domain.login)
 
     implementation(projects.feature.main)
-    implementation(project.core.network)
+    implementation(projects.core.network)
 }

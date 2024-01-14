@@ -6,7 +6,7 @@ import com.hmh.hamyeonham.core.network.auth.datastore.HMHNetworkPreference
 import com.hmh.hamyeonham.feature.onboarding.model.OnboardingAnswer
 import com.hmh.hamyeonham.feature.onboarding.model.OnboardingPageInfo
 import com.hmh.hamyeonham.feature.onboarding.model.toSignUpRequest
-import com.hmh.hamyeonham.login.repository.SignUpRepository
+import com.hmh.hamyeonham.login.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,7 +29,7 @@ data class OnBoardingState(
 
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
-    private val signUpRepository: SignUpRepository,
+    private val authRepository: AuthRepository,
     private val hmhNetworkPreference: HMHNetworkPreference,
 ) : ViewModel() {
     private val _onBoardingState = MutableStateFlow(OnBoardingState())
@@ -74,7 +74,7 @@ class OnBoardingViewModel @Inject constructor(
             val token = onBoardingState.value.accessToken
             val request = onBoardingState.value.onBoardingAnswer
             runCatching {
-                signUpRepository.signUp(token, request.toSignUpRequest())
+                authRepository.signUp(token, request.toSignUpRequest())
             }.onSuccess { result ->
                 val signUpUser = result.getOrNull()
                 signUpUser?.let {

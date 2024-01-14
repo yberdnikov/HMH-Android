@@ -13,25 +13,17 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.flowWithLifecycle
 import com.hmh.hamyeonham.common.fragment.toast
-import com.hmh.hamyeonham.common.fragment.viewLifeCycle
-import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.OnBoardingAccessibilityService
 import com.hmh.hamyeonham.feature.onboarding.R
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingRequestPermissionBinding
-import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingRequestPermissionViewModel
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class OnBoardingRequestPermissionFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingRequestPermissionBinding::bind)
-    private val viewModel by viewModels<OnBoardingRequestPermissionViewModel>()
     private val activityViewModel by activityViewModels<OnBoardingViewModel>()
 
     private val accessibilitySettingsLauncher: ActivityResultLauncher<Intent> =
@@ -39,7 +31,6 @@ class OnBoardingRequestPermissionFragment : Fragment() {
             ActivityResultContracts.StartActivityForResult(),
         ) {
             if (checkAccessibilityServiceEnabled()) {
-                viewModel.updateState { copy(isAccessibilityEnabled = true) }
                 toast(getString(R.string.success_accessibility_settings))
             }
         }
@@ -49,7 +40,6 @@ class OnBoardingRequestPermissionFragment : Fragment() {
             ActivityResultContracts.StartActivityForResult(),
         ) {
             if (hasOverlayPermission()) {
-                viewModel.updateState { copy(isOverlayEnabled = true) }
                 toast(getString(R.string.success_overlay_permission))
             }
         }
@@ -59,7 +49,6 @@ class OnBoardingRequestPermissionFragment : Fragment() {
             ActivityResultContracts.StartActivityForResult(),
         ) {
             if (hasUsageStatsPermission()) {
-                viewModel.updateState { copy(isUsageStatsEnabled = true) }
                 toast(getString(R.string.success_usage_stats_permission))
             }
         }
@@ -74,47 +63,34 @@ class OnBoardingRequestPermissionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        collectPermissionState()
         clickRequireAccessibilityButton()
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.updateState {
-            copy(
-                isAccessibilityEnabled = checkAccessibilityServiceEnabled(),
-                isUsageStatsEnabled = hasUsageStatsPermission(),
-                isOverlayEnabled = hasOverlayPermission(),
-            )
+        activityViewModel.updateState {
+            copy(isNextButtonActive = allPermissionIsGranted())
         }
-    }
-
-    private fun collectPermissionState() {
-        viewModel.permissionsState.flowWithLifecycle(viewLifeCycle).onEach { permissionsState ->
-            activityViewModel.updateState {
-                copy(isNextButtonActive = permissionsState.checkIsNextButtonActive())
-            }
-        }.launchIn(viewLifeCycleScope)
     }
 
     private fun clickRequireAccessibilityButton() {
         binding.run {
             clOnboardingPermission1.setOnClickListener {
-                if (viewModel.permissionsState.value.isAccessibilityEnabled) {
+                if (checkAccessibilityServiceEnabled()) {
                     toast(getString(R.string.already_accessibility_settings))
                 } else {
                     requestAccessibilitySettings()
                 }
             }
             clOnboardingPermission2.setOnClickListener {
-                if (viewModel.permissionsState.value.isUsageStatsEnabled) {
+                if (hasUsageStatsPermission()) {
                     toast(getString(R.string.already_usage_stats_permission))
                 } else {
                     requestUsageAccessPermission()
                 }
             }
             clOnboardingPermission3.setOnClickListener {
-                if (viewModel.permissionsState.value.isOverlayEnabled) {
+                if (hasOverlayPermission()) {
                     toast(getString(R.string.already_overlay_permission))
                 } else {
                     requestOverlayPermission()
@@ -124,10 +100,8 @@ class OnBoardingRequestPermissionFragment : Fragment() {
     }
 
     private fun requestAccessibilitySettings() {
-        if (!viewModel.permissionsState.value.isAccessibilityEnabled) {
-            val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-            accessibilitySettingsLauncher.launch(intent)
-        }
+        val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+        accessibilitySettingsLauncher.launch(intent)
     }
 
     private fun requestOverlayPermission() {
@@ -178,5 +152,9 @@ class OnBoardingRequestPermissionFragment : Fragment() {
 
     private fun hasOverlayPermission(): Boolean {
         return context?.let { Settings.canDrawOverlays(it) } ?: false
+    }
+
+    private fun allPermissionIsGranted(): Boolean {
+        return checkAccessibilityServiceEnabled() && hasUsageStatsPermission() && hasOverlayPermission()
     }
 }

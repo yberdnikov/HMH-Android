@@ -59,7 +59,7 @@ class AppselectionActivity : AppCompatActivity() {
     }
 
     private fun initAppSelectionButtonListener() {
-        binding.btAppselection.setOnClickListener {
+        binding.btAppSelection.setOnClickListener {
             val intent = Intent(this, AppselectionActivity::class.java)
             intent.putExtra(SELECTED_APPS, appSelectionViewModel.selectedApp.toTypedArray())
             setResult(RESULT_OK, intent)
@@ -80,7 +80,7 @@ class AppselectionActivity : AppCompatActivity() {
     }
 
     private fun enableSelectButton(appSelectButtonEnable: Boolean) {
-        binding.btAppselection.apply {
+        binding.btAppSelection.apply {
             isEnabled = appSelectButtonEnable
             isSelected = appSelectButtonEnable
         }

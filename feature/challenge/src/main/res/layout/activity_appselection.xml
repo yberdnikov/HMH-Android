@@ -47,12 +47,12 @@
         android:id="@+id/rv_appselection"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bt_appselection"
+        app:layout_constraintBottom_toTopOf="@id/bt_app_selection"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_searchbar" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/bt_appselection"
+        android:id="@+id/bt_app_selection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"

@@ -17,7 +17,7 @@ class OnBoardingSelectAppFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         return FragmentOnBoardingSelectAppBinding.inflate(inflater, container, false).root
     }
 

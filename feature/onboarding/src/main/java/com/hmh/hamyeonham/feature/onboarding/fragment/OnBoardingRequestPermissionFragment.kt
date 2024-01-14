@@ -1,5 +1,7 @@
 package com.hmh.hamyeonham.feature.onboarding.fragment
 
+import android.app.usage.UsageStatsManager
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -17,9 +19,10 @@ import com.hmh.hamyeonham.common.fragment.toast
 import com.hmh.hamyeonham.common.fragment.viewLifeCycle
 import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
+import com.hmh.hamyeonham.feature.onboarding.OnBoardingAccessibilityService
 import com.hmh.hamyeonham.feature.onboarding.R
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingRequestPermissionBinding
-import com.hmh.hamyeonham.feature.onboarding.model.OnBoardingPermissionsState
+import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingPermissionsState
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingRequestPermissionViewModel
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +39,8 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),
         ) {
-            if (viewModel.permissionsState.value.isAccessibilityEnabled) {
+            if (checkAccessibilityServiceEnabled()) {
+                viewModel.updateState { copy(isAccessibilityEnabled = true) }
                 toast(getString(R.string.success_accessibility_settings))
             }
         }
@@ -45,7 +49,8 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),
         ) {
-            if (viewModel.permissionsState.value.isOverlayEnabled) {
+            if (hasOverlayPermission()) {
+                viewModel.updateState { copy(isOverlayEnabled = true) }
                 toast(getString(R.string.success_overlay_permission))
             }
         }
@@ -54,7 +59,8 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),
         ) {
-            if (viewModel.permissionsState.value.isUsageStatsEnabled) {
+            if (hasUsageStatsPermission()) {
+                viewModel.updateState { copy(isUsageStatsEnabled = true) }
                 toast(getString(R.string.success_usage_stats_permission))
             }
         }
@@ -71,7 +77,17 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         collectPermissionState()
         clickRequireAccessibilityButton()
-        viewModel.checkPermissions(requireContext())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.updateState {
+            copy(
+                isAccessibilityEnabled = checkAccessibilityServiceEnabled(),
+                isUsageStatsEnabled = hasUsageStatsPermission(),
+                isOverlayEnabled = hasOverlayPermission(),
+            )
+        }
     }
 
     private fun collectPermissionState() {
@@ -107,11 +123,13 @@ class OnBoardingRequestPermissionFragment : Fragment() {
     }
 
     private fun updateNextButtonState(permissionsState: OnBoardingPermissionsState) {
-        permissionsState.run {
-            if (isAccessibilityEnabled && isUsageStatsEnabled && isOverlayEnabled) {
-                activityViewModel.changeStateNextButton(true)
+        viewModel.permissionsState.flowWithLifecycle(viewLifeCycle).onEach { permissionsState ->
+            permissionsState.run {
+                if (isAccessibilityEnabled && isUsageStatsEnabled && isOverlayEnabled) {
+                    activityViewModel.updateState { copy(isNextButtonActive = true) }
+                }
             }
-        }
+        }.launchIn(viewLifeCycleScope)
     }
 
     private fun requestAccessibilitySettings() {
@@ -139,5 +157,35 @@ class OnBoardingRequestPermissionFragment : Fragment() {
             startActivity(intent)
             usageStatsPermissionLauncher.launch(intent)
         }
+    }
+
+    private fun checkAccessibilityServiceEnabled(): Boolean {
+        return context?.let {
+            val service =
+                it.packageName + "/" + OnBoardingAccessibilityService::class.java.canonicalName
+            val enabledServicesSetting = Settings.Secure.getString(
+                it.contentResolver,
+                Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
+            )
+            enabledServicesSetting?.contains(service) == true
+        } ?: false
+    }
+
+    private fun hasUsageStatsPermission(): Boolean {
+        return context?.let {
+            val usageStatsManager =
+                it.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+            val time = System.currentTimeMillis()
+            val stats = usageStatsManager.queryUsageStats(
+                UsageStatsManager.INTERVAL_DAILY,
+                time - 1000 * 60,
+                time,
+            )
+            return stats != null && stats.isNotEmpty()
+        } ?: false
+    }
+
+    private fun hasOverlayPermission(): Boolean {
+        return context?.let { Settings.canDrawOverlays(it) } ?: false
     }
 }

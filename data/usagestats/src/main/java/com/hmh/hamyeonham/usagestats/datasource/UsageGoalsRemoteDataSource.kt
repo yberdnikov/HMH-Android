@@ -25,6 +25,5 @@ class UsageGoalsRemoteDataSource @Inject constructor() {
     }
 
     fun addUsageGoal(usageGoal: UsageGoal) {
-
     }
 }

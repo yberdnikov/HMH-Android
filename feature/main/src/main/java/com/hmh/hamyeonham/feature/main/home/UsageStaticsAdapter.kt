@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hmh.hamyeonham.common.view.ItemDiffCallback
 import com.hmh.hamyeonham.feature.main.databinding.ItemUsagestaticBinding
 import com.hmh.hamyeonham.feature.main.databinding.ItemUsagestaticTotalBinding
-import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
+import com.hmh.hamyeonham.usagestats.model.UsageStatusAndGoal
 
-class UsageStaticsAdapter : ListAdapter<UsageStatAndGoal, RecyclerView.ViewHolder>(
-    ItemDiffCallback<UsageStatAndGoal>(
+class UsageStaticsAdapter : ListAdapter<UsageStatusAndGoal, RecyclerView.ViewHolder>(
+    ItemDiffCallback<UsageStatusAndGoal>(
         onItemsTheSame = { old, new -> old.packageName == new.packageName },
         onContentsTheSame = { old, new -> old == new }
     )

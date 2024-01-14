@@ -12,10 +12,8 @@ import com.hmh.hamyeonham.usagestats.usecase.GetUsageStatsListUseCase
 import com.hmh.hamyeonham.userinfo.model.UserInfo
 import com.hmh.hamyeonham.userinfo.repository.UserInfoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,25 +21,35 @@ data class MainState(
     val challengeStatus: ChallengeStatus = ChallengeStatus(),
     val usageGoals: List<UsageGoal> = emptyList(),
     val usageStatsList: List<UsageStatAndGoal> = emptyList(),
-    val userInfo: UserInfo = UserInfo()
+    val userInfo: UserInfo = UserInfo(),
 )
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getUsageGoalsUseCase: GetUsageGoalsUseCase,
     private val getUsageStatsListUseCase: GetUsageStatsListUseCase,
-    private val userInfoRepository: UserInfoRepository
+    private val userInfoRepository: UserInfoRepository,
 ) : ViewModel() {
     private val _mainState = MutableStateFlow(MainState())
     val mainState = _mainState.asStateFlow()
 
     init {
+        getUsageGoal()
+        getStatsList()
+        getUserInfo()
+    }
+
+    private fun getUsageGoal() {
         viewModelScope.launch {
-            val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
             setUsageGaols(getUsageGoalsUseCase())
+        }
+    }
+
+    private fun getStatsList() {
+        val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
+        viewModelScope.launch {
             setUsageStatsList(getUsageStatsListUseCase(startTime, endTime))
         }
-        getUserInfo()
     }
 
     private fun getUserInfo() {
@@ -52,12 +60,6 @@ class MainViewModel @Inject constructor(
                 Log.e("error", it.toString())
             }
         }
-        viewModelScope.launch {
-            val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
-            setUsageGaols(getUsageGoalsUseCase())
-            setUsageStatsList(getUsageStatsListUseCase(startTime, endTime))
-        }
-        setUserInfo(getUserInfoUseCase())
     }
 
     private fun setUsageGaols(usageGoals: List<UsageGoal>) {

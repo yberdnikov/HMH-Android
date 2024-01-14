@@ -1,6 +1,5 @@
 package com.hmh.hamyeonham.login.mapper
 
-import com.hmh.hamyeonham.core.network.signup.model.SignUpRequest
 import com.hmh.hamyeonham.core.network.signup.model.SignUpResponse
 
 internal fun SignUpResponse.toSignUp(): SignUpResponse {
@@ -10,9 +9,3 @@ internal fun SignUpResponse.toSignUp(): SignUpResponse {
         refreshToken = refreshToken.orEmpty(),
     )
 }
-
-//internal fun SignUpRequest.toSignRequest(): SignUpRequest {
-//    return SignUpRequest(
-//
-//    )
-//}

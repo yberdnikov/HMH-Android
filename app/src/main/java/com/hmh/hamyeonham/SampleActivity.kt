@@ -34,7 +34,6 @@ class SampleActivity : AppCompatActivity() {
             fadeOut.setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation) {}
                 override fun onAnimationEnd(animation: Animation) {
-                    splashScreenViewProvider.remove()
                 }
 
                 override fun onAnimationRepeat(animation: Animation) {}

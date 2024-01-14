@@ -7,6 +7,7 @@ import com.hmh.hamyeonham.challenge.model.ChallengeStatus
 import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
 import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
+import com.hmh.hamyeonham.usagestats.usecase.AddUsageGoalsUseCase
 import com.hmh.hamyeonham.usagestats.usecase.GetUsageGoalsUseCase
 import com.hmh.hamyeonham.usagestats.usecase.GetUsageStatsListUseCase
 import com.hmh.hamyeonham.userinfo.model.UserInfo
@@ -27,8 +28,8 @@ data class MainState(
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getUsageGoalsUseCase: GetUsageGoalsUseCase,
-    private val usageStatsListUsecase: GetUsageStatsListUseCase,
-    private val userInfoRepository: UserInfoRepository
+    private val getUsageStatsListUseCase: GetUsageStatsListUseCase,
+    private val addUsageGoalsUseCase: AddUsageGoalsUseCase,
 ) : ViewModel() {
     private val _mainState = MutableStateFlow(MainState())
     val mainState = _mainState.asStateFlow()
@@ -36,17 +37,6 @@ class MainViewModel @Inject constructor(
     init {
         setUsageGoals(getUsageGoalsUseCase())
         setUsageStatsList()
-        getUserInfo()
-    }
-
-    private fun getUserInfo() {
-        viewModelScope.launch {
-            userInfoRepository.getUserInfo().onSuccess {
-                setUserInfo(it)
-            }.onFailure {
-                Log.e("error", it.toString())
-            }
-        }
     }
 
     fun setChallengeStatus(challengeStatus: ChallengeStatus) {
@@ -67,7 +57,8 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun addUsageGoals(usageGoal: UsageGoal) {
+    fun addUsageGoals(usageGoal: List<UsageGoal>) {
+        // TODO 앱 추가 API
         updateState {
             copy(usageGoals = usageGoals + usageGoal)
         }
@@ -82,7 +73,7 @@ class MainViewModel @Inject constructor(
     private fun setUsageStatsList() {
         val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
         updateState {
-            copy(usageStatsList = usageStatsListUsecase(startTime, endTime))
+            copy(usageStatsList = getUsageStatsListUseCase(startTime, endTime))
         }
     }
 }

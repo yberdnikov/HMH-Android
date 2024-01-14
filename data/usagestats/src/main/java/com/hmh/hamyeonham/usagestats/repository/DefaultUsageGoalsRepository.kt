@@ -17,4 +17,8 @@ class DefaultUsageGoalsRepository @Inject constructor(
         return usageGoalsRemoteDataSource.getUsageGoals()
             .firstOrNull { it.packageName == packageName }?.goalTime ?: 0
     }
+
+    override fun addUsageGoal(usageGoal: UsageGoal) {
+        usageGoalsRemoteDataSource.addUsageGoal(usageGoal)
+    }
 }

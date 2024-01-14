@@ -27,8 +27,8 @@
 
         <ImageView
             android:id="@+id/iv_point"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:src="@drawable/ic_challenge_point_24"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -101,10 +101,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="26dp"
         android:text="@string/delete"
+        android:padding="17dp"
         android:textAppearance="@style/TextAppearance.Hmh.TitleMedium"
         android:textColor="@color/blue_purple_text"
-        app:layout_constraintBottom_toBottomOf="@id/tv_app_lock"
         app:layout_constraintEnd_toEndOf="@id/v_bottom"
+        app:layout_constraintBottom_toBottomOf="@id/tv_app_lock"
         app:layout_constraintTop_toTopOf="@id/tv_app_lock" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -112,12 +113,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="17dp"
         android:layout_marginBottom="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/v_bottom"
         app:layout_constraintStart_toStartOf="@id/v_bottom"
-        app:layout_constraintTop_toBottomOf="@id/tv_app_lock" />
+        app:layout_constraintTop_toBottomOf="@id/tv_modifier_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

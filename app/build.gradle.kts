@@ -9,10 +9,9 @@ plugins {
     alias(libs.plugins.crashlytics)
 }
 
-val properties =
-    Properties().apply {
-        load(rootProject.file("local.properties").inputStream())
-    }
+val properties = Properties().apply {
+    load(rootProject.file("local.properties").inputStream())
+}
 
 android {
     namespace = "com.hmh.hamyeonham"
@@ -48,7 +47,7 @@ android {
             isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
+                "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("release")
         }
@@ -62,14 +61,18 @@ dependencies {
     implementation(projects.feature.onboarding)
     implementation(projects.feature.main)
     implementation(projects.feature.mypage)
+    implementation(projects.feature.challenge)
 
     // Domain
     implementation(projects.domain.usagestats)
     implementation(projects.domain.userinfo)
+    implementation(projects.domain.login)
 
     // Data
     implementation(projects.data.usagestats)
     implementation(projects.data.userinfo)
+    implementation(projects.data.login)
+    implementation(projects.data.device)
 
     // Core
     implementation(projects.core.common)

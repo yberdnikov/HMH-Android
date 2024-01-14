@@ -1,0 +1,14 @@
+<resources>
+    <string name="mypage_title">마이페이지</string>
+    <string name="mypage_point_title">보유 포인트</string>
+    <string name="mypage_point_unit">P</string>
+    <string name="mypage_badge_collection">배지 컬렉션</string>
+    <string name="mypage_journey">지금까지의 여정</string>
+    <string name="mypage_store">상점</string>
+    <string name="mypage_info">정보</string>
+    <string name="mypage_termofuse">이용약관</string>
+    <string name="mypage_privacy">개인정보처리방침</string>
+    <string name="logout_description">하면함을 로그아웃 하시겠어요?</string>
+    <string name="privacy_url">"https://www.notion.so/hmhteam/4219063a635e4eec8d8b9719c6c2a6fa"</string>
+    <string name="term_of_use_url">"https://www.notion.so/hmhteam/33acb29be57245f394eb93ddb2e3b8cc"</string>
+</resources>

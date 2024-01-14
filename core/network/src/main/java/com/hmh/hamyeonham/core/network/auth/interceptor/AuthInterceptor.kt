@@ -1,9 +1,9 @@
 package com.hmh.hamyeonham.core.network.auth.interceptor
 
 import com.hmh.hamyeonham.core.network.auth.datastore.HMHNetworkPreference
+import javax.inject.Inject
 import okhttp3.Interceptor
 import okhttp3.Response
-import javax.inject.Inject
 
 class AuthInterceptor @Inject constructor(
     private val dataStore: HMHNetworkPreference
@@ -17,13 +17,14 @@ class AuthInterceptor @Inject constructor(
             return chain.proceed(originalRequest)
         }
         val headerRequest = originalRequest.newBuilder()
-            .header("Authorization", encodedToken)
+            .addHeader("Authorization", encodedToken)
+            .addHeader("OS", "Android")
             .build()
         return chain.proceed(headerRequest)
     }
 
     private fun shouldRequestAuthenticatedHeaders(encodedPath: String) = when (encodedPath) {
-        "/api/v1/auth" -> false
+        "/api/v1/user/reissue" -> false
         else -> true
     }
 }

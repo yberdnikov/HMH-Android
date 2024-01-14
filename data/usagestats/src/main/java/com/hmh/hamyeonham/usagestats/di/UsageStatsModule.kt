@@ -4,9 +4,7 @@ import android.app.usage.UsageStatsManager
 import android.content.Context
 import com.hmh.hamyeonham.usagestats.datasource.UsageStatsDataSource
 import com.hmh.hamyeonham.usagestats.datasource.UsageStatsDataSourceImpl
-import com.hmh.hamyeonham.usagestats.repository.DefaultUsageGoalsRepository
 import com.hmh.hamyeonham.usagestats.repository.DefaultUsageStatsRepository
-import com.hmh.hamyeonham.usagestats.repository.UsageGoalsRepository
 import com.hmh.hamyeonham.usagestats.repository.UsageStatsRepository
 import dagger.Binds
 import dagger.Module

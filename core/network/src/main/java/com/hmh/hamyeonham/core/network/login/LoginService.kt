@@ -24,3 +24,4 @@ interface LoginService {
         @Header("Authorization") accessToken: String,
     ): BaseResponse<Unit>
 }
+

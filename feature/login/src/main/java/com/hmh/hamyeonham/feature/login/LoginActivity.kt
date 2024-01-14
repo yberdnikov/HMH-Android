@@ -6,11 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.context.toast
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.login.databinding.ActivityLoginBinding
+import com.hmh.hamyeonham.feature.onboarding.OnBoardingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -34,15 +33,27 @@ class LoginActivity : AppCompatActivity() {
         }
         setLoginViewPager()
         handleKakaoLoginSuccess()
+        handleAutoLoginSuccess()
+    }
+
+    private fun handleAutoLoginSuccess() {
+        viewModel.loginState.flowWithLifecycle(lifecycle).onEach { state ->
+            if (state.autoLogin) {
+                moveToMainActivity()
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun handleKakaoLoginSuccess() {
         viewModel.kakaoLoginEvent.flowWithLifecycle(lifecycle).onEach { state ->
+
             when (state) {
-                is LoginEffect.LoginSuccess -> moveToOnBoardingActivity()
-                is LoginEffect.LoginFail -> toast("로그인에 실패했습니다.")
+                is LoginEffect.LoginSuccess -> moveToMainActivity()
+
+                is LoginEffect.LoginFail -> toast(getString(R.string.fail_kakao_login))
+                is LoginEffect.RequireSignUp -> moveToOnBoardingActivity(state.token)
+                else -> Unit
             }
-            moveToOnBoardingActivity()
         }.launchIn(lifecycleScope)
     }
 
@@ -60,8 +71,21 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun moveToOnBoardingActivity() {
-        startActivity(navigationProvider.toOnBoarding())
+    private fun moveToOnBoardingActivity(accessToken: String? = null) {
+        val intent = navigationProvider.toOnBoarding()
+        accessToken?.let {
+            intent.putExtra(OnBoardingActivity.EXTRA_ACCESS_TOKEN, it)
+        }
+        startActivity(intent)
+        finish()
+
+        if (accessToken != null) {
+            toast(getString(R.string.empty_token_retry_login))
+        }
+    }
+
+    private fun moveToMainActivity() {
+        startActivity(navigationProvider.toMain())
         finish()
     }
 }

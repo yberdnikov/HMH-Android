@@ -9,7 +9,8 @@ import com.hmh.hamyeonham.feature.challenge.databinding.ItemUsageGoalBinding
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
 
 class ChallengeUsageGoalsAdapter(
-    private val onAppListAddClicked: () -> Unit
+    private val onAppListAddClicked: () -> Unit,
+    private val onAppItemClicked: (UsageGoal) -> Unit
 ) : ListAdapter<UsageGoal, ChallengeViewHolder>(
     ItemDiffCallback(
         onItemsTheSame = { oldItem, newItem ->
@@ -39,7 +40,8 @@ class ChallengeUsageGoalsAdapter(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
-                )
+                ),
+                onAppItemClicked = onAppItemClicked
             )
 
             else -> ChallengeViewHolder.GoalAddViewHolder(

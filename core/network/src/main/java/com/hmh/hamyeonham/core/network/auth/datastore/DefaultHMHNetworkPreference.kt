@@ -5,9 +5,8 @@ import androidx.core.content.edit
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
-class DefaultHMHNetworkPreference @Inject constructor(
-    private val preferences: SharedPreferences
+@Singleton class DefaultHMHNetworkPreference @Inject constructor(
+    private val preferences: SharedPreferences,
 ) : HMHNetworkPreference {
     override var accessToken: String
         get() = preferences.getString("access_token", "").orEmpty()

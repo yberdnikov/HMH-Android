@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.core.network.di
+package com.hmh.hamyeonham.login.di
 
 import com.hmh.hamyeonham.login.DefaultWithdrawalRepository
 import com.hmh.hamyeonham.login.repository.WithdrawalRepository

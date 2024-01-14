@@ -16,6 +16,5 @@ dependencies {
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.process.phoenix)
     implementation(libs.kakao.login)
-    implementation(project(":data:login"))
-    implementation(project(":domain:login"))
+
 }

@@ -10,7 +10,7 @@ android {
 dependencies {
     // Domain
     implementation(projects.domain.usagestats)
-
     // Core
     implementation(projects.core.database)
+    implementation(projects.core.network)
 }

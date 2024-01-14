@@ -7,7 +7,7 @@ import javax.inject.Singleton
 
 @Singleton
 class DefaultHMHNetworkPreference @Inject constructor(
-    private val preferences: SharedPreferences
+    private val preferences: SharedPreferences,
 ) : HMHNetworkPreference {
     override var accessToken: String
         get() = preferences.getString("access_token", "").orEmpty()
@@ -30,11 +30,11 @@ class DefaultHMHNetworkPreference @Inject constructor(
                 putString("user_name", value)
             }
         }
-    override var userId: String
-        get() = preferences.getString("user_id", "").orEmpty()
+    override var userId: Int
+        get() = preferences.getInt("user_id", -1)
         set(value) {
             preferences.edit(commit = true) {
-                putString("user_id", value)
+                putInt("user_id", value)
             }
         }
     override var autoLoginConfigured: Boolean

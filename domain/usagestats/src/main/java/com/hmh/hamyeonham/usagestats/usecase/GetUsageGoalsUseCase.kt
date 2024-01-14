@@ -5,9 +5,18 @@ import com.hmh.hamyeonham.usagestats.repository.UsageGoalsRepository
 import javax.inject.Inject
 
 class GetUsageGoalsUseCase @Inject constructor(
-    private val getUsageGoalsUseCase: UsageGoalsRepository,
+    private val usageGoalsRepository: UsageGoalsRepository,
 ) {
-    operator fun invoke(): List<UsageGoal> {
-        return getUsageGoalsUseCase.getUsageGoals()
+    suspend operator fun invoke(): List<UsageGoal> {
+        return getUsageGoals()
+    }
+
+    suspend fun getUsageGoals(): List<UsageGoal> {
+        return usageGoalsRepository.getUsageGoals()
+    }
+
+    suspend fun getUsageGoalTime(packageName: String): Long {
+        return usageGoalsRepository.getUsageGoals()
+            .firstOrNull { it.packageName == packageName }?.goalTime ?: 0
     }
 }

@@ -1,5 +1,6 @@
 package com.hmh.hamyeonham.usagestats.datasource
 
+import com.hmh.hamyeonham.usagestats.model.UsageGoal
 import com.hmh.hamyeonham.usagestats.model.UsageGoalModel
 import javax.inject.Inject
 
@@ -21,5 +22,8 @@ class UsageGoalsRemoteDataSource @Inject constructor() {
 
     fun getUsageGoals(): List<UsageGoalModel> {
         return usageGoalList
+    }
+
+    fun addUsageGoal(usageGoal: UsageGoal) {
     }
 }

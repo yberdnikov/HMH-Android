@@ -4,8 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hmh.hamyeonham.core.network.auth.datastore.DefaultHMHNetworkPreference
-import com.hmh.hamyeonham.login.repository.LogoutRepository
-import com.hmh.hamyeonham.login.repository.WithdrawalRepository
+import com.hmh.hamyeonham.login.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -23,8 +22,7 @@ sealed interface UserEffect {
 
 @HiltViewModel
 class MyPageViewModel @Inject constructor(
-    private val logoutRepository: LogoutRepository,
-    private val withdrawalRepository: WithdrawalRepository,
+    private val authRepository: AuthRepository,
     private val hmhPreferenceAccessToken: DefaultHMHNetworkPreference,
 ) : ViewModel() {
 
@@ -33,7 +31,7 @@ class MyPageViewModel @Inject constructor(
 
     fun handleLogout() {
         viewModelScope.launch {
-            logoutRepository.logout().onSuccess {
+            authRepository.logout().onSuccess {
                 _userEffect.emit(UserEffect.logoutSuccess)
                 hmhPreferenceAccessToken.clear()
                 Log.d("hmhPreferenceAccessToken", hmhPreferenceAccessToken.accessToken)
@@ -45,7 +43,7 @@ class MyPageViewModel @Inject constructor(
 
     fun handleWithdrawal() {
         viewModelScope.launch {
-            withdrawalRepository.withdrawal().onSuccess {
+            authRepository.withdrawal().onSuccess {
                 _userEffect.emit(UserEffect.withdrawalSuccess)
                 hmhPreferenceAccessToken.clear()
                 Log.d("hmhPreferenceAccessToken", hmhPreferenceAccessToken.accessToken)

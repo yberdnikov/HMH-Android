@@ -1,7 +1,6 @@
 package com.hmh.hamyeonham.core.network.auth.authenticator
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.core.network.auth.api.RefreshService
@@ -22,7 +21,7 @@ class HMHAuthenticator @Inject constructor(
     private val dataStore: HMHNetworkPreference,
     private val api: RefreshService,
     @ApplicationContext private val context: Context,
-    private val navigationProvider: NavigationProvider
+    private val navigationProvider: NavigationProvider,
 ) : Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? {
         if (response.request.header("Authorization") == null) {
@@ -43,9 +42,6 @@ class HMHAuthenticator @Inject constructor(
                 Log.e("Authenticator", it.toString())
                 runBlocking {
                     dataStore.clear()
-                    val intent = navigationProvider.toLogin()
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                    context.startActivity(intent)
                     UserApiClient.instance.logout { error ->
                         Log.e("Authenticator", error.toString())
                         ProcessPhoenix.triggerRebirth(context, navigationProvider.toLogin())

@@ -20,7 +20,7 @@ class UsageStaticsTotalViewHolder(
             pbTotalUsage.progress = usageStatusAndGoal.usedPercentage
         }
         context.colorSecondStrAndBindText(
-            convertTimeToString(usageStatusAndGoal.goalTime),
+            convertTimeToString(usageStatusAndGoal.timeLeft),
             getString(
                 context,
                 R.string.all_left

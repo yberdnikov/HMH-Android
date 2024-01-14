@@ -24,5 +24,6 @@ dependencies {
     // dot indicator
     implementation(libs.dot.indicator)
     implementation(projects.core.designsystem)
-
+    implementation(project(":feature:onboarding"))
+    implementation(project(":core:network"))
 }

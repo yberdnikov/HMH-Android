@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import com.hmh.hamyeonham.common.view.initAndStartProgressBarAnimation
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingEffect
@@ -134,6 +135,8 @@ class OnBoardingActivity : AppCompatActivity() {
         val progressBarWidth = (progress * 100).toInt()
         Log.d("progressBarWidth", progressBarWidth.toString())
         binding.pbOnboarding.progress = progressBarWidth
+
+        initAndStartProgressBarAnimation(binding.pbOnboarding, progressBarWidth)
     }
 
     override fun onDestroy() {

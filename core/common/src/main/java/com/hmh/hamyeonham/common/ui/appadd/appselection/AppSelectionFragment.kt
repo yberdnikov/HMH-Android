@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.challenge.appadd.appselection
+package com.hmh.hamyeonham.common.ui.appadd.appselection
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,9 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hmh.hamyeonham.challenge.appadd.AppAddViewModel
+import com.hmh.hamyeonham.common.ui.appadd.AppAddViewModel
+import com.hmh.hamyeonham.common.databinding.FrargmentAppSelectionBinding
 import com.hmh.hamyeonham.common.view.viewBinding
-import com.hmh.hamyeonham.feature.challenge.databinding.FrargmentAppSelectionBinding
+import com.hmh.hamyeonham.core.viewmodel.selection.AppSelectionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

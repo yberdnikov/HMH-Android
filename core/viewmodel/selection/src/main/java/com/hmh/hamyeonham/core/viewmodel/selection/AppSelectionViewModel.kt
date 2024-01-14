@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.challenge.appadd.appselection
+package com.hmh.hamyeonham.core.viewmodel.selection
 
 import androidx.lifecycle.ViewModel
 import com.hmh.hamyeonham.challenge.repository.DeviceRepository

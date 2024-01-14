@@ -1,10 +1,10 @@
-package com.hmh.hamyeonham.challenge.appadd.appselection
+package com.hmh.hamyeonham.common.ui.appadd.appselection
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.hmh.hamyeonham.common.context.getAppIconFromPackageName
 import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
-import com.hmh.hamyeonham.feature.challenge.databinding.ItemAppBinding
+import com.hmh.hamyeonham.common.databinding.ItemAppBinding
 
 class AppSelectionViewHolder(
     private val binding: ItemAppBinding,

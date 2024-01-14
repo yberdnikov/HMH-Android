@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.challenge.appadd
+package com.hmh.hamyeonham.common.ui.appadd
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import com.hmh.hamyeonham.common.databinding.ActivityAppAddBinding
 import com.hmh.hamyeonham.common.view.viewBinding
-import com.hmh.hamyeonham.feature.challenge.databinding.ActivityAppAddBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

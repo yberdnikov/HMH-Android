@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.challenge.appadd
+package com.hmh.hamyeonham.common.ui.appadd
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow

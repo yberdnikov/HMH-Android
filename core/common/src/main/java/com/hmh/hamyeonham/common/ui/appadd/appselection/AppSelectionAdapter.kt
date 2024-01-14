@@ -1,10 +1,11 @@
-package com.hmh.hamyeonham.challenge.appadd.appselection
+package com.hmh.hamyeonham.common.ui.appadd.appselection
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import com.hmh.hamyeonham.common.databinding.ItemAppBinding
+import com.hmh.hamyeonham.common.ui.appadd.appselection.AppSelectionViewHolder
 import com.hmh.hamyeonham.common.view.ItemDiffCallback
-import com.hmh.hamyeonham.feature.challenge.databinding.ItemAppBinding
 
 class AppSelectionAdapter(
     private val onAppCheckboxClicked: (String) -> Unit,

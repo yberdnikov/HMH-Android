@@ -103,14 +103,4 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
-
-    fun getKakaoUserNickname() {
-        UserApiClient.instance.me { user, error ->
-            if (error != null) {
-                // 닉네임 정보 얻기 실패 시
-            } else if (user != null) {
-                val kakaoNickname = user.kakaoAccount?.profile?.nickname
-            }
-        }
-    }
 }

@@ -8,10 +8,9 @@ class DefaultWithdrawalRepository @Inject constructor(
     private val withdrawalService: LoginService,
 ) : WithdrawalRepository {
 
-    override suspend fun withdrawal(accessToken: String): Result<Unit> {
-        val bearerToken = "Bearer $accessToken"
+    override suspend fun withdrawal(): Result<Unit> {
         return runCatching {
-            withdrawalService.withdrawal(bearerToken)
+            withdrawalService.withdrawal()
         }
     }
 }

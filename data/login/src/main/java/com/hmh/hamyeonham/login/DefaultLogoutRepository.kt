@@ -8,10 +8,9 @@ class DefaultLogoutRepository @Inject constructor(
     private val logoutService: LoginService,
 ) : LogoutRepository {
 
-    override suspend fun logout(accessToken: String): Result<Unit> {
-        val bearerToken = "Bearer $accessToken"
+    override suspend fun logout(): Result<Unit> {
         return runCatching {
-            logoutService.logout(bearerToken)
+            logoutService.logout()
         }
     }
 }

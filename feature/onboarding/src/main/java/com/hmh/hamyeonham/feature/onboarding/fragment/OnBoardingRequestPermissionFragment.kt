@@ -22,7 +22,6 @@ import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.OnBoardingAccessibilityService
 import com.hmh.hamyeonham.feature.onboarding.R
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingRequestPermissionBinding
-import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingPermissionsState
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingRequestPermissionViewModel
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -92,7 +91,9 @@ class OnBoardingRequestPermissionFragment : Fragment() {
 
     private fun collectPermissionState() {
         viewModel.permissionsState.flowWithLifecycle(viewLifeCycle).onEach { permissionsState ->
-            updateNextButtonState(permissionsState)
+            activityViewModel.updateState {
+                copy(isNextButtonActive = permissionsState.checkIsNextButtonActive())
+            }
         }.launchIn(viewLifeCycleScope)
     }
 
@@ -120,16 +121,6 @@ class OnBoardingRequestPermissionFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun updateNextButtonState(permissionsState: OnBoardingPermissionsState) {
-        viewModel.permissionsState.flowWithLifecycle(viewLifeCycle).onEach { permissionsState ->
-            permissionsState.run {
-                if (isAccessibilityEnabled && isUsageStatsEnabled && isOverlayEnabled) {
-                    activityViewModel.updateState { copy(isNextButtonActive = true) }
-                }
-            }
-        }.launchIn(viewLifeCycleScope)
     }
 
     private fun requestAccessibilitySettings() {

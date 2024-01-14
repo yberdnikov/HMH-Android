@@ -42,7 +42,6 @@ class LoginActivity : AppCompatActivity() {
                 is LoginEffect.LoginSuccess -> moveToOnBoardingActivity()
                 is LoginEffect.LoginFail -> toast("로그인에 실패했습니다.")
             }
-            moveToOnBoardingActivity()
         }.launchIn(lifecycleScope)
     }
 

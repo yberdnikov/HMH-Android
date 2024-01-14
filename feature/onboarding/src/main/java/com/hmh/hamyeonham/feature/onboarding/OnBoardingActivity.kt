@@ -1,16 +1,14 @@
 package com.hmh.hamyeonham.feature.onboarding
 
-import android.app.usage.UsageStatsManager
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.viewpager2.widget.ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
@@ -108,6 +106,7 @@ class OnBoardingActivity : AppCompatActivity() {
         binding.vpOnboardingContainer.run {
             adapter = pagerAdapter
             isUserInputEnabled = false
+            offscreenPageLimit = OFFSCREEN_PAGE_LIMIT_DEFAULT
         }
         return pagerAdapter
     }

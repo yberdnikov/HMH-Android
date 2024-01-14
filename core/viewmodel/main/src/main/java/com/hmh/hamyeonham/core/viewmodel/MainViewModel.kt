@@ -29,7 +29,6 @@ data class MainState(
 class MainViewModel @Inject constructor(
     private val getUsageGoalsUseCase: GetUsageGoalsUseCase,
     private val getUsageStatsListUseCase: GetUsageStatsListUseCase,
-    private val getUserInfoUseCase: GetUserInfoUseCase,
     private val addUsageGoalsUseCase: AddUsageGoalsUseCase,
 ) : ViewModel() {
     private val _mainState = MutableStateFlow(MainState())
@@ -38,17 +37,6 @@ class MainViewModel @Inject constructor(
     init {
         setUsageGoals(getUsageGoalsUseCase())
         setUsageStatsList()
-        getUserInfo()
-    }
-
-    private fun getUserInfo() {
-        viewModelScope.launch {
-            userInfoRepository.getUserInfo().onSuccess {
-                setUserInfo(it)
-            }.onFailure {
-                Log.e("error", it.toString())
-            }
-        }
     }
 
     fun setChallengeStatus(challengeStatus: ChallengeStatus) {

@@ -14,6 +14,7 @@ android {
 
 dependencies {
     implementation(projects.core.designsystem)
+    implementation(projects.core.viewmodel.selection)
 
     implementation(libs.retrofit)
 }

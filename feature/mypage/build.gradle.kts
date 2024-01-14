@@ -21,5 +21,5 @@ dependencies {
     implementation(projects.domain.login)
 
     implementation(projects.core.viewmodel.main)
-    implementation(project(":core:network"))
+    implementation(projects.core.network)
 }

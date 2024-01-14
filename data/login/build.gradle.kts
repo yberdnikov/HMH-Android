@@ -9,6 +9,6 @@ android {
 
 dependencies {
     implementation(projects.core.common)
-    implementation(project(":domain:login"))
-    implementation(project(":core:network"))
+    implementation(projects.domain.login)
+    implementation(projects.core.network)
 }

@@ -1,7 +1,6 @@
 package com.hmh.hamyeonham.feature.main.home
 
 import android.content.Context
-import android.net.Uri
 import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.RecyclerView
 import com.hmh.hamyeonham.common.context.colorSecondStrAndBindText
@@ -19,11 +18,8 @@ class UsageStaticsTotalViewHolder(
         binding.run {
             tvTotalGoal.text = convertTimeToString(usageStatAndGoal.goalTime)
             pbTotalUsage.progress = usageStatAndGoal.usedPercentage
-            val videoUri =
-                Uri.parse("android.resource://${context.packageName}/raw/vd_blackhole1")
-            vvBlackhole.setVideoURI(videoUri)
-            vvBlackhole.start()
         }
+
         context.colorSecondStrAndBindText(
             convertTimeToString(usageStatAndGoal.goalTime),
             getString(
@@ -38,4 +34,23 @@ class UsageStaticsTotalViewHolder(
             usageStatAndGoal.usedPercentage,
         )
     }
+
+//    fun attach() {
+//        val videoUri = Uri.parse("android.resource://${context.packageName}/raw/vd_blackhole1")
+//        binding.vvBlackhole.run {
+//            setVideoURI(videoUri)
+// //            vvBlackhole.setBackgroundColor(getColo)
+//            start()
+// //            vvBlackhole.setOnCompletionListener {
+// //                vvBlackhole.start()
+// //            }
+//            setOnCompletionListener {
+//                start()
+//            }
+//        }
+//    }
+
+//    fun detach() {
+//        binding.vvBlackhole.stopPlayback()
+//    }
 }

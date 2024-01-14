@@ -12,12 +12,12 @@ import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
 class UsageStaticsAdapter : ListAdapter<UsageStatAndGoal, RecyclerView.ViewHolder>(
     ItemDiffCallback<UsageStatAndGoal>(
         onItemsTheSame = { old, new -> old.packageName == new.packageName },
-        onContentsTheSame = { old, new -> old == new }
-    )
+        onContentsTheSame = { old, new -> old == new },
+    ),
 ) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
@@ -35,7 +35,7 @@ class UsageStaticsAdapter : ListAdapter<UsageStatAndGoal, RecyclerView.ViewHolde
 
     override fun onBindViewHolder(
         holder: RecyclerView.ViewHolder,
-        position: Int
+        position: Int,
     ) {
         when (position) {
             0 -> {
@@ -49,6 +49,22 @@ class UsageStaticsAdapter : ListAdapter<UsageStatAndGoal, RecyclerView.ViewHolde
             }
         }
     }
+
+//    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
+//        if (holder.itemViewType == TOTAL_ITEM_TYPE) {
+//            val newHolder = holder as UsageStaticsTotalViewHolder
+//            newHolder.attach()
+//        }
+//        super.onViewAttachedToWindow(holder)
+//    }
+//
+//    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
+//        if (holder.itemViewType == TOTAL_ITEM_TYPE) {
+//            val newHolder = holder as UsageStaticsTotalViewHolder
+//            newHolder.detach()
+//        }
+//        super.onViewDetachedFromWindow(holder)
+//    }
 
     override fun getItemViewType(position: Int): Int {
         return if (position == 0) TOTAL_ITEM_TYPE else APP_ITEM_TYPE

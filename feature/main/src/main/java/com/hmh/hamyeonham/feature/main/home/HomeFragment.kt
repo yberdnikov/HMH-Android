@@ -1,5 +1,6 @@
 package com.hmh.hamyeonham.feature.main.home
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -48,5 +49,27 @@ class HomeFragment : Fragment() {
         activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach {
             usageStaticsAdapter?.submitList(it.usageStatsList)
         }.launchIn(viewLifeCycleScope)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val videoUri =
+            Uri.parse("android.resource://${requireContext().packageName}/raw/vd_blackhole1")
+        binding.vvBlackhole.run {
+            setVideoURI(videoUri)
+            //            vvBlackhole.setBackgroundColor(getColo)
+            start()
+            //            vvBlackhole.setOnCompletionListener {
+            //                vvBlackhole.start()
+            //            }
+            setOnCompletionListener {
+                start()
+            }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.vvBlackhole.stopPlayback()
     }
 }

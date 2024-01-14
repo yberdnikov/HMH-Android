@@ -35,6 +35,7 @@ class OnBoardingViewModel @Inject constructor(
     private val _onBoardingState = MutableStateFlow(OnBoardingState())
     val onBoardingState = _onBoardingState.asStateFlow()
 
+    // TODO : stateFlow -> sharedFlow
     private val _onboardEffect = MutableSharedFlow<OnBoardingEffect>()
     val onboardEffect = _onboardEffect.asSharedFlow()
 

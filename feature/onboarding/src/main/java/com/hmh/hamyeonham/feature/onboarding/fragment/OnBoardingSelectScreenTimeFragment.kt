@@ -30,9 +30,7 @@ class OnBoardingSelectScreenTimeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.npOnboardingScreentimeGoal.setupScreentimeGoalRange(1, 6)
-        activityViewModel.changeStateNextButton(true)
 
         binding.npOnboardingScreentimeGoal.descendantFocusability =
             NumberPicker.FOCUS_BLOCK_DESCENDANTS

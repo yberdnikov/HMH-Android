@@ -17,13 +17,11 @@ class OnBoardingSelectAppFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         return FragmentOnBoardingSelectAppBinding.inflate(inflater, container, false).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        activityViewModel.changeStateNextButton(true)
     }
 }

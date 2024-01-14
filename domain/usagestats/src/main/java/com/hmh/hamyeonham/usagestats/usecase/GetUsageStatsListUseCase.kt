@@ -1,13 +1,13 @@
 package com.hmh.hamyeonham.usagestats.usecase
 
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
-import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
+import com.hmh.hamyeonham.usagestats.model.UsageStatusAndGoal
 import com.hmh.hamyeonham.usagestats.repository.UsageGoalsRepository
-import com.hmh.hamyeonham.usagestats.repository.UsageStatsRepository
+import com.hmh.hamyeonham.usagestats.repository.UsageStatusRepository
 import javax.inject.Inject
 
 class GetUsageStatsListUseCase @Inject constructor(
-    private val usageStatsRepository: UsageStatsRepository,
+    private val usageStatusRepository: UsageStatusRepository,
     private val usageGoalsRepository: UsageGoalsRepository,
 ) {
 
@@ -18,7 +18,7 @@ class GetUsageStatsListUseCase @Inject constructor(
     suspend operator fun invoke(
         startTime: Long,
         endTime: Long,
-    ): List<UsageStatAndGoal> {
+    ): List<UsageStatusAndGoal> {
         val usageGoalsForSelectedPackages = usageGoalsRepository.getUsageGoals()
         val usageForSelectedApps =
             getUsageStatsAndGoalsForSelectedPackages(
@@ -27,13 +27,13 @@ class GetUsageStatsListUseCase @Inject constructor(
                 usageGoalsForSelectedPackages.filter { it.packageName != TOTAL },
             )
         val totalUsage = getTotalUsage(usageForSelectedApps)
-        val totalUsageStatAndGoal =
-            UsageStatAndGoal(
+        val totalUsageStatusAndGoal =
+            UsageStatusAndGoal(
                 TOTAL,
                 totalUsage,
                 getUsageGoalForPackage(usageGoalsForSelectedPackages, TOTAL),
             )
-        return listOf(totalUsageStatAndGoal) + usageForSelectedApps
+        return listOf(totalUsageStatusAndGoal) + usageForSelectedApps
     }
 
     private fun getUsageGoalForPackage(
@@ -52,9 +52,9 @@ class GetUsageStatsListUseCase @Inject constructor(
         startTime: Long,
         endTime: Long,
         usageGoalList: List<UsageGoal>,
-    ): List<UsageStatAndGoal> {
+    ): List<UsageStatusAndGoal> {
         val selectedPackage = getSelectedPackageList(usageGoalList)
-        return usageStatsRepository.getUsageStatForPackages(startTime, endTime, selectedPackage)
+        return usageStatusRepository.getUsageStatForPackages(startTime, endTime, selectedPackage)
             .map {
                 createUsageStatAndGoal(
                     it.packageName,
@@ -65,9 +65,9 @@ class GetUsageStatsListUseCase @Inject constructor(
     }
 
     private fun getTotalUsage(
-        usageStatAndGoalList: List<UsageStatAndGoal>,
+        usageStatusAndGoalList: List<UsageStatusAndGoal>,
     ): Long {
-        return usageStatAndGoalList.sumOf {
+        return usageStatusAndGoalList.sumOf {
             it.totalTimeInForeground
         }
     }
@@ -80,7 +80,7 @@ class GetUsageStatsListUseCase @Inject constructor(
         packageName: String,
         totalTimeInForeground: Long,
         goalTime: Long,
-    ): UsageStatAndGoal {
-        return UsageStatAndGoal(packageName, totalTimeInForeground, goalTime)
+    ): UsageStatusAndGoal {
+        return UsageStatusAndGoal(packageName, totalTimeInForeground, goalTime)
     }
 }

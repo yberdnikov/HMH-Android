@@ -26,15 +26,14 @@ class MyPageViewModel @Inject constructor(
     private val logoutRepository: LogoutRepository,
     private val withdrawalRepository: WithdrawalRepository,
     private val hmhPreferenceAccessToken: DefaultHMHNetworkPreference,
-
-    ) : ViewModel() {
+) : ViewModel() {
 
     private val _userEffect = MutableSharedFlow<UserEffect>()
     val userEffect = _userEffect.asSharedFlow()
 
     fun handleLogout() {
         viewModelScope.launch {
-            logoutRepository.logout(hmhPreferenceAccessToken.accessToken).onSuccess {
+            logoutRepository.logout().onSuccess {
                 _userEffect.emit(UserEffect.logoutSuccess)
                 hmhPreferenceAccessToken.clear()
                 Log.d("hmhPreferenceAccessToken", hmhPreferenceAccessToken.accessToken)
@@ -46,7 +45,7 @@ class MyPageViewModel @Inject constructor(
 
     fun handleWithdrawal() {
         viewModelScope.launch {
-            withdrawalRepository.withdrawal(hmhPreferenceAccessToken.accessToken).onSuccess {
+            withdrawalRepository.withdrawal().onSuccess {
                 _userEffect.emit(UserEffect.withdrawalSuccess)
                 hmhPreferenceAccessToken.clear()
                 Log.d("hmhPreferenceAccessToken", hmhPreferenceAccessToken.accessToken)

@@ -96,25 +96,27 @@ class MyPageFragment : Fragment() {
     private fun handleLogoutSuccess() {
         viewModel.userEffect.flowWithLifecycle(lifecycle).onEach { state ->
             when (state) {
-                is UserEffect.logoutSuccess -> moveToOnLoginActivity()
+                is UserEffect.logoutSuccess -> moveToLoginActivity()
                 is UserEffect.logoutFail -> toast(getString(R.string.logout_fail))
                 else -> Unit
             }
-        }.launchIn(lifecycleScope)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun handleWithdrawalSuccess() {
         viewModel.userEffect.flowWithLifecycle(lifecycle).onEach { state ->
             when (state) {
-                is UserEffect.withdrawalSuccess -> moveToOnLoginActivity()
+                is UserEffect.withdrawalSuccess -> moveToLoginActivity()
                 is UserEffect.withdrawalFail -> toast(getString(R.string.withdrawal_fail))
                 else -> Unit
             }
-        }.launchIn(lifecycleScope)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-    private fun moveToOnLoginActivity() {
-        startActivity(navigationProvider.toLogin())
+    private fun moveToLoginActivity() {
+        val intent = navigationProvider.toLogin()
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
         activity?.finish()
     }
 

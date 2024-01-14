@@ -1,10 +1,7 @@
 package com.hmh.hamyeonham.feature.onboarding
 
-import android.app.usage.UsageStatsManager
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels

@@ -12,14 +12,19 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-sealed interface OnBoardingEffect {}
+sealed interface OnBoardingEffect {
+    data object SignUpSuccess : OnBoardingEffect
+    data object SignUpFail : OnBoardingEffect
+}
 
 data class OnBoardingState(
     val onBoardingAnswer: OnboardingAnswer = OnboardingAnswer(),
     val pageInfo: List<OnboardingPageInfo> = emptyList(),
     val isNextButtonActive: Boolean = false,
+    val accessToken: String = "",
 )
 
 @HiltViewModel
@@ -60,5 +65,36 @@ class OnBoardingViewModel @Inject constructor(
             buttonInfoList.add(OnboardingPageInfo(index))
         }
         return buttonInfoList
+    }
+
+    fun setEffect(effect: OnBoardingEffect) {
+        viewModelScope.launch {
+            _onboardEffect.emit(effect)
+        }
+    }
+
+    fun signUp() {
+        viewModelScope.launch {
+            val token = onBoardingState.value.accessToken
+            val request = onBoardingState.value.onBoardingAnswer
+            runCatching {
+                signUpRepository.signUp(token, request.toSignUpRequest())
+            }.onSuccess { result ->
+                val signUpUser = result.getOrNull()
+                signUpUser?.let {
+                    hmhNetworkPreference.accessToken = it.accessToken
+                    hmhNetworkPreference.refreshToken = it.refreshToken
+                    hmhNetworkPreference.userId = it.userId
+                    hmhNetworkPreference.autoLoginConfigured = true
+                }
+                viewModelScope.launch {
+                    _onboardEffect.emit(OnBoardingEffect.SignUpSuccess)
+                }
+            }.onFailure {
+                viewModelScope.launch {
+                    _onboardEffect.emit(OnBoardingEffect.SignUpFail)
+                }
+            }
+        }
     }
 }

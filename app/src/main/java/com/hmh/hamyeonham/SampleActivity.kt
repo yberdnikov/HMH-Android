@@ -36,7 +36,6 @@ class SampleActivity : AppCompatActivity() {
                 override fun onAnimationEnd(animation: Animation) {
                     splashScreenViewProvider.remove()
                 }
-
                 override fun onAnimationRepeat(animation: Animation) {}
             })
             splashScreenView.startAnimation(fadeOut)

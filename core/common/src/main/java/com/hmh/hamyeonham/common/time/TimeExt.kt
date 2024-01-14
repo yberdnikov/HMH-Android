@@ -51,7 +51,7 @@ fun getCurrentDayStartEndEpochMillis(): Pair<Long, Long> {
     val endOfDay = currentDate.toEndOfDay().toEpochMilliseconds(timeZone)
     return Pair(startOfDay, endOfDay)
 }
-
+//ms를 h시 m분 형식으로 변환해주는 함수
 fun convertTimeToString(time: Long): String {
     val hours = TimeUnit.MILLISECONDS.toHours(time)
     val minutes = TimeUnit.MILLISECONDS.toMinutes(time) % 60

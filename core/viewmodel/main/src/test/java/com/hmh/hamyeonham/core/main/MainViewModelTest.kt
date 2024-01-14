@@ -2,7 +2,7 @@ package com.hmh.hamyeonham.core.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.hmh.hamyeonham.challenge.model.ChallengeStatus
-import com.hmh.hamyeonham.core.MainViewModel
+import com.hmh.hamyeonham.core.viewmodel.MainViewModel
 import com.hmh.hamyeonham.usagestats.usecase.GetUsageGoalsUseCase
 import io.mockk.mockk
 import kotlinx.coroutines.flow.first

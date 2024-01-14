@@ -1,6 +1,6 @@
 package com.hmh.hamyeonham.core.network.di
 
-import com.hmh.hamyeonham.common.qualifier.Unsecured
+import com.hmh.hamyeonham.common.qualifier.Secured
 import com.hmh.hamyeonham.core.network.challenge.ChallengeService
 import dagger.Module
 import dagger.Provides
@@ -15,5 +15,5 @@ import javax.inject.Singleton
 object ChallengeModule {
     @Provides
     @Singleton
-    fun provideChallengeApi(@Unsecured retrofit: Retrofit): ChallengeService = retrofit.create()
+    fun provideChallengeApi(@Secured retrofit: Retrofit): ChallengeService = retrofit.create()
 }

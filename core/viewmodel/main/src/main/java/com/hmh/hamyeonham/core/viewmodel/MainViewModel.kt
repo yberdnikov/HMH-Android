@@ -36,7 +36,7 @@ class MainViewModel @Inject constructor(
     val mainState = _mainState.asStateFlow()
 
     init {
-        getChallengeStatus()
+//        getChallengeStatus()
         getUsageGoal()
         getStatsList()
         getUserInfo()

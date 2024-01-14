@@ -5,13 +5,14 @@ import com.hmh.hamyeonham.challenge.model.Challenge
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
 data class ChallengeGenerateViewState(
     val challenge: Challenge = Challenge()
 )
 
 @HiltViewModel
-class ChallengeGenerateViewModel : ViewModel() {
+class ChallengeGenerateViewModel @Inject constructor() : ViewModel() {
     private val _state = MutableStateFlow(ChallengeGenerateViewState())
     val state = _state.asStateFlow()
 

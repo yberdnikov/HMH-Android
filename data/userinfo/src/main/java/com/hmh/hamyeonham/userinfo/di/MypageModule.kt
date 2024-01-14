@@ -10,13 +10,9 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object UserInfoModule {
-    @Module
-    @InstallIn(SingletonComponent::class)
-    interface UserInfoBinder {
-        @Binds @Singleton
-        fun provideUserInfoRepository(
-            userInfoRepository: DefaultUserInfoRepository
-        ): UserInfoRepository
-    }
+interface UserInfoBinder {
+    @Binds @Singleton
+    fun provideUserInfoRepository(
+        userInfoRepository: DefaultUserInfoRepository
+    ): UserInfoRepository
 }

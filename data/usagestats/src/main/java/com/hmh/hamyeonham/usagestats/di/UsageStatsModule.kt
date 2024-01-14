@@ -2,6 +2,7 @@ package com.hmh.hamyeonham.usagestats.di
 
 import android.app.usage.UsageStatsManager
 import android.content.Context
+import com.hmh.hamyeonham.usagestats.datasource.UsageGoalsRemoteDataSource
 import com.hmh.hamyeonham.usagestats.datasource.UsageStatusDataSource
 import com.hmh.hamyeonham.usagestats.datasource.UsageStatusDataSourceImpl
 import com.hmh.hamyeonham.usagestats.repository.DefaultUsageGoalsRepository
@@ -24,6 +25,12 @@ object UsageStatsModule {
     @Singleton
     fun provideUsageStatusManager(@ApplicationContext context: Context): UsageStatsManager? {
         return context.getSystemService(Context.USAGE_STATS_SERVICE) as? UsageStatsManager
+    }
+
+    @Provides
+    @Singleton
+    fun provideUsageGoalsDataSource(): UsageGoalsRemoteDataSource {
+        return UsageGoalsRemoteDataSource()
     }
 
     @Module

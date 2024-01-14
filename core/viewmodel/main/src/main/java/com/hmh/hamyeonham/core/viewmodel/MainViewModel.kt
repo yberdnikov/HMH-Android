@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hmh.hamyeonham.challenge.model.ChallengeStatus
+import com.hmh.hamyeonham.challenge.repository.ChallengeRepository
 import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
 import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
@@ -26,6 +27,7 @@ data class MainState(
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
+    private val challengeRepository: ChallengeRepository,
     private val getUsageGoalsUseCase: GetUsageGoalsUseCase,
     private val getUsageStatsListUseCase: GetUsageStatsListUseCase,
     private val userInfoRepository: UserInfoRepository,
@@ -34,11 +36,17 @@ class MainViewModel @Inject constructor(
     val mainState = _mainState.asStateFlow()
 
     init {
+        getChallengeStatus()
         getUsageGoal()
         getStatsList()
         getUserInfo()
     }
 
+    private fun getChallengeStatus() {
+        viewModelScope.launch {
+            setChallengeStatus(challengeRepository.getChallengeData())
+        }
+    }
     private fun getUsageGoal() {
         viewModelScope.launch {
             setUsageGaols(getUsageGoalsUseCase())

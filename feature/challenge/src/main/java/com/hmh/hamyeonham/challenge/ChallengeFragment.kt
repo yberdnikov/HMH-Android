@@ -22,7 +22,7 @@ import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.VerticalSpaceItemDecoration
 import com.hmh.hamyeonham.common.view.dp
 import com.hmh.hamyeonham.common.view.viewBinding
-import com.hmh.hamyeonham.core.MainViewModel
+import com.hmh.hamyeonham.core.viewmodel.MainViewModel
 import com.hmh.hamyeonham.feature.challenge.databinding.FragmentChallengeBinding
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
 import dagger.hilt.android.AndroidEntryPoint

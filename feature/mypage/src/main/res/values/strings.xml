@@ -9,4 +9,6 @@
     <string name="mypage_termofuse">이용약관</string>
     <string name="mypage_privacy">개인정보처리방침</string>
     <string name="logout_description">하면함을 로그아웃 하시겠어요?</string>
+    <string name="privacy_url">"https://www.notion.so/hmhteam/4219063a635e4eec8d8b9719c6c2a6fa"</string>
+    <string name="term_of_use_url">"https://www.notion.so/hmhteam/33acb29be57245f394eb93ddb2e3b8cc"</string>
 </resources>

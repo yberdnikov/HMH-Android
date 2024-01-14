@@ -1,8 +1,12 @@
 package com.hmh.hamyeonham.feature.onboarding.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.hmh.hamyeonham.core.network.auth.datastore.HMHNetworkPreference
 import com.hmh.hamyeonham.feature.onboarding.model.OnboardingAnswer
 import com.hmh.hamyeonham.feature.onboarding.model.OnboardingPageInfo
+import com.hmh.hamyeonham.feature.onboarding.model.toSignUpRequest
+import com.hmh.hamyeonham.login.repository.SignUpRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,8 +23,10 @@ data class OnBoardingState(
 )
 
 @HiltViewModel
-class OnBoardingViewModel @Inject constructor() : ViewModel() {
-
+class OnBoardingViewModel @Inject constructor(
+    private val signUpRepository: SignUpRepository,
+    private val hmhNetworkPreference: HMHNetworkPreference,
+) : ViewModel() {
     private val _userResponses = MutableStateFlow(OnboardingAnswer())
     val userResponses = _userResponses.asStateFlow()
 

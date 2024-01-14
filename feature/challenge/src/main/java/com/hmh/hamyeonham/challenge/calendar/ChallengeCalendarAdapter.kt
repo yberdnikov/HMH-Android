@@ -4,25 +4,26 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.hmh.hamyeonham.challenge.model.Status
 import com.hmh.hamyeonham.common.view.ItemDiffCallback
 import com.hmh.hamyeonham.feature.challenge.R
 import com.hmh.hamyeonham.feature.challenge.databinding.ItemChallengeStatusBinding
 
 class ChallengeCalendarAdapter :
-    ListAdapter<Boolean, ChallengeCalendarAdapter.ChallengeStatusViewHolder>(
-        ItemDiffCallback<Boolean>(
+    ListAdapter<Status, ChallengeCalendarAdapter.ChallengeStatusViewHolder>(
+        ItemDiffCallback<Status>(
             onItemsTheSame = { oldItem, newItem ->
                 oldItem == newItem
             },
             onContentsTheSame = { oldItem, newItem ->
                 oldItem == newItem
-            }
-        )
+            },
+        ),
     ) {
     class ChallengeStatusViewHolder(
-        private val binding: ItemChallengeStatusBinding
+        private val binding: ItemChallengeStatusBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(isSuccess: Boolean?, position: Int) {
+        fun bind(isSuccess: Status, position: Int) {
             binding.apply {
                 val date = (position + 1).toString()
                 tvDate.text = date
@@ -30,10 +31,11 @@ class ChallengeCalendarAdapter :
             }
         }
 
-        private fun getDrawableResource(isSuccess: Boolean?): Int {
+        private fun getDrawableResource(isSuccess: Status?): Int {
             return when (isSuccess) {
-                true -> R.drawable.ic_challenge_success_38
-                false -> R.drawable.ic_challenge_fail_38
+                Status.UNEARNED -> R.drawable.shape_background_radius8_blackground
+                Status.EARNED -> R.drawable.ic_challenge_success_38
+                Status.FAILURE -> R.drawable.ic_challenge_fail_38
                 else -> R.drawable.shape_background_radius8_blackground
             }
         }
@@ -44,12 +46,12 @@ class ChallengeCalendarAdapter :
             ItemChallengeStatusBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false
-            )
+                false,
+            ),
         )
     }
 
     override fun onBindViewHolder(holder: ChallengeStatusViewHolder, position: Int) {
-        holder.bind(currentList.getOrNull(position), position)
+        holder.bind(currentList[position], position)
     }
 }

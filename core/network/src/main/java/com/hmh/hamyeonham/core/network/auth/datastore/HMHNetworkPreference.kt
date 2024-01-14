@@ -4,7 +4,7 @@ interface HMHNetworkPreference {
     var accessToken: String
     var refreshToken: String
     var userName: String
-    var userId: String
+    var userId: Int
     var autoLoginConfigured: Boolean
     fun clear()
 }

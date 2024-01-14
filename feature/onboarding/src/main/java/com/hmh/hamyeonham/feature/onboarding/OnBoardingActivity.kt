@@ -20,6 +20,9 @@ import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class OnBoardingActivity : AppCompatActivity() {
+    companion object {
+        const val EXTRA_ACCESS_TOKEN = "extra_access_token"
+    }
 
     private val binding by viewBinding(ActivityOnBoardingBinding::inflate)
     private val viewModel by viewModels<OnBoardingViewModel>()
@@ -31,6 +34,11 @@ class OnBoardingActivity : AppCompatActivity() {
         initViews()
         setBackPressedCallback()
         collectOnboardingState()
+
+        val accessToken = intent.getStringExtra(EXTRA_ACCESS_TOKEN)
+        viewModel.updateState {
+            copy(accessToken = accessToken.orEmpty())
+        }
     }
 
     private fun initViews() {
@@ -74,7 +82,9 @@ class OnBoardingActivity : AppCompatActivity() {
                     updateProgressBar(currentItem + 1, viewPager.adapter?.itemCount ?: 1)
                 }
 
-                currentItem == lastItem -> startOnBoardingDoneSignUpActivity()
+                currentItem == lastItem -> {
+                    viewModel.signUp()
+                }
             }
         }
     }

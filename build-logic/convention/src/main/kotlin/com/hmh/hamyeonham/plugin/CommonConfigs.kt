@@ -1,15 +1,14 @@
 package com.hmh.hamyeonham.plugin
 
 import com.android.build.gradle.BaseExtension
+import java.util.Properties
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
-import java.util.Properties
 
 internal fun Project.configureAndroidCommonPlugin() {
-
     val properties = Properties().apply {
         load(rootProject.file("local.properties").inputStream())
     }

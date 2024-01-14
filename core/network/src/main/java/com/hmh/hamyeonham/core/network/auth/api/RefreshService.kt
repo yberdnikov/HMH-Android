@@ -4,7 +4,6 @@ import com.hmh.hamyeonham.core.network.auth.api.model.TokenResponse
 import com.hmh.hamyeonham.core.network.model.BaseResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.POST
 
 interface RefreshService {
     @GET("api/v1/user/reissue")

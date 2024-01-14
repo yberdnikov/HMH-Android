@@ -38,8 +38,13 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initStaticsRecyclerView()
         collectUsageStatsList()
-//        binding.vvBlackhole.setVideoURI(videoUri)
-//        binding.vvBlackhole.start()
+        setBlackholeLoop()
+    }
+
+    private fun setBlackholeLoop() {
+        binding.vvBlackhole.setOnCompletionListener {
+            binding.vvBlackhole.start()
+        }
     }
 
     private fun initStaticsRecyclerView() {
@@ -53,13 +58,19 @@ class HomeFragment : Fragment() {
         val usageStaticsAdapter = binding.rvStatics.adapter as? UsageStaticsAdapter
         activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach {
             usageStaticsAdapter?.submitList(it.usageStatsList)
-            bindBlackholeVideo(it.usageStatsList[0])
+            bindBlackhole(it.usageStatsList[0])
         }.launchIn(viewLifeCycleScope)
     }
 
-    private fun bindBlackholeVideo(totalUsageStatusAndGoal: UsageStatusAndGoal) {
+    private fun bindBlackhole(totalUsageStatusAndGoal: UsageStatusAndGoal) {
+        val index = totalUsageStatusAndGoal.usedPercentage / 25 + 1
+        bindBlackholeVideo(index)
+        bindBlackholeDescription(index)
+    }
+
+    private fun bindBlackholeVideo(index: Int) {
         val uri =
-            Uri.parse(setUrifromTotalUsage(totalUsageStatusAndGoal))
+            Uri.parse(setUrifromIndex(index))
         binding.vvBlackhole.run {
             setVideoURI(uri)
             requestFocus()
@@ -67,8 +78,19 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setUrifromTotalUsage(totalUsageStatusAndGoal: UsageStatusAndGoal): String {
-        val index = totalUsageStatusAndGoal.usedPercentage / 25 + 1
+    private fun bindBlackholeDescription(index: Int) {
+        val description = when (index) {
+            1 -> activityViewModel.getUserName() + getString(R.string.blackhole1)
+            2 -> getString(R.string.blackhole2)
+            3 -> getString(R.string.blackhole3)
+            4 -> getString(R.string.blackhole4)
+            5 -> getString(R.string.blackhole5)
+            else -> ""
+        }
+        binding.tvHmhTitle.text = description
+    }
+
+    private fun setUrifromIndex(index: Int): String {
         val blackholeUri = getString(R.string.base_blackhole_uri) + index.toString()
         return getString(R.string.android_resource) + requireContext().packageName + getString(R.string.raw) + blackholeUri
     }

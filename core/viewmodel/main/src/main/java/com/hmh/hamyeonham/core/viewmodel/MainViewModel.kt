@@ -42,6 +42,8 @@ class MainViewModel @Inject constructor(
         getUserInfo()
     }
 
+    fun getUserName(): String = mainState.value.userInfo.name
+
     private fun getChallengeStatus() {
         viewModelScope.launch {
             challengeRepository.getChallengeData().onSuccess {

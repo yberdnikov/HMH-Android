@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.context.toast
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.login.databinding.ActivityLoginBinding
@@ -40,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.kakaoLoginEvent.flowWithLifecycle(lifecycle).onEach { state ->
             when (state) {
                 is LoginEffect.LoginSuccess -> moveToOnBoardingActivity()
-                is LoginEffect.LoginFail -> toast("로그인에 실패했습니다.")
+                is LoginEffect.LoginFail -> toast(getString(R.string.onboadrind_login_fail))
             }
             moveToOnBoardingActivity()
         }.launchIn(lifecycleScope)
@@ -48,9 +46,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setLoginViewPager() {
         val loginViewImageList = listOf(
-            R.drawable.login_sample_rectagle_viewpager,
-            R.drawable.login_sample_rectagle_viewpager,
-            R.drawable.login_sample_rectagle_viewpager,
+            R.drawable.onboarding_viewpager1,
+            R.drawable.onboarding_viewpager2,
+            R.drawable.onboarding_viewpager3,
         )
 
         loginViewPagerAdapter = LoginViewPagerAdapter(loginViewImageList)

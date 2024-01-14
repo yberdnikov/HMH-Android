@@ -83,6 +83,7 @@ class OnBoardingActivity : AppCompatActivity() {
                     binding.btnOnboardingNext.isEnabled = it.isActive
                     binding.btnOnboardingNext.isSelected = it.isActive
                 }
+                else -> binding.btnOnboardingNext.isEnabled = false
             }
         }.launchIn(lifecycleScope)
     }

@@ -1,7 +1,10 @@
 package com.hmh.hamyeonham.feature.onboarding
 
+import android.app.usage.UsageStatsManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
@@ -10,7 +13,6 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
-import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingEffect
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -27,8 +29,8 @@ class OnBoardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initViews()
-        checkNextButtonEnable()
         setBackPressedCallback()
+        collectOnboardingState()
     }
 
     private fun initViews() {
@@ -71,19 +73,15 @@ class OnBoardingActivity : AppCompatActivity() {
                     viewPager.currentItem = currentItem + 1
                     updateProgressBar(currentItem + 1, viewPager.adapter?.itemCount ?: 1)
                 }
+
                 currentItem == lastItem -> startOnBoardingDoneSignUpActivity()
             }
         }
     }
 
-    private fun checkNextButtonEnable() {
-        viewModel.onboardEffect.flowWithLifecycle(lifecycle).onEach {
-            when (it) {
-                is OnBoardingEffect.ActiveNextButton -> {
-                    binding.btnOnboardingNext.isEnabled = it.isActive
-                    binding.btnOnboardingNext.isSelected = it.isActive
-                }
-            }
+    private fun collectOnboardingState() {
+        viewModel.onBoardingState.flowWithLifecycle(lifecycle).onEach {
+            binding.btnOnboardingNext.isEnabled = it.isNextButtonActive
         }.launchIn(lifecycleScope)
     }
 

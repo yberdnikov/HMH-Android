@@ -10,7 +10,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface UsageStatAndGoalModule {
-    @Binds @Singleton
-    fun provideChallengeRepository(challengeRepository: DefaultChallengeRepository): ChallengeRepository
+object ChallengeModule {
+    @Module
+    @InstallIn(SingletonComponent::class)
+    interface Binder {
+        @Binds @Singleton
+        fun provideChallengeRepository(challengeRepository: DefaultChallengeRepository): ChallengeRepository
+    }
 }

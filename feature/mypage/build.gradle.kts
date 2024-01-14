@@ -18,5 +18,8 @@ dependencies {
     implementation(projects.core.designsystem)
 
     implementation(projects.domain.userinfo)
+    implementation(projects.domain.login)
+
     implementation(projects.core.viewmodel.main)
+    implementation(project(":core:network"))
 }

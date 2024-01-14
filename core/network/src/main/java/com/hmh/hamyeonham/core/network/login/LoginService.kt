@@ -13,4 +13,9 @@ interface LoginService {
         @Header("Authorization") accessToken: String,
         @Body request: LoginRequest
     ): BaseResponse<LoginResponse>
+
+    @POST("api/v1/user/logout")
+    suspend fun logout(
+        @Header("Authorization") accessToken: String,
+    ): BaseResponse<Unit>
 }

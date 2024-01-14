@@ -12,23 +12,34 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.dialog.TwoButtonCommonDialog
+import com.hmh.hamyeonham.common.fragment.toast
 import com.hmh.hamyeonham.common.fragment.viewLifeCycle
 import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
+import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.core.viewmodel.MainViewModel
 import com.hmh.hamyeonham.feature.mypage.R
 import com.hmh.hamyeonham.feature.mypage.databinding.FragmentMyPageBinding
+import com.hmh.hamyeonham.mypage.viewmodel.MyPageViewModel
+import com.hmh.hamyeonham.mypage.viewmodel.UserEffect
 import com.hmh.hamyeonham.userinfo.model.UserInfo
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MyPageFragment : Fragment() {
     private val binding by viewBinding(FragmentMyPageBinding::bind)
     private val activityViewModel by activityViewModels<MainViewModel>()
+    private val viewModel by viewModels<MyPageViewModel>()
+
+    @Inject
+    lateinit var navigationProvider: NavigationProvider
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,6 +68,7 @@ class MyPageFragment : Fragment() {
                 dismissButtonText = getString(com.hmh.hamyeonham.core.designsystem.R.string.all_cancel),
             ).apply {
                 setConfirmButtonClickListener {
+                    handleLogoutSuccess()
                 }
                 setDismissButtonClickListener {
                 }
@@ -76,6 +88,21 @@ class MyPageFragment : Fragment() {
                 }
             }.showAllowingStateLoss(childFragmentManager)
         }
+    }
+
+    private fun handleLogoutSuccess() {
+        viewModel.userEffect.flowWithLifecycle(lifecycle).onEach { state ->
+            when (state) {
+                is UserEffect.logoutSuccess -> moveToOnLoginActivity()
+                is UserEffect.logoutFail -> toast(getString(R.string.logout_fail))
+                else -> Unit
+            }
+        }.launchIn(lifecycleScope)
+    }
+
+    private fun moveToOnLoginActivity() {
+        startActivity(navigationProvider.toLogin())
+        activity?.finish()
     }
 
     private fun collectMainState() {
@@ -113,7 +140,7 @@ class MyPageFragment : Fragment() {
 
     private fun initTermOfUseButton() {
         binding.vTermofuse.setOnClickListener {
-            val termOfUseUrl =getString(R.string.term_of_use_url)
+            val termOfUseUrl = getString(R.string.term_of_use_url)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(termOfUseUrl))
             startActivity(intent)
         }

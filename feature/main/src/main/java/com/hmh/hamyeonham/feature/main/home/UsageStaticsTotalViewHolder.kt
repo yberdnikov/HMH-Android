@@ -8,49 +8,29 @@ import com.hmh.hamyeonham.common.time.convertTimeToString
 import com.hmh.hamyeonham.common.view.initAndStartProgressBarAnimation
 import com.hmh.hamyeonham.feature.main.R
 import com.hmh.hamyeonham.feature.main.databinding.ItemUsagestaticTotalBinding
-import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
+import com.hmh.hamyeonham.usagestats.model.UsageStatusAndGoal
 
 class UsageStaticsTotalViewHolder(
     private val binding: ItemUsagestaticTotalBinding,
-    private val context: Context,
+    private val context: Context
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun onBind(usageStatAndGoal: UsageStatAndGoal) {
+    fun onBind(usageStatusAndGoal: UsageStatusAndGoal) {
         binding.run {
-            tvTotalGoal.text = convertTimeToString(usageStatAndGoal.goalTime)
-            pbTotalUsage.progress = usageStatAndGoal.usedPercentage
+            tvTotalGoal.text = convertTimeToString(usageStatusAndGoal.goalTime)
+            pbTotalUsage.progress = usageStatusAndGoal.usedPercentage
         }
-
         context.colorSecondStrAndBindText(
-            convertTimeToString(usageStatAndGoal.goalTime),
+            convertTimeToString(usageStatusAndGoal.goalTime),
             getString(
                 context,
-                R.string.all_left,
+                R.string.all_left
             ),
             binding.tvTotalTimeLeft,
-            com.hmh.hamyeonham.core.designsystem.R.color.gray1,
+            com.hmh.hamyeonham.core.designsystem.R.color.gray1
         )
         initAndStartProgressBarAnimation(
             binding.pbTotalUsage,
-            usageStatAndGoal.usedPercentage,
+            usageStatusAndGoal.usedPercentage
         )
     }
-
-//    fun attach() {
-//        val videoUri = Uri.parse("android.resource://${context.packageName}/raw/vd_blackhole1")
-//        binding.vvBlackhole.run {
-//            setVideoURI(videoUri)
-// //            vvBlackhole.setBackgroundColor(getColo)
-//            start()
-// //            vvBlackhole.setOnCompletionListener {
-// //                vvBlackhole.start()
-// //            }
-//            setOnCompletionListener {
-//                start()
-//            }
-//        }
-//    }
-
-//    fun detach() {
-//        binding.vvBlackhole.stopPlayback()
-//    }
 }

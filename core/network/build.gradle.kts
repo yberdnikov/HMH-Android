@@ -15,4 +15,6 @@ dependencies {
     implementation(platform(libs.okhttp.bom))
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.process.phoenix)
+    implementation(projects.domain.login)
+    implementation(libs.kakao.login)
 }

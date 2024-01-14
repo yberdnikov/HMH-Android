@@ -2,10 +2,13 @@ package com.hmh.hamyeonham.usagestats.di
 
 import android.app.usage.UsageStatsManager
 import android.content.Context
-import com.hmh.hamyeonham.usagestats.datasource.UsageStatsDataSource
-import com.hmh.hamyeonham.usagestats.datasource.UsageStatsDataSourceImpl
-import com.hmh.hamyeonham.usagestats.repository.DefaultUsageStatsRepository
-import com.hmh.hamyeonham.usagestats.repository.UsageStatsRepository
+import com.hmh.hamyeonham.usagestats.datasource.UsageGoalsRemoteDataSource
+import com.hmh.hamyeonham.usagestats.datasource.UsageStatusDataSource
+import com.hmh.hamyeonham.usagestats.datasource.UsageStatusDataSourceImpl
+import com.hmh.hamyeonham.usagestats.repository.DefaultUsageGoalsRepository
+import com.hmh.hamyeonham.usagestats.repository.DefaultUsageStatusRepository
+import com.hmh.hamyeonham.usagestats.repository.UsageGoalsRepository
+import com.hmh.hamyeonham.usagestats.repository.UsageStatusRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -24,15 +27,25 @@ object UsageStatsModule {
         return context.getSystemService(Context.USAGE_STATS_SERVICE) as? UsageStatsManager
     }
 
+    @Provides
+    @Singleton
+    fun provideUsageGoalsDataSource(): UsageGoalsRemoteDataSource {
+        return UsageGoalsRemoteDataSource()
+    }
+
     @Module
     @InstallIn(SingletonComponent::class)
     interface Binder {
         @Binds
         @Singleton
-        fun provideUsageStatusDataSource(usageStatsDataSource: UsageStatsDataSourceImpl): UsageStatsDataSource
+        fun provideUsageStatusDataSource(usageStatsDataSource: UsageStatusDataSourceImpl): UsageStatusDataSource
 
         @Binds
         @Singleton
-        fun provideUsageStatusRepository(usageStatsRepository: DefaultUsageStatsRepository): UsageStatsRepository
+        fun provideUsageStatusRepository(usageStatsRepository: DefaultUsageStatusRepository): UsageStatusRepository
+
+        @Binds
+        @Singleton
+        fun provideUsageGoalsRepository(usageGoalsRepository: DefaultUsageGoalsRepository): UsageGoalsRepository
     }
 }

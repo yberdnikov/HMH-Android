@@ -10,29 +10,29 @@ import com.hmh.hamyeonham.common.time.convertTimeToString
 import com.hmh.hamyeonham.common.view.initAndStartProgressBarAnimation
 import com.hmh.hamyeonham.feature.main.R
 import com.hmh.hamyeonham.feature.main.databinding.ItemUsagestaticBinding
-import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
+import com.hmh.hamyeonham.usagestats.model.UsageStatusAndGoal
 
 class UsageStaticsViewHolder(
     private val binding: ItemUsagestaticBinding,
     private val context: Context
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun onBind(usageStatAndGoal: UsageStatAndGoal) {
+    fun onBind(usageStatusAndGoal: UsageStatusAndGoal) {
         binding.run {
-            tvAppname.text = context.getAppNameFromPackageName(usageStatAndGoal.packageName)
+            tvAppname.text = context.getAppNameFromPackageName(usageStatusAndGoal.packageName)
             ivAppicon.setImageDrawable(
                 context.getAppIconFromPackageName(
-                    usageStatAndGoal.packageName
+                    usageStatusAndGoal.packageName
                 )
             )
-            tvAppGoalTime.text = convertTimeToString(usageStatAndGoal.goalTime)
-            pbAppUsage.progress = usageStatAndGoal.usedPercentage
+            tvAppGoalTime.text = convertTimeToString(usageStatusAndGoal.goalTime)
+            pbAppUsage.progress = usageStatusAndGoal.usedPercentage
         }
         context.colorSecondStrAndBindText(
-            convertTimeToString(usageStatAndGoal.goalTime),
+            convertTimeToString(usageStatusAndGoal.goalTime),
             getString(context, R.string.all_left),
             binding.tvAppTimeLeft,
             com.hmh.hamyeonham.core.designsystem.R.color.gray1
         )
-        initAndStartProgressBarAnimation(binding.pbAppUsage, usageStatAndGoal.usedPercentage)
+        initAndStartProgressBarAnimation(binding.pbAppUsage, usageStatusAndGoal.usedPercentage)
     }
 }

@@ -18,4 +18,9 @@ interface LoginService {
     suspend fun logout(
         @Header("Authorization") accessToken: String,
     ): BaseResponse<Unit>
+
+    @POST("api/v1/user")
+    suspend fun withdrawal(
+        @Header("Authorization") accessToken: String,
+    ): BaseResponse<Unit>
 }

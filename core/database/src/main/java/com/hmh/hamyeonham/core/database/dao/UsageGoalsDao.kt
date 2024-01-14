@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 interface UsageGoalsDao {
 
     @Query("SELECT * FROM usage_goals")
-    suspend fun getUsageGoalsList(): Flow<UsageGoalsEntity>
+    fun getUsageGoalsList(): Flow<UsageGoalsEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUsageGoalsList(entity: UsageGoalsEntity): Long

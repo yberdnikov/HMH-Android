@@ -79,6 +79,9 @@ dependencies {
     implementation(projects.core.common)
     implementation(projects.core.designsystem)
     implementation(projects.core.database)
+    implementation(projects.core.network)
+    implementation(projects.core.viewmodel.main)
+    implementation(projects.core.viewmodel.selection)
 
     // Firebase
     implementation(platform(libs.firebase))

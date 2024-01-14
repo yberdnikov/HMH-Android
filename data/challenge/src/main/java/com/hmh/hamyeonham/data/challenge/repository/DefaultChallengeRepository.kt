@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class DefaultChallengeRepository @Inject constructor(private val challengeService: ChallengeService) :
     ChallengeRepository {
-    override suspend fun getChallengeData(): ChallengeStatus {
-        return challengeService.getChallengeData().data.toChallengeStatus()
+    override suspend fun getChallengeData(): Result<ChallengeStatus> {
+        return runCatching{challengeService.getChallengeData().data.toChallengeStatus()}
     }
 }

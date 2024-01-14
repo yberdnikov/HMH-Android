@@ -7,7 +7,7 @@ import com.hmh.hamyeonham.challenge.model.ChallengeStatus
 import com.hmh.hamyeonham.challenge.repository.ChallengeRepository
 import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
-import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
+import com.hmh.hamyeonham.usagestats.model.UsageStatusAndGoal
 import com.hmh.hamyeonham.usagestats.usecase.GetUsageGoalsUseCase
 import com.hmh.hamyeonham.usagestats.usecase.GetUsageStatsListUseCase
 import com.hmh.hamyeonham.userinfo.model.UserInfo
@@ -21,7 +21,7 @@ import javax.inject.Inject
 data class MainState(
     val challengeStatus: ChallengeStatus = ChallengeStatus(),
     val usageGoals: List<UsageGoal> = emptyList(),
-    val usageStatsList: List<UsageStatAndGoal> = emptyList(),
+    val usageStatsList: List<UsageStatusAndGoal> = emptyList(),
     val userInfo: UserInfo = UserInfo(),
 )
 
@@ -44,9 +44,14 @@ class MainViewModel @Inject constructor(
 
     private fun getChallengeStatus() {
         viewModelScope.launch {
-            setChallengeStatus(challengeRepository.getChallengeData())
+            challengeRepository.getChallengeData().onSuccess {
+                setChallengeStatus(it)
+            }.onFailure {
+                Log.e("challenge status error", it.toString())
+            }
         }
     }
+
     private fun getUsageGoal() {
         viewModelScope.launch {
             setUsageGaols(getUsageGoalsUseCase())
@@ -65,7 +70,7 @@ class MainViewModel @Inject constructor(
             userInfoRepository.getUserInfo().onSuccess {
                 setUserInfo(it)
             }.onFailure {
-                Log.e("error", it.toString())
+                Log.e("userInfo error", it.toString())
             }
         }
     }
@@ -88,12 +93,6 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun addUsageGoals(usageGoal: UsageGoal) {
-        updateState {
-            copy(usageGoals = usageGoals + usageGoal)
-        }
-    }
-
     fun updateState(transform: suspend MainState.() -> MainState) {
         viewModelScope.launch {
             val currentState = mainState.value
@@ -102,7 +101,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private fun setUsageStatsList(usageStatsList: List<UsageStatAndGoal>) {
+    private fun setUsageStatsList(usageStatsList: List<UsageStatusAndGoal>) {
         updateState {
             copy(usageStatsList = usageStatsList)
         }

@@ -14,7 +14,8 @@ object ChallengeModule {
     @Module
     @InstallIn(SingletonComponent::class)
     interface Binder {
-        @Binds @Singleton
+        @Binds
+        @Singleton
         fun provideChallengeRepository(challengeRepository: DefaultChallengeRepository): ChallengeRepository
     }
 }

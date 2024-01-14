@@ -11,8 +11,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
+import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingEffect
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -81,10 +83,25 @@ class OnBoardingActivity : AppCompatActivity() {
                 }
 
                 currentItem == lastItem -> {
-                    viewModel.signUp()
+                    startSignupApi()
                 }
+                else -> Unit
             }
         }
+    }
+
+    private fun startSignupApi(): Job {
+        viewModel.signUp()
+        return viewModel.onboardEffect.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is OnBoardingEffect.SignUpSuccess -> {
+                    moveToOnBoardingDoneSignUpActivity()
+                }
+
+                is OnBoardingEffect.SignUpFail -> {
+                }
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun collectOnboardingState() {
@@ -101,7 +118,7 @@ class OnBoardingActivity : AppCompatActivity() {
         }
     }
 
-    private fun startOnBoardingDoneSignUpActivity() {
+    private fun moveToOnBoardingDoneSignUpActivity() {
         val intent = Intent(this, OnBoardingDoneSingUpActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)

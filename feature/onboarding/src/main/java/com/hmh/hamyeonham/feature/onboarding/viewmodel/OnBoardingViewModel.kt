@@ -67,12 +67,6 @@ class OnBoardingViewModel @Inject constructor(
         return buttonInfoList
     }
 
-    fun setEffect(effect: OnBoardingEffect) {
-        viewModelScope.launch {
-            _onboardEffect.emit(effect)
-        }
-    }
-
     fun signUp() {
         viewModelScope.launch {
             val token = onBoardingState.value.accessToken

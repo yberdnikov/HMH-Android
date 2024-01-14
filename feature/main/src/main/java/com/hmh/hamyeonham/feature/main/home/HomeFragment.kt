@@ -35,6 +35,10 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initStaticsRecyclerView()
         collectUsageStatsList()
+        val videoUri =
+            Uri.parse("android.resource://${requireContext().packageName}/raw/vd_blackhole1")
+        binding.vvBlackhole.setVideoURI(videoUri)
+        binding.vvBlackhole.start()
     }
 
     private fun initStaticsRecyclerView() {
@@ -53,23 +57,11 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val videoUri =
-            Uri.parse("android.resource://${requireContext().packageName}/raw/vd_blackhole1")
-        binding.vvBlackhole.run {
-            setVideoURI(videoUri)
-            //            vvBlackhole.setBackgroundColor(getColo)
-            start()
-            //            vvBlackhole.setOnCompletionListener {
-            //                vvBlackhole.start()
-            //            }
-            setOnCompletionListener {
-                start()
-            }
-        }
+        binding.vvBlackhole.resume()
     }
 
-    override fun onStop() {
-        super.onStop()
-        binding.vvBlackhole.stopPlayback()
+    override fun onPause() {
+        super.onPause()
+        binding.vvBlackhole.pause()
     }
 }

@@ -1,7 +1,6 @@
 package com.hmh.hamyeonham.feature.onboarding.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,10 +36,21 @@ class OnBoardingSelectScreenTimeFragment : Fragment() {
 
 
         binding.npOnboardingScreentimeGoal.setOnValueChangedListener { _, _, newTime ->
-            Log.d("NP", "useTotalTime: $newTime")
-            activityViewModel.updateUserResponses {
-                copy(goalTime = newTime)
+            activityViewModel.run {
+                updateUserResponses {
+                    copy(goalTime = newTime)
+                }
+                updateState {
+                    copy(isNextButtonActive = true)
+                }
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activityViewModel.updateState {
+            copy(isNextButtonActive = true)
         }
     }
 }

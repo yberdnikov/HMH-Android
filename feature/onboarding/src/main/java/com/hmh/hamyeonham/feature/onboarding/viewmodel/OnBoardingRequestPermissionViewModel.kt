@@ -13,7 +13,10 @@ data class OnBoardingPermissionsState(
     val isAccessibilityEnabled: Boolean = false,
     val isUsageStatsEnabled: Boolean = false,
     val isOverlayEnabled: Boolean = false,
-)
+) {
+    fun checkIsNextButtonActive() =
+        isAccessibilityEnabled && isUsageStatsEnabled && isOverlayEnabled
+}
 
 @HiltViewModel
 class OnBoardingRequestPermissionViewModel @Inject constructor() : ViewModel() {

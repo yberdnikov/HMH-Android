@@ -3,6 +3,7 @@ package com.hmh.hamyeonham.core.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hmh.hamyeonham.challenge.model.Challenge
 import com.hmh.hamyeonham.challenge.model.ChallengeStatus
 import com.hmh.hamyeonham.challenge.repository.ChallengeRepository
 import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
@@ -42,9 +43,45 @@ class MainViewModel @Inject constructor(
         getUserInfo()
     }
 
-    private fun getChallengeStatus() {
+    fun setChallengeStatus(challengeStatus: ChallengeStatus) {
+        updateState {
+            copy(challengeStatus = challengeStatus)
+        }
+    }
+
+    fun setUserInfo(userInfo: UserInfo) {
+        updateState {
+            copy(userInfo = userInfo)
+        }
+    }
+
+    fun addUsageGoals(usageGoal: List<UsageGoal>) {
+        updateState {
+            copy(usageGoals = usageGoals + usageGoal)
+        }
+    }
+
+    fun updateState(transform: suspend MainState.() -> MainState) {
+        viewModelScope.launch {
+            val currentState = mainState.value
+            val newState = currentState.transform()
+            _mainState.value = newState
+        }
+    }
+
+    fun getChallengeStatus() {
         viewModelScope.launch {
             challengeRepository.getChallengeData().onSuccess {
+                setChallengeStatus(it)
+            }.onFailure {
+                Log.e("challenge status error", it.toString())
+            }
+        }
+    }
+
+    fun generateChallenge(challenge: Challenge) {
+        viewModelScope.launch {
+            challengeRepository.postChallengeData(challenge).onSuccess {
                 setChallengeStatus(it)
             }.onFailure {
                 Log.e("challenge status error", it.toString())
@@ -78,33 +115,6 @@ class MainViewModel @Inject constructor(
     private fun setUsageGaols(usageGoals: List<UsageGoal>) {
         updateState {
             copy(usageGoals = usageGoals)
-        }
-    }
-
-    fun setChallengeStatus(challengeStatus: ChallengeStatus) {
-        updateState {
-            copy(challengeStatus = challengeStatus)
-        }
-    }
-
-    fun setUserInfo(userInfo: UserInfo) {
-        updateState {
-            copy(userInfo = userInfo)
-        }
-    }
-
-    fun addUsageGoals(usageGoal: List<UsageGoal>) {
-        // TODO 앱 추가 API
-        updateState {
-            copy(usageGoals = usageGoals + usageGoal)
-        }
-    }
-
-    fun updateState(transform: suspend MainState.() -> MainState) {
-        viewModelScope.launch {
-            val currentState = mainState.value
-            val newState = currentState.transform()
-            _mainState.value = newState
         }
     }
 

@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +33,7 @@ import kotlinx.coroutines.flow.onEach
 class ChallengeFragment : Fragment() {
     private val binding by viewBinding(FragmentChallengeBinding::bind)
     private val activityViewModel by activityViewModels<MainViewModel>()
+    private val viewModel by viewModels<ChallengeViewModel>()
     private lateinit var appSelectionResultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
@@ -44,10 +46,44 @@ class ChallengeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initChallengeRecyclerView()
-        initChallengeGoalsRecyclerView()
+        initViews()
         initResultLauncher()
         collectMainState()
+        collectChallengeState()
+    }
+
+    private fun collectChallengeState() {
+        viewModel.challengeState.flowWithLifecycle(viewLifeCycle).onEach {
+            when (it.modifierState) {
+                ModifierState.CANCEL -> binding.tvModifierButton.text = "취소"
+                ModifierState.DELETE -> binding.tvModifierButton.text = "삭제"
+                else -> Unit
+            }
+        }.launchIn(viewLifeCycleScope)
+    }
+
+    private fun initViews() {
+        initChallengeRecyclerView()
+        initChallengeGoalsRecyclerView()
+        initModifierButton()
+    }
+
+    private fun initModifierButton() {
+        binding.tvModifierButton.setOnClickListener {
+            when (viewModel.challengeState.value.modifierState) {
+                ModifierState.CANCEL -> {
+                    viewModel.updateState {
+                        copy(modifierState = ModifierState.DELETE)
+                    }
+                }
+
+                ModifierState.DELETE -> {
+                    viewModel.updateState {
+                        copy(modifierState = ModifierState.CANCEL)
+                    }
+                }
+            }
+        }
     }
 
     private fun collectMainState() {
@@ -89,7 +125,17 @@ class ChallengeFragment : Fragment() {
                 onAppListAddClicked = {
                     val intent = Intent(requireContext(), AppAddActivity::class.java)
                     appSelectionResultLauncher.launch(intent)
-                })
+                },
+                onAppItemClicked = {
+                    when (viewModel.challengeState.value.modifierState) {
+                        ModifierState.DELETE -> {
+                            // TODO 앱 삭제 다이얼로그 추가 및 삭제 API 호출
+                        }
+
+                        else -> Unit
+                    }
+                }
+            )
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(VerticalSpaceItemDecoration(9.dp))
         }

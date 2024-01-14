@@ -72,6 +72,7 @@ dependencies {
     implementation(projects.data.usagestats)
     implementation(projects.data.userinfo)
     implementation(projects.data.login)
+    implementation(projects.data.challenge)
 
     // Core
     implementation(projects.core.common)

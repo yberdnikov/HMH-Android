@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ChallengeResponse(
     @SerialName("apps")
-    val apps: List<UsageGoalResponse.AppGoal>,
+    val apps: List<AppGoal>,
     @SerialName("goalTime")
     val goalTime: Int,
     @SerialName("period")
@@ -16,4 +16,12 @@ data class ChallengeResponse(
     val statuses: List<String>,
     @SerialName("todayIndex")
     val todayIndex: Int
-)
+) {
+    @Serializable
+    data class AppGoal(
+        @SerialName("appCode")
+        val appCode: String,
+        @SerialName("appGoalTime")
+        val appGoalTime: Long
+    )
+}

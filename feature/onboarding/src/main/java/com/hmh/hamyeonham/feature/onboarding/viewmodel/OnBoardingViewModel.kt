@@ -1,7 +1,6 @@
 package com.hmh.hamyeonham.feature.onboarding.viewmodel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.hmh.hamyeonham.feature.onboarding.model.OnboardingAnswer
 import com.hmh.hamyeonham.feature.onboarding.model.OnboardingPageInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -9,16 +8,14 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-sealed interface OnBoardingEffect {
-    data class ActiveNextButton(val isActive: Boolean) : OnBoardingEffect
-}
+sealed interface OnBoardingEffect {}
 
 data class OnBoardingState(
     val onBoardingAnswer: OnboardingAnswer = OnboardingAnswer(),
     val pageInfo: List<OnboardingPageInfo> = emptyList(),
+    val isNextButtonActive: Boolean = false,
 )
 
 @HiltViewModel
@@ -39,16 +36,16 @@ class OnBoardingViewModel @Inject constructor() : ViewModel() {
         )
     }
 
-    fun changeStateNextButton(isActive: Boolean) {
-        viewModelScope.launch {
-            _onboardEffect.emit(OnBoardingEffect.ActiveNextButton(isActive))
-        }
-    }
-
     fun updateUserResponses(transform: OnboardingAnswer.() -> OnboardingAnswer) {
         val currentState = userResponses.value
         val newState = currentState.transform()
         _userResponses.value = newState
+    }
+
+    fun updateState(transform: OnBoardingState.() -> OnBoardingState) {
+        val currentState = onBoardingState.value
+        val newState = currentState.transform()
+        _onBoardingState.value = newState
     }
 
     private fun initializeButtonInfoList(): List<OnboardingPageInfo> {

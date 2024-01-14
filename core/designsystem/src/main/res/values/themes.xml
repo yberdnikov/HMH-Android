@@ -107,4 +107,11 @@
         <item name="trackCornerRadius">6dp</item>
     </style>
 
+    <style name="AppTheme.NumberPicker" parent="Base.Theme.HMH">
+        <item name="colorControlNormal">?gray6</item>
+        <item name="android:background">#00FFFFFF</item>
+        <item name="android:editTextColor">?white_text</item>
+        <item name ="android:textSize">24sp</item>
+    </style>
+
 </resources>

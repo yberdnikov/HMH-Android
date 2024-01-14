@@ -47,7 +47,7 @@ android {
             isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
             signingConfig = signingConfigs.getByName("release")
         }
@@ -72,6 +72,8 @@ dependencies {
     implementation(projects.data.usagestats)
     implementation(projects.data.userinfo)
     implementation(projects.data.login)
+    implementation(projects.data.challenge)
+    implementation(projects.data.device)
 
     // Core
     implementation(projects.core.common)

@@ -12,11 +12,11 @@ class DefaultUsageGoalsRepository @Inject constructor(
 ) : UsageGoalsRepository {
     //    override suspend fun getUsageGoals(): Result<List<UsageGoal>> {
 //        return runCatching { usageGoalService.getUsageGoal().data.toUsageGoalList() }
-    override suspend fun getUsageGoals(): List<UsageGoal> {
-        return usageGoalService.getUsageGoal().data.toUsageGoalList()
+    override suspend fun getUsageGoals(): Result<List<UsageGoal>> {
+        return runCatching { usageGoalService.getUsageGoal().data.toUsageGoalList() }
     }
 
-    override fun getUsageGoalTime(packageName: String): Long {
+    override fun getUsageGoalTimeFromMockData(packageName: String): Long {
         return usageGoalsRemoteDataSource.getUsageGoals()
             .firstOrNull { it.packageName == packageName }?.goalTime ?: 0
     }

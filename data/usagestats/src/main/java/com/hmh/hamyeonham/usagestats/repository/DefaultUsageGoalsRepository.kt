@@ -13,4 +13,8 @@ class DefaultUsageGoalsRepository @Inject constructor(
     override suspend fun getUsageGoals(): List<UsageGoal> {
         return usageGoalService.getUsageGoal().data.toUsageGoalList()
     }
+
+    override fun addUsageGoal(usageGoal: UsageGoal) {
+        usageGoalsRemoteDataSource.addUsageGoal(usageGoal)
+    }
 }

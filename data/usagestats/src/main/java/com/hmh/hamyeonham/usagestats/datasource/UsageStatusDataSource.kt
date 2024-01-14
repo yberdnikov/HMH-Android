@@ -2,6 +2,6 @@ package com.hmh.hamyeonham.usagestats.datasource
 
 import com.hmh.hamyeonham.usagestats.model.UsageStatsModel
 
-interface UsageStatsDataSource {
+interface UsageStatusDataSource {
     fun getUsageStats(startTime: Long, endTime: Long): List<UsageStatsModel>
 }

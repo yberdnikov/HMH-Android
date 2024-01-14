@@ -1,12 +1,12 @@
 package com.hmh.hamyeonham.usagestats.repository
 
-import com.hmh.hamyeonham.usagestats.model.UsageStat
+import com.hmh.hamyeonham.usagestats.model.UsageStatus
 
-interface UsageStatsRepository {
+interface UsageStatusRepository {
     fun getUsageStats(
         startTime: Long,
         endTime: Long,
-    ): List<UsageStat>
+    ): List<UsageStatus>
 
     fun getUsageTimeForPackage(
         startTime: Long,
@@ -18,11 +18,11 @@ interface UsageStatsRepository {
         startTime: Long,
         endTime: Long,
         vararg packageNames: String,
-    ): List<UsageStat>
+    ): List<UsageStatus>
 
     fun getUsageStatForPackages(
         startTime: Long,
         endTime: Long,
         packageNames: List<String>,
-    ): List<UsageStat>
+    ): List<UsageStatus>
 }

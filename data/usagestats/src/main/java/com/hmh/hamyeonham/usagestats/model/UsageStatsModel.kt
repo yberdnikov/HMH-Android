@@ -1,6 +1,6 @@
 package com.hmh.hamyeonham.usagestats.model
 
-data class UsageStat(
+data class UsageStatsModel(
     val packageName: String,
-    val totalTimeInForeground: Long,
+    val totalTimeInForeground: Long
 )

@@ -1,6 +1,6 @@
 package com.hmh.hamyeonham.usagestats.model
 
-data class UsageStatAndGoal(
+data class UsageStatusAndGoal(
     val packageName: String,
     val totalTimeInForeground: Long,
     val goalTime: Long,

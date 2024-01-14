@@ -85,11 +85,14 @@ class LoginViewModel @Inject constructor(
                 viewModelScope.launch {
                     loginRepository.login(token.accessToken).onSuccess {
                         _kakaoLoginEvent.emit(LoginEffect.LoginSuccess)
-                        hmhNetworkPreference.accessToken = token.accessToken
-                        hmhNetworkPreference.refreshToken = token.refreshToken
-                        hmhNetworkPreference.userId = it.userId
-                        hmhNetworkPreference.autoLoginConfigured = true
+                        hmhNetworkPreference.run {
+                            accessToken = token.accessToken
+                            refreshToken = token.refreshToken
+                            userId = it.userId
+                            autoLoginConfigured = true
+                        }
                     }.onFailure {
+                        // TODO : Network Error Handling 확장 함수
                         if (it is HttpException && it.code() == 403) {
                             _kakaoLoginEvent.emit(LoginEffect.RequireSignUp(token.accessToken))
                         } else {

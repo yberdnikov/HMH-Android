@@ -78,6 +78,10 @@ class LoginActivity : AppCompatActivity() {
         }
         startActivity(intent)
         finish()
+
+        if (accessToken != null) {
+            toast(getString(R.string.empty_token_retry_login))
+        }
     }
 
     private fun moveToMainActivity() {

@@ -15,9 +15,20 @@ sealed class ChallengeViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder
         GOAL_ADD
     }
 
-    class UsageGoalsViewHolder(private val binding: ItemUsageGoalBinding) :
-        ChallengeViewHolder(binding) {
+    class UsageGoalsViewHolder(
+        private val binding: ItemUsageGoalBinding,
+        private val onAppItemClicked: (UsageGoal) -> Unit
+    ) : ChallengeViewHolder(binding) {
+        private var item: UsageGoal? = null
+
+        init {
+            binding.root.setOnClickListener {
+                item?.let(onAppItemClicked)
+            }
+        }
+
         fun bind(item: UsageGoal) {
+            this.item = item
             binding.run {
                 val context = root.context
                 val packageName = item.packageName

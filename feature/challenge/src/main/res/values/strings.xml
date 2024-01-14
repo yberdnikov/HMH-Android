@@ -5,5 +5,5 @@
     <string name="app_lock">앱 잠금</string>
     <string name="delete">삭제</string>
     <string name="appselection_searchbar">잠금 추가할 앱을 검색해 주세요</string>
-    <string name="appselection_done">선택 완료</string>
+    <string name="app_selection_done">선택 완료</string>
 </resources>

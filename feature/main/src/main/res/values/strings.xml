@@ -9,4 +9,7 @@
     <string name="item_usagestatic_appicon_description">image of app icon</string>
     <string name="item_usagestatic_total_blackhole_description">image of black hole</string>
     <string name="item_usagestatic_total_blackhole">블랙홀이\n가까워지고 있어요!</string>
+    <string name="base_blackhole_uri">vd_blackhole</string>
+    <string name="android_resource">android.resource://</string>
+    <string name="raw">/raw/</string>
 </resources>

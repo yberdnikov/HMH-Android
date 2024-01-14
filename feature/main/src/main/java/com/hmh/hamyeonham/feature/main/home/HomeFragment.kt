@@ -13,7 +13,9 @@ import com.hmh.hamyeonham.common.fragment.viewLifeCycle
 import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.core.viewmodel.MainViewModel
+import com.hmh.hamyeonham.feature.main.R
 import com.hmh.hamyeonham.feature.main.databinding.FragmentHomeBinding
+import com.hmh.hamyeonham.usagestats.model.UsageStatusAndGoal
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -23,6 +25,7 @@ class HomeFragment : Fragment() {
     private val binding by viewBinding(FragmentHomeBinding::bind)
     private val activityViewModel by activityViewModels<MainViewModel>()
 
+    //    val mediaPlayer = MediaPlayer()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,10 +38,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initStaticsRecyclerView()
         collectUsageStatsList()
-        val videoUri =
-            Uri.parse("android.resource://${requireContext().packageName}/raw/vd_blackhole1")
-        binding.vvBlackhole.setVideoURI(videoUri)
-        binding.vvBlackhole.start()
+//        binding.vvBlackhole.setVideoURI(videoUri)
+//        binding.vvBlackhole.start()
     }
 
     private fun initStaticsRecyclerView() {
@@ -52,7 +53,24 @@ class HomeFragment : Fragment() {
         val usageStaticsAdapter = binding.rvStatics.adapter as? UsageStaticsAdapter
         activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach {
             usageStaticsAdapter?.submitList(it.usageStatsList)
+            bindBlackholeVideo(it.usageStatsList[0])
         }.launchIn(viewLifeCycleScope)
+    }
+
+    private fun bindBlackholeVideo(totalUsageStatusAndGoal: UsageStatusAndGoal) {
+        val uri =
+            Uri.parse(setUrifromTotalUsage(totalUsageStatusAndGoal))
+        binding.vvBlackhole.run {
+            setVideoURI(uri)
+            requestFocus()
+            start()
+        }
+    }
+
+    private fun setUrifromTotalUsage(totalUsageStatusAndGoal: UsageStatusAndGoal): String {
+        val index = totalUsageStatusAndGoal.usedPercentage / 25 + 1
+        val blackholeUri = getString(R.string.base_blackhole_uri) + index.toString()
+        return getString(R.string.android_resource) + requireContext().packageName + getString(R.string.raw) + blackholeUri
     }
 
     override fun onResume() {

@@ -9,7 +9,7 @@ import javax.inject.Singleton
     private val preferences: SharedPreferences,
 ) : HMHNetworkPreference {
     override var accessToken: String
-        get() = preferences.getString("access_token", "").orEmpty()
+        get() = preferences.getString("access_token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJpYXQiOjE3MDUxMjcyOTksImV4cCI6MTcwNTk5MTI5OSwidXNlcklkIjoxfQ.ify6miN838GJp_-uIXp0xQj3HTgWrFd3VDCCWx3PNQlE-FvZjqXgkx9eZ-sX_qjT").orEmpty()
         set(value) {
             preferences.edit(commit = true) {
                 putString("access_token", value)

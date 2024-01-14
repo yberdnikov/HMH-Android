@@ -1,6 +1,7 @@
 package com.hmh.hamyeonham.feature.main.home
 
 import android.content.Context
+import android.net.Uri
 import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.RecyclerView
 import com.hmh.hamyeonham.common.context.colorSecondStrAndBindText
@@ -12,25 +13,29 @@ import com.hmh.hamyeonham.usagestats.model.UsageStatAndGoal
 
 class UsageStaticsTotalViewHolder(
     private val binding: ItemUsagestaticTotalBinding,
-    private val context: Context
+    private val context: Context,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun onBind(usageStatAndGoal: UsageStatAndGoal) {
         binding.run {
             tvTotalGoal.text = convertTimeToString(usageStatAndGoal.goalTime)
             pbTotalUsage.progress = usageStatAndGoal.usedPercentage
+            val videoUri =
+                Uri.parse("android.resource://${context.packageName}/raw/vd_blackhole1")
+            vvBlackhole.setVideoURI(videoUri)
+            vvBlackhole.start()
         }
         context.colorSecondStrAndBindText(
             convertTimeToString(usageStatAndGoal.goalTime),
             getString(
                 context,
-                R.string.all_left
+                R.string.all_left,
             ),
             binding.tvTotalTimeLeft,
-            com.hmh.hamyeonham.core.designsystem.R.color.gray1
+            com.hmh.hamyeonham.core.designsystem.R.color.gray1,
         )
         initAndStartProgressBarAnimation(
             binding.pbTotalUsage,
-            usageStatAndGoal.usedPercentage
+            usageStatAndGoal.usedPercentage,
         )
     }
 }

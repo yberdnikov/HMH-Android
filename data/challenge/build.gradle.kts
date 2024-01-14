@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "com.hmh.hamyeonham.data.usagestats"
+    namespace = "com.hmh.hamyeonham.data.challenge"
 }
 
 dependencies {
     // Domain
-    implementation(projects.domain.usagestats)
+    implementation(projects.domain.challenge)
     // Core
     implementation(projects.core.database)
     implementation(projects.core.network)

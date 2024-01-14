@@ -10,5 +10,5 @@ android {
 dependencies {
     implementation(projects.core.common)
     implementation(projects.core.designsystem)
-    implementation(project(":feature:main"))
+    implementation(projects.feature.main)
 }

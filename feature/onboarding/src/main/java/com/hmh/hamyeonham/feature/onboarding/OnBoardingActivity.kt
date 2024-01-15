@@ -2,7 +2,6 @@ package com.hmh.hamyeonham.feature.onboarding
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +13,6 @@ import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBindi
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingEffect
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -83,25 +81,21 @@ class OnBoardingActivity : AppCompatActivity() {
                 }
 
                 currentItem == lastItem -> {
-                    startSignupApi()
+                    viewModel.signUp()
+                    viewModel.onboardEffect.flowWithLifecycle(lifecycle).onEach {
+                        when (it) {
+                            is OnBoardingEffect.SignUpSuccess -> {
+                                moveToOnBoardingDoneSignUpActivity()
+                            }
+                            is OnBoardingEffect.SignUpFail -> {
+                            }
+                        }
+                    }.launchIn(lifecycleScope)
                 }
+
                 else -> Unit
             }
         }
-    }
-
-    private fun startSignupApi(): Job {
-        viewModel.signUp()
-        return viewModel.onboardEffect.flowWithLifecycle(lifecycle).onEach {
-            when (it) {
-                is OnBoardingEffect.SignUpSuccess -> {
-                    moveToOnBoardingDoneSignUpActivity()
-                }
-
-                is OnBoardingEffect.SignUpFail -> {
-                }
-            }
-        }.launchIn(lifecycleScope)
     }
 
     private fun collectOnboardingState() {
@@ -141,7 +135,6 @@ class OnBoardingActivity : AppCompatActivity() {
     private fun updateProgressBar(currentItem: Int, totalItems: Int) {
         val progress = (currentItem + 1).toFloat() / totalItems.toFloat()
         val progressBarWidth = (progress * 100).toInt()
-        Log.d("progressBarWidth", progressBarWidth.toString())
         binding.pbOnboarding.progress = progressBarWidth
     }
 

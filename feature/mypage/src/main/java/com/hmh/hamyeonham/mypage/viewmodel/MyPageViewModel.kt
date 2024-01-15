@@ -43,8 +43,8 @@ class MyPageViewModel @Inject constructor(
     fun handleWithdrawal() {
         viewModelScope.launch {
             authRepository.withdrawal(hmhPreferenceAccessToken.accessToken).onSuccess {
-                _userEffect.emit(UserEffect.withdrawalSuccess)
                 hmhPreferenceAccessToken.clear()
+                _userEffect.emit(UserEffect.withdrawalSuccess)
                 Log.d("hmhPreferenceAccessToken", hmhPreferenceAccessToken.accessToken)
             }.onFailure {
                 _userEffect.emit(UserEffect.withdrawalFail)

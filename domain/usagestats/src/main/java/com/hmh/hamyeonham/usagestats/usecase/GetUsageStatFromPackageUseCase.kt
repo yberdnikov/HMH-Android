@@ -4,7 +4,7 @@ import com.hmh.hamyeonham.usagestats.repository.UsageStatsRepository
 import javax.inject.Inject
 
 class GetUsageStatFromPackageUseCase @Inject constructor(
-    private val usageStatsRepository: UsageStatsRepository,
+    private val usageStatsRepository: UsageStatsRepository
 ) {
     operator fun invoke(
         startTime: Long,

@@ -3,11 +3,11 @@ package com.hmh.hamyeonham.usagestats.usecase
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
 import com.hmh.hamyeonham.usagestats.model.UsageStatusAndGoal
 import com.hmh.hamyeonham.usagestats.repository.UsageGoalsRepository
-import com.hmh.hamyeonham.usagestats.repository.UsageStatusRepository
+import com.hmh.hamyeonham.usagestats.repository.UsageStatsRepository
 import javax.inject.Inject
 
 class GetUsageStatsListUseCase @Inject constructor(
-    private val usageStatusRepository: UsageStatusRepository,
+    private val usageStatsRepository: UsageStatsRepository,
     private val usageGoalsRepository: UsageGoalsRepository,
 ) {
 
@@ -54,7 +54,7 @@ class GetUsageStatsListUseCase @Inject constructor(
         usageGoalList: List<UsageGoal>,
     ): List<UsageStatusAndGoal> {
         val selectedPackage = getSelectedPackageList(usageGoalList)
-        return usageStatusRepository.getUsageStatForPackages(startTime, endTime, selectedPackage)
+        return usageStatsRepository.getUsageStatForPackages(startTime, endTime, selectedPackage)
             .map {
                 createUsageStatAndGoal(
                     it.packageName,

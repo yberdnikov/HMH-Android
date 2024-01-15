@@ -11,8 +11,10 @@ dependencies {
     implementation(projects.core.common)
     implementation(projects.core.designsystem)
 
+    implementation(projects.feature.main)
+    implementation(projects.feature.lock)
+
     implementation(projects.domain.login)
 
-    implementation(projects.feature.main)
     implementation(projects.core.network)
 }

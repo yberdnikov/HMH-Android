@@ -51,12 +51,13 @@ class UsageStaticsTotalViewHolder(
     }
 
     private fun bindBlackholeVideo(uri: String) {
-        val uri =
-            Uri.parse(uri)
+        val uri = Uri.parse(uri)
         binding.vvBlackhole.run {
             setVideoURI(uri)
             requestFocus()
-            start()
+            setOnPreparedListener {
+                it.start()
+            }
         }
     }
 

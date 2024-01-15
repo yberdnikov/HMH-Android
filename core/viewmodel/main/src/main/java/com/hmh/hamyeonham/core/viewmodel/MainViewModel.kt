@@ -8,6 +8,7 @@ import com.hmh.hamyeonham.challenge.repository.ChallengeRepository
 import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
 import com.hmh.hamyeonham.usagestats.model.UsageStatusAndGoal
+import com.hmh.hamyeonham.usagestats.repository.UsageGoalsRepository
 import com.hmh.hamyeonham.usagestats.usecase.GetUsageStatsListUseCase
 import com.hmh.hamyeonham.userinfo.model.UserInfo
 import com.hmh.hamyeonham.userinfo.repository.UserInfoRepository
@@ -24,7 +25,8 @@ data class MainState(
     val userInfo: UserInfo = UserInfo(),
 )
 
-@HiltViewModel class MainViewModel @Inject constructor(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val challengeRepository: ChallengeRepository,
 //    private val getUsageGoalsUseCase: GetUsageGoalsUseCase,
     private val getUsageStatsListUseCase: GetUsageStatsListUseCase,
@@ -34,7 +36,7 @@ data class MainState(
     val mainState = _mainState.asStateFlow()
 
     init {
-//        getChallengeStatus()
+        getChallengeStatus()
 //        getUsageGoal()
         getStatsList()
         getUserInfo()

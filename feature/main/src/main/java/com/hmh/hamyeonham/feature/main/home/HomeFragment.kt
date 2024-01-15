@@ -14,6 +14,7 @@ import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.core.viewmodel.MainViewModel
 import com.hmh.hamyeonham.feature.main.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -47,8 +48,9 @@ class HomeFragment : Fragment() {
     private fun collectUsageStatsList() {
         val usageStaticsAdapter = binding.rvStatics.adapter as? UsageStaticsAdapter
         activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach {
-            usageStaticsAdapter?.submitList(it.usageStatsList)
             usageStaticsAdapter?.setUserInfo(it.userInfo)
+            delay(100)
+            usageStaticsAdapter?.submitList(it.usageStatsList)
         }.launchIn(viewLifeCycleScope)
     }
 }

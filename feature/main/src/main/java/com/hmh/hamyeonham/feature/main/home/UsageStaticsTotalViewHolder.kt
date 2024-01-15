@@ -9,13 +9,15 @@ import com.hmh.hamyeonham.common.time.convertTimeToString
 import com.hmh.hamyeonham.common.view.initAndStartProgressBarAnimation
 import com.hmh.hamyeonham.feature.main.R
 import com.hmh.hamyeonham.feature.main.databinding.ItemUsagestaticTotalBinding
+import com.hmh.hamyeonham.usagestats.model.Blackhole
 import com.hmh.hamyeonham.usagestats.model.UsageStatusAndGoal
+import com.hmh.hamyeonham.userinfo.model.UserInfo
 
 class UsageStaticsTotalViewHolder(
     private val binding: ItemUsagestaticTotalBinding,
     private val context: Context,
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun onBind(usageStatusAndGoal: UsageStatusAndGoal) {
+    fun onBind(usageStatusAndGoal: UsageStatusAndGoal, userInfo: UserInfo?) {
         binding.run {
             tvTotalGoal.text = convertTimeToString(usageStatusAndGoal.goalTime)
             pbTotalUsage.progress = usageStatusAndGoal.usedPercentage
@@ -33,12 +35,13 @@ class UsageStaticsTotalViewHolder(
             binding.pbTotalUsage,
             usageStatusAndGoal.usedPercentage,
         )
+        bindBlackhole(usageStatusAndGoal, userInfo)
         setBlackholeLoop()
     }
 
-    fun bindBlackhole(usageStatusAndGoal: UsageStatusAndGoal) {
+    fun bindBlackhole(usageStatusAndGoal: UsageStatusAndGoal, userInfo: UserInfo?) {
         bindBlackholeVideo(usageStatusAndGoal.getBlackholeUri())
-        bindBlackholeDescription(usageStatusAndGoal.getBlackholeDescription())
+        bindBlackholeDescription(usageStatusAndGoal, userInfo)
     }
 
     private fun setBlackholeLoop() {
@@ -57,13 +60,19 @@ class UsageStaticsTotalViewHolder(
         }
     }
 
-    private fun bindBlackholeDescription(description: String) {
-        binding.tvBlackholeDescription.text = description
+    private fun bindBlackholeDescription(
+        userStatusAndGoal: UsageStatusAndGoal,
+        userInfo: UserInfo?,
+    ) {
+        binding.tvBlackholeDescription.text = when (userStatusAndGoal.blackhole) {
+            Blackhole.FIRST -> userInfo?.name ?: ""
+            else -> ""
+        } + userStatusAndGoal.getBlackholeDescription()
     }
 
-    fun resume(usageStatusAndGoal: UsageStatusAndGoal) {
-        bindBlackhole(usageStatusAndGoal)
-    }
+//    fun resume(usageStatusAndGoal: UsageStatusAndGoal) {
+//        bindBlackhole(usageStatusAndGoal)
+//    }
 
     fun pause() {
     }

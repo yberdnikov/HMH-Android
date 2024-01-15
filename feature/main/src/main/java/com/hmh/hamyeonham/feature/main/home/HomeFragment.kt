@@ -48,6 +48,7 @@ class HomeFragment : Fragment() {
         val usageStaticsAdapter = binding.rvStatics.adapter as? UsageStaticsAdapter
         activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach {
             usageStaticsAdapter?.submitList(it.usageStatsList)
+            usageStaticsAdapter?.setUserInfo(it.userInfo)
         }.launchIn(viewLifeCycleScope)
     }
 }

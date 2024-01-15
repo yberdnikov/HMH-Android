@@ -8,6 +8,7 @@ import com.hmh.hamyeonham.common.view.ItemDiffCallback
 import com.hmh.hamyeonham.feature.main.databinding.ItemUsagestaticBinding
 import com.hmh.hamyeonham.feature.main.databinding.ItemUsagestaticTotalBinding
 import com.hmh.hamyeonham.usagestats.model.UsageStatusAndGoal
+import com.hmh.hamyeonham.userinfo.model.UserInfo
 
 class UsageStaticsAdapter : ListAdapter<UsageStatusAndGoal, RecyclerView.ViewHolder>(
     ItemDiffCallback<UsageStatusAndGoal>(
@@ -15,6 +16,7 @@ class UsageStaticsAdapter : ListAdapter<UsageStatusAndGoal, RecyclerView.ViewHol
         onContentsTheSame = { old, new -> old == new },
     ),
 ) {
+    private var currentUserInfo: UserInfo? = null
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -40,7 +42,7 @@ class UsageStaticsAdapter : ListAdapter<UsageStatusAndGoal, RecyclerView.ViewHol
         when (position) {
             0 -> {
                 val newHolder = holder as UsageStaticsTotalViewHolder
-                newHolder.onBind(currentList[position])
+                newHolder.onBind(currentList[position], currentUserInfo)
             }
 
             else -> {
@@ -50,13 +52,13 @@ class UsageStaticsAdapter : ListAdapter<UsageStatusAndGoal, RecyclerView.ViewHol
         }
     }
 
-    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
-        if (holder.itemViewType == TOTAL_ITEM_TYPE) {
-            val newHolder = holder as UsageStaticsTotalViewHolder
-            newHolder.resume(currentList[holder.layoutPosition])
-        }
-        super.onViewAttachedToWindow(holder)
-    }
+//    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
+//        if (holder.itemViewType == TOTAL_ITEM_TYPE) {
+//            val newHolder = holder as UsageStaticsTotalViewHolder
+//            newHolder.resume(currentList[holder.layoutPosition])
+//        }
+//        super.onViewAttachedToWindow(holder)
+//    }
 
     override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
         if (holder.itemViewType == TOTAL_ITEM_TYPE) {
@@ -68,6 +70,10 @@ class UsageStaticsAdapter : ListAdapter<UsageStatusAndGoal, RecyclerView.ViewHol
 
     override fun getItemViewType(position: Int): Int {
         return if (position == 0) TOTAL_ITEM_TYPE else APP_ITEM_TYPE
+    }
+
+    fun setUserInfo(userInfo: UserInfo) {
+        currentUserInfo = userInfo
     }
 
     companion object {

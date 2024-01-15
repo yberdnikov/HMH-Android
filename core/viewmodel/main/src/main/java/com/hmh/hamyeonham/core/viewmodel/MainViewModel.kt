@@ -8,7 +8,6 @@ import com.hmh.hamyeonham.challenge.repository.ChallengeRepository
 import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
 import com.hmh.hamyeonham.usagestats.model.UsageStatusAndGoal
-import com.hmh.hamyeonham.usagestats.usecase.GetUsageGoalsUseCase
 import com.hmh.hamyeonham.usagestats.usecase.GetUsageStatsListUseCase
 import com.hmh.hamyeonham.userinfo.model.UserInfo
 import com.hmh.hamyeonham.userinfo.repository.UserInfoRepository
@@ -27,7 +26,7 @@ data class MainState(
 
 @HiltViewModel class MainViewModel @Inject constructor(
     private val challengeRepository: ChallengeRepository,
-    private val getUsageGoalsUseCase: GetUsageGoalsUseCase,
+//    private val getUsageGoalsUseCase: GetUsageGoalsUseCase,
     private val getUsageStatsListUseCase: GetUsageStatsListUseCase,
     private val userInfoRepository: UserInfoRepository,
 ) : ViewModel() {
@@ -36,7 +35,7 @@ data class MainState(
 
     init {
 //        getChallengeStatus()
-        getUsageGoal()
+//        getUsageGoal()
         getStatsList()
         getUserInfo()
     }
@@ -53,17 +52,11 @@ data class MainState(
         }
     }
 
-    fun getBlackholeUri(): String =
-        mainState.value.usageStatsList.getFirstOrNull()?.getBlackholeUri() ?: ""
-
-    fun getBlackholeDescription(): String =
-        mainState.value.usageStatsList.getFirstOrNull()?.getBlackholeDescription() ?: ""
-
-    private fun getUsageGoal() {
-        viewModelScope.launch {
-            setUsageGaols(getUsageGoalsUseCase())
-        }
-    }
+//    private fun getUsageGoal() {
+//        viewModelScope.launch {
+//            setUsageGaols(getUsageGoalsUseCase())
+//        }
+//    }
 
     private fun getStatsList() {
         val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
@@ -120,9 +113,4 @@ data class MainState(
             copy(usageStatsList = usageStatsList)
         }
     }
-}
-
-private fun <E> List<E>.getFirstOrNull(): E? {
-    if (this.isNotEmpty()) return this[0]
-    return null
 }

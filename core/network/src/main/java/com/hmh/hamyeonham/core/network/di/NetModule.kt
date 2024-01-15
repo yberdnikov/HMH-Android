@@ -13,8 +13,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 import kotlinx.serialization.json.Json
 import okhttp3.Authenticator
 import okhttp3.Interceptor
@@ -23,6 +21,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 private const val HMHBaseUrl = BuildConfig.HMH_BASE_URL
 
@@ -51,7 +51,7 @@ object NetModule {
                 HttpLoggingInterceptor.Level.BODY
             } else {
                 HttpLoggingInterceptor.Level.NONE
-            }
+            },
         )
 
     @Singleton
@@ -65,7 +65,7 @@ object NetModule {
     fun provideOkHttpClient(
         @Log logInterceptor: Interceptor,
         @Auth authInterceptor: Interceptor,
-        authenticator: Authenticator
+        authenticator: Authenticator,
     ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(logInterceptor)
         .addInterceptor(authInterceptor)
@@ -79,7 +79,7 @@ object NetModule {
     @Provides
     @Unsecured
     fun provideOkHttpClientNotNeededAuth(
-        @Log logInterceptor: Interceptor
+        @Log logInterceptor: Interceptor,
     ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(logInterceptor)
         .connectTimeout(60, TimeUnit.SECONDS)
@@ -92,7 +92,7 @@ object NetModule {
     @Secured
     fun provideRetrofit(
         @Secured client: OkHttpClient,
-        converterFactory: Converter.Factory
+        converterFactory: Converter.Factory,
     ): Retrofit = Retrofit.Builder()
         .baseUrl(HMHBaseUrl)
         .client(client)
@@ -104,7 +104,7 @@ object NetModule {
     @Unsecured
     fun provideRetrofitNotNeededAuth(
         @Unsecured client: OkHttpClient,
-        converterFactory: Converter.Factory
+        converterFactory: Converter.Factory,
     ): Retrofit = Retrofit.Builder()
         .baseUrl(HMHBaseUrl)
         .client(client)

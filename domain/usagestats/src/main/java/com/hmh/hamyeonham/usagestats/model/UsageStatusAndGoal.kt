@@ -27,9 +27,7 @@ enum class Blackhole(val level: Int, val description: String, val fileName: Stri
     FIFTH(5, "지금부터 앱을 사용하면\n챌린지를 실패해요", "vd_blackhole5"),
     ;
 
-    //    FAIL(6, "블랙홀에 빠졌어요\n내일은 목표를 이뤄보아요", "blackhole5"),
     fun getVideoUri(): String {
-        // 여기에서 원하는 로직을 추가하여 nameString을 다른 문자열로 변환
         return baseVideoUri + fileName
     }
 

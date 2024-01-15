@@ -1,6 +1,8 @@
 package com.hmh.hamyeonham.core.network.di
 
 import com.hmh.hamyeonham.common.qualifier.Secured
+import com.hmh.hamyeonham.common.qualifier.Secured
+import com.hmh.hamyeonham.common.qualifier.Unsecured
 import com.hmh.hamyeonham.core.network.usagegoal.UsageGoalService
 import dagger.Module
 import dagger.Provides

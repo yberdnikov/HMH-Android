@@ -58,6 +58,13 @@ class OnBoardingSelectDataFragment : Fragment() {
         initFragmentType()
     }
 
+    override fun onResume() {
+        super.onResume()
+        activityViewModel.updateState {
+            copy(isNextButtonActive = selectedButtons.isNotEmpty())
+        }
+    }
+
     private fun initViews() {
         initQuestionButton()
         viewModel.onBoardingSelectDataState.onEach {
@@ -128,6 +135,9 @@ class OnBoardingSelectDataFragment : Fragment() {
             selectedButtons.filter { it != selectedButton }.forEach { it.isSelected = false }
             selectedButtons.clear()
             if (selectedButton.isSelected) selectedButtons.add(selectedButton)
+        }
+        activityViewModel.updateState {
+            copy(isNextButtonActive = selectedButtons.isNotEmpty())
         }
     }
 

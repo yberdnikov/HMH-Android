@@ -10,8 +10,7 @@ class DefaultUsageGoalsRepository @Inject constructor(
     private val usageGoalService: UsageGoalService,
     private val usageGoalsRemoteDataSource: UsageGoalsRemoteDataSource,
 ) : UsageGoalsRepository {
-    //    override suspend fun getUsageGoals(): Result<List<UsageGoal>> {
-//        return runCatching { usageGoalService.getUsageGoal().data.toUsageGoalList() }
+
     override suspend fun getUsageGoals(): List<UsageGoal> {
         return usageGoalService.getUsageGoal().data.toUsageGoalList()
     }

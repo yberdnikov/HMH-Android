@@ -9,11 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.view.initAndStartProgressBarAnimation
+import androidx.viewpager2.widget.ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingEffect
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -33,6 +35,7 @@ class OnBoardingActivity : AppCompatActivity() {
         initViews()
         checkNextButtonEnable()
         setBackPressedCallback()
+        collectOnboardingState()
 
         val accessToken = intent.getStringExtra(EXTRA_ACCESS_TOKEN)
         viewModel.updateState {
@@ -82,8 +85,9 @@ class OnBoardingActivity : AppCompatActivity() {
                 }
 
                 currentItem == lastItem -> {
-                    viewModel.signUp()
+                    startSignupApi()
                 }
+                else -> Unit
             }
         }
     }
@@ -103,6 +107,26 @@ class OnBoardingActivity : AppCompatActivity() {
         }.launchIn(lifecycleScope)
     }
 
+    private fun startSignupApi(): Job {
+        viewModel.signUp()
+        return viewModel.onboardEffect.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is OnBoardingEffect.SignUpSuccess -> {
+                    moveToOnBoardingDoneSignUpActivity()
+                }
+
+                is OnBoardingEffect.SignUpFail -> {
+                }
+            }
+        }.launchIn(lifecycleScope)
+    }
+
+    private fun collectOnboardingState() {
+        viewModel.onBoardingState.flowWithLifecycle(lifecycle).onEach {
+            binding.btnOnboardingNext.isEnabled = it.isNextButtonActive
+        }.launchIn(lifecycleScope)
+    }
+
     private fun setBackPressedCallback() {
         onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -111,7 +135,7 @@ class OnBoardingActivity : AppCompatActivity() {
         }
     }
 
-    private fun startOnBoardingDoneSignUpActivity() {
+    private fun moveToOnBoardingDoneSignUpActivity() {
         val intent = Intent(this, OnBoardingDoneSingUpActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -126,6 +150,7 @@ class OnBoardingActivity : AppCompatActivity() {
         binding.vpOnboardingContainer.run {
             adapter = pagerAdapter
             isUserInputEnabled = false
+            offscreenPageLimit = OFFSCREEN_PAGE_LIMIT_DEFAULT
         }
         return pagerAdapter
     }

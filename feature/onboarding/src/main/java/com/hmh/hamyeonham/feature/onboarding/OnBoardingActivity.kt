@@ -2,6 +2,7 @@ package com.hmh.hamyeonham.feature.onboarding
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -35,10 +36,10 @@ class OnBoardingActivity : AppCompatActivity() {
         setBackPressedCallback()
         collectOnboardingState()
 
-        updateEccessToken()
+        updateAccessToken()
     }
 
-    private fun updateEccessToken() {
+    private fun updateAccessToken() {
         val accessToken = intent.getStringExtra(EXTRA_ACCESS_TOKEN)
         viewModel.updateState {
             copy(accessToken = accessToken.orEmpty())
@@ -85,29 +86,23 @@ class OnBoardingActivity : AppCompatActivity() {
                     viewPager.currentItem = currentItem + 1
                     updateProgressBar(currentItem + 1, viewPager.adapter?.itemCount ?: 1)
                 }
-
                 currentItem == lastItem -> {
-                    // viewModel.signUp()
-                    startSignupApi()
-                }
+                    viewModel.signUp()
+                    viewModel.onboardEffect.flowWithLifecycle(lifecycle).onEach {
+                        when (it) {
+                            is OnBoardingEffect.SignUpSuccess -> {
+                                moveToOnBoardingDoneSignUpActivity()
+                            }
 
+                            is OnBoardingEffect.SignUpFail -> {
+                                Log.e("OnBoardingActivity", "sign up fail")
+                            }
+                        }
+                    }.launchIn(lifecycleScope)
+                }
                 else -> Unit
             }
         }
-    }
-
-    private fun startSignupApi(): Job {
-        viewModel.signUp()
-        return viewModel.onboardEffect.flowWithLifecycle(lifecycle).onEach {
-            when (it) {
-                is OnBoardingEffect.SignUpSuccess -> {
-                    moveToOnBoardingDoneSignUpActivity()
-                }
-
-                is OnBoardingEffect.SignUpFail -> {
-                }
-            }
-        }.launchIn(lifecycleScope)
     }
 
     private fun collectOnboardingState() {

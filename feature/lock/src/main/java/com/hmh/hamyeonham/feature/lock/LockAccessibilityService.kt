@@ -3,11 +3,12 @@ package com.hmh.hamyeonham.feature.lock
 import android.accessibilityservice.AccessibilityService
 import android.content.Intent
 import android.view.accessibility.AccessibilityEvent
+import androidx.lifecycle.ProcessLifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.usagestats.usecase.GetUsageGoalsUseCase
 import com.hmh.hamyeonham.usagestats.usecase.GetUsageStatFromPackageUseCase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,7 +35,8 @@ class LockAccessibilityService : AccessibilityService() {
             endTime = endTime,
             packageName = packageName
         )
-        GlobalScope.launch {
+
+        ProcessLifecycleOwner.get().lifecycleScope.launch {
             getUsageGoalsUseCase().firstOrNull { it.packageName == packageName }?.let { myGoal ->
                 if (usageStats > myGoal.goalTime) {
                     val intent =

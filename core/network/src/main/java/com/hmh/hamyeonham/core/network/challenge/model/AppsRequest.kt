@@ -15,5 +15,5 @@ data class AppsRequest(
         @SerialName("goalTime")
         val goalTime: Int? = null
     )
-
 }
+

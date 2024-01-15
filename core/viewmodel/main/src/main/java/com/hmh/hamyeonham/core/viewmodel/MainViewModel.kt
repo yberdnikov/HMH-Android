@@ -25,8 +25,7 @@ data class MainState(
     val userInfo: UserInfo = UserInfo(),
 )
 
-@HiltViewModel
-class MainViewModel @Inject constructor(
+@HiltViewModel class MainViewModel @Inject constructor(
     private val challengeRepository: ChallengeRepository,
     private val getUsageGoalsUseCase: GetUsageGoalsUseCase,
     private val getUsageStatsListUseCase: GetUsageStatsListUseCase,
@@ -53,6 +52,12 @@ class MainViewModel @Inject constructor(
             }
         }
     }
+
+    fun getBlackholeUri(): String =
+        mainState.value.usageStatsList.getFirstOrNull()?.getBlackholeUri() ?: ""
+
+    fun getBlackholeDescription(): String =
+        mainState.value.usageStatsList.getFirstOrNull()?.getBlackholeDescription() ?: ""
 
     private fun getUsageGoal() {
         viewModelScope.launch {
@@ -115,4 +120,9 @@ class MainViewModel @Inject constructor(
             copy(usageStatsList = usageStatsList)
         }
     }
+}
+
+private fun <E> List<E>.getFirstOrNull(): E? {
+    if (this.isNotEmpty()) return this[0]
+    return null
 }

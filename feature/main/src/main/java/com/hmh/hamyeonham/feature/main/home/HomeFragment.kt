@@ -2,6 +2,7 @@ package com.hmh.hamyeonham.feature.main.home
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +14,7 @@ import com.hmh.hamyeonham.common.fragment.viewLifeCycle
 import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.core.viewmodel.MainViewModel
-import com.hmh.hamyeonham.feature.main.R
 import com.hmh.hamyeonham.feature.main.databinding.FragmentHomeBinding
-import com.hmh.hamyeonham.usagestats.model.UsageStatusAndGoal
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -59,20 +58,18 @@ class HomeFragment : Fragment() {
         activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach {
             usageStaticsAdapter?.submitList(it.usageStatsList)
             if (it.usageStatsList.isNotEmpty()) {
-                bindBlackhole(it.usageStatsList[0])
+                Log.d("package name", requireActivity().packageName)
+                Log.d("uri", activityViewModel.getBlackholeUri())
+
+                bindBlackholeVideo(activityViewModel.getBlackholeUri())
+                bindBlackholeDescription(activityViewModel.getBlackholeDescription())
             }
         }.launchIn(viewLifeCycleScope)
     }
 
-    private fun bindBlackhole(totalUsageStatusAndGoal: UsageStatusAndGoal) {
-        val index = totalUsageStatusAndGoal.usedPercentage / 25 + 1
-        bindBlackholeVideo(index)
-        bindBlackholeDescription(index)
-    }
-
-    private fun bindBlackholeVideo(index: Int) {
+    private fun bindBlackholeVideo(uri: String) {
         val uri =
-            Uri.parse(setUrifromIndex(index))
+            Uri.parse(uri)
         binding.vvBlackhole.run {
             setVideoURI(uri)
             requestFocus()
@@ -80,21 +77,8 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun bindBlackholeDescription(index: Int) {
-        val description = when (index) {
-            1 -> activityViewModel.getUserName() + getString(R.string.blackhole1)
-            2 -> getString(R.string.blackhole2)
-            3 -> getString(R.string.blackhole3)
-            4 -> getString(R.string.blackhole4)
-            5 -> getString(R.string.blackhole5)
-            else -> ""
-        }
+    private fun bindBlackholeDescription(description: String) {
         binding.tvHmhTitle.text = description
-    }
-
-    private fun setUrifromIndex(index: Int): String {
-        val blackholeUri = getString(R.string.base_blackhole_uri) + index.toString()
-        return getString(R.string.android_resource) + requireContext().packageName + getString(R.string.raw) + blackholeUri
     }
 
     override fun onResume() {

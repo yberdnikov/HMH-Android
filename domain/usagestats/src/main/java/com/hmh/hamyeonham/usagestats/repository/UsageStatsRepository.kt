@@ -2,7 +2,7 @@ package com.hmh.hamyeonham.usagestats.repository
 
 import com.hmh.hamyeonham.usagestats.model.UsageStatus
 
-interface UsageStatusRepository {
+interface UsageStatsRepository {
     fun getUsageStats(
         startTime: Long,
         endTime: Long,

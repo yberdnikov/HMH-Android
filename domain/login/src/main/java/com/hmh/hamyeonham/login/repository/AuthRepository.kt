@@ -8,5 +8,5 @@ interface AuthRepository {
     suspend fun login(accessToken: String): Result<Login>
     suspend fun logout(accessToken: String): Result<Unit>
     suspend fun signUp(accessToken: String, signUpRequest: SignRequestDomain): Result<SignUpUser>
-    suspend fun withdrawal(): Result<Unit>
+    suspend fun withdrawal(accessToken: String): Result<Unit>
 }

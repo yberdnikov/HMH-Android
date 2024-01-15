@@ -43,9 +43,10 @@ class DefaultAuthRepository @Inject constructor(
         }
     }
 
-    override suspend fun withdrawal(): Result<Unit> {
+    override suspend fun withdrawal(accessToken: String): Result<Unit> {
+        val bearerToken = "Bearer $accessToken"
         return runCatching {
-            authService.withdrawal()
+            authService.withdrawal(bearerToken)
         }
     }
 }

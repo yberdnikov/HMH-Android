@@ -8,7 +8,6 @@ import com.hmh.hamyeonham.challenge.repository.ChallengeRepository
 import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
 import com.hmh.hamyeonham.usagestats.model.UsageStatusAndGoal
-import com.hmh.hamyeonham.usagestats.repository.UsageGoalsRepository
 import com.hmh.hamyeonham.usagestats.usecase.GetUsageStatsListUseCase
 import com.hmh.hamyeonham.userinfo.model.UserInfo
 import com.hmh.hamyeonham.userinfo.repository.UserInfoRepository
@@ -28,7 +27,6 @@ data class MainState(
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val challengeRepository: ChallengeRepository,
-//    private val getUsageGoalsUseCase: GetUsageGoalsUseCase,
     private val getUsageStatsListUseCase: GetUsageStatsListUseCase,
     private val userInfoRepository: UserInfoRepository,
 ) : ViewModel() {
@@ -37,7 +35,6 @@ class MainViewModel @Inject constructor(
 
     init {
         getChallengeStatus()
-//        getUsageGoal()
         getStatsList()
         getUserInfo()
     }
@@ -53,12 +50,6 @@ class MainViewModel @Inject constructor(
             }
         }
     }
-
-//    private fun getUsageGoal() {
-//        viewModelScope.launch {
-//            setUsageGaols(getUsageGoalsUseCase())
-//        }
-//    }
 
     private fun getStatsList() {
         val (startTime, endTime) = getCurrentDayStartEndEpochMillis()

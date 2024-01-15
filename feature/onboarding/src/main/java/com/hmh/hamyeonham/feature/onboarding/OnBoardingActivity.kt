@@ -2,14 +2,13 @@ package com.hmh.hamyeonham.feature.onboarding
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import com.hmh.hamyeonham.common.view.initAndStartProgressBarAnimation
 import androidx.viewpager2.widget.ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
+import com.hmh.hamyeonham.common.view.initAndStartProgressBarAnimation
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingEffect
@@ -33,10 +32,13 @@ class OnBoardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initViews()
-        checkNextButtonEnable()
         setBackPressedCallback()
         collectOnboardingState()
 
+        updateEccessToken()
+    }
+
+    private fun updateEccessToken() {
         val accessToken = intent.getStringExtra(EXTRA_ACCESS_TOKEN)
         viewModel.updateState {
             copy(accessToken = accessToken.orEmpty())
@@ -85,26 +87,13 @@ class OnBoardingActivity : AppCompatActivity() {
                 }
 
                 currentItem == lastItem -> {
+                    // viewModel.signUp()
                     startSignupApi()
                 }
+
                 else -> Unit
             }
         }
-    }
-
-    private fun checkNextButtonEnable() {
-        viewModel.onboardEffect.flowWithLifecycle(lifecycle).onEach {
-            when (it) {
-                is OnBoardingEffect.ActiveNextButton -> {
-                    binding.btnOnboardingNext.isEnabled = it.isActive
-                    binding.btnOnboardingNext.isSelected = it.isActive
-                }
-
-                is OnBoardingEffect.SignUpSuccess -> startOnBoardingDoneSignUpActivity()
-                is OnBoardingEffect.SignUpFail -> Log.e("OnBoardingActivity", "signUpEvent: $it")
-                else -> Unit
-            }
-        }.launchIn(lifecycleScope)
     }
 
     private fun startSignupApi(): Job {
@@ -158,9 +147,7 @@ class OnBoardingActivity : AppCompatActivity() {
     private fun updateProgressBar(currentItem: Int, totalItems: Int) {
         val progress = (currentItem + 1).toFloat() / totalItems.toFloat()
         val progressBarWidth = (progress * 100).toInt()
-        Log.d("progressBarWidth", progressBarWidth.toString())
         binding.pbOnboarding.progress = progressBarWidth
-
         initAndStartProgressBarAnimation(binding.pbOnboarding, progressBarWidth)
     }
 

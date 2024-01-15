@@ -76,10 +76,12 @@ class OnBoardingViewModel @Inject constructor(
             }.onSuccess { result ->
                 val signUpUser = result.getOrNull()
                 signUpUser?.let {
-                    hmhNetworkPreference.accessToken = it.accessToken
-                    hmhNetworkPreference.refreshToken = it.refreshToken
-                    hmhNetworkPreference.userId = it.userId
-                    hmhNetworkPreference.autoLoginConfigured = true
+                    hmhNetworkPreference.run {
+                        accessToken = it.accessToken
+                        refreshToken = it.refreshToken
+                        userId = it.userId
+                        autoLoginConfigured = true
+                    }
                 }
                 viewModelScope.launch {
                     _onboardEffect.emit(OnBoardingEffect.SignUpSuccess)

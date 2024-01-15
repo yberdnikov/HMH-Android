@@ -1,8 +1,7 @@
-package com.hmh.hamyeonham.core.network.signup.di
+package com.hmh.hamyeonham.core.network.di
 
-import com.hmh.hamyeonham.common.qualifier.Secured
 import com.hmh.hamyeonham.common.qualifier.Unsecured
-import com.hmh.hamyeonham.core.network.service.SignUpService
+import com.hmh.hamyeonham.core.network.login.AuthService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,8 +12,8 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object SignUpModule {
+object AuthModule {
     @Provides
     @Singleton
-    fun provideSignUpApi(@Unsecured retrofit: Retrofit): SignUpService = retrofit.create()
+    fun provideLoginApi(@Unsecured retrofit: Retrofit): AuthService = retrofit.create()
 }

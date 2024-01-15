@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hmh.hamyeonham.core.network.auth.datastore.HMHNetworkPreference
-import com.hmh.hamyeonham.login.repository.LoginRepository
+import com.hmh.hamyeonham.login.repository.AuthRepository
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
@@ -29,7 +29,7 @@ data class LoginState(
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val loginRepository: LoginRepository,
+    private val authRepository: AuthRepository,
     private val hmhNetworkPreference: HMHNetworkPreference,
 ) : ViewModel() {
 
@@ -56,12 +56,12 @@ class LoginViewModel @Inject constructor(
                     loginWithKakaoAccount(context)
                 } else if (token != null) {
                     viewModelScope.launch {
-                        loginRepository.login(token.accessToken).onSuccess {
-                            _kakaoLoginEvent.emit(LoginEffect.LoginSuccess)
-                            hmhNetworkPreference.accessToken = token.accessToken
-                            hmhNetworkPreference.refreshToken = token.refreshToken
+                        authRepository.login(token.accessToken).onSuccess {
+                            hmhNetworkPreference.accessToken = it.accessToken
+                            hmhNetworkPreference.refreshToken = it.refreshToken
                             hmhNetworkPreference.userId = it.userId
                             hmhNetworkPreference.autoLoginConfigured = true
+                            _kakaoLoginEvent.emit(LoginEffect.LoginSuccess)
                         }.onFailure {
                             if (it is HttpException && it.code() == 403) {
                                 _kakaoLoginEvent.emit(LoginEffect.RequireSignUp(token.accessToken))
@@ -83,14 +83,14 @@ class LoginViewModel @Inject constructor(
                 // 닉네임 정보 얻기 실패 시
             } else if (token != null) {
                 viewModelScope.launch {
-                    loginRepository.login(token.accessToken).onSuccess {
-                        _kakaoLoginEvent.emit(LoginEffect.LoginSuccess)
+                    authRepository.login(token.accessToken).onSuccess {
                         hmhNetworkPreference.run {
-                            accessToken = token.accessToken
-                            refreshToken = token.refreshToken
+                            accessToken = it.accessToken
+                            refreshToken = it.refreshToken
                             userId = it.userId
                             autoLoginConfigured = true
                         }
+                        _kakaoLoginEvent.emit(LoginEffect.LoginSuccess)
                     }.onFailure {
                         // TODO : Network Error Handling 확장 함수
                         if (it is HttpException && it.code() == 403) {

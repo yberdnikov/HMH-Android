@@ -11,7 +11,9 @@ import com.hmh.hamyeonham.challenge.appadd.AppAddViewModel
 import com.hmh.hamyeonham.common.view.setupScreentimeGoalRange
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.challenge.databinding.FragmentSetGoalTimeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SetGoalTimeFragment : Fragment() {
     private val binding by viewBinding(FragmentSetGoalTimeBinding::bind)
     private val activityViewModel by activityViewModels<AppAddViewModel>()

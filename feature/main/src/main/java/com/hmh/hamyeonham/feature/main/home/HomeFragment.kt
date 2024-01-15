@@ -1,8 +1,6 @@
 package com.hmh.hamyeonham.feature.main.home
 
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,13 +35,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initStaticsRecyclerView()
         collectUsageStatsList()
-        setBlackholeLoop()
-    }
-
-    private fun setBlackholeLoop() {
-        binding.vvBlackhole.setOnCompletionListener {
-            binding.vvBlackhole.start()
-        }
     }
 
     private fun initStaticsRecyclerView() {
@@ -57,37 +48,6 @@ class HomeFragment : Fragment() {
         val usageStaticsAdapter = binding.rvStatics.adapter as? UsageStaticsAdapter
         activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach {
             usageStaticsAdapter?.submitList(it.usageStatsList)
-            if (it.usageStatsList.isNotEmpty()) {
-                Log.d("package name", requireActivity().packageName)
-                Log.d("uri", activityViewModel.getBlackholeUri())
-
-                bindBlackholeVideo(activityViewModel.getBlackholeUri())
-                bindBlackholeDescription(activityViewModel.getBlackholeDescription())
-            }
         }.launchIn(viewLifeCycleScope)
-    }
-
-    private fun bindBlackholeVideo(uri: String) {
-        val uri =
-            Uri.parse(uri)
-        binding.vvBlackhole.run {
-            setVideoURI(uri)
-            requestFocus()
-            start()
-        }
-    }
-
-    private fun bindBlackholeDescription(description: String) {
-        binding.tvHmhTitle.text = description
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding.vvBlackhole.resume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        binding.vvBlackhole.pause()
     }
 }

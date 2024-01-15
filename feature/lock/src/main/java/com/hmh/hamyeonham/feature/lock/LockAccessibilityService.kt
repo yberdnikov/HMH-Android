@@ -37,7 +37,9 @@ class LockAccessibilityService : AccessibilityService() {
         )
 
         ProcessLifecycleOwner.get().lifecycleScope.launch {
-            getUsageGoalsUseCase().firstOrNull { it.packageName == packageName }?.let { myGoal ->
+            getUsageGoalsUseCase().firstOrNull {
+                it.packageName == packageName
+            }?.let { myGoal ->
                 if (usageStats > myGoal.goalTime) {
                     val intent =
                         LockActivity.getIntent(this@LockAccessibilityService, packageName).apply {

@@ -58,7 +58,9 @@ class HomeFragment : Fragment() {
         val usageStaticsAdapter = binding.rvStatics.adapter as? UsageStaticsAdapter
         activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach {
             usageStaticsAdapter?.submitList(it.usageStatsList)
-            bindBlackhole(it.usageStatsList[0])
+            if (it.usageStatsList.isNotEmpty()) {
+                bindBlackhole(it.usageStatsList[0])
+            }
         }.launchIn(viewLifeCycleScope)
     }
 

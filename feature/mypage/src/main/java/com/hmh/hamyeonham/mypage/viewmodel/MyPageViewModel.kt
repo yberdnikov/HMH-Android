@@ -31,11 +31,12 @@ class MyPageViewModel @Inject constructor(
 
     fun handleLogout() {
         viewModelScope.launch {
-            authRepository.logout().onSuccess {
+            authRepository.logout(hmhPreferenceAccessToken.accessToken).onSuccess {
                 _userEffect.emit(UserEffect.logoutSuccess)
                 hmhPreferenceAccessToken.clear()
                 Log.d("hmhPreferenceAccessToken", hmhPreferenceAccessToken.accessToken)
             }.onFailure {
+                Log.d("FAIL : hmhPreferenceAccessToken", hmhPreferenceAccessToken.accessToken)
                 _userEffect.emit(UserEffect.logoutFail)
             }
         }

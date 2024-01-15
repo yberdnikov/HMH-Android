@@ -1,16 +1,18 @@
 package com.hmh.hamyeonham.usagestats.repository
 
+import com.hmh.hamyeonham.core.network.usagegoal.UsageGoalService
+import com.hmh.hamyeonham.login.mapper.toUsageGoalList
 import com.hmh.hamyeonham.usagestats.datasource.UsageGoalsRemoteDataSource
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
 import javax.inject.Inject
 
 class DefaultUsageGoalsRepository @Inject constructor(
-    private val usageGoalsRemoteDataSource: UsageGoalsRemoteDataSource
+    private val usageGoalService: UsageGoalService,
+    private val usageGoalsRemoteDataSource: UsageGoalsRemoteDataSource,
 ) : UsageGoalsRepository {
-    override fun getUsageGoals(): List<UsageGoal> {
-        return usageGoalsRemoteDataSource.getUsageGoals().map {
-            UsageGoal(it.packageName, it.goalTime)
-        }
+
+    override suspend fun getUsageGoals(): List<UsageGoal> {
+        return usageGoalService.getUsageGoal().data.toUsageGoalList()
     }
 
     override fun getUsageGoalTime(packageName: String): Long {

@@ -32,11 +32,13 @@ include(":data:onboarding")
 include(":data:userinfo")
 include(":data:login")
 include(":data:device")
+include(":data:challenge")
 
 include(":domain:userinfo")
 include(":domain:usagestats")
 include(":domain:challenge")
 include(":domain:login")
+include(":domain:onboarding")
 
 include(":core:common")
 include(":core:database")

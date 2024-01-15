@@ -1,13 +1,20 @@
 package com.hmh.hamyeonham.challenge.model
 
 data class ChallengeStatus(
-    val apps: List<App> = emptyList(),
-    val isSuccessList: List<Boolean?> = emptyList(),
+    val appGoals: List<AppGoal> = emptyList(),
+    val isSuccessList: List<Status> = emptyList(),
     val goalTime: Int = 0,
-    val period: Int = 0
+    val period: Int = 0,
 ) {
-    data class App(
+    data class AppGoal(
         val appCode: String,
-        val appGoalTime: Int
+        val appGoalTime: Int,
     )
+}
+
+enum class Status(val value: String) {
+    NONE("NONE"),
+    UNEARNED("UNEARNED"),
+    EARNED("EARNED"),
+    FAILURE("FAILURE"),
 }

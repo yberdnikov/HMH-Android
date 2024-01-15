@@ -5,6 +5,8 @@ import android.util.Log
 import com.hmh.hamyeonham.common.navigation.NavigationProvider
 import com.hmh.hamyeonham.core.network.auth.api.RefreshService
 import com.hmh.hamyeonham.core.network.auth.datastore.HMHNetworkPreference
+import com.jakewharton.processphoenix.ProcessPhoenix
+import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
@@ -19,7 +21,7 @@ class HMHAuthenticator @Inject constructor(
     private val dataStore: HMHNetworkPreference,
     private val api: RefreshService,
     @ApplicationContext private val context: Context,
-    private val navigationProvider: NavigationProvider
+    private val navigationProvider: NavigationProvider,
 ) : Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? {
         if (response.request.header("Authorization") == null) {
@@ -39,12 +41,11 @@ class HMHAuthenticator @Inject constructor(
             }.onFailure {
                 Log.e("Authenticator", it.toString())
                 runBlocking {
-                    //TODO 어떻게 처리할지 고민해보기
-//                    UserApiClient.instance.logout { error ->
-//                        Log.e("Authenticator", error.toString())
-//                        dataStore.clear()
-//                        ProcessPhoenix.triggerRebirth(context, navigationProvider.toOnboarding())
-//                    }
+                    dataStore.clear()
+                    UserApiClient.instance.logout { error ->
+                        Log.e("Authenticator", error.toString())
+                        ProcessPhoenix.triggerRebirth(context, navigationProvider.toLogin())
+                    }
                 }
             }.getOrThrow()
 

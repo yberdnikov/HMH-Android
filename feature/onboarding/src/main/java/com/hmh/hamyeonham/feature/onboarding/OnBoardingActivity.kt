@@ -8,16 +8,21 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.viewpager2.widget.ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingEffect
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class OnBoardingActivity : AppCompatActivity() {
+    companion object {
+        const val EXTRA_ACCESS_TOKEN = "extra_access_token"
+    }
 
     private val binding by viewBinding(ActivityOnBoardingBinding::inflate)
     private val viewModel by viewModels<OnBoardingViewModel>()
@@ -27,8 +32,13 @@ class OnBoardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initViews()
-        checkNextButtonEnable()
         setBackPressedCallback()
+        collectOnboardingState()
+
+        val accessToken = intent.getStringExtra(EXTRA_ACCESS_TOKEN)
+        viewModel.updateState {
+            copy(accessToken = accessToken.orEmpty())
+        }
     }
 
     private fun initViews() {
@@ -71,19 +81,32 @@ class OnBoardingActivity : AppCompatActivity() {
                     viewPager.currentItem = currentItem + 1
                     updateProgressBar(currentItem + 1, viewPager.adapter?.itemCount ?: 1)
                 }
-                currentItem == lastItem -> startOnBoardingDoneSignUpActivity()
+
+                currentItem == lastItem -> {
+                    startSignupApi()
+                }
+                else -> Unit
             }
         }
     }
 
-    private fun checkNextButtonEnable() {
-        viewModel.onboardEffect.flowWithLifecycle(lifecycle).onEach {
+    private fun startSignupApi(): Job {
+        viewModel.signUp()
+        return viewModel.onboardEffect.flowWithLifecycle(lifecycle).onEach {
             when (it) {
-                is OnBoardingEffect.ActiveNextButton -> {
-                    binding.btnOnboardingNext.isEnabled = it.isActive
-                    binding.btnOnboardingNext.isSelected = it.isActive
+                is OnBoardingEffect.SignUpSuccess -> {
+                    moveToOnBoardingDoneSignUpActivity()
+                }
+
+                is OnBoardingEffect.SignUpFail -> {
                 }
             }
+        }.launchIn(lifecycleScope)
+    }
+
+    private fun collectOnboardingState() {
+        viewModel.onBoardingState.flowWithLifecycle(lifecycle).onEach {
+            binding.btnOnboardingNext.isEnabled = it.isNextButtonActive
         }.launchIn(lifecycleScope)
     }
 
@@ -95,7 +118,7 @@ class OnBoardingActivity : AppCompatActivity() {
         }
     }
 
-    private fun startOnBoardingDoneSignUpActivity() {
+    private fun moveToOnBoardingDoneSignUpActivity() {
         val intent = Intent(this, OnBoardingDoneSingUpActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -110,6 +133,7 @@ class OnBoardingActivity : AppCompatActivity() {
         binding.vpOnboardingContainer.run {
             adapter = pagerAdapter
             isUserInputEnabled = false
+            offscreenPageLimit = OFFSCREEN_PAGE_LIMIT_DEFAULT
         }
         return pagerAdapter
     }

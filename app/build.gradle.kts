@@ -67,6 +67,8 @@ dependencies {
     implementation(projects.domain.usagestats)
     implementation(projects.domain.userinfo)
     implementation(projects.domain.login)
+    implementation(projects.domain.challenge)
+    implementation(projects.domain.onboarding)
 
     // Data
     implementation(projects.data.usagestats)
@@ -74,6 +76,7 @@ dependencies {
     implementation(projects.data.login)
     implementation(projects.data.challenge)
     implementation(projects.data.device)
+    implementation(projects.data.onboarding)
 
     // Core
     implementation(projects.core.common)

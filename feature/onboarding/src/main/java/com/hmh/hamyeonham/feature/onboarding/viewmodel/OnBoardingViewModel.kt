@@ -15,9 +15,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-sealed interface OnBoardingEffect {
-    data object SignUpSuccess : OnBoardingEffect
-    data object SignUpFail : OnBoardingEffect
+sealed interface SignUpEffect {
+    data object SignUpSuccess : SignUpEffect
+    data object SignUpFail : SignUpEffect
 }
 
 data class OnBoardingState(
@@ -38,7 +38,7 @@ class OnBoardingViewModel @Inject constructor(
     private val _onBoardingState = MutableStateFlow(OnBoardingState())
     val onBoardingState = _onBoardingState.asStateFlow()
 
-    private val _onboardEffect = MutableSharedFlow<OnBoardingEffect>()
+    private val _onboardEffect = MutableSharedFlow<SignUpEffect>()
     val onboardEffect = _onboardEffect.asSharedFlow()
 
     init {
@@ -82,11 +82,11 @@ class OnBoardingViewModel @Inject constructor(
                     hmhNetworkPreference.autoLoginConfigured = true
                 }
                 viewModelScope.launch {
-                    _onboardEffect.emit(OnBoardingEffect.SignUpSuccess)
+                    _onboardEffect.emit(SignUpEffect.SignUpSuccess)
                 }
             }.onFailure {
                 viewModelScope.launch {
-                    _onboardEffect.emit(OnBoardingEffect.SignUpFail)
+                    _onboardEffect.emit(SignUpEffect.SignUpFail)
                 }
             }
         }

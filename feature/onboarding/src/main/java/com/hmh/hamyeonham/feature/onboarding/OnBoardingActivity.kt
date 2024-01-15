@@ -10,8 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
-import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingEffect
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
+import com.hmh.hamyeonham.feature.onboarding.viewmodel.SignUpEffect
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -32,11 +32,25 @@ class OnBoardingActivity : AppCompatActivity() {
         initViews()
         setBackPressedCallback()
         collectOnboardingState()
+        collectSignUpEffect()
 
         val accessToken = intent.getStringExtra(EXTRA_ACCESS_TOKEN)
         viewModel.updateState {
             copy(accessToken = accessToken.orEmpty())
         }
+    }
+
+    private fun collectSignUpEffect() {
+        viewModel.onboardEffect.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is SignUpEffect.SignUpSuccess -> {
+                    moveToOnBoardingDoneSignUpActivity()
+                }
+
+                is SignUpEffect.SignUpFail -> {
+                }
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun initViews() {
@@ -82,15 +96,6 @@ class OnBoardingActivity : AppCompatActivity() {
 
                 currentItem == lastItem -> {
                     viewModel.signUp()
-                    viewModel.onboardEffect.flowWithLifecycle(lifecycle).onEach {
-                        when (it) {
-                            is OnBoardingEffect.SignUpSuccess -> {
-                                moveToOnBoardingDoneSignUpActivity()
-                            }
-                            is OnBoardingEffect.SignUpFail -> {
-                            }
-                        }
-                    }.launchIn(lifecycleScope)
                 }
 
                 else -> Unit

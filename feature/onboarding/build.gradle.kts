@@ -15,4 +15,5 @@ dependencies {
 
     implementation(projects.feature.main)
     implementation(projects.core.network)
+    implementation(projects.domain.challenge)
 }

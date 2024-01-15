@@ -21,6 +21,15 @@ sealed interface OnBoardingEffect {
     data object SignUpFail : OnBoardingEffect
 }
 
+sealed interface AppAddEffect {
+    data class AppAdd(val selectedApp: List<String>, val goalTime: Long) : AppAddEffect
+}
+
+data class AppAddState(
+    val selectedApp: List<String> = listOf(),
+    val goalTime: Long = 0
+)
+
 data class OnBoardingState(
     val onBoardingAnswer: OnboardingAnswer = OnboardingAnswer(),
     val pageInfo: List<OnboardingPageInfo> = emptyList(),
@@ -39,6 +48,11 @@ class OnBoardingViewModel @Inject constructor(
     private val _onboardEffect = MutableSharedFlow<OnBoardingEffect>()
     val onboardEffect = _onboardEffect.asSharedFlow()
 
+    private val _addState = MutableStateFlow(AppAddState())
+    val addState = _addState.asStateFlow()
+
+    private val _addEffect = MutableSharedFlow<AppAddEffect>()
+    val addEffect = _addEffect.asSharedFlow()
     init {
         _onBoardingState.value = onBoardingState.value.copy(
             pageInfo = initializeButtonInfoList(),
@@ -57,10 +71,16 @@ class OnBoardingViewModel @Inject constructor(
         _onBoardingState.value = onBoardingState.value.copy(onBoardingAnswer = newState)
     }
 
-    fun updateState(transform: OnBoardingState.() -> OnBoardingState) {
+    fun updateOnBoardingState(transform: OnBoardingState.() -> OnBoardingState) {
         val currentState = onBoardingState.value
         val newState = currentState.transform()
         _onBoardingState.value = newState
+    }
+
+    fun updateAppAddState(transform: AppAddState.() -> AppAddState) {
+        val currentState = addState.value
+        val newState = currentState.transform()
+        _addState.value = newState
     }
 
     fun setEffect(effect: OnBoardingEffect) {

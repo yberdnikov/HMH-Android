@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
+import com.hmh.hamyeonham.feature.onboarding.adapter.OnBoardingFragmentStateAdapter
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingEffect
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
@@ -34,7 +35,7 @@ class OnBoardingActivity : AppCompatActivity() {
         setBackPressedCallback()
 
         val accessToken = intent.getStringExtra(EXTRA_ACCESS_TOKEN)
-        viewModel.updateState {
+        viewModel.updateOnBoardingState {
             copy(accessToken = accessToken.orEmpty())
         }
     }

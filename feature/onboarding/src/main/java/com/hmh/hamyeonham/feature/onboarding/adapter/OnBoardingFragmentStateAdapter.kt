@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.feature.onboarding
+package com.hmh.hamyeonham.feature.onboarding.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

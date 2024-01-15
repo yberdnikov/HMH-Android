@@ -52,14 +52,6 @@ class UsageStaticsAdapter : ListAdapter<UsageStatusAndGoal, RecyclerView.ViewHol
         }
     }
 
-//    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
-//        if (holder.itemViewType == TOTAL_ITEM_TYPE) {
-//            val newHolder = holder as UsageStaticsTotalViewHolder
-//            newHolder.resume(currentList[holder.layoutPosition])
-//        }
-//        super.onViewAttachedToWindow(holder)
-//    }
-
     override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
         if (holder.itemViewType == TOTAL_ITEM_TYPE) {
             val newHolder = holder as UsageStaticsTotalViewHolder

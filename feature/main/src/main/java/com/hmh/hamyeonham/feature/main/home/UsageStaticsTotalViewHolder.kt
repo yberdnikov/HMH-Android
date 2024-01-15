@@ -71,10 +71,6 @@ class UsageStaticsTotalViewHolder(
         } + userStatusAndGoal.getBlackholeDescription()
     }
 
-//    fun resume(usageStatusAndGoal: UsageStatusAndGoal) {
-//        bindBlackhole(usageStatusAndGoal)
-//    }
-
     fun pause() {
     }
 }

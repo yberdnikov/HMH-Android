@@ -71,24 +71,22 @@ class OnBoardingViewModel @Inject constructor(
         viewModelScope.launch {
             val token = onBoardingState.value.accessToken
             val request = onBoardingState.value.onBoardingAnswer
-            runCatching {
-                authRepository.signUp(token, request.toSignUpRequest())
-            }.onSuccess { result ->
-                val signUpUser = result.getOrNull()
-                signUpUser?.let {
-                    hmhNetworkPreference.accessToken = it.accessToken
-                    hmhNetworkPreference.refreshToken = it.refreshToken
-                    hmhNetworkPreference.userId = it.userId
-                    hmhNetworkPreference.autoLoginConfigured = true
+            authRepository.signUp(token, request.toSignUpRequest())
+                .onSuccess { signUpUser ->
+                    signUpUser.let {
+                        hmhNetworkPreference.accessToken = it.accessToken
+                        hmhNetworkPreference.refreshToken = it.refreshToken
+                        hmhNetworkPreference.userId = it.userId
+                        hmhNetworkPreference.autoLoginConfigured = true
+                    }
+                    viewModelScope.launch {
+                        _onboardEffect.emit(SignUpEffect.SignUpSuccess)
+                    }
+                }.onFailure {
+                    viewModelScope.launch {
+                        _onboardEffect.emit(SignUpEffect.SignUpFail)
+                    }
                 }
-                viewModelScope.launch {
-                    _onboardEffect.emit(SignUpEffect.SignUpSuccess)
-                }
-            }.onFailure {
-                viewModelScope.launch {
-                    _onboardEffect.emit(SignUpEffect.SignUpFail)
-                }
-            }
         }
     }
 }

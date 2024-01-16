@@ -2,6 +2,7 @@ package com.hmh.hamyeonham.usagestats.di
 
 import android.app.usage.UsageStatsManager
 import android.content.Context
+import com.hmh.hamyeonham.core.network.usagegoal.UsageGoalService
 import com.hmh.hamyeonham.usagestats.datasource.UsageGoalsRemoteDataSource
 import com.hmh.hamyeonham.usagestats.datasource.UsageStatusDataSource
 import com.hmh.hamyeonham.usagestats.datasource.UsageStatusDataSourceImpl
@@ -29,8 +30,10 @@ object UsageStatsModule {
 
     @Provides
     @Singleton
-    fun provideUsageGoalsDataSource(): UsageGoalsRemoteDataSource {
-        return UsageGoalsRemoteDataSource()
+    fun provideUsageGoalsDataSource(
+        usageGoalService: UsageGoalService
+    ): UsageGoalsRemoteDataSource {
+        return UsageGoalsRemoteDataSource(usageGoalService)
     }
 
     @Module

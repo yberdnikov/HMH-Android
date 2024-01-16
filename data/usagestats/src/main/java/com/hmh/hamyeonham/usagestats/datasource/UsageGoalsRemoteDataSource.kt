@@ -1,29 +1,20 @@
 package com.hmh.hamyeonham.usagestats.datasource
 
+import com.hmh.hamyeonham.core.network.usagegoal.UsageGoalService
+import com.hmh.hamyeonham.usagestats.mapper.toUsageGoalList
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
 import com.hmh.hamyeonham.usagestats.model.UsageGoalModel
 import javax.inject.Inject
 
-class UsageGoalsRemoteDataSource @Inject constructor() {
-    var usageGoalList = listOf(
-        UsageGoalModel("total", 20000000),
-        UsageGoalModel("com.kakao.talk", 3000000),
-        UsageGoalModel("com.hmh.hamyeonham", 3000000),
-        UsageGoalModel("com.netflix.mediaclient", 3000000),
-        UsageGoalModel("com.google.android.gms", 500000),
-        UsageGoalModel("com.google.android.youtube", 3000000),
-        UsageGoalModel("com.android.chrome", 1000000),
-        UsageGoalModel("com.apple.android.music", 1000000),
-        UsageGoalModel("com.duolingo", 1000000),
-        UsageGoalModel("com.android.providers.calendar", 1000000),
-        UsageGoalModel("com.lge.sizechangable.weather.platform", 1000000),
-        UsageGoalModel("com.discord", 1000000),
-    )
+class UsageGoalsRemoteDataSource @Inject constructor(
+    private val usageGoalService: UsageGoalService,
+) {
 
-    fun getUsageGoals(): List<UsageGoalModel> {
-        return usageGoalList
+    suspend fun getUsageGoals(): Result<List<UsageGoal>> {
+        return runCatching { usageGoalService.getUsageGoal().data.toUsageGoalList() }
     }
 
     fun addUsageGoal(usageGoal: UsageGoal) {
+
     }
 }

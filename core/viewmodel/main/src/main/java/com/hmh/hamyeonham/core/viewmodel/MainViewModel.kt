@@ -98,8 +98,15 @@ class MainViewModel @Inject constructor(
     fun addUsageGoals(usageGoal: List<UsageGoal>) {
         // TODO 앱 추가 API
         updateState {
-            copy(usageGoals = usageGoals + usageGoal)
+            copy(usageGoals = deleteSamePackage(usageGoals, usageGoal))
         }
+    }
+
+    fun deleteSamePackage(
+        firstList: List<UsageGoal>,
+        secondList: List<UsageGoal>,
+    ): List<UsageGoal> {
+        return firstList.filter { firstUsageGoal -> firstUsageGoal.packageName !in secondList.map { secondUsageGoal -> secondUsageGoal.packageName } } + secondList
     }
 
     fun updateState(transform: suspend MainState.() -> MainState) {

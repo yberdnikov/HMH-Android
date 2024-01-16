@@ -3,6 +3,7 @@ package com.hmh.hamyeonham.challenge
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -91,7 +92,12 @@ class ChallengeFragment : Fragment() {
         val challengeGoalsAdapter = binding.rvAppUsageGoals.adapter as? ChallengeUsageGoalsAdapter
         activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach {
             challengeAdapter?.submitList(it.challengeStatus.isSuccessList)
-            challengeGoalsAdapter?.submitList(it.usageGoals.drop(0) + UsageGoal())
+            if(it.usageGoals.isNotEmpty())
+            challengeGoalsAdapter?.submitList(it.usageGoals.drop(1) + UsageGoal())
+            for(i in it.usageGoals.drop(1) + UsageGoal()) {
+                Log.d("usage goal", i.packageName)
+                Log.d("goal time", i.goalTime.toString())
+            }
         }.launchIn(viewLifeCycleScope)
     }
 

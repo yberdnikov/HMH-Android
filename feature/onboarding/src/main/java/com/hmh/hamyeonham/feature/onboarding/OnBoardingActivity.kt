@@ -86,15 +86,6 @@ class OnBoardingActivity : AppCompatActivity() {
                 currentItem == lastItem -> {
                     startSignupApi()
                 }
-                currentItem == 7 -> {
-                    binding.btnOnboardingNext.text = "앱 선택하기"
-                }
-                currentItem == 8 -> {
-                    binding.btnOnboardingNext.text = "선택 완료"
-                }
-                currentItem == 9 -> {
-                    binding.btnOnboardingNext.text = "완료"
-                }
                 else -> Unit
             }
         }

@@ -30,4 +30,7 @@
     <string name="already_accessibility_settings">이미 권한이 허용되어 있습니다</string>
     <string name="already_usage_stats_permission">이미 권한이 허용되어 있습니다</string>
     <string name="already_overlay_permission">이미 권한이 허용되어 있습니다</string>
+    <string name="all_done">완료</string>
+    <string name="all_select_done">선택 완료</string>
+    <string name="all_select_app">앱 선택하기</string>
 </resources>

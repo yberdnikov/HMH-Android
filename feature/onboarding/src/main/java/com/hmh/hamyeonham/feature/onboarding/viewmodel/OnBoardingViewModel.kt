@@ -1,5 +1,6 @@
 package com.hmh.hamyeonham.feature.onboarding.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hmh.hamyeonham.core.network.auth.datastore.HMHNetworkPreference
@@ -21,13 +22,8 @@ sealed interface OnBoardingEffect {
     data object SignUpFail : OnBoardingEffect
 }
 
-sealed interface AppAddEffect {
-    data class AppAdd(val selectedApp: List<String>, val goalTime: Long) : AppAddEffect
-}
-
 data class AppAddState(
     val selectedApp: List<String> = listOf(),
-    val goalTime: Long = 0
 )
 
 data class OnBoardingState(
@@ -48,15 +44,15 @@ class OnBoardingViewModel @Inject constructor(
     private val _onBoardingState = MutableStateFlow(OnBoardingState())
     val onBoardingState = _onBoardingState.asStateFlow()
 
-    // TODO : stateFlow -> sharedFlow
     private val _onboardEffect = MutableSharedFlow<OnBoardingEffect>()
     val onboardEffect = _onboardEffect.asSharedFlow()
 
     private val _addState = MutableStateFlow(AppAddState())
     val addState = _addState.asStateFlow()
 
-    private val _addEffect = MutableSharedFlow<AppAddEffect>()
+    private val _addEffect = MutableSharedFlow<AppAddState>()
     val addEffect = _addEffect.asSharedFlow()
+
     init {
         _onBoardingState.value = onBoardingState.value.copy(
             pageInfo = initializeButtonInfoList(),
@@ -66,6 +62,13 @@ class OnBoardingViewModel @Inject constructor(
     fun changeStateNextButton(isActive: Boolean) {
         viewModelScope.launch {
             _onboardEffect.emit(OnBoardingEffect.ActiveNextButton(isActive))
+        }
+    }
+
+    fun getAddAppEffect(selectedApp: List<String>) {
+        Log.d("OnBoardingViewModel", "getAddAppEffect: $selectedApp")
+        viewModelScope.launch {
+            _addEffect.emit(AppAddState(selectedApp = selectedApp))
         }
     }
 
@@ -82,9 +85,12 @@ class OnBoardingViewModel @Inject constructor(
     }
 
     fun updateAppAddState(transform: AppAddState.() -> AppAddState) {
+        Log.d("OnBoardingViewModel", "updateAppAddState: $transform")
         val currentState = addState.value
         val newState = currentState.transform()
         _addState.value = newState
+        Log.d("OnBoardingViewModel", "updateAppAddState: $newState")
+
     }
 
     private fun initializeButtonInfoList(): List<OnboardingPageInfo> {
@@ -99,6 +105,7 @@ class OnBoardingViewModel @Inject constructor(
         viewModelScope.launch {
             val token = onBoardingState.value.accessToken
             val request = onBoardingState.value.onBoardingAnswer
+            Log.d("OnBoardingViewModel", "signUp: $request")
             runCatching {
                 authRepository.signUp(token, request.toSignUpRequest())
             }.onSuccess { result ->

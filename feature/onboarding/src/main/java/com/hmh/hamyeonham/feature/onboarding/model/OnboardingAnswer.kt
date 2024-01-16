@@ -18,7 +18,8 @@ data class OnboardingAnswer(
 fun OnboardingAnswer.toSignUpRequest(): SignRequestDomain {
     return SignRequestDomain(
         challenge = SignRequestDomain.Challenge(
-            app = apps.map { app ->
+            app =
+            apps.map { app ->
                 SignRequestDomain.Challenge.App(
                     appCode = app.appCode,
                     goalTime = app.goalTime,

@@ -15,6 +15,7 @@ import com.hmh.hamyeonham.userinfo.repository.UserInfoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,48 +33,48 @@ class MainViewModel @Inject constructor(
     private val getUsageStatsListUseCase: GetUsageStatsListUseCase,
     private val userInfoRepository: UserInfoRepository,
 ) : ViewModel() {
+
     private val _mainState = MutableStateFlow(MainState())
     val mainState = _mainState.asStateFlow()
 
     init {
-        getChallengeStatus()
-        getUsageGoalAndStatList()
-        getUserInfo()
-    }
-
-    private fun getChallengeStatus() {
         viewModelScope.launch {
-            challengeRepository.getChallengeData().onSuccess {
-                setChallengeStatus(it)
-            }.onFailure {
-                Log.e("challenge status error", it.toString())
-            }
+            updateGoals()
+            getChallengeStatus()
+            getUsageGoalAndStatList()
+            getUserInfo()
         }
     }
 
-    private fun getUsageGoalAndStatList() {
-        viewModelScope.launch {
-            usageGoalsRepository.getUsageGoals().onSuccess {
-                setUsageGaols(it)
-                getStatsList(it)
-            }.onFailure {
-                Log.e("usage Goal status error", it.toString())
-            }
+    private suspend fun updateGoals() {
+        usageGoalsRepository.updateUsageGoal()
+    }
+
+    private suspend fun getChallengeStatus() {
+        challengeRepository.getChallengeData().onSuccess {
+            setChallengeStatus(it)
+        }.onFailure {
+            Log.e("challenge status error", it.toString())
         }
     }
 
-    private suspend fun getStatsList(usageGoals: List<UsageGoal>) {
+    private suspend fun getUsageGoalAndStatList() {
+        usageGoalsRepository.getUsageGoals().collectLatest {
+            setUsageGaols(it)
+            getStatsList()
+        }
+    }
+
+    private suspend fun getStatsList() {
         val (startTime, endTime) = getCurrentDayStartEndEpochMillis()
         setUsageStatsList(getUsageStatsListUseCase(startTime, endTime))
     }
 
-    private fun getUserInfo() {
-        viewModelScope.launch {
-            userInfoRepository.getUserInfo().onSuccess {
-                setUserInfo(it)
-            }.onFailure {
-                Log.e("userInfo error", it.toString())
-            }
+    private suspend fun getUserInfo() {
+        userInfoRepository.getUserInfo().onSuccess {
+            setUserInfo(it)
+        }.onFailure {
+            Log.e("userInfo error", it.toString())
         }
     }
 

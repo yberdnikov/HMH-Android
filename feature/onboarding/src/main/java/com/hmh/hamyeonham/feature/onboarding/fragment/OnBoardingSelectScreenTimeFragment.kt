@@ -40,7 +40,7 @@ class OnBoardingSelectScreenTimeFragment : Fragment() {
                 updateUserResponses {
                     copy(goalTime = newTime)
                 }
-                updateState {
+                updateOnBoardingState {
                     copy(isNextButtonActive = true)
                 }
             }
@@ -49,7 +49,7 @@ class OnBoardingSelectScreenTimeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        activityViewModel.updateState {
+        activityViewModel.updateOnBoardingState {
             copy(isNextButtonActive = true)
         }
     }

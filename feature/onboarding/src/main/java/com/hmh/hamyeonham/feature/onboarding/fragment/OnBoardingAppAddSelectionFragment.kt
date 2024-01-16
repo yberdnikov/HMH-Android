@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.feature.onboarding.viewmodel
+package com.hmh.hamyeonham.feature.onboarding.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,14 +9,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hmh.hamyeonham.common.view.viewBinding
-import com.hmh.hamyeonham.feature.challenge.databinding.FrargmentAppSelectionBinding
 import com.hmh.hamyeonham.feature.onboarding.adapter.OnBoardingAppSelectionAdapter
 import com.hmh.hamyeonham.feature.onboarding.adapter.OnBoardingAppSelectionViewModel
+import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingAppAddSelectionBinding
+import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OnBoardingAppSelectionFragment : Fragment() {
-    private val binding by viewBinding(FrargmentAppSelectionBinding::bind)
+class OnBoardingAppAddSelectionFragment : Fragment() {
+    private val binding by viewBinding(FragmentOnBoardingAppAddSelectionBinding::bind)
     private val viewModel by viewModels<OnBoardingAppSelectionViewModel>()
     private val activityViewModel by activityViewModels<OnBoardingViewModel>()
 
@@ -25,7 +26,7 @@ class OnBoardingAppSelectionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        return FrargmentAppSelectionBinding.inflate(inflater, container, false).root
+        return FragmentOnBoardingAppAddSelectionBinding.inflate(inflater, container, false).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

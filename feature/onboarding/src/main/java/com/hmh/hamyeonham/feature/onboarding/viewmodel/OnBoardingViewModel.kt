@@ -118,4 +118,5 @@ class OnBoardingViewModel @Inject constructor(
                 }
             }
         }
+    }
 }

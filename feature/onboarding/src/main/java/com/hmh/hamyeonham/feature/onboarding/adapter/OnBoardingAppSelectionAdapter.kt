@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.hmh.hamyeonham.common.view.ItemDiffCallback
-import com.hmh.hamyeonham.feature.challenge.databinding.ItemAppBinding
+import com.hmh.hamyeonham.feature.onboarding.databinding.ItemAddAppBinding
 
 class OnBoardingAppSelectionAdapter(
     private val onAppCheckboxClicked: (String) -> Unit,
@@ -23,7 +23,7 @@ class OnBoardingAppSelectionAdapter(
         viewType: Int,
     ): OnBoardingAppSelectionViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemAppBinding.inflate(inflater, parent, false)
+        val binding = ItemAddAppBinding.inflate(inflater, parent, false)
         return OnBoardingAppSelectionViewHolder(
             binding,
             onAppCheckboxClicked = onAppCheckboxClicked,

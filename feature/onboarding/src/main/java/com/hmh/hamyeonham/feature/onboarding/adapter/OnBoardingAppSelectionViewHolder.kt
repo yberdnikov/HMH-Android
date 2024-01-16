@@ -4,10 +4,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.hmh.hamyeonham.common.context.getAppIconFromPackageName
 import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
-import com.hmh.hamyeonham.feature.challenge.databinding.ItemAppBinding
+import com.hmh.hamyeonham.feature.onboarding.databinding.ItemAddAppBinding
 
 class OnBoardingAppSelectionViewHolder(
-    private val binding: ItemAppBinding,
+    private val binding: ItemAddAppBinding,
     private val onAppCheckboxClicked: (String) -> Unit,
     private val onAppCheckboxUnClicked: (String) -> Unit
 ) : ViewHolder(binding.root) {

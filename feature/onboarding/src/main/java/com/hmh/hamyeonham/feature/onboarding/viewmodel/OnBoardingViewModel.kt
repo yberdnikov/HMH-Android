@@ -33,6 +33,7 @@ data class AppAddState(
 data class OnBoardingState(
     val onBoardingAnswer: OnboardingAnswer = OnboardingAnswer(),
     val pageInfo: List<OnboardingPageInfo> = emptyList(),
+    val isNextButtonActive: Boolean = false,
     val accessToken: String = "",
 )
 
@@ -41,6 +42,9 @@ class OnBoardingViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val hmhNetworkPreference: HMHNetworkPreference,
 ) : ViewModel() {
+    private val _userResponses = MutableStateFlow(OnboardingAnswer())
+    val userResponses = _userResponses.asStateFlow()
+
     private val _onBoardingState = MutableStateFlow(OnBoardingState())
     val onBoardingState = _onBoardingState.asStateFlow()
 
@@ -66,9 +70,9 @@ class OnBoardingViewModel @Inject constructor(
     }
 
     fun updateUserResponses(transform: OnboardingAnswer.() -> OnboardingAnswer) {
-        val currentState = onBoardingState.value.onBoardingAnswer
+        val currentState = userResponses.value
         val newState = currentState.transform()
-        _onBoardingState.value = onBoardingState.value.copy(onBoardingAnswer = newState)
+        _userResponses.value = newState
     }
 
     fun updateOnBoardingState(transform: OnBoardingState.() -> OnBoardingState) {
@@ -83,10 +87,12 @@ class OnBoardingViewModel @Inject constructor(
         _addState.value = newState
     }
 
-    fun setEffect(effect: OnBoardingEffect) {
-        viewModelScope.launch {
-            _onboardEffect.emit(effect)
+    private fun initializeButtonInfoList(): List<OnboardingPageInfo> {
+        val buttonInfoList = mutableListOf<OnboardingPageInfo>()
+        for (index in 0..3) {
+            buttonInfoList.add(OnboardingPageInfo(index))
         }
+        return buttonInfoList
     }
 
     fun signUp() {
@@ -103,18 +109,13 @@ class OnBoardingViewModel @Inject constructor(
                     hmhNetworkPreference.userId = it.userId
                     hmhNetworkPreference.autoLoginConfigured = true
                 }
-                setEffect(OnBoardingEffect.SignUpSuccess)
+                viewModelScope.launch {
+                    _onboardEffect.emit(OnBoardingEffect.SignUpSuccess)
+                }
             }.onFailure {
-                setEffect(OnBoardingEffect.SignUpFail)
+                viewModelScope.launch {
+                    _onboardEffect.emit(OnBoardingEffect.SignUpFail)
+                }
             }
         }
-    }
-
-    private fun initializeButtonInfoList(): List<OnboardingPageInfo> {
-        val buttonInfoList = mutableListOf<OnboardingPageInfo>()
-        for (index in 0..3) {
-            buttonInfoList.add(OnboardingPageInfo(index))
-        }
-        return buttonInfoList
-    }
 }

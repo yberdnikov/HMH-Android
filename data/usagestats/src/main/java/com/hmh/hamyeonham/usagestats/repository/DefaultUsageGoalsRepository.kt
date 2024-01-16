@@ -1,23 +1,35 @@
 package com.hmh.hamyeonham.usagestats.repository
 
-import com.hmh.hamyeonham.core.network.usagegoal.UsageGoalService
-import com.hmh.hamyeonham.login.mapper.toUsageGoalList
+import com.hmh.hamyeonham.core.database.dao.UsageGoalsDao
 import com.hmh.hamyeonham.usagestats.datasource.UsageGoalsRemoteDataSource
+import com.hmh.hamyeonham.usagestats.mapper.toUsageGoal
+import com.hmh.hamyeonham.usagestats.mapper.toUsageGoalEntityList
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class DefaultUsageGoalsRepository @Inject constructor(
-    private val usageGoalService: UsageGoalService,
     private val usageGoalsRemoteDataSource: UsageGoalsRemoteDataSource,
+    private val usageGoalsDao: UsageGoalsDao
 ) : UsageGoalsRepository {
 
-    override suspend fun getUsageGoals(): Result<List<UsageGoal>> {
-        return runCatching { usageGoalService.getUsageGoal().data.toUsageGoalList() }
+    override suspend fun updateUsageGoal() {
+        usageGoalsRemoteDataSource.getUsageGoals().onSuccess {
+            usageGoalsDao.insertUsageGoalsList(it.toUsageGoalEntityList())
+        }.onFailure {
+            usageGoalsDao.deleteAll()
+        }
+    }
+
+    override fun getUsageGoals(): Flow<List<UsageGoal>> {
+        return usageGoalsDao.getUsageGoal().map { usageGoals ->
+            usageGoals.map { it.toUsageGoal() }
+        }
     }
 
     override fun getUsageGoalTimeFromMockData(packageName: String): Long {
-        return usageGoalsRemoteDataSource.getUsageGoals()
-            .firstOrNull { it.packageName == packageName }?.goalTime ?: 0
+        return usageGoalsDao.getUsageGoal(packageName).goalTime
     }
 
     override fun addUsageGoal(usageGoal: UsageGoal) {

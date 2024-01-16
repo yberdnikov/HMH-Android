@@ -58,7 +58,6 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
             copy(
                 apps = listOf(
                     OnboardingAnswer.App(
-                        appCode = "",
                         goalTime = useTotalTime,
                     ),
                 ),

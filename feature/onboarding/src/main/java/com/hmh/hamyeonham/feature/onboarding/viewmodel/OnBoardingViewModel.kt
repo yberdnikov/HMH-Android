@@ -83,6 +83,16 @@ class OnBoardingViewModel @Inject constructor(
         val newState = currentState.transform()
         _addState.value = newState
         Log.d("OnBoardingViewModel", "updateAppAddState: $newState")
+        val selectedApps = addState.value.selectedApp
+
+        val challengeApps = selectedApps.map { appCode ->
+            OnboardingAnswer.App(appCode = appCode, goalTime = 0)
+        }
+
+        updateState {
+            copy(onBoardingAnswer = onBoardingAnswer.copy(apps = challengeApps))
+        }
+        Log.d("OnBoardingViewModel", "updateAppAddState: ${onBoardingState.value.onBoardingAnswer}")
     }
 
     private fun initializeButtonInfoList(): List<OnboardingPageInfo> {
@@ -97,6 +107,7 @@ class OnBoardingViewModel @Inject constructor(
         viewModelScope.launch {
             val token = onBoardingState.value.accessToken
             val request = onBoardingState.value.onBoardingAnswer
+            Log.d("OnBoardingViewModel", "signUp: $request")
             authRepository.signUp(token, request.toSignUpRequest())
                 .onSuccess { signUpUser ->
                     signUpUser.let {

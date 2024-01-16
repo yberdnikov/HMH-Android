@@ -9,6 +9,7 @@ import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.usagestats.usecase.GetUsageGoalsUseCase
 import com.hmh.hamyeonham.usagestats.usecase.GetUsageStatFromPackageUseCase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,16 +38,16 @@ class LockAccessibilityService : AccessibilityService() {
         )
 
         ProcessLifecycleOwner.get().lifecycleScope.launch {
-            getUsageGoalsUseCase().onSuccess {
-                val myGoal = it.find { goal -> goal.packageName == packageName } ?: return@onSuccess
-                if (usageStats > myGoal.goalTime) {
-                    val intent =
-                        LockActivity.getIntent(this@LockAccessibilityService, packageName).apply {
-                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        }
-                    startActivity(intent)
-                }
+            val usageGoals = getUsageGoalsUseCase().first()
+            val myGoal = usageGoals.find { it.packageName == packageName } ?: return@launch
+            if (usageStats > myGoal.goalTime) {
+                val intent =
+                    LockActivity.getIntent(this@LockAccessibilityService, packageName).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }
+                startActivity(intent)
             }
+
         }
     }
 

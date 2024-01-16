@@ -34,13 +34,12 @@ class OnBoardingSelectScreenTimeFragment : Fragment() {
         binding.npOnboardingScreentimeGoal.descendantFocusability =
             NumberPicker.FOCUS_BLOCK_DESCENDANTS
 
-
         binding.npOnboardingScreentimeGoal.setOnValueChangedListener { _, _, newTime ->
             activityViewModel.run {
                 updateUserResponses {
                     copy(goalTime = newTime)
                 }
-                updateOnBoardingState {
+                updateState {
                     copy(isNextButtonActive = true)
                 }
             }
@@ -49,7 +48,7 @@ class OnBoardingSelectScreenTimeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        activityViewModel.updateOnBoardingState {
+        activityViewModel.updateState {
             copy(isNextButtonActive = true)
         }
     }

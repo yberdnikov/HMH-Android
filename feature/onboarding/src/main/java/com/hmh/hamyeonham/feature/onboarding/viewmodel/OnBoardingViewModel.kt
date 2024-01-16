@@ -58,12 +58,6 @@ class OnBoardingViewModel @Inject constructor(
         )
     }
 
-    fun changeStateNextButton(isActive: Boolean) {
-        viewModelScope.launch {
-            _onboardEffect.emit(OnBoardingEffect.ActiveNextButton(isActive))
-        }
-    }
-
     fun getAddAppEffect(selectedApp: List<String>) {
         Log.d("OnBoardingViewModel", "getAddAppEffect: $selectedApp")
         viewModelScope.launch {
@@ -89,7 +83,6 @@ class OnBoardingViewModel @Inject constructor(
         val newState = currentState.transform()
         _addState.value = newState
         Log.d("OnBoardingViewModel", "updateAppAddState: $newState")
-
     }
 
     private fun initializeButtonInfoList(): List<OnboardingPageInfo> {

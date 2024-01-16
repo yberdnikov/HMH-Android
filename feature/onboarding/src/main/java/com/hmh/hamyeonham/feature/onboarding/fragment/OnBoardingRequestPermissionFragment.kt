@@ -68,7 +68,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        activityViewModel.updateOnBoardingState {
+        activityViewModel.updateState {
             copy(isNextButtonActive = allPermissionIsGranted())
         }
     }

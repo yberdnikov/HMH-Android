@@ -13,8 +13,8 @@ import com.hmh.hamyeonham.common.fragment.colorOf
 import com.hmh.hamyeonham.common.fragment.drawableOf
 import com.hmh.hamyeonham.common.primitive.extractDigits
 import com.hmh.hamyeonham.common.view.viewBinding
-import com.hmh.hamyeonham.feature.onboarding.adapter.OnBoardingFragmentType
 import com.hmh.hamyeonham.feature.onboarding.R
+import com.hmh.hamyeonham.feature.onboarding.adapter.OnBoardingFragmentType
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectDataBinding
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingSelectDataViewModel
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
@@ -60,7 +60,7 @@ class OnBoardingSelectDataFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        activityViewModel.updateOnBoardingState {
+        activityViewModel.updateState {
             copy(isNextButtonActive = selectedButtons.isNotEmpty())
         }
     }
@@ -136,7 +136,7 @@ class OnBoardingSelectDataFragment : Fragment() {
             selectedButtons.clear()
             if (selectedButton.isSelected) selectedButtons.add(selectedButton)
         }
-        activityViewModel.updateOnBoardingState {
+        activityViewModel.updateState {
             copy(isNextButtonActive = selectedButtons.isNotEmpty())
         }
     }

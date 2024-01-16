@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.feature.onboarding.adapter
+package com.hmh.hamyeonham.feature.onboarding.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.hmh.hamyeonham.challenge.repository.DeviceRepository

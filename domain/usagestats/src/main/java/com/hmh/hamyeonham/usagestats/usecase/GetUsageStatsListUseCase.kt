@@ -4,6 +4,7 @@ import com.hmh.hamyeonham.usagestats.model.UsageGoal
 import com.hmh.hamyeonham.usagestats.model.UsageStatusAndGoal
 import com.hmh.hamyeonham.usagestats.repository.UsageGoalsRepository
 import com.hmh.hamyeonham.usagestats.repository.UsageStatsRepository
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 class GetUsageStatsListUseCase @Inject constructor(
@@ -19,7 +20,7 @@ class GetUsageStatsListUseCase @Inject constructor(
         startTime: Long,
         endTime: Long,
     ): List<UsageStatusAndGoal> {
-        usageGoalsRepository.getUsageGoals().getOrNull()?.let { usageGoals ->
+        usageGoalsRepository.getUsageGoals().first().let { usageGoals ->
             val usageForSelectedApps =
                 getUsageStatsAndGoalsForSelectedPackages(
                     startTime,
@@ -34,7 +35,7 @@ class GetUsageStatsListUseCase @Inject constructor(
                     getUsageGoalForPackage(usageGoals, TOTAL),
                 )
             return listOf(totalUsageStatusAndGoal) + usageForSelectedApps
-        } ?: return emptyList()
+        }
     }
 
     private fun getUsageGoalForPackage(

@@ -39,7 +39,7 @@ class ChallengeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         return FragmentChallengeBinding.inflate(inflater, container, false).root
     }
@@ -91,7 +91,7 @@ class ChallengeFragment : Fragment() {
         val challengeGoalsAdapter = binding.rvAppUsageGoals.adapter as? ChallengeUsageGoalsAdapter
         activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach {
             challengeAdapter?.submitList(it.challengeStatus.isSuccessList)
-            challengeGoalsAdapter?.submitList(it.usageGoals)
+            challengeGoalsAdapter?.submitList(it.usageGoals.drop(0) + UsageGoal())
         }.launchIn(viewLifeCycleScope)
     }
 
@@ -111,7 +111,7 @@ class ChallengeFragment : Fragment() {
                     val usageGoals = apps?.map { packageName ->
                         UsageGoal(
                             packageName = packageName,
-                            goalTime = goalTime ?: 0
+                            goalTime = goalTime ?: 0,
                         )
                     }.orEmpty()
                     activityViewModel.addUsageGoals(usageGoals)
@@ -134,7 +134,7 @@ class ChallengeFragment : Fragment() {
 
                         else -> Unit
                     }
-                }
+                },
             )
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(VerticalSpaceItemDecoration(9.dp))

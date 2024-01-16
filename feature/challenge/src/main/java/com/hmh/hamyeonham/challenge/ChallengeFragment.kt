@@ -92,11 +92,8 @@ class ChallengeFragment : Fragment() {
         val challengeGoalsAdapter = binding.rvAppUsageGoals.adapter as? ChallengeUsageGoalsAdapter
         activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach {
             challengeAdapter?.submitList(it.challengeStatus.isSuccessList)
-            if(it.usageGoals.isNotEmpty())
-            challengeGoalsAdapter?.submitList(it.usageGoals.drop(1) + UsageGoal())
-            for(i in it.usageGoals.drop(1) + UsageGoal()) {
-                Log.d("usage goal", i.packageName)
-                Log.d("goal time", i.goalTime.toString())
+            if (it.usageGoals.isNotEmpty()) {
+                challengeGoalsAdapter?.submitList(it.usageGoals.drop(1) + UsageGoal())
             }
         }.launchIn(viewLifeCycleScope)
     }

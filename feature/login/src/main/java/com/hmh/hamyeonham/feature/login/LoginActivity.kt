@@ -48,7 +48,6 @@ class LoginActivity : AppCompatActivity() {
         viewModel.kakaoLoginEvent.flowWithLifecycle(lifecycle).onEach { state ->
             when (state) {
                 is LoginEffect.LoginSuccess -> moveToMainActivity()
-
                 is LoginEffect.LoginFail -> toast(getString(R.string.fail_kakao_login))
                 is LoginEffect.RequireSignUp -> moveToOnBoardingActivity(state.token)
                 else -> Unit

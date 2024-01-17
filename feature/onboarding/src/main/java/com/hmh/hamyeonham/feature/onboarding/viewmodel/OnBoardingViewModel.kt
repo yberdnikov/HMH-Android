@@ -72,12 +72,12 @@ class OnBoardingViewModel @Inject constructor(
         val newState = currentState.transform()
         _addState.value = newState
 
-        val challengeApps = newState.selectedApp.map { appCode ->
-            OnboardingAnswer.App(appCode = appCode)
-        }
-
-        updateState {
-            copy(onBoardingAnswer = onBoardingAnswer.copy(apps = challengeApps))
+        updateUserResponses {
+            copy(
+                apps = newState.selectedApp.map { appCode ->
+                    OnboardingAnswer.App(appCode = appCode)
+                },
+            )
         }
         Log.d("OnBoardingViewModel", "updateAppAddState: ${onBoardingState.value.onBoardingAnswer}")
     }

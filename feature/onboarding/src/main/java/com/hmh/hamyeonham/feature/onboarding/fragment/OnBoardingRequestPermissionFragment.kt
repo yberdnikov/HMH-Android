@@ -106,9 +106,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
 
     private fun requestOverlayPermission() {
         val packageUri = Uri.parse("package:" + requireContext().packageName)
-        val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, packageUri)
-        startActivity(intent)
-        overlayPermissionLauncher.launch(intent)
+        overlayPermissionLauncher.launch(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, packageUri))
     }
 
     private fun requestUsageAccessPermission() {
@@ -118,9 +116,7 @@ class OnBoardingRequestPermissionFragment : Fragment() {
             startActivity(intent)
             usageStatsPermissionLauncher.launch(intent)
         } catch (e: Exception) {
-            val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
-            startActivity(intent)
-            usageStatsPermissionLauncher.launch(intent)
+            usageStatsPermissionLauncher.launch(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
         }
     }
 

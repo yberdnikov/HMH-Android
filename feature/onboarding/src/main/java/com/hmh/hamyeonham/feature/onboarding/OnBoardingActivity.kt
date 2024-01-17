@@ -3,6 +3,7 @@ package com.hmh.hamyeonham.feature.onboarding
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -38,6 +39,7 @@ class OnBoardingActivity : AppCompatActivity() {
         collectSignUpEffect()
         changeOnBoardingButtonTextState()
         updateAccessToken()
+        changeProgressbarVisibleState()
     }
 
     private fun updateAccessToken() {
@@ -118,6 +120,15 @@ class OnBoardingActivity : AppCompatActivity() {
     private fun changeOnBoardingButtonTextState() {
         viewModel.onBoardingState.flowWithLifecycle(lifecycle).onEach {
             binding.btnOnboardingNext.text = it.buttonText
+        }.launchIn(lifecycleScope)
+    }
+    private fun changeProgressbarVisibleState() {
+        viewModel.onBoardingState.flowWithLifecycle(lifecycle).onEach {
+            if(it.progressbarVisible) {
+                binding.pbOnboarding.visibility = View.VISIBLE
+            } else {
+                binding.pbOnboarding.visibility = View.GONE
+            }
         }.launchIn(lifecycleScope)
     }
 

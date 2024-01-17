@@ -38,7 +38,6 @@ class OnBoardingAppAddSelectionFragment : Fragment() {
 
     private fun initViews() {
         initAppSelectionRecyclerAdapter()
-        activityViewModel.sendEvent(OnboardEvent.changeActivityButtonText(getString(R.string.all_select_done)))
     }
 
     private fun initAppSelectionRecyclerAdapter() {
@@ -69,5 +68,6 @@ class OnBoardingAppAddSelectionFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         activityViewModel.sendEvent(OnboardEvent.changeActivityButtonText(getString(R.string.all_select_done)))
+        activityViewModel.sendEvent(OnboardEvent.visibleProgressbar(false))
     }
 }

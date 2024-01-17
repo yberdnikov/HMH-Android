@@ -17,12 +17,11 @@ class AppSelectionViewHolder(
             tvAppname.text = context.getAppNameFromPackageName(packageName)
             ivAppicon.setImageDrawable(context.getAppIconFromPackageName(packageName))
         }
-        setOnClickListener(packageName)
-
+        initAppSelectionListener(packageName)
         binding.cbApp.isClickable = false
     }
 
-    private fun setOnClickListener(packageName: String) {
+    private fun initAppSelectionListener(packageName: String) {
         binding.root.setOnClickListener {
             if (adapterPosition != RecyclerView.NO_POSITION) {
                 if (binding.cbApp.isChecked) {

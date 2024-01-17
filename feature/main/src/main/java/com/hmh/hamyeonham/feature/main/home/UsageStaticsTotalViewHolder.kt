@@ -72,5 +72,6 @@ class UsageStaticsTotalViewHolder(
     }
 
     fun pause() {
+        binding.vvBlackhole.pause()
     }
 }

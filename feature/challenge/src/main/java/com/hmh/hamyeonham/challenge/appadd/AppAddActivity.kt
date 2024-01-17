@@ -64,7 +64,6 @@ class AppAddActivity : AppCompatActivity() {
         }
     }
 
-
     private fun initViewPager() {
         binding.vpAppAdd.run {
             adapter = AppAddViewPagerAdapter(this@AppAddActivity)

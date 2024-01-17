@@ -33,7 +33,7 @@ import kotlinx.coroutines.flow.onEach
 class ChallengeFragment : Fragment() {
     private val binding by viewBinding(FragmentChallengeBinding::bind)
     private val activityViewModel by activityViewModels<MainViewModel>()
-    private val viewModel by viewModels<ChallengeViewModel>()
+    private val challengeViewModel by viewModels<ChallengeViewModel>()
     private lateinit var appSelectionResultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
@@ -53,7 +53,7 @@ class ChallengeFragment : Fragment() {
     }
 
     private fun collectChallengeState() {
-        viewModel.challengeState.flowWithLifecycle(viewLifeCycle).onEach {
+        challengeViewModel.challengeState.flowWithLifecycle(viewLifeCycle).onEach {
             when (it.modifierState) {
                 ModifierState.CANCEL -> binding.tvModifierButton.text = "취소"
                 ModifierState.DELETE -> binding.tvModifierButton.text = "삭제"
@@ -70,15 +70,15 @@ class ChallengeFragment : Fragment() {
 
     private fun initModifierButton() {
         binding.tvModifierButton.setOnClickListener {
-            when (viewModel.challengeState.value.modifierState) {
+            when (challengeViewModel.challengeState.value.modifierState) {
                 ModifierState.CANCEL -> {
-                    viewModel.updateState {
+                    challengeViewModel.updateState {
                         copy(modifierState = ModifierState.DELETE)
                     }
                 }
 
                 ModifierState.DELETE -> {
-                    viewModel.updateState {
+                    challengeViewModel.updateState {
                         copy(modifierState = ModifierState.CANCEL)
                     }
                 }
@@ -127,7 +127,7 @@ class ChallengeFragment : Fragment() {
                     appSelectionResultLauncher.launch(intent)
                 },
                 onAppItemClicked = {
-                    when (viewModel.challengeState.value.modifierState) {
+                    when (challengeViewModel.challengeState.value.modifierState) {
                         ModifierState.DELETE -> {
                             // TODO 앱 삭제 다이얼로그 추가 및 삭제 API 호출
                         }

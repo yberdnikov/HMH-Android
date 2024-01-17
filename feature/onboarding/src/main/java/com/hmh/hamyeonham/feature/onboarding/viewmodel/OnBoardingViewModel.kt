@@ -46,9 +46,6 @@ class OnBoardingViewModel @Inject constructor(
     private val _onboardEffect = MutableSharedFlow<SignUpEffect>()
     val onboardEffect = _onboardEffect.asSharedFlow()
 
-    private val _addState = MutableStateFlow(AppAddState())
-    val addState = _addState.asStateFlow()
-
     init {
         _onBoardingState.value = onBoardingState.value.copy(
             pageInfo = initializeButtonInfoList(),
@@ -65,21 +62,6 @@ class OnBoardingViewModel @Inject constructor(
         val currentState = onBoardingState.value
         val newState = currentState.transform()
         _onBoardingState.value = newState
-    }
-
-    fun updateAppAddState(transform: AppAddState.() -> AppAddState) {
-        val currentState = addState.value
-        val newState = currentState.transform()
-        _addState.value = newState
-
-        updateUserResponses {
-            copy(
-                apps = newState.selectedApp.map { appCode ->
-                    OnboardingAnswer.App(appCode = appCode)
-                },
-            )
-        }
-        Log.d("OnBoardingViewModel", "updateAppAddState: ${onBoardingState.value.onBoardingAnswer}")
     }
 
     private fun initializeButtonInfoList(): List<OnboardingPageInfo> {

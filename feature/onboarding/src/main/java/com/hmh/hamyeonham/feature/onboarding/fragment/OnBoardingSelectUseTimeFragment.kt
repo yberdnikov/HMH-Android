@@ -11,13 +11,12 @@ import com.hmh.hamyeonham.common.time.timeToMs
 import com.hmh.hamyeonham.common.view.setupScreentimeGoalRange
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectUseTimeBinding
-import com.hmh.hamyeonham.feature.onboarding.model.OnboardingAnswer
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 
 class OnBoardingSelectUseTimeFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingSelectUseTimeBinding::bind)
     private val activityViewModel by activityViewModels<OnBoardingViewModel>()
-    private var useTotalTime: Long = 0L
+    private var useSelectTime: Long = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,11 +34,11 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
 
     private fun handleNumberPickerValue() {
         binding.npOnboardingUseTimeGoalHour.setOnValueChangedListener { _, _, newTime ->
-            useTotalTime = (newTime * 60 + binding.npOnboardingUseTimeGoalMinute.value).timeToMs()
+            useSelectTime = (newTime * 60 + binding.npOnboardingUseTimeGoalMinute.value).timeToMs()
             updateViewModel()
         }
         binding.npOnboardingUseTimeGoalMinute.setOnValueChangedListener { _, _, newTime ->
-            useTotalTime = (binding.npOnboardingUseTimeGoalHour.value * 60 + newTime).timeToMs()
+            useSelectTime = (binding.npOnboardingUseTimeGoalHour.value * 60 + newTime).timeToMs()
             updateViewModel()
         }
     }
@@ -55,15 +54,10 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
 
     private fun updateViewModel() {
         activityViewModel.updateState {
-            copy(
-                onBoardingAnswer = onBoardingAnswer.copy(
-                    apps = listOf(
-                        OnboardingAnswer.App(
-                            goalTime = useTotalTime,
-                        ),
-                    ),
-                ),
-            )
+            val onBoardingAnswer = activityViewModel.onBoardingState.value.onBoardingAnswer
+            copy(onBoardingAnswer = onBoardingAnswer.copy(apps = onBoardingAnswer.apps.map { app ->
+                app.copy(goalTime = useSelectTime)
+            }))
         }
     }
 }

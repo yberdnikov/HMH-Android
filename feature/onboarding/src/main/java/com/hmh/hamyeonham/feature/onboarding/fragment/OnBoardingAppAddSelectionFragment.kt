@@ -1,7 +1,6 @@
 package com.hmh.hamyeonham.feature.onboarding.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,33 +57,28 @@ class OnBoardingAppAddSelectionFragment : Fragment() {
     }
 
     private fun onAppCheckboxClicked(packageName: String) {
-        activityViewModel.updateAppAddState {
-            copy(selectedApp = selectedApp + packageName)
-        }
-
-        val challengeApps = activityViewModel.addState.value.selectedApp.map { appCode ->
-            OnboardingAnswer.App(appCode = appCode)
-        }
-        Log.d("TAG", "onAppCheckboxUnClicked: $challengeApps")
-
-
         activityViewModel.updateState {
-            copy(onBoardingAnswer = onBoardingAnswer.copy(apps = challengeApps))
+            val currentState = onBoardingAnswer.apps
+            copy(
+                onBoardingAnswer = onBoardingAnswer.copy(
+                    apps = currentState + OnboardingAnswer.App(
+                        packageName
+                    )
+                )
+            )
         }
-        Log.d("TAG", "onAppCheckboxClicked: ${activityViewModel.addState.value.selectedApp}")
     }
 
     private fun onAppCheckboxUnClicked(packageName: String) {
-        activityViewModel.updateAppAddState {
-            copy(selectedApp = selectedApp - packageName)
-        }
-        val challengeApps = activityViewModel.addState.value.selectedApp.map { appCode ->
-            OnboardingAnswer.App(appCode = appCode)
-        }
-        Log.d("TAG", "onAppCheckboxUnClicked: $challengeApps")
-
         activityViewModel.updateState {
-            copy(onBoardingAnswer = onBoardingAnswer.copy(apps = challengeApps))
+            val currentState = onBoardingAnswer.apps
+            copy(
+                onBoardingAnswer = onBoardingAnswer.copy(
+                    apps = currentState - OnboardingAnswer.App(
+                        packageName
+                    )
+                )
+            )
         }
     }
 }

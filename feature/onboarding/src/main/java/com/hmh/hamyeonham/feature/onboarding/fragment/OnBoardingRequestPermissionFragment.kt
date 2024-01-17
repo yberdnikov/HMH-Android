@@ -113,10 +113,10 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         try {
             val packageUri = Uri.parse("package:" + requireContext().packageName)
             val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS, packageUri)
-            startActivity(intent)
+            // startActivity(intent)
             usageStatsPermissionLauncher.launch(intent)
         } catch (e: Exception) {
-            usageStatsPermissionLauncher.launch(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+            // usageStatsPermissionLauncher.launch(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
         }
     }
 

@@ -54,8 +54,7 @@ class OnBoardingActivity : AppCompatActivity() {
                     moveToOnBoardingDoneSignUpActivity()
                 }
 
-                is SignUpEffect.SignUpFail -> {
-                }
+                is SignUpEffect.SignUpFail -> {}
             }
         }.launchIn(lifecycleScope)
     }

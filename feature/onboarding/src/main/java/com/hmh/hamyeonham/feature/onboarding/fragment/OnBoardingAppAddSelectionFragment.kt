@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.adapter.OnBoardingAppSelectionAdapter
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingAppAddSelectionBinding
-import com.hmh.hamyeonham.feature.onboarding.model.OnboardingAnswer
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingAppSelectionViewModel
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
+import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnboardEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -57,28 +57,10 @@ class OnBoardingAppAddSelectionFragment : Fragment() {
     }
 
     private fun onAppCheckboxClicked(packageName: String) {
-        activityViewModel.updateState {
-            val currentState = onBoardingAnswer.apps
-            copy(
-                onBoardingAnswer = onBoardingAnswer.copy(
-                    apps = currentState + OnboardingAnswer.App(
-                        packageName
-                    )
-                )
-            )
-        }
+        activityViewModel.sendEvent(OnboardEvent.AddApps(packageName))
     }
 
     private fun onAppCheckboxUnClicked(packageName: String) {
-        activityViewModel.updateState {
-            val currentState = onBoardingAnswer.apps
-            copy(
-                onBoardingAnswer = onBoardingAnswer.copy(
-                    apps = currentState - OnboardingAnswer.App(
-                        packageName
-                    )
-                )
-            )
-        }
+        activityViewModel.sendEvent(OnboardEvent.DeleteApp(packageName))
     }
 }

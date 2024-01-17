@@ -14,7 +14,7 @@ import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.adapter.OnBoardingFragmentStateAdapter
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
-import com.hmh.hamyeonham.feature.onboarding.viewmodel.SignUpEffect
+import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnboardEffect
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -50,11 +50,11 @@ class OnBoardingActivity : AppCompatActivity() {
     private fun collectSignUpEffect() {
         viewModel.onboardEffect.flowWithLifecycle(lifecycle).onEach {
             when (it) {
-                is SignUpEffect.SignUpSuccess -> {
+                is OnboardEffect.OnboardSuccess -> {
                     moveToOnBoardingDoneSignUpActivity()
                 }
 
-                is SignUpEffect.SignUpFail -> {}
+                is OnboardEffect.OnboardFail -> {}
             }
         }.launchIn(lifecycleScope)
     }

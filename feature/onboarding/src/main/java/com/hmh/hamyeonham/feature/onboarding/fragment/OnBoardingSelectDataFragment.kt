@@ -18,6 +18,7 @@ import com.hmh.hamyeonham.feature.onboarding.adapter.OnBoardingFragmentType
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectDataBinding
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingSelectDataViewModel
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
+import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnboardEvent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -147,30 +148,19 @@ class OnBoardingSelectDataFragment : Fragment() {
 
         when (fragmentType) {
             OnBoardingFragmentType.SELECT_DATA_TIME -> {
-                activityViewModel.updateUserResponses {
-                    copy(usuallyUseTime = firstSelected.orEmpty())
-                }
-                activityViewModel.updateState {
-                    copy(onBoardingAnswer = onBoardingAnswer.copy(usuallyUseTime = firstSelected.orEmpty()))
-                }
+                activityViewModel.sendEvent(OnboardEvent.UpdateUsuallyUseTime(firstSelected.orEmpty()))
             }
 
             OnBoardingFragmentType.SELECT_DATA_PROBLEM -> {
-                activityViewModel.updateUserResponses {
-                    copy(problems = selectedQuestion)
-                }
-                activityViewModel.updateState {
-                    copy(onBoardingAnswer = onBoardingAnswer.copy(problems = selectedQuestion))
-                }
+                activityViewModel.sendEvent(OnboardEvent.UpdateProblems(selectedQuestion))
             }
 
             OnBoardingFragmentType.SELECT_DATA_PERIOD -> {
-                activityViewModel.updateUserResponses {
-                    copy(period = firstSelected?.extractDigits() ?: 0)
-                }
-                activityViewModel.updateState {
-                    copy(onBoardingAnswer = onBoardingAnswer.copy(period = firstSelected?.extractDigits() ?: 0))
-                }
+                activityViewModel.sendEvent(
+                    OnboardEvent.UpdatePeriod(
+                        firstSelected?.extractDigits() ?: 0
+                    )
+                )
             }
 
             else -> {}

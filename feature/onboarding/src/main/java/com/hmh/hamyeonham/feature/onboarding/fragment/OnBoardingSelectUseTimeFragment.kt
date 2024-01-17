@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.NumberPicker
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.hmh.hamyeonham.common.time.timeToMs
 import com.hmh.hamyeonham.common.view.setupScreentimeGoalRange
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectUseTimeBinding
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
+import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnboardEvent
 
 class OnBoardingSelectUseTimeFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingSelectUseTimeBinding::bind)
@@ -33,13 +33,11 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
     }
 
     private fun handleNumberPickerValue() {
-        binding.npOnboardingUseTimeGoalHour.setOnValueChangedListener { _, _, newTime ->
-            useSelectTime = (newTime * 60 + binding.npOnboardingUseTimeGoalMinute.value).timeToMs()
-            updateViewModel()
+        binding.npOnboardingUseTimeGoalHour.setOnValueChangedListener { _, _, hour ->
+            activityViewModel.sendEvent(OnboardEvent.UpdateAppGoalTimeHour(hour))
         }
-        binding.npOnboardingUseTimeGoalMinute.setOnValueChangedListener { _, _, newTime ->
-            useSelectTime = (binding.npOnboardingUseTimeGoalHour.value * 60 + newTime).timeToMs()
-            updateViewModel()
+        binding.npOnboardingUseTimeGoalMinute.setOnValueChangedListener { _, _, minute ->
+            activityViewModel.sendEvent(OnboardEvent.UpdateAppGoalTimeMinute(minute))
         }
     }
 
@@ -49,15 +47,6 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
             npOnboardingUseTimeGoalMinute.setupScreentimeGoalRange(0, 59)
             npOnboardingUseTimeGoalHour.descendantFocusability =
                 NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        }
-    }
-
-    private fun updateViewModel() {
-        activityViewModel.updateState {
-            val onBoardingAnswer = activityViewModel.onBoardingState.value.onBoardingAnswer
-            copy(onBoardingAnswer = onBoardingAnswer.copy(apps = onBoardingAnswer.apps.map { app ->
-                app.copy(goalTime = useSelectTime)
-            }))
         }
     }
 }

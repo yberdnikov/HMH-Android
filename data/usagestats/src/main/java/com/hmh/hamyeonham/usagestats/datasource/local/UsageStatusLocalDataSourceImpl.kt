@@ -1,12 +1,12 @@
-package com.hmh.hamyeonham.usagestats.datasource
+package com.hmh.hamyeonham.usagestats.datasource.local
 
 import android.app.usage.UsageStatsManager
 import com.hmh.hamyeonham.usagestats.model.UsageStatsModel
 import javax.inject.Inject
 
-class UsageStatusDataSourceImpl @Inject constructor(
+class UsageStatusLocalDataSourceImpl @Inject constructor(
     private val usageStatsManager: UsageStatsManager?,
-) : UsageStatusDataSource {
+) : UsageStatusLocalDataSource {
 
     override fun getUsageStats(startTime: Long, endTime: Long): List<UsageStatsModel> {
         return usageStatsManager?.queryUsageStats(

@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hmh.hamyeonham.common.view.viewBinding
+import com.hmh.hamyeonham.feature.onboarding.R
 import com.hmh.hamyeonham.feature.onboarding.adapter.OnBoardingAppSelectionAdapter
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingAppAddSelectionBinding
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingAppSelectionViewModel
@@ -37,6 +38,7 @@ class OnBoardingAppAddSelectionFragment : Fragment() {
 
     private fun initViews() {
         initAppSelectionRecyclerAdapter()
+        activityViewModel.sendEvent(OnboardEvent.changeActivityButtonText(getString(R.string.all_select_done)))
     }
 
     private fun initAppSelectionRecyclerAdapter() {
@@ -62,5 +64,10 @@ class OnBoardingAppAddSelectionFragment : Fragment() {
 
     private fun onAppCheckboxUnClicked(packageName: String) {
         activityViewModel.sendEvent(OnboardEvent.DeleteApp(packageName))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activityViewModel.sendEvent(OnboardEvent.changeActivityButtonText(getString(R.string.all_select_done)))
     }
 }

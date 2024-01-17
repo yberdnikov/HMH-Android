@@ -25,6 +25,7 @@ sealed interface OnboardEvent {
     data class UpdateAppGoalTimeHour(val goalTimeHour: Int) : OnboardEvent
     data class UpdateNextButtonActive(val isNextButtonActive: Boolean) : OnboardEvent
     data class UpdateAccessToken(val accessToken: String) : OnboardEvent
+    data class changeActivityButtonText(val buttonText: String) : OnboardEvent
 }
 
 sealed interface OnboardEffect {
@@ -42,6 +43,7 @@ data class OnBoardingState(
     val appGoalTimeHour: Int = 0,
     val isNextButtonActive: Boolean = false,
     val accessToken: String = "",
+    val buttonText: String = "다음",
 ) {
     val goalTime: Long
         get() = (screenGoalTime * 60).timeToMs()
@@ -126,6 +128,11 @@ class OnBoardingViewModel @Inject constructor(
             is OnboardEvent.UpdateAccessToken -> {
                 updateState {
                     copy(accessToken = event.accessToken)
+                }
+            }
+            is OnboardEvent.changeActivityButtonText -> {
+                updateState {
+                    copy(buttonText = event.buttonText)
                 }
             }
         }

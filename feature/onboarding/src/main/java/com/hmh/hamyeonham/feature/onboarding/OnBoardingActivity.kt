@@ -36,7 +36,7 @@ class OnBoardingActivity : AppCompatActivity() {
         setBackPressedCallback()
         collectOnboardingState()
         collectSignUpEffect()
-
+        changeOnBoardingButtonTextState()
         updateAccessToken()
     }
 
@@ -115,6 +115,12 @@ class OnBoardingActivity : AppCompatActivity() {
         }.launchIn(lifecycleScope)
     }
 
+    private fun changeOnBoardingButtonTextState() {
+        viewModel.onBoardingState.flowWithLifecycle(lifecycle).onEach {
+            binding.btnOnboardingNext.text = it.buttonText
+        }.launchIn(lifecycleScope)
+    }
+
     private fun setBackPressedCallback() {
         onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -146,7 +152,6 @@ class OnBoardingActivity : AppCompatActivity() {
     private fun updateProgressBar(currentItem: Int, totalItems: Int) {
         val progress = (currentItem + 1).toFloat() / totalItems.toFloat()
         val progressBarWidth = (progress * 100).toInt()
-        Log.d("progressBarWidth", progressBarWidth.toString())
         binding.pbOnboarding.progress = progressBarWidth
         initAndStartProgressBarAnimation(binding.pbOnboarding, progressBarWidth)
     }

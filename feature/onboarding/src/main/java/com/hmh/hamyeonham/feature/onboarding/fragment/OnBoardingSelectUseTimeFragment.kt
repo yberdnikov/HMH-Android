@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.hmh.hamyeonham.common.view.setupScreentimeGoalRange
 import com.hmh.hamyeonham.common.view.viewBinding
+import com.hmh.hamyeonham.feature.onboarding.R
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectUseTimeBinding
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnboardEvent
@@ -48,5 +49,9 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
             npOnboardingUseTimeGoalHour.descendantFocusability =
                 NumberPicker.FOCUS_BLOCK_DESCENDANTS
         }
+    }
+    override fun onResume() {
+        super.onResume()
+        activityViewModel.sendEvent(OnboardEvent.changeActivityButtonText(getString(R.string.all_done)))
     }
 }

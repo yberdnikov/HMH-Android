@@ -1,6 +1,6 @@
 package com.hmh.hamyeonham.core.network.di
 
-import com.hmh.hamyeonham.common.qualifier.Unsecured
+import com.hmh.hamyeonham.common.qualifier.Secured
 import com.hmh.hamyeonham.core.network.usagegoal.UsageGoalService
 import dagger.Module
 import dagger.Provides
@@ -15,5 +15,5 @@ import javax.inject.Singleton
 object UsageGoalModule {
     @Provides
     @Singleton
-    fun provideUsageGoalApi(@Unsecured retrofit: Retrofit): UsageGoalService = retrofit.create()
+    fun provideUsageGoalApi(@Secured retrofit: Retrofit): UsageGoalService = retrofit.create()
 }

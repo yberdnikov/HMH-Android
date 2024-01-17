@@ -2,16 +2,17 @@ package com.hmh.hamyeonham.feature.onboarding
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.viewpager2.widget.ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
+import com.hmh.hamyeonham.common.view.initAndStartProgressBarAnimation
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.ActivityOnBoardingBinding
-import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingEffect
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
+import com.hmh.hamyeonham.feature.onboarding.viewmodel.SignUpEffect
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -30,13 +31,31 @@ class OnBoardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initViews()
-        checkNextButtonEnable()
         setBackPressedCallback()
+        collectOnboardingState()
+        collectSignUpEffect()
 
+        updateAccessToken()
+    }
+
+    private fun updateAccessToken() {
         val accessToken = intent.getStringExtra(EXTRA_ACCESS_TOKEN)
         viewModel.updateState {
             copy(accessToken = accessToken.orEmpty())
         }
+    }
+
+    private fun collectSignUpEffect() {
+        viewModel.onboardEffect.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is SignUpEffect.SignUpSuccess -> {
+                    moveToOnBoardingDoneSignUpActivity()
+                }
+
+                is SignUpEffect.SignUpFail -> {
+                }
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun initViews() {
@@ -83,22 +102,15 @@ class OnBoardingActivity : AppCompatActivity() {
                 currentItem == lastItem -> {
                     viewModel.signUp()
                 }
+
+                else -> Unit
             }
         }
     }
 
-    private fun checkNextButtonEnable() {
-        viewModel.onboardEffect.flowWithLifecycle(lifecycle).onEach {
-            when (it) {
-                is OnBoardingEffect.ActiveNextButton -> {
-                    binding.btnOnboardingNext.isEnabled = it.isActive
-                    binding.btnOnboardingNext.isSelected = it.isActive
-                }
-
-                is OnBoardingEffect.SignUpSuccess -> startOnBoardingDoneSignUpActivity()
-                is OnBoardingEffect.SignUpFail -> Log.e("OnBoardingActivity", "signUpEvent: $it")
-                else -> Unit
-            }
+    private fun collectOnboardingState() {
+        viewModel.onBoardingState.flowWithLifecycle(lifecycle).onEach {
+            binding.btnOnboardingNext.isEnabled = it.isNextButtonActive
         }.launchIn(lifecycleScope)
     }
 
@@ -110,7 +122,7 @@ class OnBoardingActivity : AppCompatActivity() {
         }
     }
 
-    private fun startOnBoardingDoneSignUpActivity() {
+    private fun moveToOnBoardingDoneSignUpActivity() {
         val intent = Intent(this, OnBoardingDoneSingUpActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -125,6 +137,7 @@ class OnBoardingActivity : AppCompatActivity() {
         binding.vpOnboardingContainer.run {
             adapter = pagerAdapter
             isUserInputEnabled = false
+            offscreenPageLimit = OFFSCREEN_PAGE_LIMIT_DEFAULT
         }
         return pagerAdapter
     }
@@ -132,8 +145,8 @@ class OnBoardingActivity : AppCompatActivity() {
     private fun updateProgressBar(currentItem: Int, totalItems: Int) {
         val progress = (currentItem + 1).toFloat() / totalItems.toFloat()
         val progressBarWidth = (progress * 100).toInt()
-        Log.d("progressBarWidth", progressBarWidth.toString())
         binding.pbOnboarding.progress = progressBarWidth
+        initAndStartProgressBarAnimation(binding.pbOnboarding, progressBarWidth)
     }
 
     override fun onDestroy() {

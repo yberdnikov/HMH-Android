@@ -19,21 +19,22 @@ class GetUsageStatsListUseCase @Inject constructor(
         startTime: Long,
         endTime: Long,
     ): List<UsageStatusAndGoal> {
-        val usageGoalsForSelectedPackages = usageGoalsRepository.getUsageGoals()
-        val usageForSelectedApps =
-            getUsageStatsAndGoalsForSelectedPackages(
-                startTime,
-                endTime,
-                usageGoalsForSelectedPackages.filter { it.packageName != TOTAL },
-            )
-        val totalUsage = getTotalUsage(usageForSelectedApps)
-        val totalUsageStatusAndGoal =
-            UsageStatusAndGoal(
-                TOTAL,
-                totalUsage,
-                getUsageGoalForPackage(usageGoalsForSelectedPackages, TOTAL),
-            )
-        return listOf(totalUsageStatusAndGoal) + usageForSelectedApps
+        usageGoalsRepository.getUsageGoals().getOrNull()?.let { usageGoals ->
+            val usageForSelectedApps =
+                getUsageStatsAndGoalsForSelectedPackages(
+                    startTime,
+                    endTime,
+                    usageGoals.filter { it.packageName != TOTAL },
+                )
+            val totalUsage = getTotalUsage(usageForSelectedApps)
+            val totalUsageStatusAndGoal =
+                UsageStatusAndGoal(
+                    TOTAL,
+                    totalUsage,
+                    getUsageGoalForPackage(usageGoals, TOTAL),
+                )
+            return listOf(totalUsageStatusAndGoal) + usageForSelectedApps
+        } ?: return emptyList()
     }
 
     private fun getUsageGoalForPackage(
@@ -48,7 +49,7 @@ class GetUsageStatsListUseCase @Inject constructor(
         return 0
     }
 
-    private suspend fun getUsageStatsAndGoalsForSelectedPackages(
+    private fun getUsageStatsAndGoalsForSelectedPackages(
         startTime: Long,
         endTime: Long,
         usageGoalList: List<UsageGoal>,

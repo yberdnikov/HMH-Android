@@ -63,5 +63,16 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
                 ),
             )
         }
+        activityViewModel.updateState {
+            copy(
+                onBoardingAnswer = onBoardingAnswer.copy(
+                    apps = listOf(
+                        OnboardingAnswer.App(
+                            goalTime = useTotalTime,
+                        ),
+                    ),
+                ),
+            )
+        }
     }
 }

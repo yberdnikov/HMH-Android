@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.NumberPicker
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.hmh.hamyeonham.common.primitive.extractDigits
 import com.hmh.hamyeonham.common.view.setupScreentimeGoalRange
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectScreentimeBinding
@@ -41,6 +42,9 @@ class OnBoardingSelectScreenTimeFragment : Fragment() {
                 }
                 updateState {
                     copy(isNextButtonActive = true)
+                }
+                updateState {
+                    copy(onBoardingAnswer = onBoardingAnswer.copy(goalTime = newTime))
                 }
             }
         }

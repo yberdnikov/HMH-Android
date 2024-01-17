@@ -150,17 +150,26 @@ class OnBoardingSelectDataFragment : Fragment() {
                 activityViewModel.updateUserResponses {
                     copy(usuallyUseTime = firstSelected.orEmpty())
                 }
+                activityViewModel.updateState {
+                    copy(onBoardingAnswer = onBoardingAnswer.copy(usuallyUseTime = firstSelected.orEmpty()))
+                }
             }
 
             OnBoardingFragmentType.SELECT_DATA_PROBLEM -> {
                 activityViewModel.updateUserResponses {
                     copy(problems = selectedQuestion)
                 }
+                activityViewModel.updateState {
+                    copy(onBoardingAnswer = onBoardingAnswer.copy(problems = selectedQuestion))
+                }
             }
 
             OnBoardingFragmentType.SELECT_DATA_PERIOD -> {
                 activityViewModel.updateUserResponses {
                     copy(period = firstSelected?.extractDigits() ?: 0)
+                }
+                activityViewModel.updateState {
+                    copy(onBoardingAnswer = onBoardingAnswer.copy(period = firstSelected?.extractDigits() ?: 0))
                 }
             }
 

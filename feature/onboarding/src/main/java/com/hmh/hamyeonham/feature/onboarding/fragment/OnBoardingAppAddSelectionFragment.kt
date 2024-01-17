@@ -1,6 +1,7 @@
 package com.hmh.hamyeonham.feature.onboarding.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.onboarding.adapter.OnBoardingAppSelectionAdapter
-import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingAppSelectionViewModel
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingAppAddSelectionBinding
+import com.hmh.hamyeonham.feature.onboarding.model.OnboardingAnswer
+import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingAppSelectionViewModel
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -59,11 +61,30 @@ class OnBoardingAppAddSelectionFragment : Fragment() {
         activityViewModel.updateAppAddState {
             copy(selectedApp = selectedApp + packageName)
         }
+
+        val challengeApps = activityViewModel.addState.value.selectedApp.map { appCode ->
+            OnboardingAnswer.App(appCode = appCode)
+        }
+        Log.d("TAG", "onAppCheckboxUnClicked: $challengeApps")
+
+
+        activityViewModel.updateState {
+            copy(onBoardingAnswer = onBoardingAnswer.copy(apps = challengeApps))
+        }
+        Log.d("TAG", "onAppCheckboxClicked: ${activityViewModel.addState.value.selectedApp}")
     }
 
     private fun onAppCheckboxUnClicked(packageName: String) {
         activityViewModel.updateAppAddState {
             copy(selectedApp = selectedApp - packageName)
+        }
+        val challengeApps = activityViewModel.addState.value.selectedApp.map { appCode ->
+            OnboardingAnswer.App(appCode = appCode)
+        }
+        Log.d("TAG", "onAppCheckboxUnClicked: $challengeApps")
+
+        activityViewModel.updateState {
+            copy(onBoardingAnswer = onBoardingAnswer.copy(apps = challengeApps))
         }
     }
 }

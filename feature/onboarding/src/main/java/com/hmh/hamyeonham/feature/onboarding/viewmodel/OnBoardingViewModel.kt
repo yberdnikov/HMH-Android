@@ -49,20 +49,10 @@ class OnBoardingViewModel @Inject constructor(
     private val _addState = MutableStateFlow(AppAddState())
     val addState = _addState.asStateFlow()
 
-    private val _addEffect = MutableSharedFlow<AppAddState>()
-    val addEffect = _addEffect.asSharedFlow()
-
     init {
         _onBoardingState.value = onBoardingState.value.copy(
             pageInfo = initializeButtonInfoList(),
         )
-    }
-
-    fun getAddAppEffect(selectedApp: List<String>) {
-        Log.d("OnBoardingViewModel", "getAddAppEffect: $selectedApp")
-        viewModelScope.launch {
-            _addEffect.emit(AppAddState(selectedApp = selectedApp))
-        }
     }
 
     fun updateUserResponses(transform: OnboardingAnswer.() -> OnboardingAnswer) {
@@ -78,15 +68,12 @@ class OnBoardingViewModel @Inject constructor(
     }
 
     fun updateAppAddState(transform: AppAddState.() -> AppAddState) {
-        Log.d("OnBoardingViewModel", "updateAppAddState: $transform")
         val currentState = addState.value
         val newState = currentState.transform()
         _addState.value = newState
-        Log.d("OnBoardingViewModel", "updateAppAddState: $newState")
-        val selectedApps = addState.value.selectedApp
 
-        val challengeApps = selectedApps.map { appCode ->
-            OnboardingAnswer.App(appCode = appCode, goalTime = 0)
+        val challengeApps = newState.selectedApp.map { appCode ->
+            OnboardingAnswer.App(appCode = appCode)
         }
 
         updateState {

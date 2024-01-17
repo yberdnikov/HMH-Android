@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.hmh.hamyeonham.common.view.setupScreentimeGoalRange
 import com.hmh.hamyeonham.common.view.viewBinding
+import com.hmh.hamyeonham.feature.onboarding.R
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingSelectScreentimeBinding
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnboardEvent
@@ -45,5 +46,7 @@ class OnBoardingSelectScreenTimeFragment : Fragment() {
         activityViewModel.updateState {
             copy(isNextButtonActive = true)
         }
+        activityViewModel.sendEvent(OnboardEvent.changeActivityButtonText(getString(R.string.all_next)))
+        activityViewModel.sendEvent(OnboardEvent.visibleProgressbar(true))
     }
 }

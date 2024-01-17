@@ -53,5 +53,6 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         activityViewModel.sendEvent(OnboardEvent.changeActivityButtonText(getString(R.string.all_done)))
+        activityViewModel.sendEvent(OnboardEvent.visibleProgressbar(true))
     }
 }

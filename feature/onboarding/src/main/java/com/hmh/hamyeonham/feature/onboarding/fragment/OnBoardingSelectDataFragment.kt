@@ -64,6 +64,8 @@ class OnBoardingSelectDataFragment : Fragment() {
         activityViewModel.updateState {
             copy(isNextButtonActive = selectedButtons.isNotEmpty())
         }
+        activityViewModel.sendEvent(OnboardEvent.changeActivityButtonText(getString(R.string.all_next)))
+        activityViewModel.sendEvent(OnboardEvent.visibleProgressbar(true))
     }
 
     private fun initViews() {

@@ -19,6 +19,7 @@ import com.hmh.hamyeonham.feature.onboarding.OnBoardingAccessibilityService
 import com.hmh.hamyeonham.feature.onboarding.R
 import com.hmh.hamyeonham.feature.onboarding.databinding.FragmentOnBoardingRequestPermissionBinding
 import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnBoardingViewModel
+import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnboardEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -71,6 +72,8 @@ class OnBoardingRequestPermissionFragment : Fragment() {
         activityViewModel.updateState {
             copy(isNextButtonActive = allPermissionIsGranted())
         }
+        activityViewModel.sendEvent(OnboardEvent.changeActivityButtonText(getString(R.string.all_next)))
+        activityViewModel.sendEvent(OnboardEvent.visibleProgressbar(true))
     }
 
     private fun clickRequireAccessibilityButton() {

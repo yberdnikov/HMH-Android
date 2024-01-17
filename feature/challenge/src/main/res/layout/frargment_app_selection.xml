@@ -20,7 +20,7 @@
         android:textAppearance="?textAppearanceTitleSmall"
         android:textColor="?gray2"
         android:textColorHint="?gray2"
-        android:textCursorDrawable="@drawable/drawable_cursor_color"
+        android:textCursorDrawable="@drawable/cursor"
         app:layout_constraintBottom_toTopOf="@id/rv_app_selection"
         app:layout_constraintTop_toTopOf="parent" />
 

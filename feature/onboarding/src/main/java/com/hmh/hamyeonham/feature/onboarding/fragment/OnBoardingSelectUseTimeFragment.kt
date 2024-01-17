@@ -54,15 +54,6 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
     }
 
     private fun updateViewModel() {
-        activityViewModel.updateUserResponses {
-            copy(
-                apps = listOf(
-                    OnboardingAnswer.App(
-                        goalTime = useTotalTime,
-                    ),
-                ),
-            )
-        }
         activityViewModel.updateState {
             copy(
                 onBoardingAnswer = onBoardingAnswer.copy(

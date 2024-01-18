@@ -1,4 +1,4 @@
-package com.hmh.hamyeonham.login.mapper
+package com.hmh.hamyeonham.usagestats.mapper
 
 import com.hmh.hamyeonham.core.network.usagegoal.model.UsageGoalResponse
 import com.hmh.hamyeonham.usagestats.model.UsageGoal

@@ -1,7 +1,7 @@
 package com.hmh.hamyeonham.usagestats.repository
 
 import com.hmh.hamyeonham.core.network.usagegoal.UsageGoalService
-import com.hmh.hamyeonham.login.mapper.toUsageGoalList
+import com.hmh.hamyeonham.usagestats.mapper.toUsageGoalList
 import com.hmh.hamyeonham.usagestats.datasource.UsageGoalsRemoteDataSource
 import com.hmh.hamyeonham.usagestats.model.UsageGoal
 import javax.inject.Inject

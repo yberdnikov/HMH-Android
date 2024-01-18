@@ -3,6 +3,7 @@ package com.hmh.hamyeonham.challenge.appadd.appselection
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hmh.hamyeonham.challenge.appadd.AppAddViewModel
+import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
 import com.hmh.hamyeonham.common.view.viewBinding
 import com.hmh.hamyeonham.feature.challenge.databinding.FrargmentAppSelectionBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +26,7 @@ class AppSelectionFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         return FrargmentAppSelectionBinding.inflate(inflater, container, false).root
     }
@@ -39,12 +41,14 @@ class AppSelectionFragment : Fragment() {
         binding.etSearchbar.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                Log.d("edit text search", s.toString())
+                setRecyclerViewWithFilter(s.toString())
+            }
 
             override fun afterTextChanged(s: Editable?) {}
-        }
+        })
     }
-
 
     private fun initViews() {
         initAppSelectionRecyclerAdapter()
@@ -58,12 +62,23 @@ class AppSelectionFragment : Fragment() {
             )
             layoutManager = LinearLayoutManager(requireContext())
         }
-        setViewPager()
+        setRecyclerView()
     }
 
-    private fun setViewPager() {
+    private fun setRecyclerView() {
         val appSelectionAdapter = binding.rvAppSelection.adapter as? AppSelectionAdapter
         appSelectionAdapter?.submitList(viewModel.getInstalledApps())
+    }
+
+    private fun setRecyclerViewWithFilter(filter: String) {
+        val appSelectionAdapter = binding.rvAppSelection.adapter as? AppSelectionAdapter
+        val newAppList =
+            viewModel.getInstalledApps().filter {
+                (context?.getAppNameFromPackageName(it) ?: "").contains(filter)
+            }
+        for (i in newAppList)
+            Log.d("app", i)
+        appSelectionAdapter?.submitList(newAppList)
     }
 
     private fun onAppCheckboxClicked(packageName: String) {

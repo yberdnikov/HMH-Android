@@ -51,6 +51,11 @@ class OnBoardingSelectUseTimeFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
+        val selectedHour = activityViewModel.onBoardingState.value.appGoalTimeHour
+        val selectedMinute = activityViewModel.onBoardingState.value.appGoalTimeMinute
+
+        binding.npOnboardingUseTimeGoalHour.value = selectedHour
+        binding.npOnboardingUseTimeGoalMinute.value = selectedMinute
         activityViewModel.sendEvent(OnboardEvent.changeActivityButtonText(getString(R.string.all_done)))
         activityViewModel.sendEvent(OnboardEvent.visibleProgressbar(true))
     }

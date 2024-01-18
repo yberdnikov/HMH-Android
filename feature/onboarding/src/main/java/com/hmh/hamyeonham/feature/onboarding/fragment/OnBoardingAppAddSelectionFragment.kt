@@ -3,7 +3,6 @@ package com.hmh.hamyeonham.feature.onboarding.fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,6 +80,7 @@ class OnBoardingAppAddSelectionFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
         })
     }
+
     private fun setRecyclerViewWithFilter(filter: String) {
         val appSelectionAdapter = binding.rvAppSelection.adapter as? OnBoardingAppSelectionAdapter
         val newAppList =
@@ -88,8 +88,7 @@ class OnBoardingAppAddSelectionFragment : Fragment() {
                 (context?.getAppNameFromPackageName(it) ?: "").contains(filter)
             }
         for (i in newAppList)
-            Log.d("app", i)
-        appSelectionAdapter?.submitList(newAppList)
+            appSelectionAdapter?.submitList(newAppList)
     }
 
     override fun onResume() {

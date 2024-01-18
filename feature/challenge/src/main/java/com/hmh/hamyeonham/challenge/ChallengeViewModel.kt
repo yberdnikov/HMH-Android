@@ -1,5 +1,6 @@
 package com.hmh.hamyeonham.challenge
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hmh.hamyeonham.challenge.model.Apps
@@ -35,13 +36,21 @@ class ChallengeViewModel @Inject constructor(
 
     fun addApp(apps: Apps) {
         viewModelScope.launch {
-            challengeRepository.postApps(apps)
+            challengeRepository.postApps(apps).onSuccess {
+                Log.d("app add success", "앱 추가에 성공했습니다")
+            }.onFailure {
+                Log.d("app delete success", it.toString())
+            }
         }
     }
 
     fun deleteApp(packageName: String) {
         viewModelScope.launch {
-            challengeRepository.deleteApps(packageName)
+            challengeRepository.deleteApps(packageName).onSuccess {
+                Log.d("app delete success", "앱 삭제에 성공했습니다")
+            }.onFailure {
+                Log.d("app delete fail", it.toString())
+            }
         }
     }
 }

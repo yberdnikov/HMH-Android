@@ -77,9 +77,14 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private fun setUsageGaols(usageGoals: List<UsageGoal>) {
+    fun setUsageGaols(usageGoals: List<UsageGoal>) {
         updateState {
             copy(usageGoals = usageGoals)
+        }
+    }
+    fun deleteUsageGoals(packageName: String) {
+        updateState {
+            copy(usageGoals = this.usageGoals.filter { it.packageName != packageName })
         }
     }
 

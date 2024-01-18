@@ -3,6 +3,7 @@ package com.hmh.hamyeonham.challenge
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,14 +67,14 @@ class ChallengeFragment : Fragment() {
             ModifierState.CANCEL -> {
                 getString(R.string.all_cancel) to ContextCompat.getColor(
                     requireContext(),
-                    R.color.white_text
+                    R.color.white_text,
                 )
             }
 
             ModifierState.DELETE -> {
                 getString(R.string.all_delete) to ContextCompat.getColor(
                     requireContext(),
-                    R.color.blue_purple_text
+                    R.color.blue_purple_text,
                 )
             }
         }
@@ -113,8 +114,13 @@ class ChallengeFragment : Fragment() {
         activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach {
             challengeAdapter?.submitList(it.challengeStatus.isSuccessList)
             if (it.usageGoals.isNotEmpty()) {
-                challengeGoalsAdapter?.submitList(it.usageGoals.drop(1) + UsageGoal())
+                val newUsageGoals = it.usageGoals.drop(1) + UsageGoal()
+                challengeGoalsAdapter?.submitList(newUsageGoals)
+            } else {
+                val newUsageGoals = listOf(UsageGoal())
+                challengeGoalsAdapter?.submitList(newUsageGoals)
             }
+//            }
         }.launchIn(viewLifeCycleScope)
     }
 
@@ -136,11 +142,19 @@ class ChallengeFragment : Fragment() {
                         apps = selectedApps?.map {
                             Apps.App(
                                 appCode = it,
-                                goalTime = (goalTime ?: 0).toInt()
+                                goalTime = (goalTime ?: 0),
                             )
-                        } ?: return@registerForActivityResult
+                        } ?: return@registerForActivityResult,
                     )
                     viewModel.addApp(apps)
+                    activityViewModel.setUsageGaols(
+                        activityViewModel.mainState.value.usageGoals + apps.apps.map {
+                            UsageGoal(
+                                it.appCode,
+                                it.goalTime,
+                            )
+                        },
+                    )
                 }
             }
     }
@@ -154,7 +168,8 @@ class ChallengeFragment : Fragment() {
                 },
                 onAppItemClicked = {
                     when (viewModel.challengeState.value.modifierState) {
-                        ModifierState.DELETE -> {
+                        ModifierState.CANCEL -> {
+                            activityViewModel.deleteUsageGoals(it.packageName)
                             viewModel.deleteApp(it.packageName)
                         }
 

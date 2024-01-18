@@ -16,9 +16,9 @@ class AppSelectionViewHolder(
             val context = binding.root.context
             tvAppname.text = context.getAppNameFromPackageName(packageName)
             ivAppicon.setImageDrawable(context.getAppIconFromPackageName(packageName))
+            cbApp.isClickable = false
         }
         initAppSelectionListener(packageName)
-        binding.cbApp.isClickable = false
     }
 
     private fun initAppSelectionListener(packageName: String) {

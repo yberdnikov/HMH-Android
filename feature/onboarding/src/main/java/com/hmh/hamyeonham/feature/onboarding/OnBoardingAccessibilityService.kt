@@ -8,7 +8,6 @@ class OnBoardingAccessibilityService : AccessibilityService() {
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
         if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
             val packageName = event.packageName ?: return
-            Log.d("AccessibilityService", "현재 실행 중인 앱 패키지: $packageName")
         }
     }
 

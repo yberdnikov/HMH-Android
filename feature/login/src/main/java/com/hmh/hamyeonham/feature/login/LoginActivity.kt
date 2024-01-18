@@ -48,7 +48,6 @@ class LoginActivity : AppCompatActivity() {
         viewModel.kakaoLoginEvent.flowWithLifecycle(lifecycle).onEach { state ->
             when (state) {
                 is LoginEffect.LoginSuccess -> moveToMainActivity()
-
                 is LoginEffect.LoginFail -> toast(getString(R.string.fail_kakao_login))
                 is LoginEffect.RequireSignUp -> moveToOnBoardingActivity(state.token)
                 else -> Unit
@@ -71,16 +70,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun moveToOnBoardingActivity(accessToken: String? = null) {
+        if (accessToken == null) {
+            toast(getString(R.string.empty_token_retry_login))
+        }
+
         val intent = navigationProvider.toOnBoarding()
         accessToken?.let {
             intent.putExtra(OnBoardingActivity.EXTRA_ACCESS_TOKEN, it)
         }
         startActivity(intent)
         finish()
-
-        if (accessToken != null) {
-            toast(getString(R.string.empty_token_retry_login))
-        }
     }
 
     private fun moveToMainActivity() {

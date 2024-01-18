@@ -17,7 +17,6 @@ import com.hmh.hamyeonham.feature.onboarding.viewmodel.OnboardEvent
 class OnBoardingSelectUseTimeFragment : Fragment() {
     private val binding by viewBinding(FragmentOnBoardingSelectUseTimeBinding::bind)
     private val activityViewModel by activityViewModels<OnBoardingViewModel>()
-    private var useSelectTime: Long = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater,

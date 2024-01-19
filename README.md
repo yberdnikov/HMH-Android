@@ -1,6 +1,6 @@
 <div align="center">
   <p align="center">
-      <img src="https://github.com/Team-HMH/HMH-Android/assets/84266681/8cb75ef2-678b-49ef-ad57-a09b9d30627c"/>
+      <img src="https://github.com/Team-HMH/HMH-Android/assets/84266681/94dc7039-55fb-4a95-b562-6714eda38f5d"/>
   </p>
   <br />
 </div>
@@ -17,6 +17,21 @@
   </p>
   <br />
 </div>
+
+## 온보딩 및 권한 허용
+https://github.com/Team-HMH/HMH-Android/assets/84266681/3ac06c7d-3507-4e59-aed0-194c6c1a292d
+
+## 앱 잠금 화면 및 사용시간 연장
+https://github.com/Team-HMH/HMH-Android/assets/84266681/bafa0b64-fbdf-40bc-86af-47d7cd0f58ec
+
+## 사용시간 연장 후 사용
+https://github.com/Team-HMH/HMH-Android/assets/84266681/ea3aee61-83b3-40e9-8320-69f55f3c166b
+
+## 앱 추가 및 삭제
+https://github.com/Team-HMH/HMH-Android/assets/84266681/e8a55788-8d0a-480f-bf1f-b7e385fb2e2f
+
+
+
 
 <h2>Tech Stack</h2>
 

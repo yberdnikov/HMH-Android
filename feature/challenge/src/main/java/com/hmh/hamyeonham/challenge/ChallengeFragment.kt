@@ -9,17 +9,19 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hmh.hamyeonham.challenge.appadd.AppAddActivity
 import com.hmh.hamyeonham.challenge.calendar.ChallengeCalendarAdapter
 import com.hmh.hamyeonham.challenge.goals.ChallengeUsageGoalsAdapter
 import com.hmh.hamyeonham.challenge.model.Apps
+import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
+import com.hmh.hamyeonham.common.dialog.TwoButtonCommonDialog
 import com.hmh.hamyeonham.common.fragment.viewLifeCycle
 import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.VerticalSpaceItemDecoration
@@ -67,14 +69,14 @@ class ChallengeFragment : Fragment() {
             ModifierState.CANCEL -> {
                 getString(R.string.all_cancel) to ContextCompat.getColor(
                     requireContext(),
-                    R.color.white_text
+                    R.color.white_text,
                 )
             }
 
             ModifierState.DELETE -> {
                 getString(R.string.all_delete) to ContextCompat.getColor(
                     requireContext(),
-                    R.color.blue_purple_text
+                    R.color.blue_purple_text,
                 )
             }
         }
@@ -88,6 +90,11 @@ class ChallengeFragment : Fragment() {
         initChallengeRecyclerView()
         initChallengeGoalsRecyclerView()
         initModifierButton()
+    }
+
+    private fun initTotalGoalTime(goalTime: Int) {
+        binding.tvTotalGoalTimeValue.text =
+            goalTime.toString() + getString(com.hmh.hamyeonham.feature.challenge.R.string.all_time)
     }
 
     private fun initModifierButton() {
@@ -116,17 +123,12 @@ class ChallengeFragment : Fragment() {
             if (isChallengeExist) {
                 challengeAdapter?.submitList(it.isSuccessList)
                 if (it.usageGoals.isNotEmpty()) {
-                    challengeGoalsAdapter?.submitList(it.usageGoals.drop(1) + UsageGoal())
+                    challengeGoalsAdapter?.submitList(activityViewModel.getUsageGoalsExceptTotal() + UsageGoal())
                 }
+                val totalHour = it.goalTimeInHour.toString()
+                binding.tvTotalGoalTimeValue.text = getString(R.string.all_format_hour, totalHour)
             }
-//            binding.run {
-//                tvChallengeCreateTitle.isVisible = isChallengeExist
-//                btnChallengeCreate.isVisible = isChallengeExist
-//
-//                tvChallengeTitle.isVisible = !isChallengeExist
-//                tvTotalGoalTime.isVisible = !isChallengeExist
-//                rvChallengeCalendar.isVisible = !isChallengeExist
-//            }
+            initTotalGoalTime(it.goalTimeInHour)
         }.launchIn(viewLifeCycleScope)
     }
 
@@ -148,9 +150,9 @@ class ChallengeFragment : Fragment() {
                         apps = selectedApps?.map {
                             Apps.App(
                                 appCode = it,
-                                goalTime = goalTime ?: 0
+                                goalTime = goalTime ?: 0,
                             )
-                        } ?: return@registerForActivityResult
+                        } ?: return@registerForActivityResult,
                     )
                     viewModel.addApp(apps)
                 }
@@ -166,8 +168,8 @@ class ChallengeFragment : Fragment() {
                 },
                 onAppItemClicked = {
                     when (viewModel.challengeState.value.modifierState) {
-                        ModifierState.DELETE -> {
-                            viewModel.deleteApp(it.packageName)
+                        ModifierState.CANCEL -> {
+                            setDeleteAppDialog(it)
                         }
 
                         else -> Unit
@@ -176,6 +178,25 @@ class ChallengeFragment : Fragment() {
             )
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(VerticalSpaceItemDecoration(9.dp))
+        }
+    }
+
+    private fun RecyclerView.setDeleteAppDialog(it: UsageGoal) {
+        val clickedAppNameToDialog = context.getAppNameFromPackageName(it.packageName)
+        TwoButtonCommonDialog.newInstance(
+            title = getString(R.string.delete_app_dialog_title, clickedAppNameToDialog),
+            description = getString(R.string.delete_app_dialog_description),
+            confirmButtonText = getString(R.string.all_okay),
+            dismissButtonText = getString(R.string.all_cancel),
+        ).apply {
+            setConfirmButtonClickListener {
+                viewModel.deleteApp(it.packageName)
+            }
+            setDismissButtonClickListener {
+            }
+        }.showAllowingStateLoss(childFragmentManager)
+        viewModel.updateState {
+            copy(modifierState = ModifierState.DELETE)
         }
     }
 }

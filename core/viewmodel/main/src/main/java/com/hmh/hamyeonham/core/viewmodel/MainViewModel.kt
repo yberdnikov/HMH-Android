@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hmh.hamyeonham.challenge.model.ChallengeStatus
-import com.hmh.hamyeonham.challenge.model.Status
 import com.hmh.hamyeonham.challenge.repository.ChallengeRepository
 import com.hmh.hamyeonham.common.time.getCurrentDayStartEndEpochMillis
 import com.hmh.hamyeonham.core.domain.usagegoal.model.UsageGoal
@@ -21,13 +20,14 @@ import javax.inject.Inject
 
 data class MainState(
     val appGoals: List<ChallengeStatus.AppGoal> = emptyList(),
-    val isSuccessList: List<Status> = emptyList(),
-    val goalTime: Int = 0,
+    val isSuccessList: List<ChallengeStatus.Status> = emptyList(),
+    val goalTimeInHour: Int = 0,
     val period: Int = 0,
     val usageGoals: List<UsageGoal> = emptyList(),
     val usageStatsList: List<UsageStatusAndGoal> = emptyList(),
     val name: String = "",
-    val point: Int = 0
+    val point: Int = 0,
+    val challengeSuccess: Boolean = true,
 )
 
 @HiltViewModel
@@ -46,8 +46,32 @@ class MainViewModel @Inject constructor(
             updateGoals()
             getChallengeStatus()
             getUserInfo()
+            getUsageGoalAndStatList()
         }
-        getUsageGoalAndStatList()
+    }
+
+    fun reloadUsageStatsList() {
+        viewModelScope.launch {
+            getStatsList()
+        }
+    }
+
+    fun updateState(transform: suspend MainState.() -> MainState) {
+        viewModelScope.launch {
+            val currentState = mainState.value
+            val newState = currentState.transform()
+            _mainState.value = newState
+        }
+    }
+
+    fun updateDailyChallengeFailed() {
+        viewModelScope.launch {
+            challengeRepository.updateDailyChallengeFailed().onSuccess {
+                getChallengeStatus()
+            }.onFailure {
+                Log.e("updateDailyChallengeFailed error", it.toString())
+            }
+        }
     }
 
     private suspend fun updateGoals() {
@@ -90,13 +114,18 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun getUsageGoalsExceptTotal(): List<UsageGoal> {
+        return mainState.value.usageGoals.filter { it.packageName != UsageGoal.TOTAL }
+    }
+
     fun setChallengeStatus(challengeStatus: ChallengeStatus) {
         updateState {
             copy(
                 appGoals = challengeStatus.appGoals,
                 isSuccessList = challengeStatus.isSuccessList,
-                goalTime = challengeStatus.goalTime,
+                goalTimeInHour = challengeStatus.goalTimeInHours,
                 period = challengeStatus.period,
+                challengeSuccess = challengeStatus.challengeSuccess,
             )
         }
     }
@@ -105,16 +134,8 @@ class MainViewModel @Inject constructor(
         updateState {
             copy(
                 name = userInfo.name,
-                point = userInfo.point
+                point = userInfo.point,
             )
-        }
-    }
-
-    fun updateState(transform: suspend MainState.() -> MainState) {
-        viewModelScope.launch {
-            val currentState = mainState.value
-            val newState = currentState.transform()
-            _mainState.value = newState
         }
     }
 

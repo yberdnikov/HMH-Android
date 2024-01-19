@@ -9,9 +9,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.transition.MaterialFadeThrough
+import com.hmh.hamyeonham.common.fragment.checkAllPermissionIsGranted
 import com.hmh.hamyeonham.common.fragment.viewLifeCycle
 import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
+import com.hmh.hamyeonham.core.service.lockAccessibilityServiceClassName
 import com.hmh.hamyeonham.core.viewmodel.MainViewModel
 import com.hmh.hamyeonham.feature.main.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +44,11 @@ class HomeFragment : Fragment() {
         collectUsageStatsList()
     }
 
+    override fun onResume() {
+        super.onResume()
+        activityViewModel.reloadUsageStatsList()
+    }
+
     private fun initStaticsRecyclerView() {
         binding.rvStatics.run {
             adapter = UsageStaticsAdapter()
@@ -52,9 +59,11 @@ class HomeFragment : Fragment() {
     private fun collectUsageStatsList() {
         val usageStaticsAdapter = binding.rvStatics.adapter as? UsageStaticsAdapter
         activityViewModel.mainState.flowWithLifecycle(viewLifeCycle).onEach { mainState ->
-            usageStaticsAdapter?.submitList(mainState.usageStatsList.map {
-                UsageStaticsModel(mainState.name, it)
-            })
+            usageStaticsAdapter?.submitList(
+                mainState.usageStatsList.map {
+                    UsageStaticsModel(mainState.name, mainState.challengeSuccess, it)
+                },
+            )
         }.launchIn(viewLifeCycleScope)
     }
 }

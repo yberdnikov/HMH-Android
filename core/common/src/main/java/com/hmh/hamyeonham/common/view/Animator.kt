@@ -7,7 +7,7 @@ import android.view.animation.BaseInterpolator
 import android.widget.ProgressBar
 
 fun initAndStartProgressBarAnimation(pb: ProgressBar, progressTo: Int) {
-    initAndStartAnimation(pb, "progress", 0, progressTo, AccelerateInterpolator())
+    initAndStartAnimation(pb, "progress", progressTo - 10, progressTo, AccelerateInterpolator())
 }
 
 inline fun <reified T : BaseInterpolator> initAndStartAnimation(

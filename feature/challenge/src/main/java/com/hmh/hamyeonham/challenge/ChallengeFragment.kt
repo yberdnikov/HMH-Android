@@ -15,7 +15,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.hmh.hamyeonham.challenge.appadd.AppAddActivity
 import com.hmh.hamyeonham.challenge.calendar.ChallengeCalendarAdapter
 import com.hmh.hamyeonham.challenge.goals.ChallengeUsageGoalsAdapter
@@ -72,7 +71,6 @@ class ChallengeFragment : Fragment() {
                     R.color.white_text,
                 )
             }
-
             ModifierState.DELETE -> {
                 getString(R.string.all_delete) to ContextCompat.getColor(
                     requireContext(),
@@ -162,27 +160,30 @@ class ChallengeFragment : Fragment() {
     private fun initChallengeGoalsRecyclerView() {
         binding.rvAppUsageGoals.run {
             adapter = ChallengeUsageGoalsAdapter(
-                onAppListAddClicked = {
-                    val intent = Intent(requireContext(), AppAddActivity::class.java)
-                    appSelectionResultLauncher.launch(intent)
-                },
-                onAppItemClicked = {
-                    when (viewModel.challengeState.value.modifierState) {
-                        ModifierState.CANCEL -> {
-                            setDeleteAppDialog(it)
-                        }
-
-                        else -> Unit
-                    }
-                },
+                onAppListAddClicked = { appListAddClickListener() },
+                onAppItemClicked = { appItemClickedListener(it) },
             )
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(VerticalSpaceItemDecoration(9.dp))
         }
     }
 
-    private fun RecyclerView.setDeleteAppDialog(it: UsageGoal) {
-        val clickedAppNameToDialog = context.getAppNameFromPackageName(it.packageName)
+    private fun appListAddClickListener() {
+        val intent = Intent(requireContext(), AppAddActivity::class.java)
+        appSelectionResultLauncher.launch(intent)
+    }
+
+    private fun appItemClickedListener(usageGoal: UsageGoal) {
+        when (viewModel.challengeState.value.modifierState) {
+            ModifierState.CANCEL -> {
+                setDeleteAppDialog(usageGoal)
+            }
+            else -> Unit
+        }
+    }
+
+    private fun setDeleteAppDialog(it: UsageGoal) {
+        val clickedAppNameToDialog = requireContext().getAppNameFromPackageName(it.packageName)
         TwoButtonCommonDialog.newInstance(
             title = getString(R.string.delete_app_dialog_title, clickedAppNameToDialog),
             description = getString(R.string.delete_app_dialog_description),

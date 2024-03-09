@@ -12,6 +12,8 @@ data class SignUpRequest(
     val onboarding: Onboarding,
     @SerialName("socialPlatform")
     val socialPlatform: String,
+//    @SerialName("name")
+//    val name: String,
 ) {
     @Serializable
     data class Onboarding(
@@ -56,6 +58,7 @@ fun SignRequestDomain.toSignUpRequest(): SignUpRequest {
             averageUseTime = onboarding.averageUseTime,
             problem = onboarding.problem,
         ),
-        socialPlatform = "KAKAO",
+        socialPlatform = "KAKAO"
+//        name = null,
     )
 }

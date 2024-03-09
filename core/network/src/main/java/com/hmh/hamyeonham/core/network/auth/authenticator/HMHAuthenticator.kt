@@ -44,7 +44,7 @@ class HMHAuthenticator @Inject constructor(
                     dataStore.clear()
                     UserApiClient.instance.logout { error ->
                         Log.e("Authenticator", error.toString())
-                        ProcessPhoenix.triggerRebirth(context, navigationProvider.toLogin())
+//                        ProcessPhoenix.triggerRebirth(context, navigationProvider.toLogin())
                     }
                 }
             }.getOrThrow()

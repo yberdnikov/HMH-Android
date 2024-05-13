@@ -20,6 +20,7 @@
 
 <br/>
 ## HMH Gradle Module Dependency Graph
+<br/>
 ![](gradle/dependency-graph/project.dot.png)
 
 ![Alt](https://repobeats.axiom.co/api/embed/d2c401ae723c367a03ed9fb81ea6e6e7cfbee2ea.svg "Repobeats analytics image")

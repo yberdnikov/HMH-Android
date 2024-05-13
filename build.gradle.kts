@@ -27,6 +27,7 @@ plugins {
     alias(libs.plugins.app.distribution) apply false
     alias(libs.plugins.crashlytics) apply false
 }
+apply(from = file(path = "gradle/projectDependencyGraph.gradle"))
 
 tasks.register("clean", Delete::class) {
     delete(rootProject.layout.buildDirectory)

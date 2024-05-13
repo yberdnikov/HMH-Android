@@ -8,6 +8,9 @@
 # 하면함 Android 
 ## 스마트폰 중독 탈출, 너도 하면함!
 <br/>
+## HMH Gradle Module Dependency Graph
+![](/project.dot.png)
+<br/>
 <div align="center">
   <p align="center">
     <img src="https://img.shields.io/badge/Kotlin-1.9.20-7F52FF?style=for-the-badge&logo=Kotlin&logoColor=white"/>

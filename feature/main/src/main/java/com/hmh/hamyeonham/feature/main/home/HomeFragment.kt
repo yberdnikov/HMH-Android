@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setShimmer(isLoading = true)
         initStaticsRecyclerView()
         initUsageStatsList()
     }
@@ -62,7 +63,24 @@ class HomeFragment : Fragment() {
                     UsageStaticsModel(mainState.name, mainState.challengeSuccess, it)
                 },
             )
+            setShimmer(isLoading = false)
         }.launchIn(viewLifeCycleScope)
+    }
+
+    private fun setShimmer(isLoading: Boolean) {
+        val shimmerLayoutVisibility = if (isLoading) View.VISIBLE else View.INVISIBLE
+        val defaultLayoutVisibility = if (isLoading) View.INVISIBLE else View.VISIBLE
+
+        binding.sflHome.visibility = shimmerLayoutVisibility
+        binding.rvStatics.visibility = defaultLayoutVisibility
+
+        if (isLoading) {
+            //shimmer mode
+            binding.sflHome.startShimmer()
+        } else {
+            //default mode
+            binding.sflHome.stopShimmer()
+        }
     }
 
 }

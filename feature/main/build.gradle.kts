@@ -28,4 +28,7 @@ dependencies {
 
     // lottie
     implementation(libs.lottie)
+
+    // shimmer
+    implementation(libs.shimmer)
 }

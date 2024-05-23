@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/iv_total_usage"
+        android:id="@+id/pv_total_usage"
         style="@style/Widget.Hmh.TotalProgressIndicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
         android:textAppearance="?textAppearanceDisplayMedium"
         android:textColor="?white_text"
         app:layout_constraintBottom_toBottomOf="@id/iv_blackhole"
-        app:layout_constraintStart_toStartOf="@id/iv_total_usage" />
+        app:layout_constraintStart_toStartOf="@id/pv_total_usage" />
 
     <TextView
         android:id="@+id/tv_total_goal"
@@ -56,7 +56,7 @@
         android:textAppearance="?textAppearanceLabelMedium"
         android:textColor="?gray1"
         app:layout_constraintBottom_toTopOf="@id/tv_total_usage"
-        app:layout_constraintStart_toStartOf="@id/iv_total_usage" />
+        app:layout_constraintStart_toStartOf="@id/pv_total_usage" />
 
     <TextView
         android:id="@+id/tv_total_time_left"
@@ -65,5 +65,5 @@
         android:textAppearance="?textAppearanceBodySmall"
         android:textColor="?white_text"
         app:layout_constraintBottom_toBottomOf="@id/tv_total_usage"
-        app:layout_constraintEnd_toEndOf="@id/iv_total_usage" />
+        app:layout_constraintEnd_toEndOf="@id/pv_total_usage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

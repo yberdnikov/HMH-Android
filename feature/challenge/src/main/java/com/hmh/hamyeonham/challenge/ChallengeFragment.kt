@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,8 +25,9 @@ import com.hmh.hamyeonham.challenge.model.Apps
 import com.hmh.hamyeonham.challenge.model.ChallengeStatus
 import com.hmh.hamyeonham.common.context.getAppNameFromPackageName
 import com.hmh.hamyeonham.common.dialog.TwoButtonCommonDialog
-import com.hmh.hamyeonham.common.fragment.toast
+import com.hmh.hamyeonham.common.fragment.setShimmerVisibility
 import com.hmh.hamyeonham.common.fragment.snackBarWithAction
+import com.hmh.hamyeonham.common.fragment.toast
 import com.hmh.hamyeonham.common.fragment.viewLifeCycle
 import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.navigation.NavigationProvider
@@ -39,8 +41,10 @@ import com.hmh.hamyeonham.core.viewmodel.MainViewModel
 import com.hmh.hamyeonham.feature.challenge.databinding.FragmentChallengeBinding
 import com.hmh.hamyeonham.usagestats.model.UsageStatusAndGoal
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 import javax.inject.Inject
 
@@ -68,6 +72,11 @@ class ChallengeFragment : Fragment() {
         initViews()
         collectMainStateAndProcess()
         collectChallengeStateAndProcess()
+        lifecycleScope.launch {
+            setShimmerVisibility(isLoading = true, binding.sflChallenge, binding.svChallenge)
+            delay(3000)
+            setShimmerVisibility(isLoading = false, binding.sflChallenge, binding.svChallenge)
+        }
     }
 
     private fun collectMainStateAndProcess() {

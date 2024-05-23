@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tv_challenge_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="18dp"
+        android:text="@string/challenge"
+        android:textAppearance="?textAppearanceTitleLarge"
+        android:textColor="?gray1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/iv_calendar_background"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:contentDescription="@string/challenge_calendar_background_img"
+        app:layout_constraintDimensionRatio="320:214"
+        app:layout_constraintTop_toBottomOf="@id/tv_challenge_title" />
+    <TextView
+        android:id="@+id/tv_challenge_start_date_skeleton"
+        android:layout_width="119dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="36dp"
+        android:background="?gray6"
+        android:textAppearance="?textAppearanceDisplayMedium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_challenge_title" />
+
+    <TextView
+        android:id="@+id/tv_challenge_day_skeleton"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:background="?gray6"
+        android:layout_marginTop="12dp"
+        android:textAppearance="?textAppearanceDisplayMedium"
+        android:textSize="45sp"
+        app:layout_constraintStart_toStartOf="@id/tv_challenge_start_date_skeleton"
+        app:layout_constraintTop_toBottomOf="@id/tv_challenge_start_date_skeleton" />
+
+    <TextView
+        android:id="@+id/tv_app_lock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/app_lock"
+        android:textAppearance="?textAppearanceTitleSmall"
+        android:textColor="@color/gray1"
+        app:layout_constraintStart_toStartOf="@id/tv_challenge_start_date_skeleton"
+        app:layout_constraintTop_toBottomOf="@id/iv_calendar_background" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

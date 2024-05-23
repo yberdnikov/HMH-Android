@@ -13,6 +13,7 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.snackbar.Snackbar
 
 fun Fragment.toast(message: String) {
@@ -27,7 +28,12 @@ fun Fragment.snackBar(anchorView: View, message: () -> String) {
     Snackbar.make(anchorView, message(), Snackbar.LENGTH_SHORT).show()
 }
 
-fun Fragment.snackBarWithAction(anchorView: View, message: String, actionMessage:String, action: View.OnClickListener) {
+fun Fragment.snackBarWithAction(
+    anchorView: View,
+    message: String,
+    actionMessage: String,
+    action: View.OnClickListener
+) {
     Snackbar.make(anchorView, message, Snackbar.LENGTH_SHORT)
         .setAction(actionMessage, action)
         .show()
@@ -110,4 +116,21 @@ fun Fragment.checkAllPermissionIsGranted(classCanonicalName: String) {
 
 fun Fragment.allPermissionIsGranted(classCanonicalName: String): Boolean {
     return this.checkAccessibilityServiceEnabled(classCanonicalName) && hasUsageStatsPermission() && hasOverlayPermission()
+}
+
+fun setShimmerVisibility(isLoading: Boolean, shimmerLayout: ShimmerFrameLayout, defaultLayout: View) {
+
+    val shimmerLayoutVisibility = if (isLoading) View.VISIBLE else View.INVISIBLE
+    val defaultLayoutVisibility = if (isLoading) View.INVISIBLE else View.VISIBLE
+
+    shimmerLayout.visibility = shimmerLayoutVisibility
+    defaultLayout.visibility = defaultLayoutVisibility
+
+    if (isLoading) {
+        //shimmer mode
+        shimmerLayout.startShimmer()
+    } else {
+        //default mode
+        shimmerLayout.stopShimmer()
+    }
 }

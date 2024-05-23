@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.transition.MaterialFadeThrough
+import com.hmh.hamyeonham.common.fragment.setShimmerVisibility
 import com.hmh.hamyeonham.common.fragment.viewLifeCycle
 import com.hmh.hamyeonham.common.fragment.viewLifeCycleScope
 import com.hmh.hamyeonham.common.view.viewBinding
@@ -38,7 +39,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setShimmer(isLoading = true)
+        setShimmerVisibility(isLoading = true, binding.sflHome, binding.rvStatics)
         initStaticsRecyclerView()
         initUsageStatsList()
     }
@@ -63,24 +64,7 @@ class HomeFragment : Fragment() {
                     UsageStaticsModel(mainState.name, mainState.challengeSuccess, it)
                 },
             )
-            setShimmer(isLoading = false)
+            setShimmerVisibility(isLoading = false, binding.sflHome, binding.rvStatics)
         }.launchIn(viewLifeCycleScope)
     }
-
-    private fun setShimmer(isLoading: Boolean) {
-        val shimmerLayoutVisibility = if (isLoading) View.VISIBLE else View.INVISIBLE
-        val defaultLayoutVisibility = if (isLoading) View.INVISIBLE else View.VISIBLE
-
-        binding.sflHome.visibility = shimmerLayoutVisibility
-        binding.rvStatics.visibility = defaultLayoutVisibility
-
-        if (isLoading) {
-            //shimmer mode
-            binding.sflHome.startShimmer()
-        } else {
-            //default mode
-            binding.sflHome.stopShimmer()
-        }
-    }
-
 }

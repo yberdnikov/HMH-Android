@@ -25,4 +25,7 @@ dependencies {
 
     implementation(projects.feature.store)
     implementation(projects.domain.challenge)
+
+    //shimmer
+    implementation(libs.shimmer)
 }

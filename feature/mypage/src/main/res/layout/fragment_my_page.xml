@@ -26,7 +26,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
-        android:id="@+id/sc_mypage"
+        android:id="@+id/sv_mypage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -43,12 +43,12 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="24dp"
+                android:contentDescription="@string/mypage_profile_img"
                 android:src="@drawable/img_profile"
                 app:layout_constraintDimensionRatio="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/mypage_profile_img" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_user_name"
@@ -121,12 +121,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginEnd="17dp"
+                android:contentDescription="@string/mypage_journey_button_img"
                 android:src="@drawable/ic_arrow_24_gray4"
                 app:layout_constraintBottom_toBottomOf="@id/tv_journey"
                 app:layout_constraintDimensionRatio="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_journey"
-                android:contentDescription="@string/mypage_journey_button_img" />
+                app:layout_constraintTop_toTopOf="@id/tv_journey" />
 
             <View
                 android:id="@+id/v_journey"
@@ -154,12 +154,12 @@
                 android:id="@+id/iv_store_button"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
+                android:contentDescription="@string/mypage_store_button_img"
                 android:src="@drawable/ic_arrow_24_gray2"
                 app:layout_constraintBottom_toBottomOf="@id/tv_store"
                 app:layout_constraintDimensionRatio="1"
                 app:layout_constraintEnd_toEndOf="@id/iv_journey_button"
-                app:layout_constraintTop_toTopOf="@id/tv_store"
-                android:contentDescription="@string/mypage_store_button_img" />
+                app:layout_constraintTop_toTopOf="@id/tv_store" />
 
             <View
                 android:id="@+id/v_store"
@@ -198,12 +198,12 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="15dp"
+                android:contentDescription="@string/mypage_termofuse_button_img"
                 android:src="@drawable/ic_arrow_24_gray2"
                 app:layout_constraintBottom_toBottomOf="@id/tv_termofuse"
                 app:layout_constraintDimensionRatio="1"
                 app:layout_constraintEnd_toEndOf="@id/iv_journey_button"
-                app:layout_constraintTop_toTopOf="@id/tv_termofuse"
-                android:contentDescription="@string/mypage_termofuse_button_img" />
+                app:layout_constraintTop_toTopOf="@id/tv_termofuse" />
 
             <View
                 android:id="@+id/v_termofuse"
@@ -230,12 +230,12 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="13dp"
                 android:layout_marginBottom="22dp"
+                android:contentDescription="@string/mypage_privacy_button_img"
                 android:src="@drawable/ic_arrow_24_gray2"
                 app:layout_constraintBottom_toBottomOf="@id/tv_privacy"
                 app:layout_constraintDimensionRatio="1"
                 app:layout_constraintEnd_toEndOf="@id/iv_journey_button"
-                app:layout_constraintTop_toTopOf="@id/tv_privacy"
-                android:contentDescription="@string/mypage_privacy_button_img" />
+                app:layout_constraintTop_toTopOf="@id/tv_privacy" />
 
             <View
                 android:id="@+id/v_privacy"
@@ -284,4 +284,15 @@
                 app:layout_constraintTop_toTopOf="@id/v_divider" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/sfl_mypage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_mypage_title">
+
+        <include layout="@layout/my_page_skeleton" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

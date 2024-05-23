@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/iv_blackhole"
+        android:id="@+id/lav_blackhole"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?blackground"
@@ -48,7 +48,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_blackhole" />
+        app:layout_constraintTop_toBottomOf="@id/lav_blackhole" />
 
     <TextView
         android:id="@+id/tv_total_usage"
@@ -57,7 +57,7 @@
         android:layout_marginBottom="6dp"
         android:textAppearance="?textAppearanceDisplayMedium"
         android:textColor="?white_text"
-        app:layout_constraintBottom_toBottomOf="@id/iv_blackhole"
+        app:layout_constraintBottom_toBottomOf="@id/lav_blackhole"
         app:layout_constraintStart_toStartOf="@id/iv_total_usage" />
 
 

@@ -27,7 +27,7 @@ class UsageStatusLocalDataSourceImpl @Inject constructor(
 
         val usageEvents = queryUsageEvents(usageStatsManager, startTime, endTime)
         val sameEvents = collectSameEvents(usageEvents)
-        val usageMap = calculateForegroundTime(sameEvents, startTime, endTime)
+        val usageMap = calculateForegroundTime(sameEvents)
 
         return usageMap.map { (packageName, totalTimeInForeground) ->
             UsageStatsModel(packageName, totalTimeInForeground)
@@ -46,7 +46,8 @@ class UsageStatusLocalDataSourceImpl @Inject constructor(
             val currentEvent = UsageEvents.Event()
             events.getNextEvent(currentEvent)
             if (currentEvent.eventType == UsageEvents.Event.ACTIVITY_RESUMED ||
-                currentEvent.eventType == UsageEvents.Event.ACTIVITY_PAUSED) {
+                currentEvent.eventType == UsageEvents.Event.ACTIVITY_PAUSED
+            ) {
                 usageEvents.add(currentEvent)
             }
         }
@@ -66,12 +67,9 @@ class UsageStatusLocalDataSourceImpl @Inject constructor(
     }
 
     private fun calculateForegroundTime(
-        sameEvents: Map<String, List<UsageEvents.Event>>,
-        startTime: Long,
-        endTime: Long
+        sameEvents: Map<String, List<UsageEvents.Event>>
     ): Map<String, Long> {
         val usageMap = mutableMapOf<String, Long>()
-
         sameEvents.forEach { (key, events) ->
             var totalForegroundTime = 0L
             var lastResumeTime = -1L
@@ -79,11 +77,9 @@ class UsageStatusLocalDataSourceImpl @Inject constructor(
             events.forEach { event ->
                 when (event.eventType) {
                     UsageEvents.Event.ACTIVITY_RESUMED -> {
-                        if (lastResumeTime != -1L) {
-                            totalForegroundTime += event.timeStamp - lastResumeTime
-                        }
                         lastResumeTime = event.timeStamp
                     }
+
                     UsageEvents.Event.ACTIVITY_PAUSED -> {
                         if (lastResumeTime != -1L) {
                             totalForegroundTime += event.timeStamp - lastResumeTime
@@ -91,15 +87,6 @@ class UsageStatusLocalDataSourceImpl @Inject constructor(
                         }
                     }
                 }
-            }
-
-            if (lastResumeTime != -1L) {
-                totalForegroundTime += endTime - lastResumeTime
-            }
-
-            if (events.first().eventType == UsageEvents.Event.ACTIVITY_PAUSED) {
-                val diff = events.first().timeStamp - startTime
-                totalForegroundTime += diff
             }
 
             usageMap[key] = totalForegroundTime
